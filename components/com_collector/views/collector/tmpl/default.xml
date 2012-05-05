@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id: default.xml 46 2010-11-21 17:27:33Z chdemko $ -->
+<metadata>
+	<layout title="COM_COLLECTOR_COLLECTOR_VIEW_DEFAULT_TITLE">
+		<message>COM_COLLECTOR_COLLECTOR_VIEW_DEFAULT_DESC</message>
+	</layout>
+	<fields name="request">
+		<fieldset name="request">
+			<field
+				name="id"
+				type="list"
+				label="COM_COLLECTOR_COLLECTOR_FIELD_GREETING_LABEL"
+				description="COM_COLLECTOR_COLLECTOR_FIELD_GREETING_DESC"
+				default="1"
+			>
+				<option value="1">Сначала начнём разбрасывать</option>
+				<option value="2">Теперь начнём собирать</option>
+			</field>
+		</fieldset>
+	</fields>
+</metadata>

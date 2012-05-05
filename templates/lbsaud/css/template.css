@@ -1,0 +1,101 @@
+/* Layouts */
+html, body {
+	margin: 0 auto;	
+	padding: 0;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	width: 960px;
+}
+
+#header {
+	height: 80px;
+	background: #99CCFF;
+	padding: 10px;
+}
+
+#message {
+	height: 36px;
+	width: 100%;
+	background: #1CA4E0;
+}
+
+#main_wrapper {
+	width: 960px;
+	height: auto;
+}
+
+#sidebar_left, #sidebar_right {
+	width: 230px;
+	background: #CCCCCC;
+	height:auto;
+	padding: 0 5px;
+}
+
+#sidebar_left {
+	float: left;
+}
+
+#sidebar_right {
+	float: right;
+}
+	
+#maincolumn0 {
+	position: relative;
+	width: 470px;
+	float: left;
+	padding: 0 5px;
+}
+
+#maincolumn1 {
+	position: relative;
+	width: 710px;
+	float: left;
+	padding: 0 5px;
+}
+
+#maincolumn2 {
+	position: relative;
+	width: 950px;
+	float: left;
+	padding: 0 5px;
+}
+
+#footer {
+	height: 38px;
+	background: #2C3E46;
+}
+
+.clear {
+	clear: both;
+}
+
+/* Topography */
+a:link, a:visited {
+	color: #1BA5DF;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #666;
+}
+
+.actions {
+	list-style: none;
+	float: right;
+}
+
+.actions li {
+	float: left;
+	display: block;
+}
+
+.actions img {
+	padding: 0 4px;
+	border: none;
+}
+
+#footer {
+	color: #FFF;
+	padding: 5px;
+	text-align: center;
+}
