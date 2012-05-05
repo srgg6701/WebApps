@@ -50,39 +50,7 @@ $app = JFactory::getApplication();
 <script type="text/javascript" src="tmpl/default/js/firefox/correct_submenu_position.js">
 </script>
 <? 	}?>
-
             <div id="wrapper_component">  			
-<?	/*if (!strstr($_SERVER['REQUEST_URI'],'?')&&!strstr($_SERVER['REQUEST_URI'],'/index.php/')){
-
-		if ($dw_mode){?>    	
-        <?	require "default_mission.php";?>        
-    <?	}else require 'templates/'.$this->template.'/default_mission.php';?>    
-            </div>
-            
-            </div>
-            <!-- / section1 -->
-
-
-
-            <!--  -->
-    <?	if ($dw_mode){?>    	
-        <?	require "quick_and_free.php";?>        
-    <?	}else require 'templates/'.$this->template.'/quick_and_free.php';?>    
-		<!-- section2 -->        
-
-    		<div id="section2">
-<?	if ($dw_mode){?>    	
-	<?	require "all_our.php";?>        
-<?	}else require 'templates/'.$this->template.'/all_our.php';?>    
-        	<div id="right_advices">
-           		<div style="padding-left:10px;">
-<?	if ($dw_mode){?>    	
-	<?	require "right_advices.php";?>        
-<?	}else require 'templates/'.$this->template.'/right_advices.php';?>    
-            	</div>
-        	</div>
-    	<!-- / section2 -->
-<?	}else {*/?>
 				<div id="com">
 					<jdoc:include type="component" />    
            		</div>
@@ -92,10 +60,6 @@ $app = JFactory::getApplication();
 	</div><!-- /main container -->
 </div>
 <!-- /body -->    
-<?	//параметры форматирования таблицы нижнего меню:
-	//$_SESSION['menu_table_params']='align="center" class="light" cellspacing="0" height="48"';
-	//unset($_SESSION['menu_tr_params']);		
-?>
 <div id="footer">
 	<center>
 	<? 	//$s="1000";
