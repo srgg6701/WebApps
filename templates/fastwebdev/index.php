@@ -12,6 +12,7 @@ $app = JFactory::getApplication();
 <head>
 <jdoc:include type="head" />
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/firefox/correct_submenu_position.js" type="text/javascript"></script>
+<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css">
 </head>
 <body>
@@ -33,10 +34,28 @@ $app = JFactory::getApplication();
                 <table height="59" width="100%" cellspacing="0" cellpadding="0">
                   <tr>
                     <td align="center" nowrap class="logotype"><a href="index.php">DevLogo</a><span style="color: #F4BD00;">.net</span> :: <span style="font-size:0.8em; font-weight:lighter;"> 8(904)442-84-47</span></td>
-                    <td align="right" nowrap id="topSearch">Найти: 
-                      <input type="text" size="40">
-                    <img class="link" src="templates/<?php echo $this->template ?>/images/find_black_18.png" width="18" height="18" hspace="4" align="absmiddle"></td>
-                    <td align="center" nowrap style="font-size:1.1em; padding-right:14px;"><a href="#">Вход</a> :: <a href="#">Регистрация</a></td>
+                    <td align="right" nowrap id="topSearch">
+                            	<jdoc:include type="modules" name="search" style="xhtml" />
+<script type="text/javascript">
+document.getElementById('swrd').innerHTML='Найти: ';
+function manageLoginDisplay(stat){
+	document.getElementById('login_block').style.display=stat;
+}
+</script>
+
+					</td>
+                    <td id="tdLogin">
+                    	<a href="javascript:void();" onclick="manageLoginDisplay('block');">Вход</a>
+                        ::
+                        <a href="index.php/component/users/?view=registration">Регистрация</a>
+                    <div id="login_block">
+                    	<jdoc:include type="modules" name="login" style="xhtml" />
+                        <div align="right">
+                            <div id="close_it"><a href="javascript:void();" onclick="manageLoginDisplay('none');">закрыть</a>
+                            </div>
+                        </div>
+                    </div>
+                    </td>
                   </tr>
                 </table>
             </div>

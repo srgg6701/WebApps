@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+
+              <field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL"
+                    readonly="true" class="readonly"
+                    description="JGLOBAL_FIELD_ID_DESC" /> 
+
+       <field name="name" type="text" size="40" class="inputbox"
+                 label="COM_COLLECTOR1_FORM_LBL_ENGINES_ALL_NAME" description="COM_COLLECTOR1_FORM_DESC_ENGINES_ALL_NAME" 
+                
+                 required="true" 
+                filter="safehtml" /> 
+
+ <field id="free" name="free" type="radio"
+                class="inputbox"
+                 label="COM_COLLECTOR1_FORM_LBL_ENGINES_ALL_FREE" description="COM_COLLECTOR1_FORM_DESC_ENGINES_ALL_FREE" 
+                
+                >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field> 
+
+                        <field name="checked_out" type="hidden" filter="unset" />
+                <field name="checked_out_time" type="hidden" filter="unset" />
+
+	</fieldset>
+
+</form>

@@ -27,9 +27,11 @@
 		<folder>language</folder>
 	</files>
 	<positions>
-		<position>logo_and_menu</position>
-		<position>footer</position>
         <position>debug</position>		
+		<position>footer</position>
+		<position>login</position>
+		<position>logo_and_menu</position>
+		<position>search</position>
 	</positions>
 	<!-- 	For core templates, we also install/uninstall the language files in the core language folders.
 	

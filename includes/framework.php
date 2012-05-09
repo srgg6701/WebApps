@@ -8,7 +8,7 @@
 
 // No direct access.
 defined('_JEXEC') or die;
-
+//echo "<div class='profiler'>Object";
 //
 // Joomla system checks.
 //
@@ -105,9 +105,11 @@ if (JDEBUG) {
 //
 // Joomla library imports.
 //
-
 jimport('joomla.application.menu');
 jimport('joomla.environment.uri');
 jimport('joomla.utilities.utility');
 jimport('joomla.event.dispatcher');
 jimport('joomla.utilities.arrayhelper');
+
+//echo "</div>"; 
+

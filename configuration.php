@@ -11,7 +11,7 @@ class JConfig {
 	public $access = '1';
 	public $debug = '0';
 	public $debug_lang = '0';
-	public $dbtype = 'mysqli';
+	public $dbtype = 'mysql';
 	public $host = 'localhost';
 	public $user = 'root';
 	public $password = '';
@@ -63,4 +63,5 @@ class JConfig {
 	public $feed_email = 'author';
 	public $cookie_domain = '';
 	public $cookie_path = '';
+	//phpMyAdmin:a2allcom_(srgg,fastweb)::outofcontrol
 }

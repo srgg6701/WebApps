@@ -10,8 +10,11 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
+
+//будем подключать страницу по умолчанию, которую мы не хотим делать статьёй:
 $req_tmpl_files=JPATH_COMPONENT.'/views/featured/tmpl/default/';
 require_once $req_tmpl_files.'index.php';
+
 //'components/com_content/views/featured/default_html.php';
 // If the page class is defined, add to class as suffix.
 // It will be a separate class if the user starts it with a space?>

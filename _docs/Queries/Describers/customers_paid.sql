@@ -1,0 +1,1 @@
+desc `dnior_customers_paid`

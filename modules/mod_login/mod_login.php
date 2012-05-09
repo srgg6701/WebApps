@@ -17,5 +17,4 @@ $params->def('greeting', 1);
 $type	= modLoginHelper::getType();
 $return	= modLoginHelper::getReturnURL($params, $type);
 $user	= JFactory::getUser();
-
 require JModuleHelper::getLayoutPath('mod_login', $params->get('layout', 'default'));

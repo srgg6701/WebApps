@@ -1,0 +1,1 @@
+desc `dnior_site_types`;

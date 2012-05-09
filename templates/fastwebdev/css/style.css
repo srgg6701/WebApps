@@ -122,11 +122,19 @@ div#footer table {
 div#footer td, div#footer span, div#footer a{
 	color:#FFFFFF;
 }
+p#form-login-username{
+}
 table#heads img{
 	margin-right:10px;
 }
-.offsetBottom{
-	padding-bottom:54px;
+tr.hiddenShop{
+	background:#FFFBEC;
+}
+tr.hiddenShop > td:first-child{
+	padding-left:20px;
+}
+tr.hiddenShop > td[class="joined"]{
+	padding-left:10px;
 }
 div.info_right{
 	border:solid 1px; 
@@ -200,25 +208,88 @@ div#img_tech{
 	padding-bottom:20px;
 	border-bottom:solid 4px #CCCCCC;
 }
+td#img_people{
+	padding-top:0px;
+}
+label{
+	margin-top:6px;
+	text-align:right;
+}
 .light, .light a{
 	color:#efefef;
+}
+.list_big_circle{
+	margin-left:46px; 
+	padding-top:10px;
+}
+.list_big_circle li{
+	display:inline-block; 
+	width:19px; 
+	height:19px; 
+	margin-right:6px; 
+	margin-left:-25px; 
+	margin-bottom:-10px;
+	background-image:url(../images/marker_round_green.png);
+	background-repeat:no-repeat;
+}
+.list_big_circle li > span{
+	padding-left:5px; color:#FFFFFF;
+}
+#login_block{
+	position:absolute; 
+	display:none;
+	margin:4px 8px;
+	background:#F90; 
+	border-radius:6px;
+	z-index:5;
+	box-shadow:2px 6px 20px #003C00;
+}
+#login_block div#close_it{
+	display:inline-block;
+	padding-bottom:10px;
+	padding-right:10px;
+	margin-top:-10px;
+	font-size:0.9em;
+}
+#login_block ul{
+	text-align:left;
+	list-style-position:inside;
+	list-style-type:square;
+	margin-left:-24px;
+	margin-top:0px;
+}
+#login_block ul a{
+	color:#FFF;
+}
+#login_block fieldset.userdata {
+	border:none;
+}
+#login_block fieldset.userdata input[type='text'], #login_block fieldset.userdata input[type='password']{
+	width:95px;
+	border:solid 1px #9F792B;
+	border-radius:3px;
+}
+form#login-form{
+	font-size:0.9em;
+}
+div#logoPanelWrapper{
+	position:relative; 
+	background:#FFFFFF; 
+	border-radius:6px 6px 0px 0px; 
+	border:solid 1px #CCCCCC; 
+	border-bottom: none;
+}
+.logotype{
+	color:#666;
+	padding:10px;
+	font-size:1.8em;
+	font-weight:bolder;
 }
 div#main{
 	max-width:940px;
 	padding:10px !important;
 	text-align:left !important;
 	height:100%;
-}
-div#wrapper_menu{
-	background:#333; 
-	padding:6px 20px 0px;
-	border-bottom:solid 6px #090;
-}
-div#wrapper_menu td{
-	/*id="tableMenu" align="center" class="light" width="100%" cellspacing="0"*/
-	padding:9px 12px;
-	position:relative;
-
 }
 .marginRight10{
 	margin-right:10px;
@@ -246,13 +317,10 @@ div#mission_content_next{
 	width:60%; 
 	display:inline-table;
 }
-td#img_people{
-	padding-top:0px;
-}
 div#mission_possible{
-	padding:24px;
+	padding:32px;
 	padding-top:0px; 
-	margin-top:-20px; 
+	margin-top:-10px; 
 	font-size:24px;
 }
 div#mission_possible_header{
@@ -260,20 +328,12 @@ div#mission_possible_header{
 	width:363px;
 	text-align:center;
 }
-#logoPanelWrapper{
-	position:relative; 
-}
-div#wrapper_component{
-	border:solid 1px #009900;
-	border-top:none;
-	border-bottom-width:3px;
-	border-right-color:#006600;
-	border-radius:0 0 6px 6px;
-	background-color:#fff;
-}
 div#mission_wrapper_next{
 	max-width:1000px;
 	overflow:hidden;
+}
+.offsetBottom{
+	padding-bottom:54px;
 }
 div#our_heads table{
 	margin:10px;
@@ -300,119 +360,6 @@ div#our_heads img{
 div#our_heads {
 	border:1px;
 	margin:0 4px 0 0;
-}
-table#ours_tbl h4{
-	margin-bottom:4px;
-}
-table#ours_tbl th{
-	text-align:center;
-}
-table#ours_tbl td{
-	border: solid 4px;
-	border-radius:6px;
-	padding:10px;
-}
-div#our_principles{
-	color:#000;
-	margin-left:20px; 
-	font-size:22px; 
-	font-weight:
-}
-div.padding10{
-	padding:10px;
-}
-div#pseudo_bg{
-	position:absolute;
-	top:0;
-	height:104px;
-	background:#999;
-	width:100%;
-	z-index:-1;
-	border-bottom:solid 6px #009900;
-}
-div#pseudo_bg > div{
-	height:64px; 
-	background:#dedede
-}
-div#section1{
-	position:relative;
-	box-shadow:0 0 12px #666;
-	border-radius:6px;
-}
-div#section2{
-	overflow:hidden; 
-	margin-top:10px;
-}
-div#section2next{
-	width:70%; 
-	float:left; 
-	margin-left:0px; 
-	text-align:left;
-}
-div#tech_start div{
-	position:absolute;
-}
-label{
-	margin-top:6px;
-	text-align:right;
-}
-div#wrapper_menu table{
-	height:35px;
-}
-div#wrapper_menu table td{
-	padding:7px 12px;
-	position:relative;
-	white-space:nowrap;
-	text-align:center;
-}
-div#wrapper_menu table td a{
-	color:#FFF;
-}
-div#wrapper_menu table{
-	width:100%;
-}
-div#wrapper_menu table td div.drop_down_menu{
-	position:absolute; 
-	top:34px; 
-	left:10px; 
-	background:#666; 
-}/*#tableMenu td{
-	white-space:nowrap;
-}
-table.light div.drop_down_menu{
-	position:absolute; 
-	top:34px; 
-	left:10px; 
-	background:#666; 
-}*/
-.list_big_circle{
-	margin-left:46px; 
-	padding-top:10px;
-}
-.list_big_circle li{
-	display:inline-block; 
-	width:19px; 
-	height:19px; 
-	margin-right:6px; 
-	margin-left:-25px; 
-	margin-bottom:-10px;
-	background-image:url(../images/marker_round_green.png);
-	background-repeat:no-repeat;
-}
-.list_big_circle li > span{
-	padding-left:5px; color:#FFFFFF;
-}
-div#logoPanelWrapper{
-	background:#FFFFFF; 
-	border-radius:6px 6px 0px 0px; 
-	border:solid 1px #CCCCCC; 
-	border-bottom: none;
-}
-.logotype{
-	color:#666;
-	padding:10px;
-	font-size:1.8em;
-	font-weight:bolder;
 }
 ul#our_tech{
 	list-style-type:none; 
@@ -456,6 +403,9 @@ tr.paddingTop10 td, tr.paddingTop10 th {
 	width:30%; 
 	float:right; 
 	padding-top:16px;
+}
+.skinny{
+	font-weight:lighter;
 }
 #super_bonuses{
 	padding:0; 
@@ -516,6 +466,138 @@ td.tdActive{
 }
 td.tdActive a{
 }
+table#ours_tbl h4{
+	margin-bottom:4px;
+}
+table#ours_tbl th{
+	text-align:center;
+}
+table#ours_tbl td{
+	border: solid 4px;
+	border-radius:6px;
+	padding:10px;
+}
+div#our_principles{
+	color:#000;
+	margin-left:20px; 
+	font-size:22px; 
+	font-weight:
+}
+div.padding10{
+	padding:10px;
+}
+div#pseudo_bg{
+	position:absolute;
+	top:0;
+	height:104px;
+	background:#999;
+	width:100%;
+	z-index:-1;
+	border-bottom:solid 6px #009900;
+}
+div#pseudo_bg > div{
+	height:64px; 
+	background:#dedede
+}
+div.search input[type="image"]{
+	background-color:#FFFFFF;
+	color:#FFF;
+	border-top-color: #FFFFFF !important;
+	border:none !important;
+	width:18px !important;
+	height:18px !important;
+	margin-bottom:6px;
+	margin-left:4px;
+	padding:0 !important;
+	vertical-align: bottom;
+	background-image:url(../images/find_black_18.png);
+	background-position:top left;
+	background-repeat:no-repeat;
+}
+div.search input[type="submit"]{
+	background-color:#FFFFFF;
+	width:18px;
+	height:18px;
+	background-image:url(../images/find_black_18.png);
+	border:none;
+	margin-bottom:6px;
+	margin-left:4px;
+	vertical-align: bottom;
+	cursor:pointer;
+}
+div#section1{
+	position:relative;
+	box-shadow:0 0 12px #666;
+	border-radius:6px;
+}
+div#section2{
+	overflow:hidden; 
+	margin-top:10px;
+}
+div#section2next{
+	width:70%; 
+	float:left; 
+	margin-left:0px; 
+	text-align:left;
+}
+div#tech_start div{
+	position:absolute;
+}
+#tdLogin{
+	position:relative;
+	white-space:nowrap;
+	text-align:center;
+	font-size:1.1em; 
+	padding-right:14px;
+}
+div#wrapper_component{
+	border:solid 1px #009900;
+	border-top:none;
+	border-bottom-width:3px;
+	border-right-color:#006600;
+	border-radius:0 0 6px 6px;
+	background-color:#fff;
+}
+div#wrapper_menu table{
+	height:35px;
+}
+div#wrapper_menu table td{
+	padding:7px 12px;
+	position:relative;
+	white-space:nowrap;
+	text-align:center;
+}
+div#wrapper_menu{
+	background:#333; 
+	padding:6px 20px 0px;
+	border-bottom:solid 6px #090;
+}
+div#wrapper_menu td{
+	/*id="tableMenu" align="center" class="light" width="100%" cellspacing="0"*/
+	padding:9px 12px;
+	position:relative;
+
+}
+div#wrapper_menu table{
+	width:100%;
+}
+div#wrapper_menu table td a{
+	color:#FFF;
+}
+div#wrapper_menu table td div.drop_down_menu{
+	position:absolute; 
+	top:34px; 
+	left:10px; 
+	background:#666; 
+}/*#tableMenu td{
+	white-space:nowrap;
+}
+table.light div.drop_down_menu{
+	position:absolute; 
+	top:34px; 
+	left:10px; 
+	background:#666; 
+}*/
 #your_site{
 	padding-top:16px;
 }
@@ -533,15 +615,18 @@ td.tdActive a{
 #your_site li:after{
 	content:url(../images/check_ok.png)
 }
-tr.hiddenShop{
-	background:#FFFBEC;
-}
-tr.hiddenShop > td:first-child{
-	padding-left:20px;
-}
-tr.hiddenShop > td[class="joined"]{
-	padding-left:10px;
-}
 tr.WebShop, tr.WebShop td{
 	display:none;
+}
+.widthFull{
+	width:100%;
+}
+/*test styles*/
+div.profiler{
+	border:solid 2px #CC99FF;
+	padding:6px;
+}
+div.profiler_method{
+	border:solid 2px #FFCC00;
+	padding:6px;
 }

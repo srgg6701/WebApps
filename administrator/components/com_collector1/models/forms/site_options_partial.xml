@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+
+              <field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL"
+                    readonly="true" class="readonly"
+                    description="JGLOBAL_FIELD_ID_DESC" /> 
+
+       <field name="site_option_id" type="text" size="40" class="inputbox"
+                 label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_PARTIAL_SITE_OPTION_ID" description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_PARTIAL_SITE_OPTION_ID" 
+                
+                
+                filter="safehtml" /> 
+
+       <field name="sites_types_ids_location" type="editor" buttons="true"
+                class="inputbox"
+                filter="safehtml"
+                
+                
+                 label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_PARTIAL_SITES_TYPES_IDS_LOCATION" description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_PARTIAL_SITES_TYPES_IDS_LOCATION"  /> 
+
+                        <field name="checked_out" type="hidden" filter="unset" />
+                <field name="checked_out_time" type="hidden" filter="unset" />
+
+	</fieldset>
+
+</form>

@@ -12,13 +12,14 @@ defined('_JEXEC') or die;
 <form action="<?php echo JRoute::_('index.php');?>" method="post">
 	<div class="search<?php echo $moduleclass_sfx ?>">
 		<?php
-			$output = '<label for="mod-search-searchword">'.$label.'</label><input name="searchword" id="mod-search-searchword" maxlength="'.$maxlength.'"  class="inputbox'.$moduleclass_sfx.'" type="text" size="'.$width.'" value="'.$text.'"  onblur="if (this.value==\'\') this.value=\''.$text.'\';" onfocus="if (this.value==\''.$text.'\') this.value=\'\';" />';
+			$output = '<label for="mod-search-searchword" id="swrd">'.$label.'</label>
+			<input name="searchword" id="mod-search-searchword" maxlength="'.$maxlength.'"  class="inputbox'.$moduleclass_sfx.'" type="text" size="'.$width.'" value="'.$text.'"  onblur="if (this.value==\'\') this.value=\''.$text.'\';" onfocus="if (this.value==\''.$text.'\') this.value=\'\';" />';
 
-			if ($button) :
+			if ($button) : //value="'.$button_text.'" class="button'.$moduleclass_sfx.'" src="'.$img.'"
 				if ($imagebutton) :
-					$button = '<input type="image" value="'.$button_text.'" class="button'.$moduleclass_sfx.'" src="'.$img.'" onclick="this.form.searchword.focus();"/>';
-				else :
-					$button = '<input type="submit" value="'.$button_text.'" class="button'.$moduleclass_sfx.'" onclick="this.form.searchword.focus();"/>';
+					$button = '<input type="image" onclick="this.form.searchword.focus();"/>';
+				else : //'.$button_text.'
+					$button = '<input type="submit" value="" class="button'.$moduleclass_sfx.'" onclick="this.form.searchword.focus();"/>';
 				endif;
 			endif;
 
