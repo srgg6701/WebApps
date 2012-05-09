@@ -33,7 +33,11 @@ $app = JFactory::getApplication();
             <div id="logoPanelWrapper">
                 <table height="59" width="100%" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td align="center" nowrap class="logotype"><a href="index.php">DevLogo</a><span style="color: #F4BD00;">.net</span> :: <span style="font-size:0.8em; font-weight:lighter;"> 8(904)442-84-47</span></td>
+                    <td align="center" nowrap class="logotype">
+          <div>
+          	<a href="index.php">WebApps</a>.2-all<span style="color: #F4BD00;">.com</span>  
+          </div>
+		  <div id="call_us"> 8(904)442-84-47 </div></td>
                     <td align="right" nowrap id="topSearch">
                             	<jdoc:include type="modules" name="search" style="xhtml" />
 <script type="text/javascript">

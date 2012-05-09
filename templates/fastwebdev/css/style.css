@@ -43,6 +43,20 @@ img#call_expert{
 	border-radius:6px; 
 	margin-right:10px;
 }
+#call_us{
+	font-size:0.55em; 
+	font-weight:lighter; 
+	margin-left:10px; 
+	padding:8px 12px; 
+	background:#FC0; 
+	border-radius:6px; 
+	display:inline-block; 
+	vertical-align:central; 
+	float:right;
+}
+tr.center td{
+	text-align:center; 
+}
 div#collector_wrapper{
 	margin:6px 0 4px;
 	padding:0px;
@@ -65,9 +79,6 @@ div#container{
 	min-height:100%; 
 	margin-left:10%; 
 	margin-right:10%;
-}
-tr.center td{
-	text-align:center; 
 }
 div.div_left, div.div_right{
 	text-align:left;
@@ -284,6 +295,12 @@ div#logoPanelWrapper{
 	padding:10px;
 	font-size:1.8em;
 	font-weight:bolder;
+}
+.logotype div:first-child{
+	display:inline-block; 
+	padding-top:2px; 
+	padding-left:16px; 
+	float:left;
 }
 div#main{
 	max-width:940px;

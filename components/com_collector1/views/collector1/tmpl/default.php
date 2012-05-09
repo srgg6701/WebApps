@@ -12,7 +12,6 @@
 defined('_JEXEC') or die('Restricted access');
 
 $table=Collector1ModelCollector1::getDataForCollector();
-//var_dump("<h1>table:</h1><pre>",$table,"</pre>");
 
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 
