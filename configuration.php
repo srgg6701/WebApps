@@ -48,7 +48,7 @@ class JConfig {
 	public $MetaTitle = '1';
 	public $MetaAuthor = '1';
 	public $robots = '';
-	public $sef = '1';
+	public $sef = '0';
 	public $sef_rewrite = '0';
 	public $sef_suffix = '0';
 	public $unicodeslugs = '0';
@@ -63,5 +63,4 @@ class JConfig {
 	public $feed_email = 'author';
 	public $cookie_domain = '';
 	public $cookie_path = '';
-	//phpMyAdmin:a2allcom_(srgg,fastweb)::outofcontrol
 }

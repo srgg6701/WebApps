@@ -772,7 +772,7 @@ class JController extends JObject
 	 * @since   11.1
 	 */
 	public function getModel($name = '', $prefix = '', $config = array())
-	{
+	{			
 		if (empty($name))
 		{
 			$name = $this->getName();

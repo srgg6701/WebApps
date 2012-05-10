@@ -8,11 +8,12 @@
  */
 
 defined('_JEXEC') or die;
-
 // Include dependancies
 jimport('joomla.application.component.controller');
+//JPATH_ADMINISTRATOR
+JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_collector1/tables');
 
 // Execute the task.
 $controller	= JController::getInstance('Collector1');
-$controller->execute(JRequest::getVar('task','display'));
+$controller->execute(JRequest::getCmd('task', 'display'));
 $controller->redirect();

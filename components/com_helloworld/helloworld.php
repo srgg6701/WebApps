@@ -15,12 +15,15 @@ defined('_JEXEC') or die('Restricted access');
 
 // import joomla controller library
 jimport('joomla.application.component.controller');
-
+//JPATH_ADMINISTRATOR
+JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_helloworld/tables');
+?>HELLO AGAIN!<?
 // Get an instance of the controller prefixed by HelloWorld
 $controller = JController::getInstance('HelloWorld');
 
 // Perform the Request task
-$controller->execute(JRequest::getCmd('task'));
+//$controller->execute(JRequest::getCmd('task','display'));
+$controller->execute(JRequest::getVar('task'));
 
 // Redirect if set by the controller
 $controller->redirect();

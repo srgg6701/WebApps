@@ -24,11 +24,11 @@ if($html->innertext!='' && count($html->find('label'))){
 		//выводим ошибки
 		echo $mysql->sql_err;
     }
-	
+
 }
 
 $html->clear(); // подчищаем за собой
-unset($html); 
+unset($html);
 
 //достаем cms
 //сначала все которые начинаются с цыфры
@@ -40,26 +40,30 @@ for($i=0; $i<5; $i++){
 			//выводим ошибки
 			echo $mysql->sql_err;
 		}
-	
+
 	}
 }
 $html->clear(); // подчищаем за собой
 unset($html);
- 
+
 //теперь все которые начинаются с буквы
 for ($i=65; $i<=90; $i++) {
 	$html = file_get_html('http://www.cms-comparison.com/cms-list/'.chr($i));
+	if(!$html){
+		continue;
+	}
 	if($html->innertext!='' && count($html->find('.views-table a'))){
 		foreach($html->find('.views-table a') as $a_tag_abc){
 			$mysql->cms_write(trim($a_tag_abc->plaintext), $a_tag_abc->href, 'en');
 			//выводим ошибки
 			echo $mysql->sql_err;
 		}
-	
+
 	}
+	$html->clear(); //подчищаем за собой
+	unset($html);
+
 }
-$html->clear(); //подчищаем за собой
-unset($html);
 
 
 

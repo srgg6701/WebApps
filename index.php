@@ -94,6 +94,7 @@ if ($t){
 }
 // Выводит состав полученных объектов в тестовом режиме:
 if ($t=='site')	extractObjects($app);
+
 // Initialise the application.
 $app->initialise();
 if ($t=='init') showClasses();
@@ -111,7 +112,7 @@ JDEBUG ? $_PROFILER->mark('afterRoute') : null;
 // Dispatch the application.
 $app->dispatch();
 if ($t=='dispatch') showClasses();
-
+//die('1');
 // Mark afterDispatch in the profiler.
 JDEBUG ? $_PROFILER->mark('afterDispatch') : null;
 

@@ -15,7 +15,7 @@ $table=Collector1ModelCollector1::getDataForCollector();
 
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 
-<form name="form1" method="post" action="" onSubmit="return checkRequired();">
+<form name="form1" method="post" action="<?php echo JRoute::_('index.php?option=com_collector1&task=collect'); ?>" onSubmit="return checkRequired();">
     <div>
     <a name="select_site_type"></a>
   <label for="select" style="margin-left:6px;">Какой тип сайта вам нужен?</label>
@@ -23,14 +23,14 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
     <option selected value="0">Выберите из списка</option>
 <?	$arrSitesTypes=Collector1ModelCollector1::getSitesTypes();
 	for($s=0,$st=count($arrSitesTypes);$s<$st;$s++){?>    
-    <option value="<?=$arrSitesTypes[$s]['name_en']?>"><?=$arrSitesTypes[$s]['name_ru']?></option>
+    <option value="<?=$arrSitesTypes[$s]['id']?>"><?=$arrSitesTypes[$s]['name_ru']?></option>
 <?	}
 	if ($test){?>
     <option value="corp">Корпоративный</option>
     <option value="private">Личный</option>
     <option value="shop">Интернет-магазин</option>
 <?	}?>    
-    <option value="xtra">Другое</option>
+    <option value="-1">Другое</option>
   </select>
   </div>
 <div id="collector_wrapper" style="clear:both;">
@@ -104,7 +104,9 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
     <td colspan="4" style="padding-right:20px;"><div style="padding-left:6px">Дополнительно:</div>
       <textarea rows="5" style="margin-top:6px; display:block;" class="widthFull" name="xtra_options" id="xtra_options"></textarea></td>
     </tr>
-<?	if ($test){?>  
+<?	if ($test){/*?>  
+
+
   <tr class="WebShop">
     <td style="padding-left:10px;"><input type="checkbox" name="checkbox4" id="checkbox4">
       Корзина</td>
@@ -284,7 +286,10 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
     <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
     <td><input type="checkbox" name="checkbox32" id="checkbox32"></td>
     </tr>
-<?	}?>    
+<?	*/}?>    
+
+
+
 </table>
 <table cellpadding="8" cellspacing="0">
   <tr>
@@ -293,67 +298,24 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
     <div>(вы можете выбрать несколько возможных вариантов)</div>
     <br>
       <label>
-        <input type="radio" name="choose_engine" value="cms" id="choose_engine_0" onClick="manageEnginesChoice(this);">
+        <input type="radio" name="choose_engine" value="take_ready" id="choose_engine_1" onClick="manageEnginesChoice(this);">
         Готовая CMS</label> &nbsp;
       <label>
-        <input type="radio" name="choose_engine" value="build_own" id="choose_engine_1" onClick="manageEnginesChoice(this);">
+        <input type="radio" name="choose_engine" value="build_own" id="choose_engine_2" onClick="manageEnginesChoice(this);">
         Разработать собственный</label> &nbsp;
       <label>
-        <input type="radio" name="choose_engine" value="exists" id="choose_engine_2" onClick="manageEnginesChoice(this);">
+        <input type="radio" name="choose_engine" value="exists" id="choose_engine_3" onClick="manageEnginesChoice(this);">
         Перенести на имеющийся</label><span id="existing_cms_name" style="display:<?="none"?>;">:  <input style="background:#FFFF99; border:solid 1px #999;" type="text" name="existing_cms" id="existing_cms"></span></td>
   </tr>
   <tr id="tr_cms_list" style="display:none;">
     <td id="sms_list" onClick="controlCMSchoice(this);">
     <hr size="1">
-<div><input name="" type="checkbox" value="">1С-Битрикс</div>
-<div><input name="" type="checkbox" value="">ABO.CMS</div>
-<div><input name="" type="checkbox" value="">Amiro.CMS</div>
-<div><input name="" type="checkbox" value="">АТИЛЕКТ.CMS</div>
-<div><input name="" type="checkbox" value="">B2evolution</div>
-<div><input name="" type="checkbox" value="">BIGACE</div>
-<div><input name="" type="checkbox" value="">CMS Made Simple</div>
-<div><input name="" type="checkbox" value="">CMS Mail Keeper</div>
-<div><input name="" type="checkbox" value="">CMSimple</div>
-<div><input name="" type="checkbox" value="">Concrete5</div>
-<div><input name="" type="checkbox" value="">Contao</div>
-<div><input name="" type="checkbox" value="">DLEngine</div>
-<div><input name="" type="checkbox" value="">Danneo</div>
-<div><input name="" type="checkbox" value="">DotNetNuke</div>
-<div><input name="" type="checkbox" value="">Drupal</div>
-<div><input name="" type="checkbox" value="">E107</div>
-<div><input name="" type="checkbox" value="">e2</div>
-<div><input name="" type="checkbox" value="">eZ publish</div>
-<div><input name="" type="checkbox" value="">InSales</div>
-<div><input name="" type="checkbox" value="">Joomla</div>
-<div><input name="" type="checkbox" value="">HostCMS</div>
-<div><input name="" type="checkbox" value="">KooBoo</div>
-<div><input name="" type="checkbox" value="">MODx</div>
-<div><input name="" type="checkbox" value="">Mambo Open Source</div>
-<div><input name="" type="checkbox" value="">MediaWiki</div>
-<div><input name="" type="checkbox" value="">Movable Type</div>
-<div><input name="" type="checkbox" value="">Nethouse</div>
-<div><input name="" type="checkbox" value="">Newscoop</div>
-<div><input name="" type="checkbox" value="">NPJ</div>
-<div><input name="" type="checkbox" value="">Nucleus CMS</div>
-<div><input name="" type="checkbox" value="">OpenCms</div>
-<div><input name="" type="checkbox" value="">PHP-Fusion</div>
-<div><input name="" type="checkbox" value="">PHP-Nuke</div>
-<div><input name="" type="checkbox" value="">Plone</div>
-<div><input name="" type="checkbox" value="">Prestashop</div>
-<div><input name="" type="checkbox" value="">S.Builder</div>
-<div><input name="" type="checkbox" value="">Sapid</div>
-<div><input name="" type="checkbox" value="">SharePoint</div>
-<div><input name="" type="checkbox" value="">Site Sapiens</div>
-<div><input name="" type="checkbox" value="">TYPO3</div>
-<div><input name="" type="checkbox" value="">Textpattern</div>
-<div><input name="" type="checkbox" value="">TikiWiki</div>
-<div><input name="" type="checkbox" value="">uCoz</div>
-<div><input name="" type="checkbox" value="">UMI.CMS</div>
-<div><input name="" type="checkbox" value="">WikkaWiki</div>
-<div><input name="" type="checkbox" value="">WordPress</div>
-<div><input name="" type="checkbox" value="">XOOPS</div>
-<div><input name="" type="checkbox" value="">Xaraya</div>
-<div><input name="" type="checkbox" value="">Zikula</div>
+<?	$CMS=Collector1ModelCollector1::tempCMSlist();
+	$i=0;
+	foreach($CMS as $key=>$cms){
+		$i++;?>
+	<div><input name="cms_name_<?=$i?>" type="checkbox" value="<?=$i?>"><?=$cms?></div>
+<?	}?>        
 	</td>  
   </tr>
 </table>
@@ -375,9 +337,11 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
     	Скайп: <input name="skype" id="skype" type="text" value="">
     </div>    
 <br><br><br>
-<?	}?>
 </div>
+<?	}?>
+<br>
 <button style="display:block;" type="submit">Создать прототип!</button>
+<br>
 </form>
 <script type="text/javascript">
 function checkPatchBoxes(eventSrcElement){
@@ -438,6 +402,7 @@ function checkRequired(){
 			selST.style.backgroundColor='yellow';
 			return false;
 		}
+<?	if($user->guest){?>		
 		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		if (!filter.test(yEmail.value)) {
 			alert('Емэйл введён некорректно или отсутствует!');					
@@ -445,6 +410,7 @@ function checkRequired(){
 			yEmail.style.backgroundColor='yellow';
 			return false;
 		}
+<?	}?>		
 	}catch(e){
 		alert(e.message);
 	}
@@ -453,7 +419,7 @@ function checkRows(sel){
 	
 	var rws=document.getElementsByTagName('tr');
 	var tRow,arrClassName,newClassName,tClassName;
-	if(sel=='WebShop') {
+	if(sel=='3') { //WebShop, именно число, иначе возникают проблемы при записи в БД 
 		tClassName='WebShop';
 		changedClassName='hiddenShop';
 	}else{
@@ -478,18 +444,18 @@ function checkRows(sel){
 function manageEnginesChoice(radio){
 	var d=document;
 	try{
-		if (radio.id=="choose_engine_0"||radio.id=="choose_engine_1"){
+		if (radio.id=="choose_engine_1"||radio.id=="choose_engine_2"){
 			if (radio.id=="choose_engine_0") d.getElementById('existing_cms').value='';	
 			d.getElementById('existing_cms_name').style.display='none';	
 			scrollTo(0,2000);//location.href='#bottom';
 		}		
-		if (radio.id=="choose_engine_0"){
+		if (radio.id=="choose_engine_1"){
 			d.getElementById('tr_cms_list').style.display='block';
 		}		
-		if (radio.id=="choose_engine_1"||radio.id=="choose_engine_2"){
+		if (radio.id=="choose_engine_2"||radio.id=="choose_engine_3"){
 			d.getElementById('tr_cms_list').style.display='none';
 		}		
-		if (radio.id=="choose_engine_2"){
+		if (radio.id=="choose_engine_3"){
 			d.getElementById('existing_cms_name').style.display='inline';				
 		}	
 	}catch(e){

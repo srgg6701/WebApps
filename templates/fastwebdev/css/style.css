@@ -45,10 +45,11 @@ img#call_expert{
 }
 #call_us{
 	font-size:0.55em; 
-	font-weight:lighter; 
+	font-weight:bolder; 
 	margin-left:10px; 
 	padding:8px 12px; 
-	background:#FC0; 
+	background: #FEBE38;
+	color: #FFFAE8; 
 	border-radius:6px; 
 	display:inline-block; 
 	vertical-align:central; 
@@ -56,6 +57,16 @@ img#call_expert{
 }
 tr.center td{
 	text-align:center; 
+}
+#close_user_menu{
+	padding-top:10px;
+	margin:0 4px 6px 0 !important;
+}
+#close_user_menu a {
+	display: inline !important;
+	padding:0 !important;
+	margin:0 !important;
+	font-size:0.7em !important;
 }
 div#collector_wrapper{
 	margin:6px 0 4px;
@@ -100,6 +111,26 @@ div.div_right{
 }
 div.div_right > div{
 	padding:20px 0px 0px 10px;
+}
+#div_user_menu{
+	padding:4px;
+	left:21px; 
+	top:25px; 
+	background:#0F0; 
+	position:absolute; 
+	border-radius:6px; 
+	z-index:6;
+	text-align:left;
+}
+#div_user_menu a{
+	display:block;
+	padding:7px 16px 7px 8px; 
+	padding-bottom:4px;
+	font-size:0.85em;
+}
+#div_user_menu a:hover{
+	background:#FEBE38;
+	text-decoration:none;
 }
 div.drop_down_menu{
 	display:none;
@@ -280,6 +311,9 @@ label{
 	border:solid 1px #9F792B;
 	border-radius:3px;
 }
+.logout-button{
+	padding:10px;
+}
 form#login-form{
 	font-size:0.9em;
 }
@@ -293,13 +327,17 @@ div#logoPanelWrapper{
 .logotype{
 	color:#666;
 	padding:10px;
-	font-size:1.8em;
+	padding-top:14px;
+	font-size:1.6em;
 	font-weight:bolder;
+}
+td.logotype{
+	padding:0;
 }
 .logotype div:first-child{
 	display:inline-block; 
-	padding-top:2px; 
-	padding-left:16px; 
+	padding-top:6px; 
+	padding-left:24px; 
 	float:left;
 }
 div#main{
@@ -464,7 +502,7 @@ div#tell_your_data div{
 	color:#000;
 }
 #topSearch{
-	 padding-right:20px;
+	 padding-right:0 20px;
 }
 #topSearch input[type="text"]{
 	padding:3px;
@@ -506,7 +544,7 @@ div.padding10{
 div#pseudo_bg{
 	position:absolute;
 	top:0;
-	height:104px;
+	height:105px;
 	background:#999;
 	width:100%;
 	z-index:-1;

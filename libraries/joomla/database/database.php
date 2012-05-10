@@ -798,7 +798,6 @@ abstract class JDatabase implements JDatabaseInterface
 
 		// Create the base insert statement.
 		$statement = 'INSERT INTO ' . $this->quoteName($table) . ' (%s) VALUES (%s)';
-
 		// Iterate over the object variables to build the query fields and values.
 		foreach (get_object_vars($object) as $k => $v)
 		{
@@ -822,7 +821,7 @@ abstract class JDatabase implements JDatabaseInterface
 		// Set the query and execute the insert.
 		$this->setQuery(sprintf($statement, implode(',', $fields), implode(',', $values)));
 		if (!$this->query())
-		{
+		{	//echo $this->sql;
 			return false;
 		}
 

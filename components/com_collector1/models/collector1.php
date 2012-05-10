@@ -9,19 +9,24 @@
 
 // No direct access
 defined('_JEXEC') or die;
-
 jimport('joomla.application.component.model');
 jimport('joomla.application.component.helper');
 
-JTable::addIncludePath(JPATH_ROOT . '/administrator/components/com_collector1/tables');
-
+//JTable::addIncludePath(JPATH_ROOT . '/administrator/components/com_collector1/tables');
+JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_collector1/tables');
 /**
  * Model
  */
 class Collector1ModelCollector1 extends JModel
 {
 	protected $_item;
+	protected $_action;
 
+	function __construct(){
+		parent::__construct();
+		$action=JRequest::getVar('task');
+		$this->_action=$action;
+	}
 	/**
 	 * Get the data for a banner
 	 */
@@ -113,5 +118,57 @@ FROM dnior_webapps_site_types ORDER BY id DESC";
 		}
 		return $db->loadAssocList();
 	}
+	//
+	function tempCMSlist(){
+		return array( 'bitrix'=>'1С-Битрикс',
+					'ABO.CMS'=>'ABO.CMS',
+					'Amiro.CMS'=>'Amiro.CMS',
+					'atilect.CMS'=>'АТИЛЕКТ.CMS',
+					'B2evolution'=>'B2evolution',
+					'BIGACE'=>'BIGACE',
+					'CMS Made Simple'=>'CMS Made Simple',
+					'CMS Mail Keeper'=>'CMS Mail Keeper',
+					'CMSimple'=>'CMSimple',
+					'Concrete5'=>'Concrete5',
+					'Contao'=>'Contao',
+					'DLEngine'=>'DLEngine',
+					'Danneo'=>'Danneo',
+					'DotNetNuke'=>'DotNetNuke',
+					'Drupal'=>'Drupal',
+					'E107'=>'E107',
+					'e2'=>'e2',
+					'eZ publish'=>'eZ publish',
+					'InSales'=>'InSales',
+					'Joomla'=>'Joomla',
+					'HostCMS'=>'HostCMS',
+					'KooBoo'=>'KooBoo',
+					'MODx'=>'MODx',
+					'Mambo Open Source'=>'Mambo Open Source',
+					'MediaWiki'=>'MediaWiki',
+					'Movable Type'=>'Movable Type',
+					'Nethouse'=>'Nethouse',
+					'Newscoop'=>'Newscoop',
+					'NPJ'=>'NPJ',
+					'Nucleus CMS'=>'Nucleus CMS',
+					'OpenCms'=>'OpenCms',
+					'PHP-Fusion'=>'PHP-Fusion',
+					'PHP-Nuke'=>'PHP-Nuke',
+					'Plone'=>'Plone',
+					'Prestashop'=>'Prestashop',
+					'S.Builder'=>'S.Builder',
+					'Sapid'=>'Sapid',
+					'SharePoint'=>'SharePoint',
+					'Site Sapiens'=>'Site Sapiens',
+					'TYPO3'=>'TYPO3',
+					'Textpattern'=>'Textpattern',
+					'TikiWiki'=>'TikiWiki',
+					'uCoz'=>'uCoz',
+					'UMI.CMS'=>'UMI.CMS',
+					'WikkaWiki'=>'WikkaWiki',
+					'WordPress'=>'WordPress',
+					'XOOPS'=>'XOOPS',
+					'Xaraya'=>'Xaraya',
+					'Zikula'=>'Zikula'
+				);	
+	} 
 }
-

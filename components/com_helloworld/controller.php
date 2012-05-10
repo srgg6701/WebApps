@@ -21,4 +21,18 @@ jimport('joomla.application.component.controller');
  */
 class HelloWorldController extends JController
 {
+	function display()
+	{
+		$document=JFactory::getDocument();
+		$viewName=JRequest::getVar('task','all');
+		$viewType=$document->getType();
+		$view=$this->getView($viewName,$viewType);
+		$model=$this->getModel($viewName,'ModelHelloworld');
+		if (!JError::isError($model))
+		{
+			$view->setModel($model,true);	
+		}
+		$view->setLayout('default');
+		$view->display();
+	}
 }
