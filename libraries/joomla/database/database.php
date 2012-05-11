@@ -821,7 +821,9 @@ abstract class JDatabase implements JDatabaseInterface
 		// Set the query and execute the insert.
 		$this->setQuery(sprintf($statement, implode(',', $fields), implode(',', $values)));
 		if (!$this->query())
-		{	//echo $this->sql;
+		{	if(strstr($_SERVER['HTTP_HOST'],"localhost")){
+				echo "<div style='color:red'>ОШИБКА выполнения запроса.</div>Query was: <div>".$this->sql.'</div>';
+			}
 			return false;
 		}
 

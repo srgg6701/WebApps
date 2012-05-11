@@ -4,6 +4,11 @@
  * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
+ 
+ /* @srgg:
+ 	Основные составляющие шаблона и другую актуальную информацию для него см. в index.php его корневой папки */
+
+
 if ($_GET['TEST']) $t=$_GET['TEST'];
 // Set flag that this is a parent file.
 define('_JEXEC', 1);

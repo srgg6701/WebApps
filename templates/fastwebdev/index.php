@@ -4,10 +4,16 @@
  * Copyright    Copyright (C) 2012 Lal B. Saud
  * License  GPL
  */
+
+/*
+
+*/
+
 defined('_JEXEC') or die;
 $app = JFactory::getApplication();
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <jdoc:include type="head" />
@@ -61,16 +67,8 @@ function manageLoginDisplay(stat){
 				break;		
 
 			default: d.getElementById('login_block').style.display=stat;
-			/*case "block":
-				d.getElementById('login_block').style.display='none';
-				break;		
-
-			case "none":
-				d.getElementById('login_block').style.display='none';
-				break;	*/	
 		}
-		//if (stat=="exit") document.getElementById('login-form').submit();
-		//else document.getElementById('login_block').style.display=stat;
+
 	}catch(e){
 		alert(e.message);
 	}
@@ -86,7 +84,7 @@ function manageLoginDisplay(stat){
             <a href="index.php?option=com_customer&task=userdata">Мои данные</a>
             <a href="index.php?option=com_collector1&task=collected">Мой сайт</a>
             <a href="index.php?option=com_customer&task=balance">Мой баланс</a>
-        	<div align="right" id="close_user_menu">[<a href="javascript:void();" onclick="manageLoginDisplay('hide_menu');">Закрыть</a>]</div>
+        	<div align="right" id="close_user_menu"><a href="javascript:void();" onclick="manageLoginDisplay('hide_menu');">Закрыть</a></div>
         </div>
     </div>
     <span id="user_menu_here" style="padding:6px 10px; margin-left:10px; background:#FFFF00; cursor:pointer; border-radius:6px;" onclick="manageLoginDisplay('menu');">Меню</span><img src="<?=$path_to_images?>user24.png" width="22" height="22" hspace="6" align="absmiddle" style="margin-right:14px;" /><a href="javascript:void();" onclick="manageLoginDisplay('exit');">Выход</a><? }

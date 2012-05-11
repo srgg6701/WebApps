@@ -67,6 +67,7 @@ tr.center td{
 	padding:0 !important;
 	margin:0 !important;
 	font-size:0.7em !important;
+	color: #900;
 }
 div#collector_wrapper{
 	margin:6px 0 4px;
@@ -114,13 +115,15 @@ div.div_right > div{
 }
 #div_user_menu{
 	padding:4px;
-	left:21px; 
-	top:25px; 
-	background:#0F0; 
-	position:absolute; 
-	border-radius:6px; 
+	left:21px;
+	top:25px;
+	background:#0F0;
+	position:absolute;
+	border-radius:6px;
 	z-index:6;
 	text-align:left;
+	background-color: #DEDEDE;
+	box-shadow:2px 4px 10px #333;
 }
 #div_user_menu a{
 	display:block;
