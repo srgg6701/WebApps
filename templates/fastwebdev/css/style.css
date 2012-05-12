@@ -44,16 +44,16 @@ img#call_expert{
 	margin-right:10px;
 }
 #call_us{
-	font-size:0.55em; 
+	font-size:12px; 
 	font-weight:bolder; 
 	margin-left:10px; 
-	padding:8px 12px; 
+	padding:11px 12px 7px; 
 	background: #FEBE38;
 	color: #FFFAE8; 
-	border-radius:6px; 
-	display:inline-block; 
+	border-radius:6px; white-space:nowrap;
+	/*display:inline-block; 
 	vertical-align:central; 
-	float:right;
+	float:right;*/
 }
 tr.center td{
 	text-align:center; 
@@ -338,10 +338,12 @@ td.logotype{
 	padding:0;
 }
 .logotype div:first-child{
-	display:inline-block; 
-	padding-top:6px; 
 	padding-left:24px; 
+	/*
+	padding-top:6px; 
+	display:inline-block; 
 	float:left;
+	*/
 }
 div#main{
 	max-width:940px;
@@ -423,12 +425,34 @@ ul#our_tech{
 	list-style-type:none; 
 	margin-left:-20px
 }
-.required{
+div.registration form fieldset .spacer{
+	display:block;
+	float:none;
+	clear:both;
+	background:none !important;
+	border-radius: none;
+}
+.registration fieldset{
+	background:#f3f3f3;
+	margin-bottom:10px;
+	border-radius:6px;
+}
+.registration fieldset legend{
+	padding:10px;
+	background: #FF6;
+	border-radius:6px;
+}
+.required_field{
 	display:inline;
 }
-.required:after{
+.required_field:after{
 	color:#FF0000;
 	content:'*';
+}
+#right_advices{
+	width:30%; 
+	float:right; 
+	padding-top:16px;
 }
 #sms_list div{
 	display:inline-block;
@@ -442,6 +466,19 @@ ul#our_tech{
 	background:#F90;
 	color:#FFFFFF;
 	cursor:default;
+}
+.skinny{
+	font-weight:lighter;
+}
+.star, .red{
+	color:red;
+}
+#super_bonuses{
+	padding:0; 
+	padding-left:10px;
+}
+#super_bonuses a{
+	font-size:0.9em;
 }
 table.quick img {
 	height:64px;
@@ -457,33 +494,21 @@ table#quick th {
 tr.paddingTop10 td, tr.paddingTop10 th {
 	padding-top:10px;
 }
-#right_advices{
-	width:30%; 
-	float:right; 
-	padding-top:16px;
+table#tblCollected{
+	border: solid 1px #CCCCCC;
 }
-.skinny{
-	font-weight:lighter;
-}
-#super_bonuses{
-	padding:0; 
-	padding-left:10px;
-}
-#super_bonuses a{
-	font-size:0.9em;
-}
-table#tblCollector{
+table#tblCollector, table#tblCollected{
 	border-radius:6px 6px 0 0;
 	border-bottom:solid 1px #ccc;
 }
-table#tblCollector th {
+table#tblCollector th, table#tblCollected th {
 	background:#efefef;
 	/*border-color:#CCCCCC #999999 #999999 #CCCCCC;*/
 }
-table#tblCollector tr:hover {
+table#tblCollector tr:hover, table#tblCollected tr:hover {
 	background:#E4F9DD;
 }
-table#tblCollector tr td {
+table#tblCollector tr td, table#tblCollected tr td{
 	border-top:solid 1px #CCCCCC;
 	/*empty-cells:hide;
 	border-color:#CCCCCC #999999 #999999 #CCCCCC;*/
@@ -608,6 +633,14 @@ div#tech_start div{
 	font-size:1.1em; 
 	padding-right:14px;
 }
+.tip-wrap{
+	background:#FFFF99;
+	color:#666666;
+	font-size:11px;
+	padding:10px;
+	border-radius:6px;
+	opacity:0.8;
+}
 div#wrapper_component{
 	border:solid 1px #009900;
 	border-top:none;
@@ -641,6 +674,10 @@ div#wrapper_menu table{
 }
 div#wrapper_menu table td a{
 	color:#FFF;
+}
+div#wrapper_menu table td a:hover{
+	color:#FEBE38;
+	text-decoration:none;
 }
 div#wrapper_menu table td div.drop_down_menu{
 	position:absolute; 

@@ -12,11 +12,12 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.model');
 jimport('joomla.application.component.helper');
 
-//JTable::addIncludePath(JPATH_ROOT . '/administrator/components/com_collector1/tables');
 JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_collector1/tables');
 /**
  * Model
  */
+ 
+//echo "Hello!"; 
 class Collector1ModelCollector1 extends JModel
 {
 	protected $_item;
@@ -26,6 +27,86 @@ class Collector1ModelCollector1 extends JModel
 		parent::__construct();
 		$action=JRequest::getVar('task');
 		$this->_action=$action;
+	}
+	function storeCollectedData(){
+		
+		$post_collection=JRequest::get('post');
+		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
+		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
+		$user = JFactory::getUser();
+ 
+		if ($user->guest) {
+			
+			echo " GUEST! Зарагистрируем его. ";
+  		
+		}else{
+			
+			$table->reset();
+			$table->set('customer_id', $user->id);
+			$table->set('site_type_id', $post_collection["selectSiteType"]);
+			
+			//выяснить выбор типа движка:
+			switch ($post_collection["choose_engine"])  { 
+
+				case "take_ready":
+					$engine_type_choice_id="1";
+						break;
+		
+				case "build_own":
+					$engine_type_choice_id="2";
+						break;
+		
+				case "exists":
+					$engine_type_choice_id="3";
+						break;
+			}
+			$table->set('engine_type_choice_id', $engine_type_choice_id);
+			$arrStoredOptions=array();
+			foreach ($post_collection as $key=>$val){
+				if (strstr($key,'cms_name_')) $arrCMS[]=$val;
+				if (strstr($key,'option_')) {
+					$gt=explode('_',$key);
+					$index=(int)$gt[1];
+					if (!is_array($arrStoredOptions[$index])) {
+						$arrStoredOptions[$index]=array($gt[2]);
+					}else array_push($arrStoredOptions[$index],$gt[2]);
+				}
+			}
+			if (is_array($arrCMS)){
+				$table->set('engines_ids',implode(',',$arrCMS));
+			}
+			if (!empty($arrStoredOptions)){
+				$table->set('options_array',serialize($arrStoredOptions));
+			}
+			$table->set('xtra', $post_collection["xtra"]);
+			$table->set('ordering', $table->getNextOrder());
+		}
+		/*// Bind the data to the table
+		if (!$table->bind())
+		{	echo "<div>Не связано!</div>";
+		// handle bind failure
+		}*/
+		// Check that the data is valid
+		if (!$table->check())
+		{	echo "<div>Не проверено 1!</div>";
+		// handle validation failure
+		}
+		// Store the data in the table
+		if (!$table->store(true))
+		{	echo "<div>Не сохранено!</div>";
+		// handle store failure
+		}
+		// Check the record in
+		if (!$table->checkin())
+		{	echo "<div>Не проверено 2!</div>";
+		// handle checkin failure
+		}
+		/*// Reorder the table
+		if (!$table->reorder())
+		{	echo "<div></div>";
+		// handle reorder failure
+		}*/		
+		//$this->setRedirect(JRoute::_('index.php?option=com_collector1&view=collected', false));
 	}
 	/**
 	 * Get the data for a banner

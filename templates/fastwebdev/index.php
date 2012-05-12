@@ -28,8 +28,6 @@ $app = JFactory::getApplication();
 </div>
 <!-- block that fits space verically -->
 <div id="body">
-	<!-- system messages -->
-  	<jdoc:include type="message" />
 
     <!-- main container -->
     <div align="center" class="offsetBottom" id="container">
@@ -44,6 +42,8 @@ $app = JFactory::getApplication();
           <div title="Разработка web-приложений, CMS, EMS и их компонентов">
           	<a href="index.php">WebApps</a>.2-all<span style="color: #F4BD00;">.com</span>  
           </div>
+          			</td>
+                    <td style="padding-top:2px;">
 		  <div id="call_us"><img src="<?=$path_to_images?>1335869184_contact.png" width="24" height="24" hspace="4" align="absmiddle">8(904)442-84-47 </div></td>
                     <td width="100%" align="right" nowrap id="topSearch">
                             	<jdoc:include type="modules" name="search" style="xhtml" />
@@ -77,20 +77,23 @@ function manageLoginDisplay(stat){
 
 					</td>
                     <td id="tdLogin">
-                    <? $user = JFactory::getUser();
+<? 	$user = JFactory::getUser();
 	if (!$user->guest){?>
 	<div style="position:relative">
 		<div id="div_user_menu" style="display:<?="none"?>;">
             <a href="index.php?option=com_customer&task=userdata">Мои данные</a>
-            <a href="index.php?option=com_collector1&task=collected">Мой сайт</a>
+            <a href="index.php?option=com_collector1<?
+    	//выяснить, собран ли сайт
+		$user->getCustomerData($user->id);
+		if (!empty($user->customer_data_array)){?>&view=collected<? }?>">Мой сайт</a>
             <a href="index.php?option=com_customer&task=balance">Мой баланс</a>
         	<div align="right" id="close_user_menu"><a href="javascript:void();" onclick="manageLoginDisplay('hide_menu');">Закрыть</a></div>
         </div>
     </div>
-    <span id="user_menu_here" style="padding:6px 10px; margin-left:10px; background:#FFFF00; cursor:pointer; border-radius:6px;" onclick="manageLoginDisplay('menu');">Меню</span><img src="<?=$path_to_images?>user24.png" width="22" height="22" hspace="6" align="absmiddle" style="margin-right:14px;" /><a href="javascript:void();" onclick="manageLoginDisplay('exit');">Выход</a><? }
+    <span id="user_menu_here" style="padding:6px 10px; margin-left:10px; background:#FFFF00; cursor:pointer; border-radius:6px;" onclick="manageLoginDisplay('menu');">Меню</span><img src="<?=$path_to_images?>user24.png" width="22" height="22" hspace="6" align="absmiddle" style="margin-right:14px;" title="<?=$user->username?>" /><a href="javascript:void();" onclick="manageLoginDisplay('exit');">Выход</a><? }
 	else{?>&nbsp; <a href="javascript:void();" onclick="manageLoginDisplay('block');">Вход</a>
                         ::
-                        <a href="index.php/component/users/?view=registration">Регистрация</a><? 
+                        <a href="index.php?option=com_users&view=registration">Регистрация</a><? 
 	}?>
                     <div id="login_block">
                     	<jdoc:include type="modules" name="login" style="xhtml" />
@@ -114,6 +117,10 @@ function manageLoginDisplay(stat){
 </script>
 <? 	}?>
             <div id="wrapper_component">  			
+            	
+                <!-- system messages -->
+  				<jdoc:include type="message" />
+
 				<div id="com">
 					<jdoc:include type="component" />    
            		</div>

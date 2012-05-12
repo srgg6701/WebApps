@@ -195,12 +195,19 @@ class JUser extends JObject
 	protected static $instances = array();
 
 	/**
+		данные заказчика
+		com_collector
+	*/
+	public $customer_data_array = array();
+
+	/**
 	 * Constructor activating the default information of the language
 	 *
 	 * @param   integer  $identifier  The primary key of the user to load (optional).
 	 *
 	 * @since   11.1
 	 */
+	 
 	public function __construct($identifier = 0)
 	{
 		// Create the user parameters object
@@ -208,7 +215,7 @@ class JUser extends JObject
 
 		// Load the user if it exists
 		if (!empty($identifier))
-		{
+		{	
 			$this->load($identifier);
 		}
 		else
@@ -220,7 +227,17 @@ class JUser extends JObject
 			$this->guest = 1;
 		}
 	}
-
+	//@srgg
+	//данные заказчика
+	public function getCustomerData($customer_id){ //identifier at __construct
+		if ($customer_id) {
+			$db = JFactory::getDbo();
+			$query='SELECT site_type_id, engine_type_choice_id, engines_ids, options_array, xtra' . 
+							' FROM ' . '#__webapps_customer_site_options' . ' WHERE customer_id = ' . (int) $customer_id;
+			$db->setQuery($query);
+			$this->customer_data_array=$db->loadRow();
+		}
+	}
 	/**
 	 * Returns the global User object, only creating it if it
 	 * doesn't already exist.

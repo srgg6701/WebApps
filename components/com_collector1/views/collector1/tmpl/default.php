@@ -328,7 +328,7 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 	<div style="display:block; margin-bottom:8px;">Как вас зовут? <input name="name" type="text" id="name" value="" size="40"></div>
 
 	<div>
-    	Ваш емэйл:<div class="required"></div> <input name="email" id="email" type="text" value="">
+    	Ваш емэйл:<div class="required_field"></div> <input name="email" id="email" type="text" value="">
     </div> 
 	<div>
     	Ваш телефон: <input name="phone" id="phone" type="text" value=""> 

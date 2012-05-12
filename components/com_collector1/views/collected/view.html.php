@@ -15,11 +15,17 @@ jimport('joomla.application.component.view');
 /**
  * HTML View class for the Collector1 component
  */
-class Collector1ViewCollected extends JView
-{
-
+class Collector1ViewCollected extends JView 
+{	/* возвращает всё ($this)*/
+	public $model_data; //то, что собрал юзер
+	public $sites_types;//типы сайтов
+	public $cms_choice;//выбранные cms
+	
 	function display($tpl = null)
-	{
+	{	
+		$this->model_data=$this->getModel()->collected();
+		$this->sites_types=$this->getModel()->get_sites_types();
+		$this->cms_choice=$this->getModel()->get_cms();
 		parent::display($tpl);
 	}
 }

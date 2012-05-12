@@ -14,5 +14,6 @@ jimport('joomla.application.controller');
 
 class Collector1ControllerCollector1 extends JController
 {
+	
 
 }
