@@ -22,8 +22,7 @@ class Collector1ViewCollected extends JView
 	public $cms_choice;//выбранные cms
 	
 	function display($tpl = null)
-	{	
-		$this->model_data=$this->getModel()->collected();
+	{	$this->model_data=$this->getModel()->collected();
 		$this->sites_types=$this->getModel()->get_sites_types();
 		$this->cms_choice=$this->getModel()->get_cms();
 		parent::display($tpl);

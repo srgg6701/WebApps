@@ -50,7 +50,7 @@ foreach ($list as $i => &$item) :
 		$class = ' class="'.trim($class) .'"';
 	}*/
 		if ($m>0||$_SESSION['skip_first']===false){?>
-    <td<? if ($item->id == $active_id){?>  class="tdActive">:: <? }else echo '>';
+    <td<? if ($item->id == $active_id){?>  class="tdActive"> <? }else echo '>';
 
 	// Render the menu item.
 	switch ($item->type) :

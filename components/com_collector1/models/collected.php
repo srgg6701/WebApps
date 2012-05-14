@@ -10,14 +10,14 @@ class collector1ModelCollected extends JModel
 	function __construct(){
 		parent::__construct();
 		$this->db=JFactory::getDBO();
-		$user = JFactory::getUser();
+		$user = JFactory::getUser();  
 		$this->query.=' WHERE customer_id = '.$user->id;
 	}
-	
+	//все сайты заказчика:
 	function collected()
-	{
-		$this->db->setQuery('SELECT *' . $this->query);
-		return $this->db->loadAssoc(); 
+	{	
+		$this->db->setQuery('SELECT * ' . $this->query . $where);
+		return $this->db->loadAssocList(); 
 	}
 	//получить таблицу типов сайтов:
 	function get_sites_types(){
@@ -35,7 +35,6 @@ class collector1ModelCollected extends JModel
 		$i=0;
 		$cms_list='';
 		$engs=explode(',',$cms_picked_up['engines_ids']);
-		//var_dump("<h1>engs:</h1><pre>",$engs,"</pre>"); 
 		foreach ($arrEngines as $nick=>$name){
 			$i++;
 			if (in_array($i,$engs)){

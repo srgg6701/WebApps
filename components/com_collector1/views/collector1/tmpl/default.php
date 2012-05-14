@@ -12,18 +12,42 @@
 defined('_JEXEC') or die('Restricted access');
 
 $table=Collector1ModelCollector1::getDataForCollector();
+$current_order_set=$this->current_order_set;
+var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");
+
+if ($current_order_set){
+}
 
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 
-<form name="form1" method="post" action="<?php echo JRoute::_('index.php?option=com_collector1&task=collect'); ?>" onSubmit="return checkRequired();">
+<form name="form1" method="post" action="<?php 
+
+$go_submit='index.php?option=com_collector1&task=collect';
+if ($current_order_set) $go_submit.="&collection_id=".$current_order_set['id'];
+
+echo JRoute::_($go_submit); ?>" onSubmit="return checkRequired();">
     <div>
     <a name="select_site_type"></a>
-  <label for="select" style="margin-left:6px;">Какой тип сайта вам нужен?</label>
+  <label for="select"><h3 id="collector_head"><?
+
+if ($current_order_set){
+	
+	?>Выбранный вами тип сайта: <? 
+
+}else{
+	
+	?>Какой тип сайта вам нужен?<? 
+
+}			?></h3></label>
+  
   <select name="selectSiteType" id="selectSiteType" onChange="checkRows(this.options[this.selectedIndex].value);">
-    <option selected value="0">Выберите из списка</option>
+    <option<? 	if (!$current_order_set){?> selected<? }?> value="0">Выберите из списка</option>
 <?	$arrSitesTypes=Collector1ModelCollector1::getSitesTypes();
 	for($s=0,$st=count($arrSitesTypes);$s<$st;$s++){?>    
-    <option value="<?=$arrSitesTypes[$s]['id']?>"><?=$arrSitesTypes[$s]['name_ru']?></option>
+    <option value="<?=$arrSitesTypes[$s]['id']?>"<?
+    	if ($current_order_set&&$current_order_set['site_type_id']==$arrSitesTypes[$s]['id']){
+			?> selected<? 
+		}?>><?=$arrSitesTypes[$s]['name_ru']?></option>
 <?	}
 	if ($test){?>
     <option value="corp">Корпоративный</option>
@@ -53,8 +77,17 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
     <th>Административный (back-end)</th>
     <?	}?>
   </tr>
-<?	for($i=0,$j=count($table);$i<$j;$i++){
+<?	//	
+	for($i=0,$j=count($table);$i<$j;$i++){
+		
 		$data_row=$table[$i];
+		
+		unset($shopClass);
+		
+		if ($data_row['site types']=='3') {
+			$shopClass="WebShop";
+			if ($current_order_set['site_type_id']==3)  $shopClass="hiddenShop";
+		}
 		$data_next=$table[$i+1];
 		$data_prev=$table[$i-1];
 		if ( $i && $data_row['name_ru'] &&
@@ -63,14 +96,12 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 			
 			if ($data_row['name_ru']!=NULL) $group_stat='start';?>	
   <tr<?
-  	if ($data_row['site types']=='3') {?> class="WebShop"<? } 
+  	if ($shopClass) {?> class="<?=$shopClass?>"<? } 
     ?>>
     <td colspan="4" class="joined"><?=$data_row['name_ru']?></td>
   </tr>
   <?	}?>
-  <tr class="<?
-  	if ($data_row['site types']=='3') {?>WebShop<? } 
-
+  <tr class="<? echo $shopClass;
   		//назначить стиль строке начала новой группы:
   		if ( 
 			 ( !$data_row['name_ru'] && $data_next['name_ru'] )
@@ -86,15 +117,33 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
     <td<? 
 	if ($group_stat&&$group_stat!='finish'&&strlen($data_row['name_ru'])>0){
 		?> style="padding-left:20px;"<? 
-	}else echo ' style="padding-left:10px;"';?>><? //echo 'strlen='.strlen($data_row['name_ru']);?>
+	}else echo ' style="padding-left:10px;"';?>>
     	<input type="checkbox"> <?=$data_row['option']?>
     </td>
 	<?  $side_cells=Collector1ModelCollector1::buildOptionsSidesCells($data_row['option_id']);
+		
 		//options cells:
-		for($t=0;$t<count($arrColumnsNames);$t++){?>    
-    <td><? 	$site_side=$arrColumnsNames[$t]["site_side"];
-			if ($side_cells[0]["missing side name"]!=$site_side){?>
-		<input type="checkbox" name="option_<?=$data_row['option_id']?>_<?=$site_side?>" id="<?=$data_row['option_id']?>_<?=$site_side?>"><?
+		for($t=0;$t<count($arrColumnsNames);$t++){
+			unset($checked);
+			unset($option_is_checked);?>    
+    <td<? 
+			$site_side=$arrColumnsNames[$t]["site_side"];
+			
+			$checked=$current_order_set['options_array'][$data_row['option_id']];
+			
+			if (is_array($checked) && in_array($site_side,$checked)) $option_is_checked=true;
+			
+			if($option_is_checked){?> style="background:#ccff99;"<? }?>><? 	
+			
+			
+			if ($side_cells[0]["missing side name"]!=$site_side){
+				
+				?><input type="checkbox" name="option_<?=$data_row['option_id']?>_<?=$site_side?>" id="<?=$data_row['option_id']?>_<?=$site_side?>"<? 
+
+
+	//получить id опции:
+	if ($option_is_checked){?> checked<? }	
+		?>><?
 			}else{?>&nbsp;<? }?></td>
     <?  }
 		if ($group_stat=='end') $group_stat='finish';?>
@@ -102,194 +151,8 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 <?	}?>
   <tr>
     <td colspan="4" style="padding-right:20px;"><div style="padding-left:6px">Дополнительно:</div>
-      <textarea rows="5" style="margin-top:6px; display:block;" class="widthFull" name="xtra_options" id="xtra_options"></textarea></td>
-    </tr>
-<?	if ($test){/*?>  
-
-
-  <tr class="WebShop">
-    <td style="padding-left:10px;"><input type="checkbox" name="checkbox4" id="checkbox4">
-      Корзина</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr class="WebShop">
-    <td style="padding-left:10px;">      <input type="checkbox" name="checkbox26" id="checkbox26">
-      SMS-информирование</td> 
-    <td>&nbsp;</td>
-    <td><input type="checkbox" name="checkbox27" id="checkbox27"></td>
-    <td><input type="checkbox" name="checkbox28" id="checkbox28"></td>
+      <textarea rows="5" style="margin-top:6px; display:block;" class="widthFull" name="xtra_options" id="xtra_options"><?=$current_order_set['xtra']?></textarea></td>
   </tr>
-  <tr class="WebShop">
-    <td style="padding-left:10px;"><input type="checkbox" name="checkbox29" id="checkbox29">
-      Запросы актуальности заказа</td>
-    <td>&nbsp;</td>
-    <td><input type="checkbox" name="checkbox30" id="checkbox30"></td>
-    <td><input type="checkbox" name="checkbox31" id="checkbox31"></td>
-  </tr>
-  <tr class="WebShop">
-    <td colspan="4" class="joined">Платежи онлайн:</td>
-    </tr>
-  <tr class="WebShop">
-    <td><input type="checkbox" name="checkbox5" id="checkbox5">
-      Карточкой</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td></td>
-    </tr>
-  <tr class="WebShop">
-    <td><input type="checkbox" name="checkbox6" id="checkbox6">
-      Яндекс.деньги</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr class="WebShop">
-    <td><input type="checkbox" name="checkbox7" id="checkbox7">
-      WebMoney</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr class="WebShop">
-    <td><input type="checkbox" name="checkbox8" id="checkbox8">
-      PayPal</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr class="WebShop joined_end">
-    <td><input type="checkbox" name="checkbox9" id="checkbox9">
-      Шлюз</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox10" id="checkbox10"<?	
-	if ($firefox){?> onClick="checkPatchBoxes(this);"<? }?>>
-      Карта сайта</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"<?	
-	if ($firefox){?> onClick="checkPatchBoxes(this);"<? }?>></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"<?	
-	if ($firefox){?> onClick="checkPatchBoxes(this);"<? }?>></td>
-    <td><input type="checkbox" name="checkbox3" id="checkbox3"<?	
-	if ($firefox){?> onClick="checkPatchBoxes(this);"<? }?>></td>
-  </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox11" id="checkbox11">
-      Поиск</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td><input type="checkbox" name="checkbox3" id="checkbox3"></td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox12" id="checkbox12">
-      RSS</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox13" id="checkbox13">
-      Архив материалов</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td><input type="checkbox" name="checkbox3" id="checkbox3"></td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox14" id="checkbox14">
-      Станица не найдена</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td><input type="checkbox" name="checkbox3" id="checkbox3"></td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox15" id="checkbox15">
-      Добавить статью</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox16" id="checkbox16">
-      Рейтинг статьи</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox17" id="checkbox17">
-      Форум</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox18" id="checkbox18">
-      Блог</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td><input type="checkbox" name="checkbox3" id="checkbox3"></td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox19" id="checkbox19">
-      Фотогалерея</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox20" id="checkbox20">
-      Опросы</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox21" id="checkbox21">
-      Облако тегов</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td><input type="checkbox" name="checkbox3" id="checkbox3"></td>
-    </tr>
-  <tr>
-    <td colspan="4" class="joined" bgcolor="#efefef">Социальные виджеты:</td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox22" id="checkbox22">
-      Like (Нравится)</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox23" id="checkbox23">
-      Добавить в друзья</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox24" id="checkbox24">
-      RSS</td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td>&nbsp;</td>
-    </tr>
-  <tr>
-    <td><input type="checkbox" name="checkbox25" id="checkbox25">
-      Дополнительно:
-      <textarea style="margin-top:6px; display:block;" name="textfield" id="textfield"></textarea></td>
-    <td><input type="checkbox" name="checkbox" id="checkbox"></td>
-    <td><input type="checkbox" name="checkbox2" id="checkbox2"></td>
-    <td><input type="checkbox" name="checkbox32" id="checkbox32"></td>
-    </tr>
-<?	*/}?>    
-
-
-
 </table>
 <table cellpadding="8" cellspacing="0">
   <tr>
@@ -298,23 +161,51 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
     <div>(вы можете выбрать несколько возможных вариантов)</div>
     <br>
       <label>
-        <input type="radio" name="choose_engine" value="take_ready" id="choose_engine_1" onClick="manageEnginesChoice(this);">
+        <input type="radio" name="choose_engine" value="take_ready" id="choose_engine_1" onClick="manageEnginesChoice(this);"<?
+        
+		if ($current_order_set['engine_type_choice_id']==1) {?> checked<? }
+		
+		?>>
         Готовая CMS</label> &nbsp;
       <label>
-        <input type="radio" name="choose_engine" value="build_own" id="choose_engine_2" onClick="manageEnginesChoice(this);">
+        <input type="radio" name="choose_engine" value="build_own" id="choose_engine_2" onClick="manageEnginesChoice(this);"<?
+        
+		if ($current_order_set['engine_type_choice_id']==2) {?> checked<? }
+		
+		?>>
         Разработать собственный</label> &nbsp;
       <label>
-        <input type="radio" name="choose_engine" value="exists" id="choose_engine_3" onClick="manageEnginesChoice(this);">
-        Перенести на имеющийся</label><span id="existing_cms_name" style="display:<?="none"?>;">:  <input style="background:#FFFF99; border:solid 1px #999;" type="text" name="existing_cms" id="existing_cms"></span></td>
+        <input type="radio" name="choose_engine" value="exists" id="choose_engine_3" onClick="manageEnginesChoice(this);"<?
+        
+		if ($current_order_set['engine_type_choice_id']==3) {?> checked<? }
+		
+		?>>
+        Перенести на имеющийся</label><span id="existing_cms_name"<?
+        
+		if ($current_order_set['engine_type_choice_id']!=3) {
+			
+			?> style="display:<?="none"?>;"<? 
+		
+		}?>>:  <input style="background:#FFFF99; border:solid 1px #999;" type="text" name="existing_cms" id="existing_cms"></span></td>
   </tr>
-  <tr id="tr_cms_list" style="display:none;">
+  <tr id="tr_cms_list"<? if(!$current_order_set){?> style="display:none;"<? }?>>
     <td id="sms_list" onClick="controlCMSchoice(this);">
     <hr size="1">
-<?	$CMS=Collector1ModelCollector1::tempCMSlist();
+<?	
+	$CMS=Collector1ModelCollector1::tempCMSlist();
 	$i=0;
 	foreach($CMS as $key=>$cms){
-		$i++;?>
-	<div><input name="cms_name_<?=$i?>" type="checkbox" value="<?=$i?>"><?=$cms?></div>
+		$i++;
+		$cmsChecked=($current_order_set['engines_ids'][$i])? true:false;?>
+	<div<? 	
+	
+		if ($cmsChecked){
+		
+			?> style="background-color:#f90;"<? 
+	
+		}?>><input name="cms_name_<?=$i?>" type="checkbox" value="<?=$i?>"<? 
+		
+		if ($cmsChecked){?> checked<? }?>><?=$cms?></div>
 <?	}?>        
 	</td>  
   </tr>
@@ -340,7 +231,7 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 </div>
 <?	}?>
 <br>
-<button style="display:block;" type="submit">Создать прототип!</button>
+<button id="make_site_prototype" type="submit">Создать прототип!</button>
 <br>
 </form>
 <script type="text/javascript">

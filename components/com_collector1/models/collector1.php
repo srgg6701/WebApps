@@ -144,6 +144,16 @@ class Collector1ModelCollector1 extends JModel
 		}
 		return $this->_item;
 	}
+	//получить коллекцию по её id:
+	function getCollection($collection_id){
+		$db=JFactory::getDBO();
+		$db->setQuery('SELECT `id`,`site_type_id`,`engine_type_choice_id`,`engines_ids`,`options_array`,`xtra` FROM #__webapps_customer_site_options WHERE id = ' . $collection_id);
+		$current_order_set=$db->loadAssoc(); 
+		//transform serialized arrays:
+		$current_order_set['engines_ids']=explode(',',$current_order_set['engines_ids']);
+		$current_order_set['options_array']=unserialize($current_order_set['options_array']);
+		return $current_order_set; 
+	}	
 	//получить массив всех данных для построения таблицы Коллектора:
 	function getDataForCollector(){
 		$db = JFactory::getDBO();

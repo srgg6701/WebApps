@@ -31,7 +31,6 @@ class ContentController extends JController
 			JHtml::_('stylesheet', 'system/adminlist.css', array(), true);
 			$config['base_path'] = JPATH_COMPONENT_ADMINISTRATOR;
 		}
-
 		parent::__construct($config);
 	}
 
@@ -73,7 +72,6 @@ class ContentController extends JController
 			// Somehow the person just went to the form - we don't allow that.
 			return JError::raiseError(403, JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
 		}
-
 		parent::display($cachable, $safeurlparams);
 
 		return $this;

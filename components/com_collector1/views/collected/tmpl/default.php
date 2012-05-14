@@ -17,7 +17,7 @@ $sites_types=$this->sites_types;
 //
 $cms_choice=$this->cms_choice;
 ?>
-<h4 style="margin-top:-10px;">Выбранные вами опции:</h4>
+<h3 id="collected_head">Выбранные вами опции:</h3>
 <table cellpadding="8" cellspacing="0" id="tblCollected">
   <tr>
     <th>Опция</th>
@@ -25,60 +25,79 @@ $cms_choice=$this->cms_choice;
   </tr>
 <?php
 	$arrRightOptions=array('site_type_id','engine_type_choice_id','engines_ids','xtra'); 
-	foreach($arr_options as $option=>$data){ 
-		if (in_array($option,$arrRightOptions)){
+	if (!empty($arr_options)){
+		for ($i=0,$j=count($arr_options);$i<$j;$i++){
+			//var_dump("<h1>arr_options:</h1><pre>",$arr_options,"</pre>"); die('j='.$j);
+          if ($j>1) {?>
+          <tr>
+          	<td colspan="2" id="my_site_number">
+          Сайт # <?=($i+1)?>:
+          	</td>
+          </tr>
+		  <? }
 			
-				switch ($option)  { 
-
-					case "site_type_id":
-						$option_name="Тип сайта";
-						$option_value=$sites_types['name_ru'];
-							break;
-			
-					case "engine_type_choice_id":
-						$option_name="Движок";
-							switch ($data)  { 
-								case "1":
-									$option_value="Готовая CMS";
-										break;
-								case "2":
-									$option_value="Разработать собственный";
-										break;
-								case "3":
-									$option_value="Перенести на имеющийся";
-										break;
+			foreach($arr_options[$i] as $option=>$data){ 
+				if (in_array($option,$arrRightOptions)){
+						
+						switch ($option)  { 
+								
+							case "site_type_id":
+								$option_name="Тип сайта";
+								$option_value=$sites_types['name_ru'];
+									break;
+					
+							case "engine_type_choice_id":
+								$option_name="Выбор движка";
+									switch ($data)  { 
+										case "1":
+											$option_value="Готовая CMS";
+												break;
+										case "2":
+											$option_value="Разработать собственный";
+												break;
+										case "3":
+											$option_value="Перенести на имеющийся";
+												break;
+									}
+		
+									break;
+					
+							case "engines_ids":
+								$option_name="Подходящие CMS";
+								$option_value=$cms_choice;
+									break;
+							case "xtra":
+								$option_name="Дополнительные опции";
+									break;
+						}?>
+		  <tr>
+			<td><?=$option_name?>:</td>
+			<td><?php
+					if ($option_value) {
+						echo $option_value;
+						unset($option_value);
+					}else{
+						if ($option=="options_array") {
+							$data=unserialize($data);
+							foreach($data as $key=>$val){
+								echo "<div>$key=></div>";
+								var_dump("<pre>",$val,"</pre>");
 							}
-
-							break;
-			
-					case "engines_ids":
-						$option_name="Подходящие CMS";
-						$i=0;
-						$option_value=$cms_choice;
-							break;
-					case "xtra":
-						$option_name="Дополнительные опции";
-							break;
-				}
-?>
-  <tr>
-  	<td><?=$option_name?>:</td>
-    <td><?php
-			if ($option_value) {
-				echo $option_value;
-				unset($option_value);
-			}else{
-				if ($option=="options_array") {
-					$data=unserialize($data);
-					foreach($data as $key=>$val){
-						echo "<div>$key=></div>";
-						var_dump("<pre>",$val,"</pre>");
+						}
+						echo $data; 
 					}
 				}
-				echo $data; 
-			}
-		}
-	?></td>
-  </tr>
-<?php } ?>
+			?></td>
+		  </tr>
+		<?php } ?>
+          <tr>
+          	<td colspan="2" onMouseOver="this.style.backgroundColor='white';">
+	[ <a href="index.php/build-and-calculate?collection_id=<?=$arr_options[$i]['id']?>">Изменить опции...</a> ]
+			</td>
+          </tr>
+<?		}
+	}?>
 </table>
+<div class="button-green" style="margin-left:6px;">
+    <a href="index.php/build-and-calculate/">Добавить сайт...</a>
+</div>

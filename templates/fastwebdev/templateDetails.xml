@@ -27,6 +27,7 @@
 		<folder>language</folder>
 	</files>
 	<positions>
+        <position>account</position>		
         <position>debug</position>		
 		<position>footer</position>
 		<position>login</position>

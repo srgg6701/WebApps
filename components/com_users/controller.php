@@ -29,7 +29,7 @@ class UsersController extends JController
 	 * @since	1.5
 	 */
 	public function display($cachable = false, $urlparams = false)
-	{
+	{	
 		// Get the document object.
 		$document	= JFactory::getDocument();
 		// Set the default view name and format from the Request.
@@ -37,7 +37,7 @@ class UsersController extends JController
 		$vFormat = $document->getType();
 		$lName	 = JRequest::getCmd('layout', 'default');
 
-		if ($view = $this->getView($vName, $vFormat)) {
+		if ($view = $this->getView($vName, $vFormat)) {	
 			// Do any specific processing by view.
 			switch ($vName) {
 				case 'registration':

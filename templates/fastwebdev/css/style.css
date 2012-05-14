@@ -14,6 +14,22 @@ a:hover, .link:hover{
 	text-decoration:underline;
 	cursor:pointer;
 }
+div#account_menu td{ 
+	background:#090;
+	border-right:solid 1px #FFFFFF;
+	padding:4px 12px 8px 12px;
+	border-radius:0 0 7px 6px;
+}
+div#account_menu td a{
+	color: #FC0; 
+}
+div#account_menu td a:hover{
+	color:#FFF; 
+}
+div#account_menu td.tdActive a{
+	color:#FFF;
+	font-weight:bold;
+}
 body{
 	background:#FFFFFF; 
 	background-image:url(../images/bg/bg_techno.jpg); 
@@ -38,6 +54,10 @@ div#body{
 	 margin-top:10px; 
 	 display:inline-block; 
 	 font-weight:bold;
+}
+div.button-green{
+	 display:inline-block;
+	 padding:10px 14px !important;
 }
 img#call_expert{
 	border-radius:6px; 
@@ -68,6 +88,14 @@ tr.center td{
 	margin:0 !important;
 	font-size:0.7em !important;
 	color: #900;
+}
+#collector_head, #collected_head{
+	display:inline-block;
+	margin:6px 10px 8px 10px;
+	color:#060;
+}
+#collected_head{
+	margin-bottom:14px;
 }
 div#collector_wrapper{
 	margin:6px 0 4px;
@@ -189,6 +217,10 @@ div.info_right{
 	margin-bottom:10px;
 	z-index:1;
 }
+.item-page > h2 {
+	margin-top:6px;
+	margin-bottom:20px;
+}
 dl {
 	margin-left:10px;
 	margin-bottom:10px;
@@ -221,6 +253,10 @@ h2, .h2{
 }
 h1,h2,h3,h4,h5,h6,h7{
 	color: #003;
+}
+h3, .h3{
+	font-size:1em;
+	color: #DE9601;
 }
 .joined{
 	background:#efefef;
@@ -378,7 +414,8 @@ div#mission_content_next{
 	display:inline-table;
 }
 div#mission_possible{
-	padding:32px;
+	/*padding:32px;*/
+	padding-left:16px;
 	padding-top:0px; 
 	margin-top:-10px; 
 	font-size:24px;
@@ -386,11 +423,16 @@ div#mission_possible{
 div#mission_possible_header{
 	display:inline-block; 
 	width:363px;
+	padding-bottom:20px;
 	text-align:center;
 }
 div#mission_wrapper_next{
 	max-width:1000px;
 	overflow:hidden;
+}
+#my_site_number{
+	padding-bottom:6px;
+	font-weight:bold;
 }
 .offsetBottom{
 	padding-bottom:54px;
@@ -414,6 +456,10 @@ div#our_heads table a{
 div#our_heads table tr > td{
 	padding-left:20px;
 }
+fieldset .optional{
+	background:none !important;
+	font-weight:100;
+}
 div#our_heads img{
 	border-radius:6px;
 }
@@ -425,6 +471,45 @@ ul#our_tech{
 	list-style-type:none; 
 	margin-left:-20px
 }
+div.profile fieldset{
+	/*background:#00FF00;
+	margin-bottom:10px;*/
+}
+div.profile fieldset +a, 
+div.profile-edit button.validate,
+div.profile-edit button.validate span,
+div.button-green,
+
+button#make_site_prototype,
+div.button-green a
+{
+	background: #666;
+	color:#FFCC00;
+}
+div.profile fieldset +a,
+div.button-green
+ {
+	padding:10px;
+	margin:10px;
+	border-radius:6px;
+}
+div.profile-edit button.validate, 
+button#make_site_prototype{
+	padding:10px 12px;
+	margin-left:10px;
+	border-radius:6px;
+	border-width:0;
+	cursor:pointer;
+}
+div.profile fieldset +a:hover, 
+div.profile-edit button.validate span:hover,
+div.button-green:hover,
+div.button-green:hover a,
+button#make_site_prototype:hover {
+	color:#FFF;
+	text-decoration:none;
+	background:#FF9900;
+}
 div.registration form fieldset .spacer{
 	display:block;
 	float:none;
@@ -432,12 +517,16 @@ div.registration form fieldset .spacer{
 	background:none !important;
 	border-radius: none;
 }
-.registration fieldset{
+.registration fieldset, 
+.profile fieldset,
+.profile-edit fieldset{
 	background:#f3f3f3;
 	margin-bottom:10px;
 	border-radius:6px;
 }
-.registration fieldset legend{
+.registration fieldset legend, 
+.profile fieldset legend, 
+.profile-edit fieldset legend{
 	padding:10px;
 	background: #FF6;
 	border-radius:6px;
@@ -505,7 +594,7 @@ table#tblCollector th, table#tblCollected th {
 	background:#efefef;
 	/*border-color:#CCCCCC #999999 #999999 #CCCCCC;*/
 }
-table#tblCollector tr:hover, table#tblCollected tr:hover {
+table#tblCollector tr:hover, table#tblCollected tr:hover, #my_site_number {
 	background:#E4F9DD;
 }
 table#tblCollector tr td, table#tblCollected tr td{
@@ -684,15 +773,11 @@ div#wrapper_menu table td div.drop_down_menu{
 	top:34px; 
 	left:10px; 
 	background:#666; 
-}/*#tableMenu td{
-	white-space:nowrap;
 }
-table.light div.drop_down_menu{
-	position:absolute; 
-	top:34px; 
-	left:10px; 
-	background:#666; 
-}*/
+#your_the_best{
+	display:inline-block; 
+	padding-left:40px;
+}
 #your_site{
 	padding-top:16px;
 }
@@ -716,6 +801,9 @@ tr.WebShop, tr.WebShop td{
 .widthFull{
 	width:100%;
 }
+#wrapper_menu td.tdActive:before{
+	content:":: ";
+} 
 /*test styles*/
 div.profiler{
 	border:solid 2px #CC99FF;

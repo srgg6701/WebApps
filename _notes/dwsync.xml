@@ -8,4 +8,6 @@
 <file name="README.txt" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807108166660000" remote="129808403400000000" />
 <file name="robots.txt" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807108271350000" remote="129808403400000000" />
 <file name="web.config.txt" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807108360570000" remote="129808403400000000" />
+<file name="configuration.php" server="ftp.2-all.com" local="129814449140000000" remote="129808427400000000" />
+<file name="index.php" server="ftp.2-all.com" local="129811901630000000" remote="129811797600000000" />
 </dwsync>

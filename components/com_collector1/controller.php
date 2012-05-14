@@ -14,7 +14,7 @@ jimport('joomla.application.component.controller');
 
 class Collector1Controller extends JController
 {
-	
+	//
 	/**
 	* Method to display the view
 	*
@@ -25,6 +25,7 @@ class Collector1Controller extends JController
 	{	
 		parent::display(); //отображает default view
 	}
+	
 	//добавить данные в таблицу опций сайта заказчика:
 	function collect(){ //task=collect
 		$this->getModel()->storeCollectedData();

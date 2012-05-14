@@ -1,7 +1,9 @@
-    <div id="mission_possible">
+    <div id="mission_possible"<? 
+	$user = JFactory::getUser();
+	if (!$user->guest){?> style="padding-top:20px;"<? }?>>
         <div id="mission_possible_header" class="txtBlack">Миссия выполнима!
         </div> 
-        Ваш web-сайт будет самым лучшим &#8212;	 
+        <div id="your_the_best">Ваш web-сайт будет самым лучшим &#8212;</div>
     </div>
 <!-- Mission is possible CONTENT -->    
 <div align="left" id="mission_wrapper_next">
@@ -9,7 +11,6 @@
 
     <!-- Just mission CONTENT -->    
     <div id="mission_content">
-
         <div id="mission_content_next">
             <table cellspacing="0" width="100%" cellpadding="10">
               <tr valign="top">

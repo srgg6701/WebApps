@@ -1,4 +1,10 @@
-﻿<?
+﻿<?		 	
+		
+		/*	Продумать, что показывать юзеру, который заавторизовался в зависимости от состояния его сотрудничества с нами...
+		
+		$user = JFactory::getUser();
+		if ($user->guest){ ?><? }else{?><? }*/        
+
 		$path_to_images='templates/fastwebdev/images/';
 		
 		if ($dw_mode){?>    	
@@ -29,4 +35,3 @@
         	</div>
           </div>  
     	<!-- / section2 -->
-<? ?>

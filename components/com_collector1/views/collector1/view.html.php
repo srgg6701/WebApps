@@ -19,6 +19,7 @@ class Collector1ViewCollector1 extends JView
 {
 	protected $state;
 	protected $item;
+	public $current_order_set;
 
 	function display($tpl = null)
 	{
@@ -28,8 +29,12 @@ class Collector1ViewCollector1 extends JView
 		// Get some data from the models
 		$state		= $this->get('State');
 		$item		= $this->get('Item');
+		//получим данные переданной коллекции заказчика:
+		$current_set_id=JRequest::getVar('collection_id');
+		if ($current_set_id) {
+			$this->current_order_set=Collector1ModelCollector1::getCollection($current_set_id);
+		}
 		//получает HTML из контроллера (?), в случае, если он также вызывает у себя parent::display()
         parent::display($tpl);
-
 	}
 }

@@ -30,9 +30,8 @@ if (!empty($this->item->pagination) AND $this->item->pagination && !$this->item-
 {
  echo $this->item->pagination;
 }
- ?>
 
-<?php if ($params->get('show_title')) : ?>
+if ($params->get('show_title')) : ?>
 	<h2>
 	<?php if ($params->get('link_titles') && !empty($this->item->readmore_link)) : ?>
 		<a href="<?php echo $this->item->readmore_link; ?>">
