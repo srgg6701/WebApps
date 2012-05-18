@@ -25,8 +25,33 @@ class Collector1ModelCollector1 extends JModel
 	
 	function __construct(){
 		parent::__construct();
-		$action=JRequest::getVar('task');
-		$this->_action=$action;
+		$this->_action=JRequest::getVar('task');
+	}
+	/**
+	 * Добавить набор опций 
+	 */
+	function addCollection(){
+		
+		if ($user->guest) {
+			
+			echo " GUEST! Зарегистрируем его. ";
+  		
+		}else{
+			
+			if (!$table=$this->prepareDataSet()) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareDataSet()");
+		
+		}
+		// Check that the data is valid
+		if (!$table->check()) echo "<div>Не проверено 1!</div>";
+		// Store the data in the table
+		if (!$table->store(true)) echo "<div>Не добавлено!</div>";
+		// Check the record in
+		if (!$table->checkin()) echo "<div>Не проверено 2!</div>";
+		//get last
+		$query="SELECT max(id) FROM #__webapps_customer_site_options";
+		$db = JFactory::getDBO();
+		$db->setQuery($query);
+		return $db->loadResult();
 	}
 	/**
 	 * Построить ячейки для frontend, backend, boudoire в строке опции
@@ -34,8 +59,8 @@ class Collector1ModelCollector1 extends JModel
 	function buildOptionsSidesCells($option_id){
 		$db = JFactory::getDBO();
 		$query="SELECT site_side AS `missing side name`
-FROM dnior_webapps_site_options_beyond_sides 
-WHERE site_options_beyond_side  REGEXP concat('(^|,)',$option_id,'(,|$)')";
+FROM #__webapps_site_options_beyond_sides 
+WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		if (!$db->setQuery($query)) {
 			JError::raiseError(500, $db->getErrorMsg());
 		}
@@ -44,10 +69,10 @@ WHERE site_options_beyond_side  REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	/**
 	 * Удалить коллекцию
 	 */
-	function deleteCollectionData($collection_id){
+	function deleteCollectionData($collection_id) {
 		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
-		if (!$table->delete($collection_id)) die('ОШИБКА! Данные не удаленыю');
+		return $table->delete($collection_id); 		
 	}
 	/**
 	 * Get the data for a banner
@@ -88,13 +113,40 @@ WHERE site_options_beyond_side  REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	//получить коллекцию по её id:
 	function getCollection($collection_id){
 		$db=JFactory::getDBO();
-		$db->setQuery('SELECT `id`,`site_type_id`,`engine_type_choice_id`,`engines_ids`,`options_array`,`xtra` FROM '.self::setDefaultTable().' WHERE id = ' . (int)$collection_id);
-		//die('page='.self::setDefaultPage());
+		$query='SELECT `id`,`site_type_id`,`engine_type_choice_id`,`engines_ids`,`options_array`,`xtra` FROM '.self::setDefaultTable().' WHERE id = ' . (int)$collection_id;
+		$db->setQuery($query);
+		//
 		$current_order_set=$db->loadAssoc(); 
 		//transform serialized arrays:
 		$current_order_set['engines_ids']=explode(',',$current_order_set['engines_ids']);
+		//далее будем строить карту опций по разделам сайта:
 		$current_order_set['options_array']=unserialize($current_order_set['options_array']);
-		var_dump("<h1>current_order_set:</h1><pre>",$current_order_set['options_array'],"</pre>");//die();
+		$query_sides='SELECT site_side FROM #__webapps_site_options_beyond_sides ';
+		$db->setQuery($query_sides);
+		$site_sides=$db->loadResultArray();
+		$arrCheckedMap=array();
+		//все опции в коллекции:
+		$boxes_set=$current_order_set['options_array'];
+		//препарируем набор опций построчно:		
+		foreach ($boxes_set as $option_id=>$current_array) {
+			//препарируем массив отмеченных опций для каждой строки:
+			for($i=0,$j=count($site_sides);$i<$j;$i++){
+				//по умолчанию элемент массива пуст:
+				$arrCheckedMap[$option_id][$i]='';
+				for ($b=0,$x=count($current_array);$b<$x;$b++){ 
+					//если текущий тип раздела отмечен для данной опции:
+					if (in_array($site_sides[$i],$current_array)) {
+						//заполняем элемент массива и прерываем цикл:
+						$arrCheckedMap[$option_id][$i]=$site_sides[$i];
+						break;	
+					}
+				}
+			}
+		}
+		$current_order_set['options_array']=$arrCheckedMap;
+		require_once JPATH_COMPONENT.'/models/collected.php';
+		$current_order_set['engines']=collector1ModelCollected::get_cms_names($current_order_set['engines_ids']);
+		//var_dump("<h1>current_order_set:</h1><pre>",$current_order_set['engines'],"</pre>");die();
 		return $current_order_set; 
 	}	
 	/**
@@ -111,20 +163,20 @@ WHERE site_options_beyond_side  REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	 */
 	function getDataForCollector(){
 		$db = JFactory::getDBO();
-		$query=" SELECT dnior_webapps_site_options.id AS option_id, 
+		$query=" SELECT #__webapps_site_options.id AS option_id, 
 IF ( sites_types_ids_location,
 	 sites_types_ids_location,
 	 0 -- для корректной сортировки результатов внутри таблицы
    ) as `site types`,
-   ( select name_ru FROM dnior_webapps_site_options_group 
+   ( select name_ru FROM #__webapps_site_options_group 
 	 WHERE site_options_ids 
-	 REGEXP CONCAT('(^|,)',dnior_webapps_site_options.id,'(,|$)') -- извлечь название групп опций
+	 REGEXP CONCAT('(^|,)',#__webapps_site_options.id,'(,|$)') -- извлечь название групп опций
    ) as `name_ru`, 
-dnior_webapps_site_options.name_ru AS `option` 
-    FROM dnior_webapps_site_options 
-    LEFT JOIN dnior_webapps_site_options_partial 
-    ON dnior_webapps_site_options_partial.site_option_id = dnior_webapps_site_options.id
- WHERE dnior_webapps_site_options.name_ru <> 'Дополнительно'
+#__webapps_site_options.name_ru AS `option` 
+    FROM #__webapps_site_options 
+    LEFT JOIN #__webapps_site_options_partial 
+    ON #__webapps_site_options_partial.site_option_id = #__webapps_site_options.id
+ WHERE #__webapps_site_options.name_ru <> 'Дополнительно'
  ORDER BY `site types` DESC, `name_ru`, `option` ASC;";
 		if (!$db->setQuery($query)) {
 			JError::raiseError(500, $db->getErrorMsg());
@@ -138,7 +190,7 @@ dnior_webapps_site_options.name_ru AS `option`
 	function getSidesDesc(){
 		$db = JFactory::getDBO();
 		$query="SELECT site_side, name_ru
-FROM dnior_webapps_site_options_beyond_sides ORDER BY id";
+FROM #__webapps_site_options_beyond_sides ORDER BY id";
 		if (!$db->setQuery($query)) {
 			JError::raiseError(500, $db->getErrorMsg());
 		}
@@ -150,7 +202,7 @@ FROM dnior_webapps_site_options_beyond_sides ORDER BY id";
 	function getSitesTypes(){
 		$db = JFactory::getDBO();
 		$query="SELECT id, name_ru, name_en
-FROM dnior_webapps_site_types ORDER BY id DESC";
+FROM #__webapps_site_types ORDER BY id DESC";
 		if (!$db->setQuery($query)) {
 			JError::raiseError(500, $db->getErrorMsg());
 		}
@@ -160,7 +212,6 @@ FROM dnior_webapps_site_types ORDER BY id DESC";
 	 * Подготовить данные для добавления/обновления
 	 */
 	function prepareDataSet($updated_id=false){
-		
 		$post_collection=JRequest::get('post');
 		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
@@ -244,41 +295,19 @@ FROM dnior_webapps_site_types ORDER BY id DESC";
 	/**
 	 * Сохранить данные заказчика (те, которых нет в таблице юзеров)
 	 */
-	function saveCustomerData(){
+	function saveCustomerData() {
 	
 	}
 	/**
 	 * Получить стр. по умолчанию
 	 */
-	function setDefaultTable($table=false){
+	function setDefaultTable($table=false) {
 		return ($page)? $table:"#__webapps_customer_site_options";
-	}
-	/**
-	 * Добавить набор опций 
-	 */
-	function addCollection(){
-		
-		if ($user->guest) {
-			
-			echo " GUEST! Зарегистрируем его. ";
-  		
-		}else{
-			
-			$table=$this->prepareDataSet();
-		
-		}
-		// Check that the data is valid
-		if (!$table->check()) echo "<div>Не проверено 1!</div>";
-		// Store the data in the table
-		if (!$table->store(true)) echo "<div>Не добавлено!</div>";
-		// Check the record in
-		if (!$table->checkin()) echo "<div>Не проверено 2!</div>";
-		return mysql_insert_id();
 	}
 	/*
 	 ** Построить список CMS
 	 */
-	function tempCMSlist(){
+	function tempCMSlist() {
 		return array( 'bitrix'=>'1С-Битрикс',
 					'ABO.CMS'=>'ABO.CMS',
 					'Amiro.CMS'=>'Amiro.CMS',
@@ -333,10 +362,9 @@ FROM dnior_webapps_site_types ORDER BY id DESC";
 	/**
 	 * 
 	 */
-	function updateCollectionData($collection_id){
+	function updateCollectionData($collection_id) {
 		$table=$this->prepareDataSet($collection_id); 
-		//var_dump("<h1>table:</h1><pre>",$table,"</pre>");
-		//die ('go update!');
+		//var_dump("<h1>table:</h1><pre>",$table,"</pre>");die ('go update!');
 		// Check that the data is valid
 		if (!$table->check())
 		{	echo "<div>Не проверено 1!</div>";
@@ -352,5 +380,6 @@ FROM dnior_webapps_site_types ORDER BY id DESC";
 		{	echo "<div>Не проверено 2!</div>";
 		// handle checkin failure
 		}
+		return true;
 	}
 }

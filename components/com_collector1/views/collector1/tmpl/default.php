@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
 $table=Collector1ModelCollector1::getDataForCollector();
 $current_order_set=$this->current_order_set;
 $collections_ids_array=$this->collections_ids_array;
-//var_dump("<h1>collections_ids_array:</h1><pre>",$collections_ids_array,"</pre>");
+//var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");
 
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 
@@ -84,27 +84,7 @@ if ($current_order_set){
     <th>Административный (back-end)</th>
     <?	}?>
   </tr>
-<?	
-	function buildCeckingMap($boxes){
-		$site_sides=array('public','admin','user');
-		$arrCheckedMap=array();
-		for($i=0,$j=count($site_sides);$i<$j;$i++){
-			//echo "<br>[$i]<br>";
-			$arrCheckedMap[$i]='';
-			for ($b=0,$x=count($boxes);$b<$x;$b++){ 
-				//$arrCheckedMap[$i]=
-				if (in_array($site_sides[$i],$boxes)) {
-					$arrCheckedMap[$i]=$site_sides[$i];
-					echo "<div style='color:red'>exists: $arrCheckedMap[$i]</div>";
-					break;	
-				}
-				//? $boxes[$b]:'';
-			}
-		}
-		var_dump("<pre>",$arrCheckedMap,"</pre>");
-		return $arrCheckedMap;
-	}
-	//	
+<?	//	
 	for($i=0,$j=count($table);$i<$j;$i++){
 		
 		$data_row=$table[$i];
@@ -138,7 +118,8 @@ if ($current_order_set){
 			
 			$group_stat='end';
 			if ($data_row['site types']) echo ' '; //classes separator
-			?>joined_end<? 
+				
+				?>joined_end<? 
 			
 		}?>">
     <td<? 
@@ -154,20 +135,10 @@ if ($current_order_set){
 			unset($option_is_checked);
 			$site_side=$arrColumnsNames[$t]["site_side"];
 			
-			//$checked=$current_order_set['options_array'][$data_row['option_id']];
-			$checked=buildCeckingMap($current_order_set['options_array'][$data_row['option_id']]);
-			
+			$checked=$current_order_set['options_array'][$data_row['option_id']];
 			if (is_array($checked) && 
-				in_array($site_side,$checked)/* &&
-				$site_side==$checked[$t]*/
-			   ) $option_is_checked=true;
-			   
-			//echo "<hr>site_side= $site_side<br>current: <b>$checked[$t]</b><br>option_is_checked: $option_is_checked<br><br>";
-			//var_dump('<pre>',$checked,'</pre>');
-			//if ($t==2) echo "<hr><div style='background-color:yellow'>end of cell</div>";
-			
-			   
-			   ?>    
+				in_array($site_side,$checked)
+			   ) $option_is_checked=true;?>    
     <td<? 
 			
 			
@@ -231,20 +202,20 @@ if ($current_order_set){
     <hr size="1">
 <?	
 	$CMS=Collector1ModelCollector1::tempCMSlist();
-	$i=0;
-	foreach($CMS as $key=>$cms){
-		$i++;
-		$cmsChecked=($current_order_set['engines_ids'][$i])? true:false;?>
+	$i=0;	var_dump("<h1>current_order_set:</h1><pre>",$current_order_set['engines'],"</pre>");
+	foreach($CMS as $key=>$cms){?>
 	<div<? 	
 	
-		if ($cmsChecked){
+		
+		if (in_array($cms,$current_order_set['engines'])){
 		
 			?> style="background-color:#f90;"<? 
 	
 		}?>><input name="cms_name_<?=$i?>" type="checkbox" value="<?=$i?>"<? 
 		
-		if ($cmsChecked){?> checked<? }?>><?=$cms?></div>
-<?	}?>        
+		if (in_array($cms,$current_order_set['engines'])){?> checked<? }?>><?=$cms?></div>
+<?		$i++;
+	}?>        
 	</td>  
   </tr>
 </table>

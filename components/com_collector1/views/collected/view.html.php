@@ -17,17 +17,27 @@ jimport('joomla.application.component.view');
  */
 class Collector1ViewCollected extends JView 
 {	/* возвращает всё ($this)*/
-	public $model_data; //то, что собрал юзер
-	public $sites_types;//типы сайтов
-	public $cms_choice;//выбранные cms
-	public $options_names;
+	protected $collections_data_array; //то, что собрал юзер
+	protected $sites_types;//типы сайтов
+	protected $options_names;
+	protected $done=array();
 	
 	function display($tpl = NULL)
 	{	
-		$this->model_data=$this->getModel()->collected();
+		require_once JPATH_COMPONENT.'/models/collector1.php';
+		$this->collections_data_array=$this->getModel()->collected();
 		$this->sites_types=$this->getModel()->get_sites_types();
-		$this->cms_choice=$this->getModel()->get_cms();
 		$this->get_options_names=$this->getModel()->get_options_names();
+		$arrDone=array( 'site_added' => array("Сайт добавлен","#CCF"),
+						'site_deleted' => array("Сайт удалён","#FCC"),
+						'site_updated' => array("Данные сайта изменены","#E4F9DD")	
+					  );
+		foreach ($arrDone as $site_done=>$message){
+			if (JRequest::getVar($site_done)) {
+				$this->done=$message;
+				break;
+			}
+		}
 		parent::display($tpl);
 	}
 }

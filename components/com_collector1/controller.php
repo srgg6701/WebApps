@@ -19,25 +19,27 @@ class Collector1Controller extends JController
 	 *добавить данные в таблицу опций сайта заказчика
 	 */
 	function collect(){ //task=collect
-		if ($last_site_id=$this->getModel()->addCollection())
-			$this->setRedirect($this->go_page.'&site_id='.$last_site_id);
+		if ($last_site_id=$this->getModel()->addCollection()) {
+			$this->setRedirect(JRoute::_($this->go_page.'&site_added='.$last_site_id));
+		}else die("ОШИБКА! Не получен id добавленной записи.");
 	}
 	/**
 	 *удалить запись из таблицы опций сайта заказчика. Данные из таблицы *customers не удалять
 	 */
 	function delete(){ //task=delete
 		$collection_id=JRequest::getVar('collection_id');
-		if($this->getModel()->deleteCollectionData($collection_id))
-			$this->setRedirect($this->go_page.'&site_deleted='.$collection_id);
-		
+		if($this->getModel()->deleteCollectionData($collection_id)) {
+			$this->setRedirect(JRoute::_($this->go_page.'&site_deleted='.$collection_id));
+		}else die('ОШИБКА! Данные не удалены.');
 	}
 	/**
 	 *обновить данные в таблице опций сайта заказчика
 	 */
 	function update(){ //task=update
 		$collection_id=JRequest::getVar('collection_id');
-		if ($this->getModel()->updateCollectionData($collection_id))
-			$this->setRedirect($this->go_page.'&site_updated='.$collection_id);
+		if ($this->getModel()->updateCollectionData($collection_id)) {
+			$this->setRedirect(JRoute::_($this->go_page.'&site_updated='.$collection_id));
+		}else die('ОШИБКА! Данные не изменены.');
 	}
 	/**
 	* Определиться с процедурой - обновлять/создавать коллекцию через установку action формы

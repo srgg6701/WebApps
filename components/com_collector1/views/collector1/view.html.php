@@ -32,13 +32,14 @@ class Collector1ViewCollector1 extends JView
 		// Get some data from the models
 		$state		= $this->get('State');
 		$item		= $this->get('Item');
+		$user = JFactory::getUser();
 		//получим данные переданной коллекции заказчика:
 		$current_set_id=JRequest::getVar('collection_id');
-		if ($current_set_id) {
+		if ($current_set_id&&!$user->guest) {
+			
 			$this->go_action='update';
 			$this->go_submit.="update&collection_id=".$current_set_id;		
 			$this->current_order_set=Collector1ModelCollector1::getCollection($current_set_id);
-			$user = JFactory::getUser();
 			$this->collections_ids_array=Collector1ModelCollector1::getCollectionsIds($user->id);
 
 		}else{

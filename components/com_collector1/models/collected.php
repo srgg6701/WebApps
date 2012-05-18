@@ -16,30 +16,37 @@ class collector1ModelCollected extends JModel
 	//все сайты заказчика:
 	function collected()
 	{	
-		$this->db->setQuery('SELECT * ' . $this->query . $where);
-		return $this->db->loadAssocList(); 
+		$this->db->setQuery('SELECT id ' . $this->query . $where);
+		$arrCollectionsIds=$this->db->loadResultArray(); 
+		for ($i=0,$j=count($arrCollectionsIds);$i<$j;$i++){
+			$option_id=$arrCollectionsIds[$i];
+			$collection_set[$option_id]=Collector1ModelCollector1::getCollection($option_id);
+			unset($collection_set[$option_id]['engines_ids']);
+		}
+		return $collection_set;
 	}
 	//получить движок:
-	function get_cms(){
-		$this->db->setQuery('SELECT id as collection_id, engines_ids ' . $this->query);
-		$cms_picked_up=$this->db->loadAssocList();
-		require_once(JPATH_COMPONENT.'/models/collector1.php');
-		//все доступные:
+	function get_cms_names($cms_picked_up){
 		$arrEngines=Collector1ModelCollector1::tempCMSlist(); 
+		$cnt=count($cms_picked_up);
 		$cms_list=array();
+		$j=0;
 		for ($e=0,$n=count($cms_picked_up);$e<$n;$e++){
-			$eng_ids=explode(',',$cms_picked_up[$e]['engines_ids']);
 			$i=0;
-			foreach ($arrEngines as $nick=>$name){
-				$i++;
-				//Внимание! В действительности у элементов массива $arrEngines нет id, однако нижеуказанная проверка корректна, поскольку они записывались в поле таблицы именно в том порядке, в котором расположены в этом массиве
-				if (in_array($i,$eng_ids)){
-					if ($i>1&&$cms_list[$e]) $cms_list[$e].=', ';
-					$cms_list[$e].=$name;
+			if ($cms_picked_up[$e]) { //чтобы не подставило имя при $e==0
+				foreach ($arrEngines as $nick=>$name){
+					//Внимание! В действительности у элементов массива $arrEngines нет id, однако нижеуказанная проверка корректна, поскольку они записывались в поле таблицы именно в том порядке, в котором расположены в этом массиве
+					if (in_array($i,$cms_picked_up)){
+						if ($i>1&&$cms_list[$e]) $cms_list[$e].=', ';
+						$cms_list[$e].=$name;
+						$j++;
+					}
+					$i++;
+					if ($j&&$j==$cnt) break 2;
 				}
 			}
-			if (empty($cms_list[$e])) $cms_list[$e]='';
 		}
+		if (!empty($cms_list)) sort($cms_list);
 		return $cms_list; 
 	}
 	//название опции, по умолчанию - на русском:

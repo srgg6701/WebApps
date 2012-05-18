@@ -11,31 +11,44 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 //
-$arr_options=$this->model_data;
+$collections_data_array=$this->collections_data_array;
 //
 $sites_types=$this->sites_types;
 //
-$cms_choice=$this->cms_choice; //var_dump("<h1>arr_options:</h1><pre>",$arr_options,"</pre>");?>
-<h3 class="collected_head">Выбранные вами опции:</h3>
+$done=$this->done;
+if (!empty($done)){
+		
+	?><div style="padding:40px 60px; display:inline-block; border-radius:6px; background:<?=$done[1]?>;"><?=$done[0]?>!</div>
+    <br>
+	<br><?
+
+}else{
+	
+	?><h3 class="collected_head">Выбранные вами опции:</h3><?
+}?>
 <table cellpadding="8" cellspacing="0" id="tblCollected">
   <tr>
     <th>Опция</th>
     <th>Значение</th>
   </tr>
 <?php
-	$arrRightOptions=array('site_type_id','engine_type_choice_id','engines_ids','options_array','xtra'); 
 	
-	if (!empty($arr_options)){
+	$arrRightOptions=array('site_type_id','engine_type_choice_id','engines','options_array','xtra'); 
+	
+	if (!empty($collections_data_array)){
 
-		for ($i=0,$j=count($arr_options);$i<$j;$i++){
+		$j=count($collections_data_array);
+		foreach ($collections_data_array as $collection_id=>$collection_set){
 
         	if ($j>1) {?>
           <tr>
-          	<td colspan="2" id="my_site_number">Сайт # <?=($i+1)?></td>
+          	<td colspan="2" id="my_site_number">Сайт # <?=$collection_set['id']?></td>
           </tr>
 		 <? }
+
+			//var_dump("<h1>collection_set:</h1><pre>",$collection_set,"</pre>");//die();
 			//
-			foreach($arr_options[$i] as $option=>$data){ 
+			foreach($collection_set as $option=>$data){ 
 				
 				if (in_array($option,$arrRightOptions)){
 						
@@ -59,7 +72,6 @@ $cms_choice=$this->cms_choice; //var_dump("<h1>arr_options:</h1><pre>",$arr_opti
 											$option_value="Перенести на имеющийся";
 												break;
 									}
-		
 									break;
 					
 							case "options_array":
@@ -67,9 +79,9 @@ $cms_choice=$this->cms_choice; //var_dump("<h1>arr_options:</h1><pre>",$arr_opti
 								$option_value='options_array';
 									break;
 							
-							case "engines_ids":
+							case "engines":
 								$option_name="Подходящие CMS";
-								$option_value=$cms_choice[$i];
+								$option_value=implode(', ',$collection_set['engines']).' ';
 									break;
 							
 							case "xtra":
@@ -83,7 +95,8 @@ $cms_choice=$this->cms_choice; //var_dump("<h1>arr_options:</h1><pre>",$arr_opti
 						//массив опций:
 						if ($option_value=='options_array'){
 							$arrColumnsNames=Collector1ModelCollector1::getSidesDesc();
-							$options_set=unserialize($data);?>
+							//$options_set=
+							//unserialize($data);?>
 <table cellspacing="0" cellpadding="10">
   <tr>
 	<th><div align="right">&nbsp;&nbsp;Разделы:</div>
@@ -93,12 +106,18 @@ $cms_choice=$this->cms_choice; //var_dump("<h1>arr_options:</h1><pre>",$arr_opti
 							<?	}?>
   </tr>
 						<?		$get_options_names=$this->get_options_names;
-								foreach($options_set as $option_id => $array_sides){?>
+								
+								foreach($collection_set['options_array'] as $option_id => $array_sides){?>
   <tr>
-	<td><?=$get_options_names[$option_id]?></td>
-	<td<? if($array_sides[0]&&$array_sides[0]=='public'){?> class="checked"<? }?>>&nbsp;</td>
-	<td<? if($array_sides[1]&&$array_sides[1]=='admin'){?> class="checked"<? }?>>&nbsp;</td>
-	<td<? if($array_sides[2]&&$array_sides[2]=='user'){?>  class="checked"<? }?>>&nbsp;</td>
+	<td><?=$get_options_names[$option_id]?><? ?></td>
+    							<?	for($ii=0,$c=count($arrColumnsNames);$ii<$c;$ii++){?>
+	<td<? 
+										if($array_sides[$ii]&&$array_sides[$ii]==$arrColumnsNames[$ii]['site_side']){
+											
+											?> class="checked"<? 
+										
+										}?>>&nbsp;</td>
+    							<?	}?>
   </tr>
 						<?		}?>
 </table>
@@ -122,7 +141,7 @@ $cms_choice=$this->cms_choice; //var_dump("<h1>arr_options:</h1><pre>",$arr_opti
 	<?php 	}?>
           <tr>
           	<td colspan="2" class="bgOverWhite linkButtons">
-            	<br><a href="index.php/build-and-calculate?collection_id=<?=$arr_options[$i]['id']?>">Изменить опции...</a> &nbsp; <a class="txtRed" href="index.php/build-and-calculate?collection_id=<?=$arr_options[$i]['id']?>&task=delete" onclick="if (!confirm('Вы уверены, что хотите удалить этот сайт?')) return false;">Удалить сайт...</a><br>
+            	<br><a href="index.php/build-and-calculate?collection_id=<?=$collection_set['id']?>">Изменить опции...</a> &nbsp; <a class="txtRed" href="index.php/build-and-calculate?collection_id=<?=$collection_set['id']?>&task=delete" onclick="if (!confirm('Вы уверены, что хотите удалить этот сайт?')) return false;">Удалить сайт...</a><br>
 <br>
 
 			</td>
