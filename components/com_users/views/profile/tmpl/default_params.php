@@ -19,7 +19,7 @@ JHtml::register('users.editor', array('JHtmlUsers', 'editor'));
 ?>
 <?php $fields = $this->form->getFieldset('params'); ?>
 <?php if (count($fields)): ?>
-<fieldset id="users-profile-custom">
+<fieldset id="users-profile-params">
 	<legend><?php echo JText::_('COM_USERS_SETTINGS_FIELDSET_LABEL'); ?></legend>
 	<dl>
 	<?php foreach ($fields as $field):

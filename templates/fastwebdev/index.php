@@ -80,19 +80,7 @@ function manageLoginDisplay(stat){
 					</td>
                     <td id="tdLogin">
 <? 	$user = JFactory::getUser();
-	if (!$user->guest){ /*	?>
-	<div style="position:relative">
-		<div id="div_user_menu" style="display:<?="none"?>;">
-            <a href="index.php?option=com_customer&task=userdata">Мои данные</a>
-            <a href="index.php?option=com_collector1<?
-    	//выяснить, собран ли сайт
-		$user->getCustomerData($user->id);
-		if (!empty($user->customer_data_array)){?>&view=collected<? }?>">Мой сайт</a>
-            <a href="index.php?option=com_customer&task=balance">Мой баланс</a>
-        	<div align="right" id="close_user_menu"><a href="javascript:void();" onclick="manageLoginDisplay('hide_menu');">Закрыть</a></div>
-        </div>
-    </div><? 
-    <span id="user_menu_here" style="padding:6px 10px; margin-left:10px; background:#FFFF00; cursor:pointer; border-radius:6px;" onclick="manageLoginDisplay('menu');">Меню</span>*/ ?><img src="<?=$path_to_images?>user24.png" width="22" height="22" align="absmiddle" style="margin-left:10px;" title="<?=$user->username?>" /><span style="width:62px; padding-left:3px; text-align:left; display:inline-block; overflow:hidden;" title="<?=$user->username?>"><?=$user->username?></span> &nbsp; <a href="javascript:void();" onclick="manageLoginDisplay('exit');">Выход</a><? }
+	if (!$user->guest){?><img src="<?=$path_to_images?>user24.png" width="22" height="22" align="absmiddle" style="margin-left:10px;" title="<?=$user->username?>" /><span style="width:62px; padding-left:3px; text-align:left; display:inline-block; overflow:hidden;" title="<?=$user->username?>"><?=$user->username?></span> &nbsp; <a href="javascript:void();" onclick="manageLoginDisplay('exit');">Выход</a><? }
 	else{?>&nbsp; <a href="javascript:void();" onclick="manageLoginDisplay('block');">Вход</a>
                         ::
                         <a href="index.php?option=com_users&view=registration">Регистрация</a><? 

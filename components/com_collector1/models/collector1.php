@@ -94,6 +94,7 @@ WHERE site_options_beyond_side  REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		//transform serialized arrays:
 		$current_order_set['engines_ids']=explode(',',$current_order_set['engines_ids']);
 		$current_order_set['options_array']=unserialize($current_order_set['options_array']);
+		var_dump("<h1>current_order_set:</h1><pre>",$current_order_set['options_array'],"</pre>");//die();
 		return $current_order_set; 
 	}	
 	/**

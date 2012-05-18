@@ -23,6 +23,7 @@ class UsersViewProfile extends JView
 	protected $form;
 	protected $params;
 	protected $state;
+	protected $data_custom;
 
 	/**
 	 * Method to display the view.
@@ -37,6 +38,7 @@ class UsersViewProfile extends JView
 		$this->form		= $this->get('Form');
 		$this->state	= $this->get('State');
 		$this->params	= $this->state->get('params');
+		$this->data_custom = $this->get('Custom');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {

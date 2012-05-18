@@ -18,10 +18,10 @@ JHtml::_('behavior.tooltip');
 <?php endif; ?>
 
 <?php echo $this->loadTemplate('core'); ?>
-
+<?php echo $this->loadTemplate('custom'); ?>
 <?php echo $this->loadTemplate('params'); ?>
 
-<?php echo $this->loadTemplate('custom'); ?>
+
 
 <?php if (JFactory::getUser()->id == $this->data->id) : ?>
 <a href="<?php echo JRoute::_('index.php?option=com_users&task=profile.edit&user_id='.(int) $this->data->id);?>">

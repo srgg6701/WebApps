@@ -495,7 +495,6 @@ div.profile fieldset +a,
 div.profile-edit button.validate,
 div.profile-edit button.validate span,
 div.button-green,
-
 button#make_site_prototype,
 div.button-green a
 {
@@ -538,6 +537,7 @@ div.registration form fieldset .spacer{
 }
 .registration fieldset, 
 .profile fieldset,
+div#mode_login fieldset,
 .profile-edit fieldset{
 	background:#f3f3f3;
 	margin-bottom:10px;

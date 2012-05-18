@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 JHtml::_('behavior.keepalive');
 ?>
-<div class="login<?php echo $this->pageclass_sfx?>">
+<div id="mode_login" class="login<?php echo $this->pageclass_sfx?>">
 	<?php if ($this->params->get('show_page_heading')) : ?>
 	<h1>
 		<?php echo $this->escape($this->params->get('page_heading')); ?>
@@ -35,7 +35,7 @@ JHtml::_('behavior.keepalive');
 
 	<form action="<?php echo JRoute::_('index.php?option=com_users&task=user.login'); ?>" method="post">
 
-		<fieldset>
+		<fieldset style="padding:20px;">
 			<?php foreach ($this->form->getFieldset('credentials') as $field): ?>
 				<?php if (!$field->hidden): ?>
 					<div class="login-fields"><?php echo $field->label; ?>

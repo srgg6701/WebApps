@@ -84,7 +84,27 @@ if ($current_order_set){
     <th>Административный (back-end)</th>
     <?	}?>
   </tr>
-<?	//	
+<?	
+	function buildCeckingMap($boxes){
+		$site_sides=array('public','admin','user');
+		$arrCheckedMap=array();
+		for($i=0,$j=count($site_sides);$i<$j;$i++){
+			//echo "<br>[$i]<br>";
+			$arrCheckedMap[$i]='';
+			for ($b=0,$x=count($boxes);$b<$x;$b++){ 
+				//$arrCheckedMap[$i]=
+				if (in_array($site_sides[$i],$boxes)) {
+					$arrCheckedMap[$i]=$site_sides[$i];
+					echo "<div style='color:red'>exists: $arrCheckedMap[$i]</div>";
+					break;	
+				}
+				//? $boxes[$b]:'';
+			}
+		}
+		var_dump("<pre>",$arrCheckedMap,"</pre>");
+		return $arrCheckedMap;
+	}
+	//	
 	for($i=0,$j=count($table);$i<$j;$i++){
 		
 		$data_row=$table[$i];
@@ -128,17 +148,28 @@ if ($current_order_set){
     	<input type="checkbox"> <?=$data_row['option']?>
     </td>
 	<?  $side_cells=Collector1ModelCollector1::buildOptionsSidesCells($data_row['option_id']);
-		
 		//options cells:
 		for($t=0;$t<count($arrColumnsNames);$t++){
 			unset($checked);
-			unset($option_is_checked);?>    
-    <td<? 
+			unset($option_is_checked);
 			$site_side=$arrColumnsNames[$t]["site_side"];
 			
-			$checked=$current_order_set['options_array'][$data_row['option_id']];
+			//$checked=$current_order_set['options_array'][$data_row['option_id']];
+			$checked=buildCeckingMap($current_order_set['options_array'][$data_row['option_id']]);
 			
-			if (is_array($checked) && in_array($site_side,$checked)) $option_is_checked=true;
+			if (is_array($checked) && 
+				in_array($site_side,$checked)/* &&
+				$site_side==$checked[$t]*/
+			   ) $option_is_checked=true;
+			   
+			//echo "<hr>site_side= $site_side<br>current: <b>$checked[$t]</b><br>option_is_checked: $option_is_checked<br><br>";
+			//var_dump('<pre>',$checked,'</pre>');
+			//if ($t==2) echo "<hr><div style='background-color:yellow'>end of cell</div>";
+			
+			   
+			   ?>    
+    <td<? 
+			
 			
 			if($option_is_checked){?> style="background:#ccff99;"<? }?>><? 	
 			

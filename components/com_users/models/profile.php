@@ -26,6 +26,8 @@ class UsersModelProfile extends JModelForm
 	 */
 	protected $data;
 
+	protected $data_custom;
+
 	/**
 	 * Method to check in a user.
 	 *
@@ -144,6 +146,34 @@ class UsersModelProfile extends JModelForm
 	 * @return	JForm	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
+
+	//достаем информацию о пользователе
+	public function getCustom(){
+		if ($this->data_custom === null) {
+
+			$userId = $this->getState('user.id');
+			$db = JFactory::getDbo();
+			$query = 'SELECT  surname,
+							  middle_name,
+							  sex,
+							  birthday,
+							  work_phone,
+							  mobila,
+							  company_name,
+							  city,
+							  region
+					FROM #__webapps_customers
+					WHERE dnior_users_id = '.$userId;
+			$db->setQuery($query);
+
+			$this->data_custom = $db->loadAssoc();
+
+		}
+
+		return $this->data_custom;
+
+	}
+
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
