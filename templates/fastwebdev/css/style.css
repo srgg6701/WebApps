@@ -30,6 +30,9 @@ div#account_menu td.tdActive a{
 	color:#FFF;
 	font-weight:bold;
 }
+.bgOverWhite:hover{
+	background:#FFFFFF;
+}
 body{
 	background:#FFFFFF; 
 	background-image:url(../images/bg/bg_techno.jpg); 
@@ -83,18 +86,18 @@ tr.center td{
 	margin:0 4px 6px 0 !important;
 }
 #close_user_menu a {
-	display: inline !important;
+	display: inline !important;                      
 	padding:0 !important;
 	margin:0 !important;
 	font-size:0.7em !important;
 	color: #900;
 }
-#collector_head, #collected_head{
+.collector_head, .collected_head{
 	display:inline-block;
 	margin:6px 10px 8px 10px;
 	color:#060;
 }
-#collected_head{
+.collected_head{
 	margin-bottom:14px;
 }
 div#collector_wrapper{
@@ -292,12 +295,25 @@ div#img_tech{
 td#img_people{
 	padding-top:0px;
 }
+input [type="text"],textarea{
+	padding:3px 5px;
+	color: #866D2D;
+}
 label{
 	margin-top:6px;
 	text-align:right;
 }
 .light, .light a{
 	color:#efefef;
+}
+.linkButtons a, a.linkButtons{
+	background:#CCCCCC;
+	padding:8px 12px;;
+	border-radius:4px;
+}
+.linkButtons a:hover, a.linkButtons:hover{
+	background:#FFCC00;
+	text-decoration:none;
 }
 .list_big_circle{
 	margin-left:46px; 
@@ -493,6 +509,9 @@ div.button-green
 	margin:10px;
 	border-radius:6px;
 }
+div.button-green{
+	border-radius:4px;
+}
 div.profile-edit button.validate, 
 button#make_site_prototype{
 	padding:10px 12px;
@@ -542,6 +561,16 @@ div.registration form fieldset .spacer{
 	width:30%; 
 	float:right; 
 	padding-top:16px;
+}
+tr.rowMySiteOptions > td:last-child {
+	padding:0;
+	border-left:solid 1px #ccc;
+}
+/*tr.rowMySiteOptions > td:last-child table{
+	border-right:solid 1px #ccc;
+}*/
+tr.rowMySiteOptions:hover >td:last-child {
+	background:#FFFFFF;
 }
 #sms_list div{
 	display:inline-block;
@@ -715,6 +744,9 @@ div#section2next{
 div#tech_start div{
 	position:absolute;
 }
+.txtRed{
+	color:#FF0000;
+}
 #tdLogin{
 	position:relative;
 	white-space:nowrap;
@@ -792,7 +824,7 @@ div#wrapper_menu table td div.drop_down_menu{
 	background-repeat:no-repeat;
 	vertical-align:bottom;
 }
-#your_site li:after{
+#your_site li:after, .checked:after{
 	content:url(../images/check_ok.png)
 }
 tr.WebShop, tr.WebShop td{

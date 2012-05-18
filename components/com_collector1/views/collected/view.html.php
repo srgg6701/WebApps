@@ -20,11 +20,14 @@ class Collector1ViewCollected extends JView
 	public $model_data; //то, что собрал юзер
 	public $sites_types;//типы сайтов
 	public $cms_choice;//выбранные cms
+	public $options_names;
 	
-	function display($tpl = null)
-	{	$this->model_data=$this->getModel()->collected();
+	function display($tpl = NULL)
+	{	
+		$this->model_data=$this->getModel()->collected();
 		$this->sites_types=$this->getModel()->get_sites_types();
 		$this->cms_choice=$this->getModel()->get_cms();
+		$this->get_options_names=$this->getModel()->get_options_names();
 		parent::display($tpl);
 	}
 }

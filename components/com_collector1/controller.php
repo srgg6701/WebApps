@@ -14,20 +14,39 @@ jimport('joomla.application.component.controller');
 
 class Collector1Controller extends JController
 {
-	//
+	private $go_page='index.php?option=com_collector1&view=collected';
 	/**
-	* Method to display the view
-	*
+	 *добавить данные в таблицу опций сайта заказчика
+	 */
+	function collect(){ //task=collect
+		if ($last_site_id=$this->getModel()->addCollection())
+			$this->setRedirect($this->go_page.'&site_id='.$last_site_id);
+	}
+	/**
+	 *удалить запись из таблицы опций сайта заказчика. Данные из таблицы *customers не удалять
+	 */
+	function delete(){ //task=delete
+		$collection_id=JRequest::getVar('collection_id');
+		if($this->getModel()->deleteCollectionData($collection_id))
+			$this->setRedirect($this->go_page.'&site_deleted='.$collection_id);
+		
+	}
+	/**
+	 *обновить данные в таблице опций сайта заказчика
+	 */
+	function update(){ //task=update
+		$collection_id=JRequest::getVar('collection_id');
+		if ($this->getModel()->updateCollectionData($collection_id))
+			$this->setRedirect($this->go_page.'&site_updated='.$collection_id);
+	}
+	/**
+	* Определиться с процедурой - обновлять/создавать коллекцию через установку action формы
+	* Отобразить представление
 	* @access public
 	*
 	*/
 	function display()
 	{	
 		parent::display(); //отображает default view
-	}
-	
-	//добавить данные в таблицу опций сайта заказчика:
-	function collect(){ //task=collect
-		$this->getModel()->storeCollectedData();
 	}
 }

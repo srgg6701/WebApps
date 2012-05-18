@@ -22,6 +22,7 @@ defined('JPATH_PLATFORM') or die;
  */
 abstract class JTable extends JObject
 {
+	protected $location='/libraries/joomla/database/table.php <br>';
 	/**
 	 * Name of the database table to model.
 	 *
@@ -711,28 +712,30 @@ abstract class JTable extends JObject
 	 * @since   11.1
 	 */
 	public function save($src, $orderingFilter = '', $ignore = '')
-	{
+	{	
+		$location=$this->location.='save :: ';
+		
 		// Attempt to bind the source to the instance.
 		if (!$this->bind($src, $ignore))
-		{
+		{	die($location.'bind');
 			return false;
 		}
 
 		// Run any sanity checks on the instance and verify that it is ready for storage.
 		if (!$this->check())
-		{
+		{	die($location.'check');
 			return false;
 		}
 
 		// Attempt to store the properties to the database table.
 		if (!$this->store())
-		{
+		{	die($location.'store');
 			return false;
 		}
 
 		// Attempt to check the row in, just in case it was checked out.
 		if (!$this->checkin())
-		{
+		{	die($location.'checkin');
 			return false;
 		}
 

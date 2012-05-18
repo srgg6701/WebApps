@@ -13,22 +13,29 @@ defined('_JEXEC') or die('Restricted access');
 
 $table=Collector1ModelCollector1::getDataForCollector();
 $current_order_set=$this->current_order_set;
-var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");
-
-if ($current_order_set){
-}
+$collections_ids_array=$this->collections_ids_array;
+//var_dump("<h1>collections_ids_array:</h1><pre>",$collections_ids_array,"</pre>");
 
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 
-<form name="form1" method="post" action="<?php 
-
-$go_submit='index.php?option=com_collector1&task=collect';
-if ($current_order_set) $go_submit.="&collection_id=".$current_order_set['id'];
-
-echo JRoute::_($go_submit); ?>" onSubmit="return checkRequired();">
+<form name="form1" method="post" action="<?=JRoute::_($this->go_submit)?>" onSubmit="return checkRequired();">
     <div>
+<?	//больше одной коллекции у юзера:
+if (($j=count($collections_ids_array))>1){?>
+	
+	<h3 class="collector_head">Выбранный сайт:</h3>   
+	<select name="selectSite" id="selectSite" onChange="loadCollection(this.options[this.selectedIndex].value);">
+<?	
+	for($i=0;$i<$j;$i++){?>
+		<option value="<?=$collections_ids_array[$i]?>"<? if ($current_order_set['id']==$collections_ids_array[$i]){?> selected<? }?>>Сайт #<?=$collections_ids_array[$i]?></option>
+<? 	}?>    	
+	</select>
+    <br>	
+<?
+}
+?>    
     <a name="select_site_type"></a>
-  <label for="select"><h3 id="collector_head"><?
+  <label for="select"><h3 class="collector_head"><?
 
 if ($current_order_set){
 	
@@ -231,10 +238,19 @@ if ($current_order_set){
 </div>
 <?	}?>
 <br>
-<button id="make_site_prototype" type="submit">Создать прототип!</button>
+<button id="make_site_prototype" type="submit"><?
+
+	if ($this->go_action=='update'){
+		?>Сохранить<? 	
+	}else{
+		?>Создать прототип<?
+	}?>!</button>
 <br>
 </form>
 <script type="text/javascript">
+function loadCollection(collection_id){
+	location.href='index.php/build-and-calculate?collection_id='+collection_id;
+}
 function checkPatchBoxes(eventSrcElement){
 	var tBox;
 	try{
