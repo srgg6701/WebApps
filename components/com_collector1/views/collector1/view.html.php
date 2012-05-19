@@ -35,7 +35,7 @@ class Collector1ViewCollector1 extends JView
 		$user = JFactory::getUser();
 		//получим данные переданной коллекции заказчика:
 		$current_set_id=JRequest::getVar('collection_id');
-		if ($current_set_id&&!$user->guest) {
+		if ($current_set_id&&$user->get('guest')!=1) {
 			
 			$this->go_action='update';
 			$this->go_submit.="update&collection_id=".$current_set_id;		

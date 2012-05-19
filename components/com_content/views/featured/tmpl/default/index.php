@@ -3,7 +3,7 @@
 		/*	Продумать, что показывать юзеру, который заавторизовался в зависимости от состояния его сотрудничества с нами...
 		
 		$user = JFactory::getUser();
-		if ($user->guest){ ?><? }else{?><? }*/        
+		if ($user->get('guest')==1){ ?><? }else{?><? }*/        
 
 		$path_to_images='templates/fastwebdev/images/';
 		

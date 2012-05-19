@@ -81,7 +81,7 @@ if (!empty($done)){
 							
 							case "engines":
 								$option_name="Подходящие CMS";
-								$option_value=implode(', ',$collection_set['engines']).' ';
+								$option_value=str_replace(',',', ',$collection_set['engines']).' ';
 									break;
 							
 							case "xtra":

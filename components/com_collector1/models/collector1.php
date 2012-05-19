@@ -32,7 +32,7 @@ class Collector1ModelCollector1 extends JModel
 	 */
 	function addCollection(){
 		
-		if ($user->guest) {
+		if ($user->get('guest')==1) {
 			
 			echo " GUEST! Зарегистрируем его. ";
   		
@@ -116,7 +116,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		$query='SELECT `id`,`site_type_id`,`engine_type_choice_id`,`engines_ids`,`options_array`,`xtra` FROM '.self::setDefaultTable().' WHERE id = ' . (int)$collection_id;
 		$db->setQuery($query);
 		//
-		$current_order_set=$db->loadAssoc(); 
+		$current_order_set=$db->loadAssoc();  
 		//transform serialized arrays:
 		$current_order_set['engines_ids']=explode(',',$current_order_set['engines_ids']);
 		//далее будем строить карту опций по разделам сайта:
@@ -146,7 +146,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		$current_order_set['options_array']=$arrCheckedMap;
 		require_once JPATH_COMPONENT.'/models/collected.php';
 		$current_order_set['engines']=collector1ModelCollected::get_cms_names($current_order_set['engines_ids']);
-		//var_dump("<h1>current_order_set:</h1><pre>",$current_order_set['engines'],"</pre>");die();
+		//var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");die();
 		return $current_order_set; 
 	}	
 	/**

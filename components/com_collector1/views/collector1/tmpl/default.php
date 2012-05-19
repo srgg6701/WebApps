@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 
 $table=Collector1ModelCollector1::getDataForCollector();
 $current_order_set=$this->current_order_set;
-$collections_ids_array=$this->collections_ids_array;
+//$collections_ids_array=$this->collections_ids_array;
 //var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");
 
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
@@ -202,18 +202,19 @@ if ($current_order_set){
     <hr size="1">
 <?	
 	$CMS=Collector1ModelCollector1::tempCMSlist();
-	$i=0;	var_dump("<h1>current_order_set:</h1><pre>",$current_order_set['engines'],"</pre>");
+	$i=0;	
+	$engines_set=explode(',',$current_order_set['engines']);
+	//var_dump("<h1>engines_set:</h1><pre>",$engines_set,"</pre>");
 	foreach($CMS as $key=>$cms){?>
 	<div<? 	
 	
-		
-		if (in_array($cms,$current_order_set['engines'])){
+		if (in_array($cms,$engines_set)){
 		
 			?> style="background-color:#f90;"<? 
 	
 		}?>><input name="cms_name_<?=$i?>" type="checkbox" value="<?=$i?>"<? 
 		
-		if (in_array($cms,$current_order_set['engines'])){?> checked<? }?>><?=$cms?></div>
+		if (in_array($cms,$engines_set)){?> checked<? }?>><?=$cms?></div>
 <?		$i++;
 	}?>        
 	</td>  
@@ -222,7 +223,7 @@ if ($current_order_set){
 </div>
 <?	
 	$user = JFactory::getUser();
-	if ($user->guest){?>
+	if ($user->get('guest')==1){?>
 <h4>Пожалуйста, сообщите нам свои контактные данные:</h4>
 <div id="tell_your_data">
 	<div style="display:block; margin-bottom:8px;">Как вас зовут? <input name="name" type="text" id="name" value="" size="40"></div>
@@ -311,7 +312,7 @@ function checkRequired(){
 			selST.style.backgroundColor='yellow';
 			return false;
 		}
-<?	if($user->guest){?>		
+<?	if($user->get('guest')==1){?>		
 		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		if (!filter.test(yEmail.value)) {
 			alert('Емэйл введён некорректно или отсутствует!');					

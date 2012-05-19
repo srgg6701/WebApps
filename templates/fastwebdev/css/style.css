@@ -3,6 +3,13 @@
 *{
 	color:#030;
 }
+a.addRec{
+	background:#FC0 !important;
+}
+a.addRec:hover{
+	background: #CFC !important;
+}
+
 table.alignRight td{
 	text-align:right;
 }
@@ -32,6 +39,9 @@ div#account_menu td.tdActive a{
 }
 .bgOverWhite:hover{
 	background:#FFFFFF;
+}
+.bgWhite, tr.bgWhite, tr.bgWhite td{
+	background-color:#FFF;
 }
 body{
 	background:#FFFFFF; 
@@ -122,6 +132,37 @@ div#container{
 	min-height:100%; 
 	margin-left:10%; 
 	margin-right:10%;
+}
+table.customerAccount{
+	border:solid 1px #060;
+}
+table.customerAccount input [type="checkbox"]{
+	margin:0;
+	padding:0;
+}
+table.customerAccount div{
+	overflow:hidden;
+}
+table.customerAccount td,table.customerAccount th{
+	padding:4px;
+}
+table.customerAccount th{
+	background:#060;
+	white-space:nowrap;
+	cursor:default;
+}
+table.customerAccount th div{
+	color:#FFF;
+	text-align:center;
+}
+table.customerAccount td{
+	padding:4px;
+}
+table.customerAccount td div{
+	color:#000;
+}
+table.customerAccount tr{
+	background:#CCC;
 }
 div.div_left, div.div_right{
 	text-align:left;

@@ -36,13 +36,14 @@ class UsersController extends JController
 		$vName	 = JRequest::getCmd('view', 'login');
 		$vFormat = $document->getType();
 		$lName	 = JRequest::getCmd('layout', 'default');
+		$user = JFactory::getUser();
 
 		if ($view = $this->getView($vName, $vFormat)) {
 			// Do any specific processing by view.
 			switch ($vName) {
 				case 'registration':
 					// If the user is already logged in, redirect to the profile page.
-					$user = JFactory::getUser();
+					//$user = JFactory::getUser();
 					if ($user->get('guest') != 1) {
 						// Redirect to profile page.
 						$this->setRedirect(JRoute::_('index.php?option=com_users&view=profile', false));
@@ -64,7 +65,7 @@ class UsersController extends JController
 				case 'profile':
 
 					// If the user is a guest, redirect to the login page.
-					$user = JFactory::getUser();
+					//$user = JFactory::getUser();
 					if ($user->get('guest') == 1) {
 						// Redirect to login page.
 						$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
@@ -76,12 +77,14 @@ class UsersController extends JController
 				// Handle the default views.
 				case 'login':
 					$model = $this->getModel($vName);
-					$this->setRedirect(JRoute::_('index.php?option=com_users&view=profile', false));
+					if ($user->get('guest') != 1) {
+						$this->setRedirect(JRoute::_('index.php?option=com_users&view=profile', false));
+					}
 					break;
 
 				case 'reset':
 					// If the user is already logged in, redirect to the profile page.
-					$user = JFactory::getUser();
+					//$user = JFactory::getUser();
 					if ($user->get('guest') != 1) {
 						// Redirect to profile page.
 						$this->setRedirect(JRoute::_('index.php?option=com_users&view=profile', false));
@@ -93,7 +96,7 @@ class UsersController extends JController
 
 				case 'remind':
 					// If the user is already logged in, redirect to the profile page.
-					$user = JFactory::getUser();
+					//$user = JFactory::getUser();
 					if ($user->get('guest') != 1) {
 						// Redirect to profile page.
 						$this->setRedirect(JRoute::_('index.php?option=com_users&view=profile', false));

@@ -37,8 +37,7 @@ class collector1ModelCollected extends JModel
 				foreach ($arrEngines as $nick=>$name){
 					//Внимание! В действительности у элементов массива $arrEngines нет id, однако нижеуказанная проверка корректна, поскольку они записывались в поле таблицы именно в том порядке, в котором расположены в этом массиве
 					if (in_array($i,$cms_picked_up)){
-						if ($i>1&&$cms_list[$e]) $cms_list[$e].=', ';
-						$cms_list[$e].=$name;
+						$cms_list[]=$name;
 						$j++;
 					}
 					$i++;
@@ -47,7 +46,7 @@ class collector1ModelCollected extends JModel
 			}
 		}
 		if (!empty($cms_list)) sort($cms_list);
-		return $cms_list; 
+		return implode(',',$cms_list); 
 	}
 	//название опции, по умолчанию - на русском:
 	function get_options_names($lang=false){
