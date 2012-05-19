@@ -13,7 +13,9 @@ defined('_JEXEC') or die('Restricted access');
 //
 $collections_data_array=$this->collections_data_array;
 //
-$sites_types=$this->sites_types;
+//$sites_types=$this->sites_types;
+//var_dump("<h1>sites_types:</h1><pre>",$sites_types,"</pre>");
+//var_dump("<h1>collections_data_array:</h1><pre>",$collections_data_array,"</pre>");
 //
 $done=$this->done;
 if (!empty($done)){
@@ -56,7 +58,8 @@ if (!empty($done)){
 								
 							case "site_type_id":
 								$option_name="Тип сайта";
-								$option_value=$sites_types['name_ru'];
+								$option_value=$collection_set['site_type_name'];
+								//$sites_types['name_ru'];
 									break;
 					
 							case "engine_type_choice_id":

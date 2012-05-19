@@ -65,10 +65,13 @@ class collector1ModelCollected extends JModel
 		return $arrOptions;
 	}
 	//получить таблицу типов сайтов:
-	function get_sites_types(){
-		$query="SELECT * FROM #__webapps_site_types";
+	function get_sites_types($site_type_id=false){
+		$query="SELECT";
+		$query.=($site_type_id)? " name_ru ":" * "; 
+		$query.="FROM #__webapps_site_types";
+		if ($site_type_id) $query.=" WHERE id = $site_type_id";
 		$db=JFactory::getDBO();
 		$db->setQuery($query);
-		return $db->loadAssoc(); 
+		return ($site_type_id)? $db->loadResult():$db->loadAssoc(); 
 	}
 }?>

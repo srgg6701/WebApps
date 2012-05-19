@@ -146,6 +146,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		$current_order_set['options_array']=$arrCheckedMap;
 		require_once JPATH_COMPONENT.'/models/collected.php';
 		$current_order_set['engines']=collector1ModelCollected::get_cms_names($current_order_set['engines_ids']);
+		$current_order_set['site_type_name']=collector1ModelCollected::get_sites_types($current_order_set['site_type_id']);
 		//var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");die();
 		return $current_order_set; 
 	}	

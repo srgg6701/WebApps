@@ -18,7 +18,7 @@ jimport('joomla.application.component.view');
 class Collector1ViewCollected extends JView 
 {	/* возвращает всё ($this)*/
 	protected $collections_data_array; //то, что собрал юзер
-	protected $sites_types;//типы сайтов
+	//protected $sites_types;//типы сайтов
 	protected $options_names;
 	protected $done=array();
 	
@@ -26,7 +26,7 @@ class Collector1ViewCollected extends JView
 	{	
 		require_once JPATH_COMPONENT.'/models/collector1.php';
 		$this->collections_data_array=$this->getModel()->collected();
-		$this->sites_types=$this->getModel()->get_sites_types();
+		//$this->sites_types=$this->getModel()->get_sites_types();
 		$this->get_options_names=$this->getModel()->get_options_names();
 		$arrDone=array( 'site_added' => array("Сайт добавлен","#CCF"),
 						'site_deleted' => array("Сайт удалён","#FCC"),
