@@ -1,8 +1,7 @@
     <div id="mission_possible"<? 
 	$user = JFactory::getUser();
 	if (!$user->get('guest')==1){?> style="padding-top:20px;"<? }?>>
-        <div id="mission_possible_header" class="txtBlack">Миссия выполнима!
-        </div> 
+        <div id="mission_possible_header" class="txtBlack"><a href="index.php/mission">Миссия выполнима!</a></div> 
         <div id="your_the_best">Ваш web-сайт будет самым лучшим &#8212;</div>
     </div>
 <!-- Mission is possible CONTENT -->    

@@ -28,9 +28,9 @@ class Collector1ViewCollected extends JView
 		$this->collections_data_array=$this->getModel()->collected();
 		//$this->sites_types=$this->getModel()->get_sites_types();
 		$this->get_options_names=$this->getModel()->get_options_names();
-		$arrDone=array( 'site_added' => array("Сайт добавлен","#CCF"),
-						'site_deleted' => array("Сайт удалён","#FCC"),
-						'site_updated' => array("Данные сайта изменены","#E4F9DD")	
+		$arrDone=array( 'site_added' => array("Сайт добавлен","#CCF","blue"),
+						'site_deleted' => array("Сайт удалён","#FCC","red"),
+						'site_updated' => array("Данные сайта изменены","#E4F9DD","green")	
 					  );
 		foreach ($arrDone as $site_done=>$message){
 			if (JRequest::getVar($site_done)) {

@@ -20,7 +20,7 @@ $collections_data_array=$this->collections_data_array;
 $done=$this->done;
 if (!empty($done)){
 		
-	?><div style="padding:40px 60px; display:inline-block; border-radius:6px; background:<?=$done[1]?>;"><?=$done[0]?>!</div>
+	?><div class="block_done" style="background:<?=$done[1]?>;"><img src="<?php echo $this->baseurl ?>/templates/fastwebdev/images/signs/Flag_<?=$done[2]?>.png" width="24" height="24" hspace="6" align="baseline" style="margin-bottom:-2px;"><?=$done[0]?>!</div>
     <br>
 	<br><?
 
@@ -59,7 +59,6 @@ if (!empty($done)){
 							case "site_type_id":
 								$option_name="Тип сайта";
 								$option_value=$collection_set['site_type_name'];
-								//$sites_types['name_ru'];
 									break;
 					
 							case "engine_type_choice_id":

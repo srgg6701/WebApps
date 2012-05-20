@@ -39,6 +39,9 @@
 		<menu>COM_COLLECTOR1</menu>
 		<submenu>
 			<menu link="option=com_collector1&amp;view=_customers" view="_customers" img="class:_customers" alt="Collector1/_customers">COM_COLLECTOR1__CUSTOMERS</menu>
+			
+			<menu link="option=com_collector1&amp;view=_precustomers" view="_precustomers" img="class:_precustomers" alt="Collector1/_precustomers">COM_COLLECTOR1__PRECUSTOMERS</menu>
+			
 			<menu link="option=com_collector1&amp;view=_customers_paid" view="_customers_paid" img="class:_customers_paid" alt="Collector1/_customers_paid">COM_COLLECTOR1__CUSTOMERS_PAID</menu>
 			<menu link="option=com_collector1&amp;view=_customer_site_options" view="_customer_site_options" img="class:_customer_site_options" alt="Collector1/_customer_site_options">COM_COLLECTOR1__CUSTOMER_SITE_OPTIONS</menu>
 			<menu link="option=com_collector1&amp;view=_engines_all" view="_engines_all" img="class:_engines_all" alt="Collector1/_engines_all">COM_COLLECTOR1__ENGINES_ALL</menu>

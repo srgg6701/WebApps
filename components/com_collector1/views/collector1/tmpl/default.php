@@ -224,20 +224,21 @@ if ($current_order_set){
 <?	
 	$user = JFactory::getUser();
 	if ($user->get('guest')==1){?>
-<h4>Пожалуйста, сообщите нам свои контактные данные:</h4>
 <div id="tell_your_data">
-	<div style="display:block; margin-bottom:8px;">Как вас зовут? <input name="name" type="text" id="name" value="" size="40"></div>
+<h4>Пожалуйста, сообщите нам свои контактные данные:</h4>
+<dl>
+	<dt>Как вас зовут? <div class="required_field"></div></dt>
+	<dd><input class="dataCell" name="name" type="text" id="name" value=""></dd>
 
-	<div>
-    	Ваш емэйл:<div class="required_field"></div> <input name="email" id="email" type="text" value="">
-    </div> 
-	<div>
-    	Ваш телефон: <input name="phone" id="phone" type="text" value=""> 
-    </div>
-	<div>
-    	Скайп: <input name="skype" id="skype" type="text" value="">
-    </div>    
-<br><br><br>
+	<dt>Ваш емэйл: <div class="required_field"></div></dt>
+	<dd><input name="email" id="email" type="text" value=""></dd>
+    
+	<dt>Ваш телефон: <div class="required_field"></div></dt>
+	<dd><input name="phone" id="phone" type="text" value=""></dd>
+    
+	<dt>Скайп: </dt>
+	<dd><input name="skype" id="skype" type="text" value=""></dd>
+</dl>
 </div>
 <?	}?>
 <br>
@@ -305,7 +306,10 @@ function checkRequired(){
 	try{
 		d=document;
 		var selST=d.getElementById('selectSiteType');
+		var yName=d.getElementById('name');
 		var yEmail=d.getElementById('email');
+		var yPhone=d.getElementById('phone');
+		
 		if (selST.options[selST.selectedIndex].value=='0') {
 			alert('Вы не указали, какой тип сайта вам нужен!');
 			location.href='#select_site_type';
@@ -313,11 +317,23 @@ function checkRequired(){
 			return false;
 		}
 <?	if($user->get('guest')==1){?>		
+		if (!yName.value||yName.value==' ') {
+			alert('Вы не сообщили нам своё имя!');					
+			location.href='#bottom';
+			yName.style.backgroundColor='yellow';
+			return false;
+		}
 		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		if (!filter.test(yEmail.value)) {
 			alert('Емэйл введён некорректно или отсутствует!');					
 			location.href='#bottom';
 			yEmail.style.backgroundColor='yellow';
+			return false;
+		}
+		if (yPhone.value.length<7) {
+			alert('Вы не сообщили нам № своего телефона или указали его не корректно!');					
+			location.href='#bottom';
+			yPhone.style.backgroundColor='yellow';
 			return false;
 		}
 <?	}?>		

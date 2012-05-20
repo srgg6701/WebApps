@@ -44,6 +44,7 @@ JHtml::_('behavior.formvalidation');
 		</fieldset>
 	<?php endif;?>
 <?php endforeach;?>
+		<div style="padding:4px;"></div>
 		<div>
 			<button type="submit" class="validate"><?php echo JText::_('JREGISTER');?></button>
 			<?php echo JText::_('COM_USERS_OR');?>

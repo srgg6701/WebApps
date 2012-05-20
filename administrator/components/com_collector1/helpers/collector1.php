@@ -27,6 +27,11 @@ class Collector1Helper
 			$vName == '_customers'
 		);
 		JSubMenuHelper::addEntry(
+			JText::_('COM_COLLECTOR1_TITLE__PRECUSTOMERS'),
+			'index.php?option=com_collector1&view=_precustomers',
+			$vName == '_precustomers'
+		);
+		JSubMenuHelper::addEntry(
 			JText::_('COM_COLLECTOR1_TITLE__CUSTOMERS_PAID'),
 			'index.php?option=com_collector1&view=_customers_paid',
 			$vName == '_customers_paid'

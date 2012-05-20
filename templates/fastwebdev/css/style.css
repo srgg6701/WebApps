@@ -9,7 +9,6 @@ a.addRec{
 a.addRec:hover{
 	background: #CFC !important;
 }
-
 table.alignRight td{
 	text-align:right;
 }
@@ -43,6 +42,11 @@ div#account_menu td.tdActive a{
 .bgWhite, tr.bgWhite, tr.bgWhite td{
 	background-color:#FFF;
 }
+div.block_done{
+	padding:40px 65px 40px 50px; 
+	display:inline-block; 
+	border-radius:6px;
+}
 body{
 	background:#FFFFFF; 
 	background-image:url(../images/bg/bg_techno.jpg); 
@@ -57,6 +61,11 @@ div#body{
 }
 .border_radius_none{
 	border-radius: none !important;
+}
+button, a.button{
+	padding:8px 12px;
+	border-radius:6px;
+	border:none;
 }
 #button_call{
 	 border-radius:6px; 
@@ -533,7 +542,8 @@ div.profile fieldset{
 	margin-bottom:10px;*/
 }
 div.profile fieldset +a, 
-div.profile-edit button.validate,
+button.validate,
+a.button,
 div.profile-edit button.validate span,
 div.button-green,
 button#make_site_prototype,
@@ -541,6 +551,10 @@ div.button-green a
 {
 	background: #666;
 	color:#FFCC00;
+}
+button.validate:hover, a.button:hover{
+	background:#FEBE38;
+	color:#006600;
 }
 div.profile fieldset +a,
 div.button-green
@@ -629,6 +643,10 @@ tr.rowMySiteOptions:hover >td:last-child {
 .skinny{
 	font-weight:lighter;
 }
+div.spacer4{
+	padding:4px;
+	clear:both;
+}
 .star, .red{
 	color:red;
 }
@@ -681,9 +699,24 @@ table#tblCollector tr td +td {
 table#tblCollector tr >td {
 	border-right:solid 1px #CCCCCC;
 }
-div#tell_your_data div{
+#tell_your_data{
+	padding:0px 20px 10px 10px;
+	margin:10px 0;
+	border:solid 1px #CCCCCC;
+	border-radius:6px;
+	background:#efefef;
 	display:inline-block;
+}
+#tell_your_data div{
 	white-space:nowrap;
+	padding-bottom:8px;
+}
+#tell_your_data dd{
+	margin-top:4px;
+	margin-bottom:10px;
+}
+#tell_your_data dd input[type="text"] {
+	width:190px;
 }
 .txtBlack{
 	color:#000;

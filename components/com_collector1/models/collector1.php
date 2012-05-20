@@ -32,15 +32,7 @@ class Collector1ModelCollector1 extends JModel
 	 */
 	function addCollection(){
 		
-		if ($user->get('guest')==1) {
-			
-			echo " GUEST! Зарегистрируем его. ";
-  		
-		}else{
-			
-			if (!$table=$this->prepareDataSet()) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareDataSet()");
-		
-		}
+		if (!$table=$this->prepareDataSet()) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareDataSet()");		
 		// Check that the data is valid
 		if (!$table->check()) echo "<div>Не проверено 1!</div>";
 		// Store the data in the table
@@ -51,6 +43,11 @@ class Collector1ModelCollector1 extends JModel
 		$query="SELECT max(id) FROM #__webapps_customer_site_options";
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
+		if ($user->get('guest')==1) {//коллекция создавалась незарегистрированным юзером
+			//добавить в таблицу предзаказчиков:
+			$query="SELECT max(id) FROM #__webapps_customer_site_options";
+			$db->setQuery($query);
+		}
 		return $db->loadResult();
 	}
 	/**
@@ -224,8 +221,8 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		$user = JFactory::getUser();
 		$selectSiteType=$post_collection["selectSiteType"]; //site type
 		$table->reset();
-		$table->set('customer_id', $user->id);
-		$table->set('site_type_id', $selectSiteType);
+		$table->set('customer_id', $user->id); //id заказчика
+		$table->set('site_type_id', $selectSiteType); //тип сайта
 		
 		//выяснить выбор типа движка:
 		switch ($post_collection["choose_engine"])  { 
@@ -242,7 +239,7 @@ FROM #__webapps_site_types ORDER BY id DESC";
 				$engine_type_choice_id="3";
 					break;
 		}
-		$table->set('engine_type_choice_id', $engine_type_choice_id);
+		$table->set('engine_type_choice_id', $engine_type_choice_id); //тип движка
 		$arrStoredOptions=array();
 		//получить опции не для всех типов сайтов:
 		$db=JFactory::getDBO();
@@ -252,15 +249,14 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		//var_dump("<h1>arrOptionsPartial</h1><pre>",$arrOptionsPartial,"</pre>"); echo "$selectSiteType<hr>";
 		if (!empty($arrOptionsPartial)) {
 			$arrOptionToIgnore=array();
-			//получить игнорируемые опции, добавлять который в набор не нужно:
+			//получить игнорируемые опции, добавлять которые в набор не нужно:
 			for ($i=0,$j=count($arrOptionsPartial);$i<$j;$i++){
 				//если специфическая опция относится НЕ к сайту выбранного типа,
 				//однозначно добавить к массиву исключений:
 				if ($arrOptionsPartial[$i]['sites_types_ids_location']!=$selectSiteType)
 					$arrOptionToIgnore[]=$arrOptionsPartial[$i]['site_option_id'];
 			}
-		}
-		//var_dump("<h1>arrOptionToIgnore</h1><pre>",$arrOptionToIgnore,"</pre>"); echo "<hr>";
+		} //var_dump("<h1>arrOptionToIgnore</h1><pre>",$arrOptionToIgnore,"</pre>"); echo "<hr>";
 		foreach ($post_collection as $key=>$val){
 			if (strstr($key,'cms_name_')) $arrCMS[]=$val;
 			if (strstr($key,'option_')) {
@@ -273,13 +269,22 @@ FROM #__webapps_site_types ORDER BY id DESC";
 					if (!is_array($arrStoredOptions[$option_id])) {
 						$arrStoredOptions[$option_id]=array($gt[2]); // тип раздела сайта
 						//var_dump("<h1>arrStoredOptions[$option_id]</h1><pre>",$arrStoredOptions[$option_id],"</pre>"); echo "<hr>";
-						
 					}else array_push($arrStoredOptions[$option_id],$gt[2]);
 				}//else echo "<div>exclude option_id: ".$gt[1]."</div>";
 			}
 		}//die('end of checking!');
-		if (is_array($arrCMS)){
+		if ($post_collection['choose_engine']=='build_own'){
+			
+			$table->set('engines_ids','Разработать собственный');
+		
+		}elseif ($post_collection['choose_engine']=='exists'){
+			
+			$table->set('engines_ids',$post_collection['existing_cms']);
+		
+		}elseif (is_array($arrCMS)){
+			
 			$table->set('engines_ids',implode(',',$arrCMS));
+		
 		}
 		if (!empty($arrStoredOptions)){
 			$table->set('options_array',serialize($arrStoredOptions));
