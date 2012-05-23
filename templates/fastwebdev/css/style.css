@@ -62,6 +62,9 @@ div#body{
 .border_radius_none{
 	border-radius: none !important;
 }
+a.blue{
+	color:#0000FF !important;
+}
 button, a.button{
 	padding:8px 12px;
 	border-radius:6px;

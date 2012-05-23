@@ -907,4 +907,12 @@ abstract class JError
 
 		return $contents;
 	}
+	/**
+	 * Показать trace ошибки
+	 */
+	function showErrorTrace($msg=false){
+		echo "ОШИБКА! <br>".$msg."<hr>";
+			var_dump('<pre>',debug_backtrace(),'</pre>');
+			die();
+	}
 }

@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="_customer_site_options.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466304000" remote="129810313200000000" />
-<file name="_customers.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466284000" remote="129810313200000000" />
-<file name="_customers_paid.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466294000" remote="129810313200000000" />
-<file name="_engines_all.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466314000" remote="129810313200000000" />
-<file name="_engines_ru.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466324000" remote="129810313200000000" />
-<file name="_options_beyond_sides.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466334000" remote="129810313200000000" />
-<file name="_site_options.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466344000" remote="129810313200000000" />
-<file name="_site_options_partial.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466344000" remote="129810313200000000" />
-<file name="_site_options_types.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466354000" remote="129810313200000000" />
-<file name="_site_types.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466364000" remote="129810313200000000" />
-<file name="customer_site_options.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466194000" remote="129810313200000000" />
-<file name="customers.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466184000" remote="129810313200000000" />
-<file name="engines_all.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466204000" remote="129810313200000000" />
-<file name="engines_ru.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466214000" remote="129810313200000000" />
-<file name="index.html" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466224000" remote="129810313200000000" />
-<file name="options_beyond_sides.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466244000" remote="129810313200000000" />
-<file name="site_options.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466244000" remote="129810313200000000" />
-<file name="site_options_partial.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466254000" remote="129810313200000000" />
-<file name="site_options_types.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466264000" remote="129810313200000000" />
-<file name="site_types.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129809279466274000" remote="129810313200000000" />
+<file name="_customer_site_options.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101750000" remote="129820016400000000" />
+<file name="_customers.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101670000" remote="129820016400000000" />
+<file name="_customers_paid.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101720000" remote="129820016400000000" />
+<file name="_engines_all.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101790000" remote="129820016400000000" />
+<file name="_engines_ru.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101880000" remote="129820016400000000" />
+<file name="_options_beyond_sides.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101920000" remote="129820016400000000" />
+<file name="_site_options.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136102040000" remote="129820016400000000" />
+<file name="_site_options_partial.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136102080000" remote="129820016400000000" />
+<file name="_site_options_types.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136102110000" remote="129820016400000000" />
+<file name="_site_types.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136102150000" remote="129820016400000000" />
+<file name="customer_site_options.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101280000" remote="129820016400000000" />
+<file name="customers.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101240000" remote="129820016400000000" />
+<file name="engines_all.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101320000" remote="129820016400000000" />
+<file name="engines_ru.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101360000" remote="129820016400000000" />
+<file name="index.html" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101400000" remote="129820016400000000" />
+<file name="options_beyond_sides.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101440000" remote="129820016400000000" />
+<file name="site_options.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101520000" remote="129820016400000000" />
+<file name="site_options_partial.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101560000" remote="129820016400000000" />
+<file name="site_options_types.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101600000" remote="129820016400000000" />
+<file name="site_types.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101630000" remote="129820016400000000" />
+<file name="_precustomers.php.bak" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129819942273494000" remote="129820016400000000" />
+<file name="precustomers.php.bak" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129819942273644000" remote="129820016400000000" />
+<file name="_precustomers.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101960000" remote="129820016400000000" />
+<file name="precustomers.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129820136101480000" remote="129820016400000000" />
 </dwsync>

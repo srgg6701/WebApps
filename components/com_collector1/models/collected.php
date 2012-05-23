@@ -13,11 +13,16 @@ class collector1ModelCollected extends JModel
 		$user = JFactory::getUser();  
 		$this->query.=' WHERE customer_id = '.$user->id;
 	}
-	//все сайты заказчика:
+	/**
+	 * все сайты заказчика
+	 */
 	function collected()
-	{	
-		$this->db->setQuery('SELECT id ' . $this->query . $where);
-		$arrCollectionsIds=$this->db->loadResultArray(); 
+	{	//guest?
+		require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
+		if (!$arrCollectionsIds=SCollection::getGuestCollections()){
+			$this->db->setQuery('SELECT id ' . $this->query . $where);
+			$arrCollectionsIds=$this->db->loadResultArray(); 
+		}
 		for ($i=0,$j=count($arrCollectionsIds);$i<$j;$i++){
 			$option_id=$arrCollectionsIds[$i];
 			$collection_set[$option_id]=Collector1ModelCollector1::getCollection($option_id);

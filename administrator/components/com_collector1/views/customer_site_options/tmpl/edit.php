@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     1.4.0
+ * @version     1.7.0
  * @package     com_collector1
  * @copyright   Copyright (C) 2012. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -48,8 +48,12 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getInput('engines_ids'); ?></li>
 
             
-			<li><?php echo $this->form->getLabel('option_ids'); ?>
-			<?php echo $this->form->getInput('option_ids'); ?></li>
+			<li><?php echo $this->form->getLabel('options_array'); ?>
+			<?php echo $this->form->getInput('options_array'); ?></li>
+
+            
+			<li><?php echo $this->form->getLabel('xtra'); ?>
+			<?php echo $this->form->getInput('xtra'); ?></li>
 
             
 

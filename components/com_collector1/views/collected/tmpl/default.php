@@ -10,24 +10,34 @@
  */
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
-//
-$collections_data_array=$this->collections_data_array;
-//
-//$sites_types=$this->sites_types;
-//var_dump("<h1>sites_types:</h1><pre>",$sites_types,"</pre>");
-//var_dump("<h1>collections_data_array:</h1><pre>",$collections_data_array,"</pre>");
-//
-$done=$this->done;
-if (!empty($done)){
+$user = JFactory::getUser();
+
+if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавторизован
+	 !empty($this->guest_collections) //коллекция создана текущим гостем (проверяется по его емэйлу)
+   ) {?>
+<script type="text/javascript">
+function askToSignUp(){
+	if (confirm('Чтобы изменить набор опций любого своего сайта, вам нужно добавить к своим данным логин и пароль.\nХотите сделать это сейчас?'))
+		location.href='<?=$this->go_signup?>';
+}
+</script>
+<?	//
+	$collections_data_array=$this->collections_data_array;
+	//
+	$done=$this->done;
+	if (!empty($done)){
 		
-	?><div class="block_done" style="background:<?=$done[1]?>;"><img src="<?php echo $this->baseurl ?>/templates/fastwebdev/images/signs/Flag_<?=$done[2]?>.png" width="24" height="24" hspace="6" align="baseline" style="margin-bottom:-2px;"><?=$done[0]?>!</div>
+	?><div class="block_done" style="background:<?=$done[1]?>;"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
+	?>/images/signs/Flag_<?=$done[2]?>.png" width="24" height="24" hspace="6" align="baseline" style="margin-bottom:-2px;"><?=$done[0]?></div>
     <br>
 	<br><?
 
-}else{
+	}else{
+		$margin_minus='-';
+		require_once JPATH_COMPONENT.DS.'go_register.php';
 	
 	?><h3 class="collected_head">Выбранные вами опции:</h3><?
-}?>
+	}?>
 <table cellpadding="8" cellspacing="0" id="tblCollected">
   <tr>
     <th>Опция</th>
@@ -143,7 +153,12 @@ if (!empty($done)){
 	<?php 	}?>
           <tr>
           	<td colspan="2" class="bgOverWhite linkButtons">
-            	<br><a href="index.php/build-and-calculate?collection_id=<?=$collection_set['id']?>">Изменить опции...</a> &nbsp; <a class="txtRed" href="index.php/build-and-calculate?collection_id=<?=$collection_set['id']?>&task=delete" onclick="if (!confirm('Вы уверены, что хотите удалить этот сайт?')) return false;">Удалить сайт...</a><br>
+            	<br><a href="<?
+			if (!empty($this->guest_collections)){
+				?>javascript:void();" onclick="askToSignUp();<?	
+			}else{
+                echo JRoute::_("index.php?option=com_collector1&collection_id=".$collection_set['id']);
+			}?>">Изменить опции...</a> &nbsp; <a class="txtRed" href="<?=JRoute::_("index.php?option=com_collector1&collection_id=".$collection_set['id'])?>&task=delete" onclick="if (!confirm('Вы уверены, что хотите удалить этот сайт?')) return false;">Удалить сайт...</a><br>
 <br>
 
 			</td>
@@ -152,5 +167,20 @@ if (!empty($done)){
 	}?>
 </table>
 <div class="button-green" style="margin-left:6px;">
-    <a href="index.php/build-and-calculate/">Добавить сайт...</a>
+    <a href="<?=JRoute::_("index.php?option=com_collector1")?>">Добавить сайт...</a>
 </div>
+<?
+
+}else{
+	
+	echo "<div>guest? = ".$user->get('guest').", collection_of_user: ".$this->collection_of_user.", empty? = ".empty($this->guest_collections)."</div>";
+	
+	?><div style="background:#FFCCFF; padding:20px 30px 30px 10px; display:inline-block;" class="border_radius">
+	<img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename ?>/images/stop.png" width="32" height="32" hspace="6" align="left">Просмотр невозможен, т.к. данный сайт не ваш
+	<?	
+	if ($this->collection_of_user!=-1){?> или при его создании вы указали другой емэйл</span>. 
+    <div>Чтобы получить доступ к нему, вам необходимо <a href="<?=JRoute::_('index.php?option=com_users&view=login')?>">заавторизоваться или зарегистрироваться</a>.</div><? 
+	}?>
+    </div>
+<?
+}

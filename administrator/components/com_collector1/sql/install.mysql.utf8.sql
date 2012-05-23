@@ -27,19 +27,20 @@ CREATE TABLE IF NOT EXISTS `#__webapps_customer_site_options` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 `customer_id` INT(11)  NOT NULL ,
 `site_type_id` INT(11)  NOT NULL ,
-`engine_type_choice_id` TINYINT(255)  NOT NULL ,
+`engine_type_choice_id` TINYINT(4)  NOT NULL ,
 `engines_ids` TEXT(65535)  NOT NULL ,
-`option_ids` TEXT(65535)  NOT NULL ,
+`options_array` TEXT(65535)  NOT NULL ,
 `ordering` INT(11)  NOT NULL ,
 `checked_out` INT(11)  NOT NULL ,
 `checked_out_time` DATETIME NOT NULL ,
+`xtra` TEXT(65535)  NOT NULL ,
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS `#__webapps_engines_all` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 `name` VARCHAR(45)  NOT NULL ,
-`free` TINYINT(1)  NOT NULL ,
+`free` TINYINT(4)  NOT NULL ,
 `ordering` INT(11)  NOT NULL ,
 `checked_out` INT(11)  NOT NULL ,
 `checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -60,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `#__webapps_site_options` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 `name_ru` VARCHAR(45)  NOT NULL ,
 `name_en` VARCHAR(45)  NOT NULL ,
-`option_stat` TINYINT(1)  NOT NULL ,
+`option_stat` TINYINT(4)  NOT NULL ,
 `ordering` INT(11)  NOT NULL ,
 `checked_out` INT(11)  NOT NULL ,
 `checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -95,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `#__webapps_site_options_beyond_sides` (
 `ordering` INT(11)  NOT NULL ,
 `checked_out` INT(11)  NOT NULL ,
 `checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+`name_ru` VARCHAR(20)  NOT NULL ,
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT COLLATE=utf8_general_ci;
 
@@ -107,4 +109,18 @@ CREATE TABLE IF NOT EXISTS `#__webapps_site_options_partial` (
 `checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT COLLATE=utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `#__webapps_precustomers` (
+`id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+`ordering` INT(11)  NOT NULL ,
+`state` TINYINT(1)  NOT NULL DEFAULT '1',
+`checked_out` INT(11)  NOT NULL ,
+`checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+`name` VARCHAR(45)  NOT NULL ,
+`email` VARCHAR(45)  NOT NULL ,
+`phone` VARCHAR(45)  NOT NULL ,
+`skype` VARCHAR(45)  NOT NULL ,
+`collections_ids` TEXT(65535)  NOT NULL ,
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT COLLATE=utf8_general_ci;
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     1.4.0
+ * @version     1.7.0
  * @package     com_collector1
  * @copyright   Copyright (C) 2012. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -54,7 +54,10 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMER_SITE_OPTIONS_ENGINES_IDS', 'a.engines_ids', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMER_SITE_OPTIONS_OPTION_IDS', 'a.option_ids', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMER_SITE_OPTIONS_OPTIONS_ARRAY', 'a.options_array', $listDirn, $listOrder); ?>
+				</th>
+				<th class='left'>
+				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMER_SITE_OPTIONS_XTRA', 'a.xtra', $listDirn, $listOrder); ?>
 				</th>
 
 
@@ -116,7 +119,10 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<?php endif; ?>
 				</td>
 				<td>
-					<?php echo $item->option_ids; ?>
+					<?php echo $item->options_array; ?>
+				</td>
+				<td>
+					<?php echo $item->xtra; ?>
 				</td>
 
 

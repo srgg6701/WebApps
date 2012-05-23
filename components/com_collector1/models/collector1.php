@@ -33,16 +33,21 @@ class Collector1ModelCollector1 extends JModel
 	function addCollection(){
 		
 		if (!$table=$this->prepareDataSet()) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareDataSet()");		
-		// Check that the data is valid
+		//Добавить данные в таблицу и проверить состояние:
+		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
+		SErrors::afterTable($table);
+
+		/*// Check that the data is valid
 		if (!$table->check()) echo "<div>Не проверено 1!</div>";
 		// Store the data in the table
 		if (!$table->store(true)) echo "<div>Не добавлено!</div>";
 		// Check the record in
 		if (!$table->checkin()) echo "<div>Не проверено 2!</div>";
-		//get last
+		//get last*/
 		$query="SELECT max(id) FROM #__webapps_customer_site_options";
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
+		$user = JFactory::getUser();
 		if ($user->get('guest')==1) {//коллекция создавалась незарегистрированным юзером
 			//добавить в таблицу предзаказчиков:
 			$query="SELECT max(id) FROM #__webapps_customer_site_options";
@@ -70,6 +75,45 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
 		return $table->delete($collection_id); 		
+	}
+	/**
+	 * Удалить коллекцию из набора предзаказчика
+	 */
+	function deletePreCollection($collection_id) {
+		$query="SELECT id, collections_ids FROM #__webapps_precustomers WHERE $collection_id IN (collections_ids)";
+		$db = JFactory::getDBO();
+		$db->setQuery($query);
+		$pre_order_data=$db->loadAssoc();
+		$current_collections=explode(',',$pre_order_data['collections_ids']);
+		$key=array_search($collection_id,$current_collections);
+		if ($key!==false){ //потому что может случиться 0
+			unset($current_collections[$key]);
+		}
+		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
+		$table = JTable::getInstance('precustomers', 'Collector1Table');
+		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
+		
+		if (!$table->load($pre_order_data['id'])) {
+			
+			JMail::sendErrorMess($table->getError()," (\$table->load())");
+			return false;
+		
+		}else{
+			$new_collections_ids=implode(',',$current_collections);
+			$table->set('collections_ids', $new_collections_ids);
+			if ($table->check()) {
+				
+				if (!$table->store(true)){
+					// handle failed update
+					JMail::sendErrorMess($table->getError()," (\$table->store())");
+				}
+			
+			}else{
+				// handle invalid input
+				JMail::sendErrorMess($table->getError()," (\$table->check())");
+			}
+		}
+		return true; 		
 	}
 	/**
 	 * Get the data for a banner
@@ -213,10 +257,10 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		$post_collection=JRequest::get('post');
 		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
-		
 		if ($updated_id) {
-			if (!$table->load($updated_id)) die('ОШИБКА! Запись не загружена.');
-			//var_dump("<h1>updated_id:</h1><pre>",$updated_id,"</pre>"); die();
+			if (!$table->load($updated_id)) 
+				JMail::sendErrorMess($table->getError()," (\$table->load())");
+				//var_dump("<h1>updated_id:</h1><pre>",$updated_id,"</pre>"); die();
 		}
 		$user = JFactory::getUser();
 		$selectSiteType=$post_collection["selectSiteType"]; //site type
@@ -299,10 +343,68 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		return $table;
 	}
 	/**
-	 * Сохранить данные заказчика (те, которых нет в таблице юзеров)
+	 * Сохранить данные заказчика (те, которых нет в таблице юзеров) и созданной им коллекции:
 	 */
-	function saveCustomerData() {
+	function savePreOrderData($last_site_id) {
+		
+		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
+		$table = JTable::getInstance('precustomers', 'Collector1Table');
+		//добавим в таблицу данные предзаказчика:
+		$post_collection=JRequest::get('post');
+		//проверить, есть лу уже такая запись в таблице:
+		$db = JFactory::getDBO();
+		//ниже потребуются значения обоих полей:
+		$query="SELECT id, collections_ids FROM #__webapps_precustomers WHERE email = '$post_collection[email]'";
+		$db->setQuery($query);
+		$result=$db->loadAssoc();
+		//то, что будем добавлять:
+		$arrPostData=array('name','phone','skype');
+		//коллекции предзаказчика в таблице не обнаружены:
+		if (empty($result)) {
+			
+			array_push($arrPostData,'email');				
+			$table->reset(); //clear buffer
+			//установить значения полей:
+			for($i=0,$j=count($arrPostData);$i<$j;$i++)
+				$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
+			
+			$table->set('collections_ids',$last_site_id);
+			//$table->set('session_id',session_id());
+			//Добавить данные в таблицу и проверить состояние:
+			require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
+			SErrors::afterTable($table);
+		
+		}else{	//емэйл предзаказчика в таблице обнаружен, будем ОБНОВЛЯТЬ данные в поле collections_ids
+			
+			if (!$table->load($result['id'])) {
+				// handle failed load
+				//echo "<div>/models/collector1.php, string # 364, email = $post_collection[email])</div>";
+				JMail::sendErrorMess($table->getError()," (\$table->load())");			
+			
+			}else{ 
+				
+				//$table->reset(); //clear buffer			
+				//установить значения полей:
+				for($i=0,$j=count($arrPostData);$i<$j;$i++)
+					if ($post_collection[$arrPostData[$i]]) 
+						$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
 	
+				$table->set('collections_ids', $result['collections_ids'].','.$last_site_id);
+				
+				if ($table->check()) {
+					
+					if (!$table->store(true)){
+						// handle failed update
+						JMail::sendErrorMess($table->getError()," (\$table->store())");
+					}
+				
+				}else{
+					// handle invalid input
+					JMail::sendErrorMess($table->getError()," (\$table->check())");
+				}
+			}
+		}
+		return true;
 	}
 	/**
 	 * Получить стр. по умолчанию

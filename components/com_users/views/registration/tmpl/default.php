@@ -12,12 +12,12 @@ defined('_JEXEC') or die;
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
-?>
+$user = JFactory::getUser();
+//var_dump("<h1>user:</h1><pre>",$user,"</pre>");?>
 <div class="registration<?php echo $this->pageclass_sfx?>">
 <?php if ($this->params->get('show_page_heading')) : ?>
 	<h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
-<?php endif; ?>
-
+<?php endif;?>
 	<form id="member-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=registration.register'); ?>" method="post" class="form-validate">
 <?php foreach ($this->form->getFieldsets() as $fieldset): // Iterate through the form fieldsets and display each one.?>
 	<?php $fields = $this->form->getFieldset($fieldset->name);?>
@@ -32,12 +32,36 @@ JHtml::_('behavior.formvalidation');
 				<?php echo $field->input;?>
 			<?php else:?>
 				<dt>
-				<?php echo $field->label; ?>
+				<?php 
+				$label_content=$field->label;
+				echo $label_content; ?>
 				<?php if (!$field->required && $field->type != 'Spacer'): ?>
 					<span class="optional"><?php echo JText::_('COM_USERS_OPTIONAL');?></span>
 				<?php endif; ?>
 				</dt>
-				<dd><?php echo $field->input;?></dd>
+				<dd><?php 
+				$input_content=$field->input;
+				if ($user->get('guest')==1&&$user->get('email')) {
+					//
+					switch ($field->name)  { 
+				
+						case "jform[name]":
+							//echo "NAME";
+							$new_input=$user->get('name');
+								break;
+	
+						case "jform[email1]":
+							//echo "EMAIL";
+							$new_input=$user->get('email');
+								break;
+
+						default: unset($new_input);
+					}
+				}
+				if ($new_input) 
+					$input_content=str_replace('value=""','value="'.$new_input.'"',$field->input);
+				echo $input_content;
+				?></dd>
 			<?php endif;?>
 		<?php endforeach;?>
 			</dl>

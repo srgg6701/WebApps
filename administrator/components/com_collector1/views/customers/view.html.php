@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     1.4.0
+ * @version     1.7.0
  * @package     com_collector1
  * @copyright   Copyright (C) 2012. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -70,7 +70,6 @@ class Collector1ViewCustomers extends JView
 		}
 		// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
-			
 			JToolBarHelper::custom('customers.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
 		}
 		if (empty($this->item->id)) {

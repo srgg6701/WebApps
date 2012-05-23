@@ -2366,11 +2366,11 @@ a.icon-16-menu span img {
 #submenu li a,
 #submenu span.nolink {
 	cursor: pointer;
-	padding: 0 15px;
+	padding: 0 8px;
 	border-right: 1px solid #ccc;
 	font-size: 1.1em;
-	font-weight: bold;
-	color: #808080;
+	/*font-weight: bold;
+	color: #808080;*/
 	line-height: 14px;
 	height: 12px;
 }

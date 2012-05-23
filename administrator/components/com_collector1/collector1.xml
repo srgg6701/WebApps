@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.6.0" method="upgrade">
 	<name>collector1</name>
-	<creationDate>2012-05-08</creationDate>
+	<creationDate>2012-05-20</creationDate>
 	<copyright>Copyright (C) 2012. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <author>srgg</author>
 	<authorEmail>srgg67@gmail.com</authorEmail>
 	<authorUrl>http://www.facebook.com/srgg67</authorUrl>
-	<version>1.4.0</version>
+	<version>1.7.0</version>
 	<description>Конструктор опций для сайта</description>
 
 	<install> <!-- Runs on install -->
@@ -39,9 +39,6 @@
 		<menu>COM_COLLECTOR1</menu>
 		<submenu>
 			<menu link="option=com_collector1&amp;view=_customers" view="_customers" img="class:_customers" alt="Collector1/_customers">COM_COLLECTOR1__CUSTOMERS</menu>
-			
-			<menu link="option=com_collector1&amp;view=_precustomers" view="_precustomers" img="class:_precustomers" alt="Collector1/_precustomers">COM_COLLECTOR1__PRECUSTOMERS</menu>
-			
 			<menu link="option=com_collector1&amp;view=_customers_paid" view="_customers_paid" img="class:_customers_paid" alt="Collector1/_customers_paid">COM_COLLECTOR1__CUSTOMERS_PAID</menu>
 			<menu link="option=com_collector1&amp;view=_customer_site_options" view="_customer_site_options" img="class:_customer_site_options" alt="Collector1/_customer_site_options">COM_COLLECTOR1__CUSTOMER_SITE_OPTIONS</menu>
 			<menu link="option=com_collector1&amp;view=_engines_all" view="_engines_all" img="class:_engines_all" alt="Collector1/_engines_all">COM_COLLECTOR1__ENGINES_ALL</menu>
@@ -51,6 +48,7 @@
 			<menu link="option=com_collector1&amp;view=_site_types" view="_site_types" img="class:_site_types" alt="Collector1/_site_types">COM_COLLECTOR1__SITE_TYPES</menu>
 			<menu link="option=com_collector1&amp;view=_options_beyond_sides" view="_options_beyond_sides" img="class:_options_beyond_sides" alt="Collector1/_options_beyond_sides">COM_COLLECTOR1__OPTIONS_BEYOND_SIDES</menu>
 			<menu link="option=com_collector1&amp;view=_site_options_partial" view="_site_options_partial" img="class:_site_options_partial" alt="Collector1/_site_options_partial">COM_COLLECTOR1__SITE_OPTIONS_PARTIAL</menu>
+			<menu link="option=com_collector1&amp;view=_precustomers" view="_precustomers" img="class:_precustomers" alt="Collector1/_precustomers">COM_COLLECTOR1__PRECUSTOMERS</menu>
 
         </submenu>
 		<files folder="administrator">

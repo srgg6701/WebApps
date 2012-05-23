@@ -9,14 +9,19 @@
  * @license		License GNU General Public License version 2 or later
  */
 // No direct access to this file
-defined('_JEXEC') or die('Restricted access');
-
+defined('_JEXEC') or die('Restricted access'); 
 $table=Collector1ModelCollector1::getDataForCollector();
 $current_order_set=$this->current_order_set;
-//$collections_ids_array=$this->collections_ids_array;
-//var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");
 
-if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
+if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;
+if ($arrGuestCollections=$this->guest_collections) {?>
+<div style="margin:-10px 20px 0px 0px; padding:0px 20px;">Собранные вами сайты: <?
+	for ($i=0,$j=count($arrGuestCollections);$i<$j;$i++){
+		if ($i) echo ',';?>
+	# <a href="<?=JRoute::_('index.php?option=com_collector1&view=collected&collection_id='.$arrGuestCollections[$i])?>"><?=$arrGuestCollections[$i]?></a><? 
+	}?></div>
+<?	require_once JPATH_COMPONENT.DS.'go_register.php';
+}?>
 
 <form name="form1" method="post" action="<?=JRoute::_($this->go_submit)?>" onSubmit="return checkRequired();">
     <div>
@@ -228,16 +233,16 @@ if ($current_order_set){
 <h4>Пожалуйста, сообщите нам свои контактные данные:</h4>
 <dl>
 	<dt>Как вас зовут? <div class="required_field"></div></dt>
-	<dd><input class="dataCell" name="name" type="text" id="name" value=""></dd>
+	<dd><input class="dataCell" name="name" type="text" id="name" value="<?=$user->get('name')?>"></dd>
 
 	<dt>Ваш емэйл: <div class="required_field"></div></dt>
-	<dd><input name="email" id="email" type="text" value=""></dd>
+	<dd><input name="email" id="email" type="text" value="<?=$user->get('email')?>"></dd>
     
 	<dt>Ваш телефон: <div class="required_field"></div></dt>
-	<dd><input name="phone" id="phone" type="text" value=""></dd>
+	<dd><input name="phone" id="phone" type="text" value="<?=$user->get('phone')?>"></dd>
     
 	<dt>Скайп: </dt>
-	<dd><input name="skype" id="skype" type="text" value=""></dd>
+	<dd><input name="skype" id="skype" type="text" value="<?=$user->get('skype')?>"></dd>
 </dl>
 </div>
 <?	}?>
@@ -253,7 +258,7 @@ if ($current_order_set){
 </form>
 <script type="text/javascript">
 function loadCollection(collection_id){
-	location.href='index.php/build-and-calculate?collection_id='+collection_id;
+	location.href='<?=JRoute::_("index.php?option=com_collector1&collection_id=")?>'+collection_id;
 }
 function checkPatchBoxes(eventSrcElement){
 	var tBox;
@@ -331,7 +336,7 @@ function checkRequired(){
 			return false;
 		}
 		if (yPhone.value.length<7) {
-			alert('Вы не сообщили нам № своего телефона или указали его не корректно!');					
+			alert('Вы не сообщили нам № своего телефона или указали его некорректно!');					
 			location.href='#bottom';
 			yPhone.style.backgroundColor='yellow';
 			return false;

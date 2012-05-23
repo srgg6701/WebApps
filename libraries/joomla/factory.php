@@ -101,7 +101,6 @@ abstract class JFactory
 
 			self::$application = JApplication::getInstance($id, $config, $prefix);
 		}
-
 		return self::$application;
 	}
 

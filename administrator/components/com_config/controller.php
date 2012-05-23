@@ -36,7 +36,7 @@ class ConfigController extends JController
 	 * @since	1.5
 	 */
 	public function display($cachable = false, $urlparams = false)
-	{
+	{	
 		// Get the document object.
 		$document	= JFactory::getDocument();
 

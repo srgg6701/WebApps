@@ -472,4 +472,20 @@ class JMail extends PHPMailer
 
 		return $this->Send();
 	}
+	/**
+	 * Send mess about ERROR
+	 */
+	public function sendErrorMess($msg,$subject=false){
+		
+		if(strstr($_SERVER['HTTP_HOST'],"localhost")){
+			
+			JError::showErrorTrace($msg);
+		
+		}else{
+		
+			$adminEmail=JFactory::getConfig()->getValue('mailfrom');
+			$siteName=JFactory::getConfig()->getValue('sitename');
+			JFactory::getMailer()->sendMail($adminEmail, $siteName, $adminEmail, 'Сообщение об ошибке. '.$subject, $msg);
+		}
+	}
 }

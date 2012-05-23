@@ -1,4 +1,4 @@
-<?php
+<?php	
 /**
  * @package		Joomla.Administrator
  * @subpackage	com_config
@@ -15,9 +15,7 @@ JHtml::_('behavior.switcher');
 JHtml::_('behavior.tooltip');
 
 // Load submenu template, using element id 'submenu' as needed by behavior.switcher
-$this->document->setBuffer($this->loadTemplate('navigation'), 'modules', 'submenu');
-
-?>
+$this->document->setBuffer($this->loadTemplate('navigation'), 'modules', 'submenu');?>
 <script type="text/javascript">
 	Joomla.submitbutton = function(task)
 	{
@@ -65,7 +63,7 @@ $this->document->setBuffer($this->loadTemplate('navigation'), 'modules', 'submen
 				</div>
 				<div class="width-40 fltrt">
 					<?php echo $this->loadTemplate('database'); ?>
-					<?php echo $this->loadTemplate('mail'); ?>
+					<?php echo $this->loadTemplate('mail');?>
 				</div>
 			</div>
 		</div>

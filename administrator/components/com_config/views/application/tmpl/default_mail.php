@@ -7,13 +7,13 @@
  */
 
 // No direct access
-defined('_JEXEC') or die;
+defined('_JEXEC') or die; 
 ?>
 <div class="width-100">
 <fieldset class="adminform">
 	<legend><?php echo JText::_('COM_CONFIG_MAIL_SETTINGS'); ?></legend>
 		<ul class="adminformlist">
-			<?php
+			<?php	
 			foreach ($this->form->getFieldset('mail') as $field):
 			?>
 					<li><?php echo $field->label; ?>

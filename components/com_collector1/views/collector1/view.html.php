@@ -23,11 +23,16 @@ class Collector1ViewCollector1 extends JView
 	protected $collections_ids_array=array(); //массив id id коллекций заказчика
 	protected $go_submit='index.php?option=com_collector1&task=';
 	protected $go_action;
+	public $go_signup="index.php?option=com_users&view=registration&task=fill_precustomer_data";
+	protected $guest_collections;
+	protected $templatename;
 
 	function display($tpl = null)
 	{
+		require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
 		$app		= JFactory::getApplication();
 		$params		= $app->getParams();
+		$this->templatename=SSite::getCurrentTemplateName($app);
 
 		// Get some data from the models
 		$state		= $this->get('State');
@@ -44,6 +49,11 @@ class Collector1ViewCollector1 extends JView
 
 		}else{
 			$this->go_submit.="collect";
+		}
+		//проверим, создавал ли незаавторизованный юзер сайты в течение сессии:
+		if ($user->get('guest')==1){
+			require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SCollection.php';
+			$this->guest_collections=SCollection::getGuestCollections();
 		}
 		//получает HTML из контроллера (?), в случае, если он также вызывает у себя parent::display()
         parent::display($tpl);

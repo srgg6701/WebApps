@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     1.4.0
+ * @version     1.7.0
  * @package     com_collector1
  * @copyright   Copyright (C) 2012. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -33,8 +33,9 @@ class Collector1Model_customer_site_options extends JModelList
                 'site_type_id', 'a.site_type_id',
                 'engine_type_choice_id', 'a.engine_type_choice_id',
                 'engines_ids', 'a.engines_ids',
-                'option_ids', 'a.option_ids',
+                'options_array', 'a.options_array',
                 'ordering', 'a.ordering',
+                'xtra', 'a.xtra',
 
             );
         }
@@ -124,7 +125,7 @@ class Collector1Model_customer_site_options extends JModelList
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-                $query->where('( a.engines_ids LIKE '.$search.'  OR  a.option_ids LIKE '.$search.' )');
+                $query->where('( a.engines_ids LIKE '.$search.'  OR  a.options_array LIKE '.$search.'  OR  a.xtra LIKE '.$search.' )');
 			}
 		}
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     1.4.0
+ * @version     1.7.0
  * @package     com_collector1
  * @copyright   Copyright (C) 2012. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -32,6 +32,7 @@ class Collector1Model_options_beyond_sides extends JModelList
                 'site_side', 'a.site_side',
                 'site_options_beyond_side', 'a.site_options_beyond_side',
                 'ordering', 'a.ordering',
+                'name_ru', 'a.name_ru',
 
             );
         }
@@ -121,7 +122,7 @@ class Collector1Model_options_beyond_sides extends JModelList
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-                $query->where('( a.site_side LIKE '.$search.'  OR  a.site_options_beyond_side LIKE '.$search.' )');
+                $query->where('( a.site_side LIKE '.$search.'  OR  a.site_options_beyond_side LIKE '.$search.'  OR  a.name_ru LIKE '.$search.' )');
 			}
 		}
 

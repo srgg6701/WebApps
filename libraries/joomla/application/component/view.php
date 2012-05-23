@@ -684,7 +684,7 @@ class JView extends JObject
 		// clear prior output
 		$this->_output = null;
 
-		$template = JFactory::getApplication()->getTemplate();
+		$template = JFactory::getApplication()->getTemplate(); 
 		$layout = $this->getLayout();
 		$layoutTemplate = $this->getLayoutTemplate();
 
@@ -718,7 +718,6 @@ class JView extends JObject
 			$filetofind = $this->_createFileName('', array('name' => 'default' . (isset($tpl) ? '_' . $tpl : $tpl)));
 			$this->_template = JPath::find($this->_path['template'], $filetofind);
 		}
-
 		if ($this->_template != false)
 		{
 			// Unset so as not to introduce into template scope

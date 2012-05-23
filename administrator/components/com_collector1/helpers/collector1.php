@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     1.4.0
+ * @version     1.7.0
  * @package     com_collector1
  * @copyright   Copyright (C) 2012. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -25,11 +25,6 @@ class Collector1Helper
 			JText::_('COM_COLLECTOR1_TITLE__CUSTOMERS'),
 			'index.php?option=com_collector1&view=_customers',
 			$vName == '_customers'
-		);
-		JSubMenuHelper::addEntry(
-			JText::_('COM_COLLECTOR1_TITLE__PRECUSTOMERS'),
-			'index.php?option=com_collector1&view=_precustomers',
-			$vName == '_precustomers'
 		);
 		JSubMenuHelper::addEntry(
 			JText::_('COM_COLLECTOR1_TITLE__CUSTOMERS_PAID'),
@@ -75,6 +70,11 @@ class Collector1Helper
 			JText::_('COM_COLLECTOR1_TITLE__SITE_OPTIONS_PARTIAL'),
 			'index.php?option=com_collector1&view=_site_options_partial',
 			$vName == '_site_options_partial'
+		);
+		JSubMenuHelper::addEntry(
+			JText::_('COM_COLLECTOR1_TITLE__PRECUSTOMERS'),
+			'index.php?option=com_collector1&view=_precustomers',
+			$vName == '_precustomers'
 		);
 
 	}

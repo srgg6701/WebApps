@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     1.4.0
+ * @version     1.7.0
  * @package     com_collector1
  * @copyright   Copyright (C) 2012. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -57,11 +57,10 @@ class Collector1View_customers extends JView
         //Check if the form exists before showing the add/edit buttons
         $formPath = JPATH_COMPONENT_ADMINISTRATOR.DS.'views'.DS.'customers';
         if (file_exists($formPath)) {
-			
-			/* убрать добавлению заказчика, т.к. должен добавляться автоматически при формировании заказа
+
             if ($canDo->get('core.create')) {
 			    JToolBarHelper::addNew('customers.add','JTOOLBAR_NEW');
-		    }*/
+		    }
 
 		    if ($canDo->get('core.edit')) {
 			    JToolBarHelper::editList('customers.edit','JTOOLBAR_EDIT');

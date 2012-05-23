@@ -34,12 +34,19 @@
                 
                  label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_ENGINES_IDS" description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_ENGINES_IDS"  /> 
 
-       <field name="option_ids" type="editor" buttons="true"
+       <field name="options_array" type="editor" buttons="true"
                 class="inputbox"
                 filter="safehtml"
                 
                 
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_OPTION_IDS" description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_OPTION_IDS"  /> 
+                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_OPTIONS_ARRAY" description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_OPTIONS_ARRAY"  /> 
+
+       <field name="xtra" type="editor" buttons="true"
+                class="inputbox"
+                filter="safehtml"
+                 required="true" 
+                
+                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_XTRA" description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_XTRA"  /> 
 
                         <field name="checked_out" type="hidden" filter="unset" />
                 <field name="checked_out_time" type="hidden" filter="unset" />
