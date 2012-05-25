@@ -26,11 +26,14 @@ class collector1ModelCollected extends JModel
 		for ($i=0,$j=count($arrCollectionsIds);$i<$j;$i++){
 			$option_id=$arrCollectionsIds[$i];
 			$collection_set[$option_id]=Collector1ModelCollector1::getCollection($option_id);
+			if ($collection_set[$option_id]===false) return false;
 			unset($collection_set[$option_id]['engines_ids']);
 		}
 		return $collection_set;
 	}
-	//получить движок:
+	/**
+	 * получить движок
+	 */
 	function get_cms_names($cms_picked_up){
 		$arrEngines=Collector1ModelCollector1::tempCMSlist(); 
 		$cnt=count($cms_picked_up);
@@ -53,7 +56,9 @@ class collector1ModelCollected extends JModel
 		if (!empty($cms_list)) sort($cms_list);
 		return implode(',',$cms_list); 
 	}
-	//название опции, по умолчанию - на русском:
+	/**
+	 * название опции, по умолчанию - на русском
+	 */
 	function get_options_names($lang=false){
 		if (!$lang) $lang='ru';
 		$name='name_'.$lang;
@@ -69,7 +74,9 @@ class collector1ModelCollected extends JModel
 		}
 		return $arrOptions;
 	}
-	//получить таблицу типов сайтов:
+	/**
+	 * получить таблицу типов сайтов
+	 */
 	function get_sites_types($site_type_id=false){
 		$query="SELECT";
 		$query.=($site_type_id)? " name_ru ":" * "; 

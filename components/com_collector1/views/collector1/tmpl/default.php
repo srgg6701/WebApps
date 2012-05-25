@@ -14,18 +14,13 @@ $table=Collector1ModelCollector1::getDataForCollector();
 $current_order_set=$this->current_order_set;
 
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;
-if ($arrGuestCollections=$this->guest_collections) {?>
-<div style="margin:-10px 20px 0px 0px; padding:0px 20px;">Собранные вами сайты: <?
-	for ($i=0,$j=count($arrGuestCollections);$i<$j;$i++){
-		if ($i) echo ',';?>
-	# <a href="<?=JRoute::_('index.php?option=com_collector1&view=collected&collection_id='.$arrGuestCollections[$i])?>"><?=$arrGuestCollections[$i]?></a><? 
-	}?></div>
-<?	require_once JPATH_COMPONENT.DS.'go_register.php';
-}?>
+
+require_once JPATH_COMPONENT.DS.'helpers/html/your_sites.php';?>
 
 <form name="form1" method="post" action="<?=JRoute::_($this->go_submit)?>" onSubmit="return checkRequired();">
     <div>
-<?	//больше одной коллекции у юзера:
+<?	
+//больше одной коллекции у юзера:
 if (($j=count($collections_ids_array))>1){?>
 	
 	<h3 class="collector_head">Выбранный сайт:</h3>   

@@ -37,7 +37,7 @@ class UsersModelRegistration extends JModelForm
 	{
 		$config	= JFactory::getConfig();
 		$userParams	= JComponentHelper::getParams('com_users');
-		$db		= $this->getDbo();
+		$db = $this->getDbo();
 
 		// Get the user id based on the token.
 		$db->setQuery(

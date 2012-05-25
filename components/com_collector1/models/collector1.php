@@ -35,25 +35,21 @@ class Collector1ModelCollector1 extends JModel
 		if (!$table=$this->prepareDataSet()) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareDataSet()");		
 		//Добавить данные в таблицу и проверить состояние:
 		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
+		//добавить данные в dnior_webapps_customer_site_options:
 		SErrors::afterTable($table);
-
-		/*// Check that the data is valid
-		if (!$table->check()) echo "<div>Не проверено 1!</div>";
-		// Store the data in the table
-		if (!$table->store(true)) echo "<div>Не добавлено!</div>";
-		// Check the record in
-		if (!$table->checkin()) echo "<div>Не проверено 2!</div>";
-		//get last*/
-		$query="SELECT max(id) FROM #__webapps_customer_site_options";
-		$db = JFactory::getDBO();
-		$db->setQuery($query);
+		//выясним статус юзера:
 		$user = JFactory::getUser();
-		if ($user->get('guest')==1) {//коллекция создавалась незарегистрированным юзером
-			//добавить в таблицу предзаказчиков:
-			$query="SELECT max(id) FROM #__webapps_customer_site_options";
-			$db->setQuery($query);
+		//коллекция создавалась незарегистрированным юзером
+		if ($user->get('guest')==1) {
+			$last_site_id=$this->savePreOrderData();
+			//error?
+			if (!$last_site_id)
+				JMail::sendErrorMess('Не добавлена временная коллекция опций сайта для незарегистрированного заказачика.',"Добавление временной коллекции.");
+		}else{
+			//получить id последней коллекции:
+			$last_site_id=SCollection::getLastCollectionId();
 		}
-		return $db->loadResult();
+		return $last_site_id;
 	}
 	/**
 	 * Построить ячейки для frontend, backend, boudoire в строке опции
@@ -153,43 +149,46 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	}
 	//получить коллекцию по её id:
 	function getCollection($collection_id){
-		$db=JFactory::getDBO();
-		$query='SELECT `id`,`site_type_id`,`engine_type_choice_id`,`engines_ids`,`options_array`,`xtra` FROM '.self::setDefaultTable().' WHERE id = ' . (int)$collection_id;
-		$db->setQuery($query);
-		//
-		$current_order_set=$db->loadAssoc();  
-		//transform serialized arrays:
-		$current_order_set['engines_ids']=explode(',',$current_order_set['engines_ids']);
-		//далее будем строить карту опций по разделам сайта:
-		$current_order_set['options_array']=unserialize($current_order_set['options_array']);
-		$query_sides='SELECT site_side FROM #__webapps_site_options_beyond_sides ';
-		$db->setQuery($query_sides);
-		$site_sides=$db->loadResultArray();
-		$arrCheckedMap=array();
-		//все опции в коллекции:
-		$boxes_set=$current_order_set['options_array'];
-		//препарируем набор опций построчно:		
-		foreach ($boxes_set as $option_id=>$current_array) {
-			//препарируем массив отмеченных опций для каждой строки:
-			for($i=0,$j=count($site_sides);$i<$j;$i++){
-				//по умолчанию элемент массива пуст:
-				$arrCheckedMap[$option_id][$i]='';
-				for ($b=0,$x=count($current_array);$b<$x;$b++){ 
-					//если текущий тип раздела отмечен для данной опции:
-					if (in_array($site_sides[$i],$current_array)) {
-						//заполняем элемент массива и прерываем цикл:
-						$arrCheckedMap[$option_id][$i]=$site_sides[$i];
-						break;	
+		$user = JFactory::getUser();
+		if ($user->get('guest')!=1||$user->get('email')) { 
+			$db=JFactory::getDBO();
+			$query='SELECT `id`,`site_type_id`,`engine_type_choice_id`,`engines_ids`,`options_array`,`xtra` FROM '.self::setDefaultTable().' WHERE id = ' . (int)$collection_id;
+			$db->setQuery($query);
+			//
+			$current_order_set=$db->loadAssoc();  
+			//transform serialized arrays:
+			$current_order_set['engines_ids']=explode(',',$current_order_set['engines_ids']);
+			//далее будем строить карту опций по разделам сайта:
+			$current_order_set['options_array']=unserialize($current_order_set['options_array']);
+			$query_sides='SELECT site_side FROM #__webapps_site_options_beyond_sides ';
+			$db->setQuery($query_sides);
+			$site_sides=$db->loadResultArray();
+			$arrCheckedMap=array();
+			//все опции в коллекции:
+			$boxes_set=$current_order_set['options_array'];
+			//препарируем набор опций построчно:		
+			foreach ($boxes_set as $option_id=>$current_array) {
+				//препарируем массив отмеченных опций для каждой строки:
+				for($i=0,$j=count($site_sides);$i<$j;$i++){
+					//по умолчанию элемент массива пуст:
+					$arrCheckedMap[$option_id][$i]='';
+					for ($b=0,$x=count($current_array);$b<$x;$b++){ 
+						//если текущий тип раздела отмечен для данной опции:
+						if (in_array($site_sides[$i],$current_array)) {
+							//заполняем элемент массива и прерываем цикл:
+							$arrCheckedMap[$option_id][$i]=$site_sides[$i];
+							break;	
+						}
 					}
 				}
 			}
-		}
-		$current_order_set['options_array']=$arrCheckedMap;
-		require_once JPATH_COMPONENT.'/models/collected.php';
-		$current_order_set['engines']=collector1ModelCollected::get_cms_names($current_order_set['engines_ids']);
-		$current_order_set['site_type_name']=collector1ModelCollected::get_sites_types($current_order_set['site_type_id']);
-		//var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");die();
-		return $current_order_set; 
+			$current_order_set['options_array']=$arrCheckedMap;
+			require_once JPATH_COMPONENT.'/models/collected.php';
+			$current_order_set['engines']=collector1ModelCollected::get_cms_names($current_order_set['engines_ids']);
+			$current_order_set['site_type_name']=collector1ModelCollected::get_sites_types($current_order_set['site_type_id']);
+			//var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");die();
+			return $current_order_set; 
+		}else return false;
 	}	
 	/**
 	 *Получить количество коллекций заказчика
@@ -225,7 +224,7 @@ IF ( sites_types_ids_location,
 		}
 		return $db->loadAssocList();
 	}
-	//Методы Joomla! здесь не используем просто потому, что не видим в данном случае необходимости
+	//Методы Joomla! здесь не используем просто потому, что не видим в данном случае необходимости	
 	/**
 	 *Получим таблицу разделов сайта
 	 */
@@ -343,68 +342,73 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		return $table;
 	}
 	/**
-	 * Сохранить данные заказчика (те, которых нет в таблице юзеров) и созданной им коллекции:
+	 * Сохранить данные предзаказчика (те, которых нет в таблице юзеров) и созданной им коллекции:
 	 */
-	function savePreOrderData($last_site_id) {
-		
+	function savePreOrderData() { // #__webapps_customer_site_options.id
+		//получить id последней коллекции:
+		$last_site_id=SCollection::getLastCollectionId();
+		//получить таблицу предзаказчиков:
 		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
-		$table = JTable::getInstance('precustomers', 'Collector1Table');
+		$table = JTable::getInstance('precustomers', 'Collector1Table'); //таблица
 		//добавим в таблицу данные предзаказчика:
 		$post_collection=JRequest::get('post');
-		//проверить, есть лу уже такая запись в таблице:
+		//проверить, есть ли уже такая запись в таблице:
 		$db = JFactory::getDBO();
 		//ниже потребуются значения обоих полей:
-		$query="SELECT id, collections_ids FROM #__webapps_precustomers WHERE email = '$post_collection[email]'";
+		$query="SELECT id, collections_ids FROM #__webapps_precustomers 
+ WHERE `session_id` = '".session_id()."' OR email = '$post_collection[email]'";
 		$db->setQuery($query);
 		$result=$db->loadAssoc();
-		//то, что будем добавлять:
-		$arrPostData=array('name','phone','skype');
+		//то, что будем добавлять/изменять:
+		$arrPostData=array('name','phone','skype','email'); //email, session_id (next) - идентификаторы незарегистрированного юзера
+		//Обновить данные юзера:
+		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SUser.php';
+		if (!SUser::setUserData($arrPostData))
+			JMail::sendErrorMess("SUser::setUserData(\$arrPostData)"," Ошибка обновления данных юзера!");	
+		array_push($arrPostData,'session_id');	
 		//коллекции предзаказчика в таблице не обнаружены:
 		if (empty($result)) {
-			
-			array_push($arrPostData,'email');				
 			$table->reset(); //clear buffer
 			//установить значения полей:
 			for($i=0,$j=count($arrPostData);$i<$j;$i++)
 				$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
 			
 			$table->set('collections_ids',$last_site_id);
-			//$table->set('session_id',session_id());
 			//Добавить данные в таблицу и проверить состояние:
 			require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
 			SErrors::afterTable($table);
 		
-		}else{	//емэйл предзаказчика в таблице обнаружен, будем ОБНОВЛЯТЬ данные в поле collections_ids
-			
+		}else{	//емэйл предзаказчика совпадает с текущим, либо емэйл другой, но сессия та же, что означает, что он изменил данные в течение сессии 
+			//будем ОБНОВЛЯТЬ:
 			if (!$table->load($result['id'])) {
 				// handle failed load
-				//echo "<div>/models/collector1.php, string # 364, email = $post_collection[email])</div>";
 				JMail::sendErrorMess($table->getError()," (\$table->load())");			
 			
 			}else{ 
-				
-				//$table->reset(); //clear buffer			
 				//установить значения полей:
-				for($i=0,$j=count($arrPostData);$i<$j;$i++)
-					if ($post_collection[$arrPostData[$i]]) 
+				for($i=0,$j=count($arrPostData);$i<$j;$i++) {
+					if ($post_collection[$arrPostData[$i]]) {
+						//echo "<div>added = ".$post_collection[$arrPostData[$i]]."</div>";
 						$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
-	
-				$table->set('collections_ids', $result['collections_ids'].','.$last_site_id);
+					}//else echo "<div>NOT added = ".$post_collection[$arrPostData[$i]]."</div>";
+				}
+				$table->set('session_id',session_id()); 
+					//echo "<div>session_id = ".session_id()."</div>";
 				
+				$table->set('collections_ids', $result['collections_ids'].','.$last_site_id);
+					//echo "<div>collections_ids = ".$result['collections_ids'].','.$last_site_id."</div>";
 				if ($table->check()) {
-					
 					if (!$table->store(true)){
 						// handle failed update
 						JMail::sendErrorMess($table->getError()," (\$table->store())");
 					}
-				
 				}else{
 					// handle invalid input
 					JMail::sendErrorMess($table->getError()," (\$table->check())");
 				}
-			}
+			}			//die();
 		}
-		return true;
+		return $last_site_id;
 	}
 	/**
 	 * Получить стр. по умолчанию

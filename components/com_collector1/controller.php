@@ -19,24 +19,13 @@ class Collector1Controller extends JController
 	 *добавить данные в таблицу опций сайта заказчика, как для зарегистрированных, так и для временных
 	 */
 	function collect(){ //task=collect
-		if ($last_site_id=$this->getModel()->addCollection()) {
-			$user = JFactory::getUser();
-			//незаавторизован:
-			if ($user->get('guest')==1) {
-				//установить данные поциента. НужнО, чтобы сравнивать коллекции текущей сессии и прошлых, а также, чтобы было что подставлять при регистрации:
-				$arrPrecustomerData=array('name','email','phone','skype');
-				for($i=0,$j=count($arrPrecustomerData);$i<$j;$i++)
-					if (JRequest::getVar($arrPrecustomerData[$i])) 
-						$user->set($arrPrecustomerData[$i],JRequest::getVar($arrPrecustomerData[$i]));
-				//error?
-				if (!$this->getModel()->savePreOrderData($last_site_id))
-					JMail::sendErrorMess('Не добавлена временная коллекция опций сайта для незарегистрированного заказачика.',"Добавление временной коллекции.");
-			}
-			//пслать дальше:
-			$this->setRedirect(JRoute::_($this->go_page.'&site_added='.$last_site_id));
-		}else{ 
+		$last_site_id=$this->getModel()->addCollection();
+		if (!$last_site_id) { 
 			JMail::sendErrorMess('Не получен id добавленной записи.',"Добавление записи.");
+			return false;
 		}
+		//пслать дальше:
+		$this->setRedirect(JRoute::_($this->go_page.'&site_added='.$last_site_id));
 	}
 	/**
 	 *удалить запись из таблицы опций сайта заказчика. Данные из таблицы *customers не удалять

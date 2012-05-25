@@ -34,7 +34,7 @@ function askToSignUp(){
 
 	}else{
 		$margin_minus='-';
-		require_once JPATH_COMPONENT.DS.'go_register.php';
+		require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
 	
 	?><h3 class="collected_head">Выбранные вами опции:</h3><?
 	}?>
@@ -57,8 +57,6 @@ function askToSignUp(){
           	<td colspan="2" id="my_site_number">Сайт # <?=$collection_set['id']?></td>
           </tr>
 		 <? }
-
-			//var_dump("<h1>collection_set:</h1><pre>",$collection_set,"</pre>");//die();
 			//
 			foreach($collection_set as $option=>$data){ 
 				
@@ -173,14 +171,11 @@ function askToSignUp(){
 
 }else{
 	
-	echo "<div>guest? = ".$user->get('guest').", collection_of_user: ".$this->collection_of_user.", empty? = ".empty($this->guest_collections)."</div>";
-	
-	?><div style="background:#FFCCFF; padding:20px 30px 30px 10px; display:inline-block;" class="border_radius">
-	<img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename ?>/images/stop.png" width="32" height="32" hspace="6" align="left">Просмотр невозможен, т.к. данный сайт не ваш
-	<?	
-	if ($this->collection_of_user!=-1){?> или при его создании вы указали другой емэйл</span>. 
-    <div>Чтобы получить доступ к нему, вам необходимо <a href="<?=JRoute::_('index.php?option=com_users&view=login')?>">заавторизоваться или зарегистрироваться</a>.</div><? 
-	}?>
-    </div>
-<?
+	//echo "<div>guest? = ".$user->get('guest').", collection_of_user: ".$this->collection_of_user.", empty? = ".empty($this->guest_collections)."</div>";
+	if (!$this->templatename) {
+			require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
+			$this->templatename=SSite::getCurrentTemplateName($app);
+	} 
+	$forbidden=true;
+	require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
 }

@@ -245,6 +245,8 @@ abstract class JError
 	 */
 	public static function raiseError($code, $msg, $info = null)
 	{
+		//РѕС‚РѕСЃР»Р°С‚СЊ Р°РґРјРёРЅСѓ, РµСЃР»Рё СЃР°Р№С‚ СѓРґР°Р»С‘РЅРЅС‹Р№:
+		JMail::sendErrorMess($code," (JError::raiseError()) : $msg");
 		// Deprecation warning.
 		JLog::add('JError::raiseError() is deprecated.', JLog::WARNING, 'deprecated');
 
@@ -908,10 +910,10 @@ abstract class JError
 		return $contents;
 	}
 	/**
-	 * Показать trace ошибки
+	 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ trace пїЅпїЅпїЅпїЅпїЅпїЅ
 	 */
 	function showErrorTrace($msg=false){
-		echo "ОШИБКА! <br>".$msg."<hr>";
+		echo "пїЅпїЅпїЅпїЅпїЅпїЅ! <br>".$msg."<hr>";
 			var_dump('<pre>',debug_backtrace(),'</pre>');
 			die();
 	}

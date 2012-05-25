@@ -37,7 +37,7 @@ class Collector1ViewCollector1 extends JView
 		// Get some data from the models
 		$state		= $this->get('State');
 		$item		= $this->get('Item');
-		$user = JFactory::getUser();
+		$user = JFactory::getUser(); 
 		//получим данные переданной коллекции заказчика:
 		$current_set_id=JRequest::getVar('collection_id');
 		if ($current_set_id&&$user->get('guest')!=1) {
@@ -49,7 +49,7 @@ class Collector1ViewCollector1 extends JView
 
 		}else{
 			$this->go_submit.="collect";
-		}
+		}//var_dump("<h1>user:</h1><pre>",$user,"</pre>"); die();
 		//проверим, создавал ли незаавторизованный юзер сайты в течение сессии:
 		if ($user->get('guest')==1){
 			require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SCollection.php';
