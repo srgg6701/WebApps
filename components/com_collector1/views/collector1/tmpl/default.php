@@ -33,7 +33,17 @@ if (($j=count($collections_ids_array))>1){?>
     <br>	
 <?
 }
-?>    
+if (!$user)
+	$user = JFactory::getUser();
+if ($user->get('guest')==1){?>
+    	<div class="h2" style="margin-top:0px;">Если вы уже <a href="<?=JRoute::_("index.php?option=com_users&view=registration")?>">зарегистрированы</a>,  <img src="<?
+        require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
+		$this->templatename=SSite::getCurrentTemplateName($app);?>
+<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename ?>/images/user24.png" width="22" height="22" hspace="4" border="0" align="absmiddle"><b><a href="<?=JRoute::_("index.php?option=com_users&view=login")?>">заавторизуйтесь</a>!</b></div>
+      <div style="margin:8px 0 12px;">Это позволит вам получить доступ ко всем опциям системы.</div>
+      <hr size="2" color="#009900"><br>
+<? 	
+}?>    
     <a name="select_site_type"></a>
   <label for="select"><h3 class="collector_head"><?
 
@@ -160,44 +170,43 @@ if ($current_order_set){
 <?	}?>
   <tr>
     <td colspan="4" style="padding-right:20px;"><div style="padding-left:6px">Дополнительно:</div>
-      <textarea rows="5" style="margin-top:6px; display:block;" class="widthFull" name="xtra_options" id="xtra_options"><?=$current_order_set['xtra']?></textarea></td>
+      <textarea rows="5" style="margin-top:6px; display:block;" class="widthFull" name="xtra" id="xtra"><?=$current_order_set['xtra']?></textarea></td>
   </tr>
 </table>
 <table cellpadding="8" cellspacing="0">
   <tr>
   	<td>
+<?	require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
+	$arrSMSs=SCollection::setCMStypes();?>    
 <h4 style="margin-bottom:4px;">Выберите движок:</h4>
     <div>(вы можете выбрать несколько возможных вариантов)</div>
     <br>
       <label>
-        <input type="radio" name="choose_engine" value="take_ready" id="choose_engine_1" onClick="manageEnginesChoice(this);"<?
+        <input type="radio" name="choose_engine" value="<?=$arrSMSs[0][0];//take_ready?>" id="choose_engine_1" onClick="manageEnginesChoice(this);"<?
         
 		if ($current_order_set['engine_type_choice_id']==1) {?> checked<? }
 		
-		?>>
-        Готовая CMS</label> &nbsp;
+		?>><?=$arrSMSs[0][1];//Готовая CMS?></label> &nbsp;
       <label>
-        <input type="radio" name="choose_engine" value="build_own" id="choose_engine_2" onClick="manageEnginesChoice(this);"<?
+        <input type="radio" name="choose_engine" value="<?=$arrSMSs[1][0];//build_own?>" id="choose_engine_2" onClick="manageEnginesChoice(this);"<?
         
 		if ($current_order_set['engine_type_choice_id']==2) {?> checked<? }
 		
-		?>>
-        Разработать собственный</label> &nbsp;
+		?>><?=$arrSMSs[1][1];//Разработать собственный?></label> &nbsp;
       <label>
-        <input type="radio" name="choose_engine" value="exists" id="choose_engine_3" onClick="manageEnginesChoice(this);"<?
+        <input type="radio" name="choose_engine" value="<?=$arrSMSs[2][0];//exists?>" id="choose_engine_3" onClick="manageEnginesChoice(this);"<?
         
 		if ($current_order_set['engine_type_choice_id']==3) {?> checked<? }
 		
-		?>>
-        Перенести на имеющийся</label><span id="existing_cms_name"<?
+		?>><?=$arrSMSs[2][1];//Перенести на имеющийся?></label><span id="existing_cms_name"<?
         
 		if ($current_order_set['engine_type_choice_id']!=3) {
 			
 			?> style="display:<?="none"?>;"<? 
 		
-		}?>>:  <input style="background:#FFFF99; border:solid 1px #999;" type="text" name="existing_cms" id="existing_cms"></span></td>
+		}?>>:  <input style="background:#FFFF99; border:solid 1px #999;" type="text" name="existing_cms" id="existing_cms" value="<? if ($current_order_set['engine_type_choice_id']==3) echo $current_order_set['engines_ids'][0]?>"></span></td>
   </tr>
-  <tr id="tr_cms_list"<? if(!$current_order_set){?> style="display:none;"<? }?>>
+  <tr id="tr_cms_list"<? if($current_order_set['engine_type_choice_id']!=1){?> style="display:none;"<? }?>>
     <td id="sms_list" onClick="controlCMSchoice(this);">
     <hr size="1">
 <?	

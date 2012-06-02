@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
+jimport('joomla.mail.mail');
 
 /**
  * HTML View class for the Collector1 component
@@ -21,7 +22,7 @@ class Collector1ViewCollected extends JView
 	//protected $sites_types;//типы сайтов
 	protected $options_names;
 	protected $done=array();
-	protected $guest_collections;
+	protected $guest_collections_ids;
 	protected $collection_of_user; //коллекция заавторизованного юзера
 	protected $templatename;
 	protected $go_signup="index.php?option=com_users&view=registration&task=fill_precustomer_data";
@@ -45,9 +46,8 @@ class Collector1ViewCollected extends JView
 					$this->done=$message;
 					if ($site_done=='site_added') {
 						if ($user->get('guest')==1){
-							$this->done[0]="
-							Набор опций вашего сайта определён.
-							<div style=\"padding: 6px 0;\">Пожалуйста, <a href=".JRoute::_($this->go_signup).">добавьте к своим данным логин и пароль</a>.</div> 
+							$this->done[0]="Набор опций вашего сайта определён.
+<div style=\"padding: 6px 0;\">Пожалуйста, <a href=".JRoute::_($this->go_signup).">добавьте к своим данным логин и пароль</a>.</div> 
 							<div>Это займёт несколько секунд и предоставит вам доступ ко всем опциям системы.</div>";
 						}else $this->done[0].="!";
 						//a notification for admin:
@@ -70,12 +70,13 @@ class Collector1ViewCollected extends JView
 				require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
 				
 				if ($user->get('guest')==1){
-					//получить массив id id всех коллекций гостя:this->guest_collections
-					$this->guest_collections=SCollection::getGuestCollections($user);
+					//получить массив id id всех коллекций гостя:this->guest_collections_ids
+					$this->guest_collections_ids=SCollection::getGuestCollections($user);
 				
 				}else{	
 					//если не гость, проверим - его ли коллекция
-					$this->collection_of_user=(SCollection::checkCollectionAccessory($got_collection_id,$user->get('id')))? 1:-1;
+					if(SCollection::checkCollectionAccessory($got_collection_id,$user->get('id'))) $this->collection_of_user=1;
+					elseif (JRequest::getVar('site_deleted')!=$got_collection_id) $this->collection_of_user=-1;
 				}
 			}//die('<hr>collection_id_session='.$this->collection_id_session);
 			require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';

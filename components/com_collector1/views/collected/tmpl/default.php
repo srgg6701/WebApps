@@ -11,24 +11,26 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 $user = JFactory::getUser();
-
-if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавторизован
-	 !empty($this->guest_collections) //коллекция создана текущим гостем (проверяется по его емэйлу)
-   ) {?>
-<script type="text/javascript">
-function askToSignUp(){
-	if (confirm('Чтобы изменить набор опций любого своего сайта, вам нужно добавить к своим данным логин и пароль.\nХотите сделать это сейчас?'))
-		location.href='<?=$this->go_signup?>';
+//this->guest_collections_ids	//
+//var_dump("<h1>guest_collections_ids:</h1><pre>",$this->guest_collections_ids,"</pre>");
+//echo "<hr>";
+//this->collections_data_array	//
+if ($_GET['cda']) {
+	echo "collection_of_user: ".$this->collection_of_user;
+	var_dump("<h1>collections_data_array:</h1><pre>",$this->collections_data_array,"</pre>");
 }
-</script>
-<?	//
+if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавторизован
+	 !empty($this->guest_collections_ids) //коллекция создана текущим гостем (проверяется по его емэйлу)
+   ) {
+	//
 	$collections_data_array=$this->collections_data_array;
 	//
 	$done=$this->done;
-	if (!empty($done)){
-		
-	?><div class="block_done" style="background:<?=$done[1]?>;"><img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
-	?>/images/signs/Flag_<?=$done[2]?>.png" width="24" height="24" hspace="6" align="baseline" style="margin-bottom:-2px;"><?=$done[0]?></div>
+	if (!empty($done)){?>
+    <div class="block_done" style="background:<?=$done[1]?>; margin-left:-6px;">
+    	<img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
+	?>/images/signs/Flag_<?=$done[2]?>.png" width="24" height="24" hspace="6" align="baseline" style="margin-bottom:-2px;"><?=$done[0]?>
+    </div>
     <br>
 	<br><?
 
@@ -36,8 +38,9 @@ function askToSignUp(){
 		$margin_minus='-';
 		require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
 	
-	?><h3 class="collected_head">Выбранные вами опции:</h3><?
-	}?>
+		if ($this->collection_of_user>0){?><h3 class="collected_head">Выбранные вами опции:</h3><? }
+	}
+	if (!$this->collection_of_user||$this->collection_of_user>0||!empty($this->guest_collections_ids)){?>
 <table cellpadding="8" cellspacing="0" id="tblCollected">
   <tr>
     <th>Опция</th>
@@ -48,15 +51,16 @@ function askToSignUp(){
 	$arrRightOptions=array('site_type_id','engine_type_choice_id','engines','options_array','xtra'); 
 	
 	if (!empty($collections_data_array)){
+		
+		require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
+		$arrSMSs=SCollection::setCMStypes();
 
 		$j=count($collections_data_array);
-		foreach ($collections_data_array as $collection_id=>$collection_set){
-
-        	if ($j>1) {?>
+		foreach ($collections_data_array as $collection_id=>$collection_set){?>
           <tr>
           	<td colspan="2" id="my_site_number">Сайт # <?=$collection_set['id']?></td>
           </tr>
-		 <? }
+		 <? 
 			//
 			foreach($collection_set as $option=>$data){ 
 				
@@ -71,17 +75,7 @@ function askToSignUp(){
 					
 							case "engine_type_choice_id":
 								$option_name="Выбор движка";
-									switch ($data)  { 
-										case "1":
-											$option_value="Готовая CMS";
-												break;
-										case "2":
-											$option_value="Разработать собственный";
-												break;
-										case "3":
-											$option_value="Перенести на имеющийся";
-												break;
-									}
+								$option_value=$arrSMSs[$data][1];	
 									break;
 					
 							case "options_array":
@@ -107,7 +101,7 @@ function askToSignUp(){
 							$arrColumnsNames=Collector1ModelCollector1::getSidesDesc();
 							//$options_set=
 							//unserialize($data);?>
-<table cellspacing="0" cellpadding="10">
+<table cellspacing="0" cellpadding="10" style="border-right:solid 1px #ccc;">
   <tr>
 	<th><div align="right">&nbsp;&nbsp;Разделы:</div>
 		<div class="h3">▼Опция</div></th>
@@ -152,10 +146,10 @@ function askToSignUp(){
           <tr>
           	<td colspan="2" class="bgOverWhite linkButtons">
             	<br><a href="<?
-			if (!empty($this->guest_collections)){
+			if (!empty($this->guest_collections_ids)){
 				?>javascript:void();" onclick="askToSignUp();<?	
 			}else{
-                echo JRoute::_("index.php?option=com_collector1&collection_id=".$collection_set['id']);
+                echo JRoute::_("index.php?option=com_collector1&view=collector1&id=1&collection_id=".$collection_set['id']);
 			}?>">Изменить опции...</a> &nbsp; <a class="txtRed" href="<?=JRoute::_("index.php?option=com_collector1&collection_id=".$collection_set['id'])?>&task=delete" onclick="if (!confirm('Вы уверены, что хотите удалить этот сайт?')) return false;">Удалить сайт...</a><br>
 <br>
 
@@ -164,18 +158,27 @@ function askToSignUp(){
 <?		}
 	}?>
 </table>
+<?	}else{?>
+		<h3 class="collected_head">Сайтов нет</h3>
+<? 	}?>
 <div class="button-green" style="margin-left:6px;">
-    <a href="<?=JRoute::_("index.php?option=com_collector1")?>">Добавить сайт...</a>
+    <a href="<?=JRoute::_("index.php?option=com_collector1&view=collector1");//view не убирать!?>">Добавить сайт...</a>
 </div>
+<script type="text/javascript">
+function askToSignUp(){
+	if (confirm('Чтобы изменить набор опций любого своего сайта, вам нужно добавить к своим данным логин и пароль.\nХотите сделать это сейчас?'))
+		location.href='<?=$this->go_signup?>';
+}
+</script>
 <?
 
 }else{
 	
-	//echo "<div>guest? = ".$user->get('guest').", collection_of_user: ".$this->collection_of_user.", empty? = ".empty($this->guest_collections)."</div>";
+	//echo "<div>guest? = ".$user->get('guest').", collection_of_user: ".$this->collection_of_user.", empty? = ".empty($this->guest_collections_ids)."</div>";
 	if (!$this->templatename) {
 			require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
 			$this->templatename=SSite::getCurrentTemplateName($app);
 	} 
-	$forbidden=true;
+	if (!JRequest::getVar('site_deleted')) $forbidden=true; //иначе получается абсурд - "не ваш сайт", который был удалён.
 	require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
 }

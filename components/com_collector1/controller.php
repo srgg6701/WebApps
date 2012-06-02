@@ -9,9 +9,9 @@
  
 // No direct access
 defined('_JEXEC') or die;
-
 jimport('joomla.application.component.controller');
-
+jimport('joomla.mail.mail');
+//методы для работы с коллекциями также представлены в administrator/classes/SCollection.php
 class Collector1Controller extends JController
 {
 	private $go_page='index.php?option=com_collector1&view=collected';

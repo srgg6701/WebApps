@@ -152,6 +152,11 @@ class UsersModelRegistration extends JModelForm
 		{
 			$user->set('activation', '');
 			$user->set('block', '0');
+			// Обработать коллекции юзераа - временные удалить, в таблице коллекций прописать его id
+			require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
+			if (!SCollection::makeCollectionPermanent($user))
+				
+			echo " madeCollectionPermanent ";
 		}
 
 		// Store the user object.
@@ -442,7 +447,8 @@ class UsersModelRegistration extends JModelForm
 			}
 		}
 		// Check for an error.
-		if ($return !== true) {
+		if ($return !== true) {	//$return: Не удалось вызвать функцию mail.
+			
 			$this->setError(JText::_('COM_USERS_REGISTRATION_SEND_MAIL_FAILED'));
 
 			// Send a system message to administrators receiving system mails

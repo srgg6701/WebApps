@@ -8,11 +8,8 @@
 /*
 
 */
-
 defined('_JEXEC') or die;
 $app = JFactory::getApplication();
-
-
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
@@ -22,7 +19,11 @@ $app = JFactory::getApplication();
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css">
 </head>
 <body>
-<? $path_to_images='templates/fastwebdev/images/'; ?>
+<? $path_to_images='templates/fastwebdev/images/'; 
+//var_dump("<h1>SESSION:</h1><pre>",$_SESSION,"</pre>");
+//$_SESSION['example1']='EXMPL';
+//echo "<hr>"; $session =& JFactory::getSession();
+//var_dump("<h1>session:</h1><pre>",$session,"</pre>");?>
 <div id="pseudo_bg">
     <div></div>
 </div>
@@ -44,7 +45,10 @@ $app = JFactory::getApplication();
           </div>
           			</td>
                     <td style="padding-top:2px;">
-		  <div id="call_us"><img src="<?=$path_to_images?>1335869184_contact.png" width="24" height="24" hspace="4" align="absmiddle">8(904)442-84-47 </div></td>
+		  <div id="call_us"><img src="<?=$path_to_images?>1335869184_contact.png" width="24" height="24" hspace="4" align="absmiddle"><? 
+		  $arrContact=SData::getContactData(1,8);
+		  
+		  echo $arrContact['phone'];//8(904)442-84-47 ?></div></td>
                     <td width="100%" align="right" nowrap id="topSearch">
                             	<jdoc:include type="modules" name="search" style="xhtml" />
 <script type="text/javascript">
@@ -98,10 +102,8 @@ function manageLoginDisplay(stat){
             </div>
         	<!-- Menu panel -->
             <div id="wrapper_menu">
-
 				<jdoc:include type="modules" name="menu" style="xhtml" />    
     		</div>
-
 <?	if (strstr($_SERVER['HTTP_USER_AGENT'],'Firefox')){?>
 <script type="text/javascript" src="tmpl/default/js/firefox/correct_submenu_position.js">
 </script>
@@ -114,15 +116,21 @@ function manageLoginDisplay(stat){
             <?	}?>
                 <!-- system messages -->
   				<jdoc:include type="message" />
-
 				<div id="com">
-					<jdoc:include type="component" />    
+					<jdoc:include type="component" />
+                    	<jdoc:include type="modules" name="contacts" style="xhtml" />    
+                    	<jdoc:include type="modules" name="sdata" style="xhtml" />    
+                   		<jdoc:include type="modules" name="feedback" style="xhtml" />    
+                    <!--/COM-->
            		</div>
-<?	//}?>		
+                <!--/WRAPPER_COMPONENT-->
 			</div>
+            <!--/SECTION 1-->
     	</div><!-- /section1 -->
+        <!--/CONTAINER-->
 	</div><!-- /main container -->
-</div>
+    <!--/BODY-->
+</div><? //echo " exmpl= ".$_SESSION['example1'];?>
 <!-- /body -->    
 <div id="footer">
 	<center>

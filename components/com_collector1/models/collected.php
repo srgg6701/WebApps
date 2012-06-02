@@ -4,7 +4,7 @@ jimport('joomla.application.component.model');
 
 class collector1ModelCollected extends JModel
 {	
-	private $query="FROM #__webapps_customer_site_options";
+	private $query=" FROM #__webapps_customer_site_options";
 	protected $db;
 	
 	function __construct(){
@@ -25,11 +25,11 @@ class collector1ModelCollected extends JModel
 		}
 		for ($i=0,$j=count($arrCollectionsIds);$i<$j;$i++){
 			$option_id=$arrCollectionsIds[$i];
-			$collection_set[$option_id]=Collector1ModelCollector1::getCollection($option_id);
-			if ($collection_set[$option_id]===false) return false;
-			unset($collection_set[$option_id]['engines_ids']);
+			$collections_data_array[$option_id]=Collector1ModelCollector1::getCollection($option_id);
+			if ($collections_data_array[$option_id]===false) return false;
+			unset($collections_data_array[$option_id]['engines_ids']);
 		}
-		return $collection_set;
+		return $collections_data_array;
 	}
 	/**
 	 * получить движок
@@ -54,7 +54,17 @@ class collector1ModelCollected extends JModel
 			}
 		}
 		if (!empty($cms_list)) sort($cms_list);
-		return implode(',',$cms_list); 
+		$smss=implode(',',$cms_list); 
+		return $smss;
+	}
+	/**
+	 * Получить название собственной cms
+	 */
+	function get_cms_own_name($collection_id){
+		$query="SELECT engines_ids FROM #__webapps_customer_site_options WHERE id = ".$collection_id;
+		$db=JFactory::getDBO();
+		$db->setQuery($query);
+		return $db->loadResult();
 	}
 	/**
 	 * название опции, по умолчанию - на русском

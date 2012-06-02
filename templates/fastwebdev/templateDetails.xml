@@ -29,9 +29,11 @@
 	<positions>
         <position>account</position>		
         <position>debug</position>		
+		<position>feedback</position>
 		<position>footer</position>
 		<position>login</position>
 		<position>logo_and_menu</position>
+		<position>sdata</position>
 		<position>search</position>
 	</positions>
 	<!-- 	For core templates, we also install/uninstall the language files in the core language folders.

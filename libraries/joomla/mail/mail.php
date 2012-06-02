@@ -66,9 +66,9 @@ class JMail extends PHPMailer
 	 * @since   11.1
 	 */
 	public function Send()
-	{
+	{	 
 		if (($this->Mailer == 'mail') && !function_exists('mail'))
-		{
+		{	
 			return JError::raiseNotice(500, JText::_('JLIB_MAIL_FUNCTION_DISABLED'));
 		}
 
@@ -476,16 +476,15 @@ class JMail extends PHPMailer
 	 * Send mess about ERROR
 	 */
 	public function sendErrorMess($msg,$subject=false){
-		
+		require_once JPATH_ADMINISTRATOR.DS.'classes/SErrors.php';
 		if(strstr($_SERVER['HTTP_HOST'],"localhost")){
-			
-			JError::showErrorTrace($msg);
-		
+			echo SErrors::showDebugTrace(debug_backtrace());
 		}else{
-		
-			$adminEmail=JFactory::getConfig()->getValue('mailfrom');
+			$msg.="<hr>".SErrors::showDebugTrace(debug_backtrace());
+			//$adminEmail=SData::$error_mail;
+			//JFactory::getConfig()->getValue('mailfrom');
 			$siteName=JFactory::getConfig()->getValue('sitename');
-			JFactory::getMailer()->sendMail($adminEmail, $siteName, $adminEmail, 'Сообщение об ошибке. '.$subject, $msg);
+			JFactory::getMailer()->sendMail(SData::$error_mail, $siteName, $adminEmail, 'Сообщение об ошибке. '.$subject, $msg);
 		}
 	}
 }

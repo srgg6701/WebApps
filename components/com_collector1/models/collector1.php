@@ -11,13 +11,12 @@
 defined('_JEXEC') or die;
 jimport('joomla.application.component.model');
 jimport('joomla.application.component.helper');
+jimport('joomla.mail.mail');
 
 JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_collector1/tables');
 /**
  * Model
  */
- 
-//echo "Hello!"; 
 class Collector1ModelCollector1 extends JModel
 {
 	protected $_item;
@@ -31,8 +30,8 @@ class Collector1ModelCollector1 extends JModel
 	 * Добавить набор опций 
 	 */
 	function addCollection(){
-		
-		if (!$table=$this->prepareDataSet()) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareDataSet()");		
+		$table=$this->prepareDataSet();
+		if (!$table) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareDataSet()");		
 		//Добавить данные в таблицу и проверить состояние:
 		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
 		//добавить данные в dnior_webapps_customer_site_options:
@@ -40,12 +39,14 @@ class Collector1ModelCollector1 extends JModel
 		//выясним статус юзера:
 		$user = JFactory::getUser();
 		//коллекция создавалась незарегистрированным юзером
-		if ($user->get('guest')==1) {
-			$last_site_id=$this->savePreOrderData();
+		if ($user->get('guest')==1) { echo "<h1>guest</h1>";
+			$last_site_id=$this->savePreOrderData();//echo "<h1>last_site_id before= $last_site_id</h1>";
 			//error?
-			if (!$last_site_id)
+			if (!$last_site_id){ //echo "<h1>! last_site_id</h1>";
 				JMail::sendErrorMess('Не добавлена временная коллекция опций сайта для незарегистрированного заказачика.',"Добавление временной коллекции.");
-		}else{
+			}//else echo "<h1>last_site_id AFTER= $last_site_id</h1>";
+			
+		}else{	//echo "<h1>! guest</h1>";
 			//получить id последней коллекции:
 			$last_site_id=SCollection::getLastCollectionId();
 		}
@@ -68,7 +69,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	 * Удалить коллекцию
 	 */
 	function deleteCollectionData($collection_id) {
-		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
+		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
 		return $table->delete($collection_id); 		
 	}
@@ -85,7 +86,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		if ($key!==false){ //потому что может случиться 0
 			unset($current_collections[$key]);
 		}
-		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
+		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('precustomers', 'Collector1Table');
 		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
 		
@@ -184,7 +185,22 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 			}
 			$current_order_set['options_array']=$arrCheckedMap;
 			require_once JPATH_COMPONENT.'/models/collected.php';
-			$current_order_set['engines']=collector1ModelCollected::get_cms_names($current_order_set['engines_ids']);
+				switch ($current_order_set['engine_type_choice_id'])  { 
+
+					case "1":
+						$current_order_set['engines']=collector1ModelCollected::get_cms_names($current_order_set['engines_ids']);
+							break;
+			
+					case "2": //разработать собственный
+						require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
+						$arrSMSs=SCollection::setCMStypes();
+						$current_order_set['engines']=$arrSMSs[1][1];
+							break;
+			
+					case "3":
+						$current_order_set['engines']=collector1ModelCollected::get_cms_own_name($collection_id);
+							break;
+				}
 			$current_order_set['site_type_name']=collector1ModelCollected::get_sites_types($current_order_set['site_type_id']);
 			//var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");die();
 			return $current_order_set; 
@@ -238,7 +254,7 @@ FROM #__webapps_site_options_beyond_sides ORDER BY id";
 		return $db->loadAssocList();
 	}
 	/**
-	 * Получим таблицу разделов сайта
+	 * Получим таблицу типов сайта
 	 */
 	function getSitesTypes(){
 		$db = JFactory::getDBO();
@@ -254,7 +270,7 @@ FROM #__webapps_site_types ORDER BY id DESC";
 	 */
 	function prepareDataSet($updated_id=false){
 		$post_collection=JRequest::get('post');
-		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
+		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
 		if ($updated_id) {
 			if (!$table->load($updated_id)) 
@@ -342,13 +358,25 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		return $table;
 	}
 	/**
+	 * Подготовить данные для добавления в таблицу предзаказчиков
+	 */
+	function preparePreOrderDataValues($table,$arrPostData,$post_collection,$last_site_id){ //
+		for($i=0,$j=count($arrPostData);$i<$j;$i++)
+			if ($post_collection[$arrPostData[$i]]) 
+				$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
+		$table->set('session_id',session_id()); 
+		$table->set('collections_ids',$last_site_id);
+		return $table;
+	}
+	/**
 	 * Сохранить данные предзаказчика (те, которых нет в таблице юзеров) и созданной им коллекции:
 	 */
 	function savePreOrderData() { // #__webapps_customer_site_options.id
 		//получить id последней коллекции:
+		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SCollection.php';
 		$last_site_id=SCollection::getLastCollectionId();
 		//получить таблицу предзаказчиков:
-		JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
+		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('precustomers', 'Collector1Table'); //таблица
 		//добавим в таблицу данные предзаказчика:
 		$post_collection=JRequest::get('post');
@@ -370,10 +398,11 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		if (empty($result)) {
 			$table->reset(); //clear buffer
 			//установить значения полей:
-			for($i=0,$j=count($arrPostData);$i<$j;$i++)
-				$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
-			
-			$table->set('collections_ids',$last_site_id);
+			$table=self::preparePreOrderDataValues($table,$arrPostData,$post_collection,$last_site_id);
+			//for($i=0,$j=count($arrPostData);$i<$j;$i++)
+				//$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
+			//$table->set('session_id',session_id()); 
+			//$table->set('collections_ids',$last_site_id);
 			//Добавить данные в таблицу и проверить состояние:
 			require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
 			SErrors::afterTable($table);
@@ -383,19 +412,17 @@ FROM #__webapps_site_types ORDER BY id DESC";
 			if (!$table->load($result['id'])) {
 				// handle failed load
 				JMail::sendErrorMess($table->getError()," (\$table->load())");			
-			
-			}else{ 
+			}else{ 		
 				//установить значения полей:
-				for($i=0,$j=count($arrPostData);$i<$j;$i++) {
-					if ($post_collection[$arrPostData[$i]]) {
+				$table=self::preparePreOrderDataValues($table,$arrPostData,$post_collection,$result['collections_ids'].','.$last_site_id);
+				//for($i=0,$j=count($arrPostData);$i<$j;$i++) {
+					//if ($post_collection[$arrPostData[$i]]) {
 						//echo "<div>added = ".$post_collection[$arrPostData[$i]]."</div>";
-						$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
-					}//else echo "<div>NOT added = ".$post_collection[$arrPostData[$i]]."</div>";
-				}
-				$table->set('session_id',session_id()); 
-					//echo "<div>session_id = ".session_id()."</div>";
-				
-				$table->set('collections_ids', $result['collections_ids'].','.$last_site_id);
+						//$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
+					//}//else echo "<div>NOT added = ".$post_collection[$arrPostData[$i]]."</div>";
+				//}
+				//$table->set('session_id',session_id()); 				
+				//$table->set('collections_ids', $result['collections_ids'].','.$last_site_id);
 					//echo "<div>collections_ids = ".$result['collections_ids'].','.$last_site_id."</div>";
 				if ($table->check()) {
 					if (!$table->store(true)){
@@ -406,7 +433,7 @@ FROM #__webapps_site_types ORDER BY id DESC";
 					// handle invalid input
 					JMail::sendErrorMess($table->getError()," (\$table->check())");
 				}
-			}			//die();
+			}
 		}
 		return $last_site_id;
 	}
@@ -416,8 +443,8 @@ FROM #__webapps_site_types ORDER BY id DESC";
 	function setDefaultTable($table=false) {
 		return ($page)? $table:"#__webapps_customer_site_options";
 	}
-	/*
-	 ** Построить список CMS
+	/**
+	 * Построить список CMS
 	 */
 	function tempCMSlist() {
 		return array( 'bitrix'=>'1С-Битрикс',
@@ -472,26 +499,14 @@ FROM #__webapps_site_types ORDER BY id DESC";
 				);	
 	} 
 	/**
-	 * 
+	 * Обновить данные коллекции:
 	 */
 	function updateCollectionData($collection_id) {
 		$table=$this->prepareDataSet($collection_id); 
-		//var_dump("<h1>table:</h1><pre>",$table,"</pre>");die ('go update!');
-		// Check that the data is valid
-		if (!$table->check())
-		{	echo "<div>Не проверено 1!</div>";
-		// handle validation failure
-		}
-		// Store the data in the table
-		if (!$table->store(true))
-		{	echo "<div>Не сохранено!</div>";
-		// handle store failure
-		}
-		// Check the record in
-		if (!$table->checkin())
-		{	echo "<div>Не проверено 2!</div>";
-		// handle checkin failure
-		}
+		//Добавить данные в таблицу и проверить состояние:
+		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
+		//добавить данные:
+		SErrors::afterTable($table);
 		return true;
 	}
 }

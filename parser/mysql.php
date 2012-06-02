@@ -8,7 +8,7 @@
 
 	public $sql_login="root";
 	public $sql_passwd="";
-	public $sql_database="fastdev";
+	public $sql_database="a2allcom_fastweb";
 	public $sql_host="localhost";
 
 	public $conn_id;

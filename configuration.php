@@ -1,10 +1,14 @@
 <?php
 class JConfig {
+	/*emails:
+		webapps@2-all.com
+		error_webapps@2-all.com
+	password: webappshistory*/
 	public $offline = '0';
 	public $offline_message = 'Сайт закрыт на техническое обслуживание.<br /> Пожалуйста, зайдите позже.';
 	public $display_offline_message = '1';
 	public $offline_image = '';
-	public $sitename = 'fastdev';
+	public $sitename = 'a2allcom_fastweb';
 	public $editor = 'tinymce';
 	public $captcha = '0';
 	public $list_limit = '20';
@@ -15,7 +19,7 @@ class JConfig {
 	public $host = 'localhost';
 	public $user = 'root';
 	public $password = '';
-	public $db = 'fastdev';
+	public $db = 'a2allcom_fastweb';
 	public $dbprefix = 'dnior_';
 	public $live_site = '';
 	public $secret = 'hvqmw5gTTUsOzpCB';
@@ -32,7 +36,7 @@ class JConfig {
 	public $offset_user = 'UTC';
 	public $mailer = 'mail';
 	public $mailfrom = 'srgg67@gmail.com';
-	public $fromname = 'fastdev';
+	public $fromname = 'a2allcom_fastweb';
 	public $sendmail = '/usr/sbin/sendmail';
 	public $smtpauth = '0';
 	public $smtpuser = 'admin';

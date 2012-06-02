@@ -8,6 +8,7 @@
  */
 
 defined('JPATH_PLATFORM') or die;
+require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SData.php';
 
 /**
  * Base class for a Joomla Controller

@@ -21,7 +21,7 @@ jimport('joomla.application.component.controller');
 class ContentController extends JController
 {
 	function __construct($config = array())
-	{
+	{	
 		// Article frontpage Editor pagebreak proxying:
 		if (JRequest::getCmd('view') === 'article' && JRequest::getCmd('layout') === 'pagebreak') {
 			$config['base_path'] = JPATH_COMPONENT_ADMINISTRATOR;
@@ -46,7 +46,7 @@ class ContentController extends JController
 	public function display($cachable = false, $urlparams = false)
 	{
 		$cachable = true;
-
+		
 		JHtml::_('behavior.caption');
 
 		// Set the default view name and format from the Request.
@@ -72,6 +72,7 @@ class ContentController extends JController
 			// Somehow the person just went to the form - we don't allow that.
 			return JError::raiseError(403, JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
 		}
+		//if (JRequest::getVar('Itemid') == '111') die($vName);
 		parent::display($cachable, $safeurlparams);
 
 		return $this;

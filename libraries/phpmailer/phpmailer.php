@@ -570,8 +570,10 @@ class PHPMailer {
    */
   public function Send() {
     try {
-      if(!$this->PreSend()) return false;
-      return $this->PostSend();
+      if(!$this->PreSend()) {
+		  return false;
+	  }
+	  return $this->PostSend();
     } catch (phpmailerException $e) {
       $this->SetError($e->getMessage());
       if ($this->exceptions) {
@@ -629,7 +631,7 @@ class PHPMailer {
           return $this->SmtpSend($this->MIMEHeader, $this->MIMEBody);
         default:
           return $this->MailSend($this->MIMEHeader, $this->MIMEBody);
-      }
+      }	
 
     } catch (phpmailerException $e) {
       $this->SetError($e->getMessage());
@@ -706,31 +708,32 @@ class PHPMailer {
     } else {
       $params = sprintf("-oi -f %s", $this->Sender);
     }
+	
     if ($this->Sender != '' and !ini_get('safe_mode')) {
       $old_from = ini_get('sendmail_from');
       ini_set('sendmail_from', $this->Sender);
-      if ($this->SingleTo === true && count($toArr) > 1) {
+      if ($this->SingleTo === true && count($toArr) > 1) { //die('SingleTo');
         foreach ($toArr as $key => $val) {
-          $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
+          $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header/*, $params*/);
           // implement call back function if it exists
           $isSent = ($rt == 1) ? 1 : 0;
           $this->doCallback($isSent, $val, $this->cc, $this->bcc, $this->Subject, $body);
         }
-      } else {
-        $rt = @mail($to, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
+      } else { // // // die('! SingleTo');
+        $rt = @mail($to, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header/*, $params*/);
         // implement call back function if it exists
         $isSent = ($rt == 1) ? 1 : 0;
-        $this->doCallback($isSent, $to, $this->cc, $this->bcc, $this->Subject, $body);
+        $this->doCallback($isSent, $to, $this->cc, $this->bcc, $this->Subject.' :: DoCallBack', $body);
       }
-    } else {
-      if ($this->SingleTo === true && count($toArr) > 1) {
+    } else { 
+      if ($this->SingleTo === true && count($toArr) > 1) { //die('ELSE 1');
         foreach ($toArr as $key => $val) {
-          $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
+          $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header/*, $params*/);
           // implement call back function if it exists
           $isSent = ($rt == 1) ? 1 : 0;
           $this->doCallback($isSent, $val, $this->cc, $this->bcc, $this->Subject, $body);
         }
-      } else {
+      } else { //die('ELSE 2');
         $rt = @mail($to, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header);
         // implement call back function if it exists
         $isSent = ($rt == 1) ? 1 : 0;

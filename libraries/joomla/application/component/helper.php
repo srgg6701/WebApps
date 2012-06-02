@@ -339,8 +339,13 @@ class JComponentHelper
 
 		// If component is disabled throw error
 		if (!self::isEnabled($option) || !file_exists($path))
-		{
-			JError::raiseError(404, JText::_('JLIB_APPLICATION_ERROR_COMPONENT_NOT_FOUND'));
+		{	if ($_GET['err']){
+				if (!self::isEnabled($option)) $mess1="<div>NOT ENABLED</div>";
+				if (!file_exists($path)) $mess2="<div>path: $path not exists!</div>";
+				die ("$mess1<br>$mess2");
+			}else{
+				JError::raiseError(404, JText::_('JLIB_APPLICATION_ERROR_COMPONENT_NOT_FOUND'));
+			}
 		}
 
 		$task = JRequest::getString('task');

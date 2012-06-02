@@ -37,8 +37,12 @@ class UsersController extends JController
 		$vFormat = $document->getType();
 		$lName	 = JRequest::getCmd('layout', 'default');
 		$user = JFactory::getUser();
-
+					
 		if ($view = $this->getView($vName, $vFormat)) {
+			/*
+				vName=registration, vFormat= html
+				view= UsersViewRegistration
+			*/
 			// Do any specific processing by view.
 			switch ($vName) {
 				case 'registration':
@@ -110,11 +114,10 @@ class UsersController extends JController
 					$model = $this->getModel('Login');
 					break;
 			}
-
+			
 			// Push the model into the view (as default).
 			$view->setModel($model, true);
-			$view->setLayout($lName);
-
+			$view->setLayout($lName); //default
 			// Push document object into the view.
 			$view->assignRef('document', $document);
 

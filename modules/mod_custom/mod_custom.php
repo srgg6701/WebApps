@@ -7,7 +7,7 @@
  */
 
 // no direct access
-defined('_JEXEC') or die;
+defined('_JEXEC') or die;?><div class="mod_custom_html"><?
 
 if ($params->def('prepare_content', 1))
 {
@@ -17,4 +17,4 @@ if ($params->def('prepare_content', 1))
 
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
-require JModuleHelper::getLayoutPath('mod_custom', $params->get('layout', 'default'));
+require JModuleHelper::getLayoutPath('mod_custom', $params->get('layout', 'default'));?></div><?

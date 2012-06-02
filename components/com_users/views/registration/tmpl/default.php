@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
-$user = JFactory::getUser();
+if (!$user) $user = JFactory::getUser();
 //var_dump("<h1>user:</h1><pre>",$user,"</pre>");?>
 <div class="registration<?php echo $this->pageclass_sfx?>">
 <?php if ($this->params->get('show_page_heading')) : ?>

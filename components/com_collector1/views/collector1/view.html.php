@@ -24,7 +24,7 @@ class Collector1ViewCollector1 extends JView
 	protected $go_submit='index.php?option=com_collector1&task=';
 	protected $go_action;
 	public $go_signup="index.php?option=com_users&view=registration&task=fill_precustomer_data";
-	protected $guest_collections;
+	protected $guest_collections_ids;
 	protected $templatename;
 
 	function display($tpl = null)
@@ -53,7 +53,7 @@ class Collector1ViewCollector1 extends JView
 		//проверим, создавал ли незаавторизованный юзер сайты в течение сессии:
 		if ($user->get('guest')==1){
 			require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SCollection.php';
-			$this->guest_collections=SCollection::getGuestCollections();
+			$this->guest_collections_ids=SCollection::getGuestCollections();
 		}
 		//получает HTML из контроллера (?), в случае, если он также вызывает у себя parent::display()
         parent::display($tpl);
