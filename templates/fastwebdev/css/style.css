@@ -19,7 +19,7 @@ a.addRec{
 	background:#FC0 !important;
 }
 a.addRec:hover{
-	background: #CFC !important;
+	background:#CFC !important;
 }
 table.alignRight td{
 	text-align:right;
@@ -31,6 +31,10 @@ a, .link{
 a:hover, .link:hover{
 	text-decoration:underline;
 	cursor:pointer;
+}
+div#account_menu{
+	padding-right:30px; 
+	margin-bottom:-28px; 
 }
 div#account_menu td{ 
 	background:#090;
@@ -144,7 +148,7 @@ tr.center td{
 }
 .collector_head, .collected_head{
 	display:inline-block;
-	margin:6px 10px 8px 10px;
+	margin:0px 10px 8px 0px;
 	color:#060;
 }
 .collected_head{
@@ -160,6 +164,10 @@ div#collector_wrapper{
 div#com{
 	text-align:left;
 	padding:10px 20px 20px;
+}
+div.offsetAuthorized{ /*тот же блок, что и div#com, но юзер заавторизован*/
+	/*margin-top:10px;
+	padding-top:0px;*/
 }
 div#com .item-page > h2, div#com .items-leading > h2, div#com .leading-0 > h2{ /*первый заголовок на странице*/
 	margin-top:0px;
@@ -268,6 +276,9 @@ div.drop_down_menu a:hover{
 	background: #060;
 	text-decoration:none;
 }
+#email:after{
+	content:"webapps@2-all.com";
+}
 div.feedback{
 	display:inline-block;
 	margin-top:20px;
@@ -275,6 +286,9 @@ div.feedback{
 	padding:10px;
 	background:#E4E4E4;
 	border-radius:6px;
+}
+.font_size1_1{
+	font-size:1.1em !important;
 }
 div#footer{
 	background-color:#060;
@@ -398,9 +412,25 @@ div#img_tech{
 td#img_people{
 	padding-top:0px;
 }
+img.inlist{
+	display:block;
+	margin-left:-20px;
+	margin-top:20px;
+	margin-bottom:30px;
+}
 input [type="text"],textarea{
 	padding:3px 5px;
 	color: #866D2D;
+}
+a.plink{
+	color:#060;
+}
+.img{
+	margin:4px;
+	background:#CFC;
+	border-radius:6px;
+	display:inline-block;
+	padding:10px;
 }
 label{
 	margin-top:6px;
@@ -645,6 +675,15 @@ div#mode_login button[type="submit"]{
 #my_site_number{
 	padding-bottom:6px;
 	font-weight:bold;
+}
+#offer h3{
+	color:#003;
+	font-size:1em;
+	margin-bottom:-4px;
+}
+#offer h2{
+	margin-top:24px;
+	margin-bottom:4px;
 }
 .offsetBottom{
 	padding-bottom:54px;

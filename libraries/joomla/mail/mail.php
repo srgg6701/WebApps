@@ -477,14 +477,14 @@ class JMail extends PHPMailer
 	 */
 	public function sendErrorMess($msg,$subject=false){
 		require_once JPATH_ADMINISTRATOR.DS.'classes/SErrors.php';
+		SErrors::showDebugTrace(debug_backtrace());
 		if(strstr($_SERVER['HTTP_HOST'],"localhost")){
-			echo SErrors::showDebugTrace(debug_backtrace());
+			echo SErrors::$trace.'<br>';
 		}else{
-			$msg.="<hr>".SErrors::showDebugTrace(debug_backtrace());
-			//$adminEmail=SData::$error_mail;
-			//JFactory::getConfig()->getValue('mailfrom');
+			$msg.="<hr>".SErrors::$trace;
 			$siteName=JFactory::getConfig()->getValue('sitename');
 			JFactory::getMailer()->sendMail(SData::$error_mail, $siteName, $adminEmail, 'Сообщение об ошибке. '.$subject, $msg);
 		}
+		SErrors::$trace='';
 	}
 }

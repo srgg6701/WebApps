@@ -9,16 +9,28 @@
 
 */
 defined('_JEXEC') or die;
-$app = JFactory::getApplication();
+
+if (!$app) $app = JFactory::getApplication();
+
+if (!$this->baseurl){
+	$this->baseurl="http://".$_SERVER['HTTP_HOST'];
+}
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <jdoc:include type="head" />
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/firefox/correct_submenu_position.js" type="text/javascript"></script>
 <script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+<script src="<?php echo $this->baseurl ?>/templates/_js/common.js" type="text/javascript"></script>
+
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css">
 </head>
 <body>
+<?
+if(strstr($_SERVER['HTTP_HOST'],"localhost")||$_GET['debug']){?><div style="position:absolute; right:40px; top:16px; background:#FFFF00;" class="padding10 bold border_radius"><a href="index.php?option=com_content&view=app">Debug</a></div><? }
+?>
+
 <? $path_to_images='templates/fastwebdev/images/'; 
 //var_dump("<h1>SESSION:</h1><pre>",$_SESSION,"</pre>");
 //$_SESSION['example1']='EXMPL';
@@ -109,14 +121,14 @@ function manageLoginDisplay(stat){
 </script>
 <? 	}?>
             <div id="wrapper_component">
-            <? 	if (!$user->guest){?>  			
-            	<div align="right" id="account_menu" style="padding-right:34px; margin-bottom:-28px;">
+            <? 	if ($user->get('guest')!=1){?>  			
+            	<div align="right" id="account_menu">
                 	<jdoc:include type="modules" name="account" style="xhtml" />
                 </div>
             <?	}?>
                 <!-- system messages -->
   				<jdoc:include type="message" />
-				<div id="com">
+				<div id="com"<? if($user->get('guest')!=1){?> class="offsetAuthorized"<? }?>>
 					<jdoc:include type="component" />
                     	<jdoc:include type="modules" name="contacts" style="xhtml" />    
                     	<jdoc:include type="modules" name="sdata" style="xhtml" />    

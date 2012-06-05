@@ -74,7 +74,7 @@
                         <td><p>Директор. Обладатель профессионального сертификата в области менеджмента OU. Эксперт в PHP/MySQL/XML/HTML/JS/CSS, проектировании сайтов и SAAS-систем.</p></td>
                       </tr>
                       <tr>
-                        <td><img src="<?=$path_to_images?>IMGP3961.JPG" width="120" height="120"></td>
+                        <td><img src="<?=$path_to_images?>IMGP3961.JPG" width="104" height="120" hspace="10"></td>
                         <td>Ольга<br>
                           Анатольевна<br>
                           <nobr>aka <a href="skype:myskype"><div>&nbsp;</div>

@@ -10,7 +10,9 @@
  */
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
-$user = JFactory::getUser();
+$user = JFactory::getUser();?>
+<div class="item-page">
+<?
 //this->guest_collections_ids	//
 //var_dump("<h1>guest_collections_ids:</h1><pre>",$this->guest_collections_ids,"</pre>");
 //echo "<hr>";
@@ -40,7 +42,10 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавто
 	
 		if ($this->collection_of_user>0){?><h3 class="collected_head">Выбранные вами опции:</h3><? }
 	}
-	if (!$this->collection_of_user||$this->collection_of_user>0||!empty($this->guest_collections_ids)){?>
+	if (!$this->collection_of_user||$this->collection_of_user>0||!empty($this->guest_collections_ids)){
+		if(!$this->collection_of_user){?>
+        <h3 class="collected_head">Текущие собранные сайты</h3>
+    <? 	}?>
 <table cellpadding="8" cellspacing="0" id="tblCollected">
   <tr>
     <th>Опция</th>
@@ -181,4 +186,5 @@ function askToSignUp(){
 	} 
 	if (!JRequest::getVar('site_deleted')) $forbidden=true; //иначе получается абсурд - "не ваш сайт", который был удалён.
 	require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
-}
+}?>
+</div><?
