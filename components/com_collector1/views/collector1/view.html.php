@@ -9,8 +9,8 @@
 
 // No direct access
 defined('_JEXEC') or die;
-
 jimport('joomla.application.component.view');
+require_once JPATH_COMPONENT.DS.'helpers/html/your_sites.php';
 //jimport('joomla.application.web.webclient');
 /**
  * HTML View class for the Collector1 component

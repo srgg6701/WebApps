@@ -42,7 +42,18 @@ class Collector1Controller extends JController
 		}
 	}
 	/**
-	 *обновить данные в таблице опций сайта заказчика
+	 * размещение заказа на выполнение отдельного компонента/(ов)
+	 */
+	function order(){ 
+		if($this->getModel()->makeOrder()) {
+			die ('Done!');
+			//$this->setRedirect(JRoute::_($this->go_page.'&site_deleted='.$collection_id));			
+		}else{
+			JMail::sendErrorMess('Данные не удалены.',"Удаление записи.");		
+		}
+	}
+	/**
+	 * обновить данные в таблице опций сайта заказчика
 	 */
 	function update(){ //task=update
 		$collection_id=JRequest::getVar('collection_id');

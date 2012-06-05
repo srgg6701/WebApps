@@ -276,7 +276,7 @@ div.drop_down_menu a:hover{
 	background: #060;
 	text-decoration:none;
 }
-#email:after{
+#email_container:before{
 	content:"webapps@2-all.com";
 }
 div.feedback{

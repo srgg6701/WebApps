@@ -13,9 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 $table=Collector1ModelCollector1::getDataForCollector();
 $current_order_set=$this->current_order_set;
 
-if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;
-
-require_once JPATH_COMPONENT.DS.'helpers/html/your_sites.php';?>
+if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 
 <form name="form1" method="post" action="<?=JRoute::_($this->go_submit)?>" onSubmit="return checkRequired();">
     <div>
@@ -230,26 +228,7 @@ if ($current_order_set){
   </tr>
 </table>
 </div>
-<?	
-	$user = JFactory::getUser();
-	if ($user->get('guest')==1){?>
-<div id="tell_your_data">
-<h4>Пожалуйста, сообщите нам свои контактные данные:</h4>
-<dl>
-	<dt>Как вас зовут? <div class="required_field"></div></dt>
-	<dd><input class="dataCell" name="name" type="text" id="name" value="<?=$user->get('name')?>"></dd>
-
-	<dt>Ваш емэйл: <div class="required_field"></div></dt>
-	<dd><input name="email" id="email" type="text" value="<?=$user->get('email')?>"></dd>
-    
-	<dt>Ваш телефон: <div class="required_field"></div></dt>
-	<dd><input name="phone" id="phone" type="text" value="<?=$user->get('phone')?>"></dd>
-    
-	<dt>Скайп: </dt>
-	<dd><input name="skype" id="skype" type="text" value="<?=$user->get('skype')?>"></dd>
-</dl>
-</div>
-<?	}?>
+<?	require_once JPATH_COMPONENT.DS.'helpers'.DS.'html'.DS.'set_your_data.php';	?>
 <br>
 <button id="make_site_prototype" type="submit"><?
 
@@ -260,6 +239,7 @@ if ($current_order_set){
 	}?>!</button>
 <br>
 </form>
+<? $checkCommonData=setCheckCommonData();?>
 <script type="text/javascript">
 function loadCollection(collection_id){
 	location.href='<?=JRoute::_("index.php?option=com_collector1&collection_id=")?>'+collection_id;
@@ -315,9 +295,6 @@ function checkRequired(){
 	try{
 		d=document;
 		var selST=d.getElementById('selectSiteType');
-		var yName=d.getElementById('name');
-		var yEmail=d.getElementById('email');
-		var yPhone=d.getElementById('phone');
 		
 		if (selST.options[selST.selectedIndex].value=='0') {
 			alert('Вы не указали, какой тип сайта вам нужен!');
@@ -325,27 +302,9 @@ function checkRequired(){
 			selST.style.backgroundColor='yellow';
 			return false;
 		}
-<?	if($user->get('guest')==1){?>		
-		if (!yName.value||yName.value==' ') {
-			alert('Вы не сообщили нам своё имя!');					
-			location.href='#bottom';
-			yName.style.backgroundColor='yellow';
-			return false;
-		}
-		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-		if (!filter.test(yEmail.value)) {
-			alert('Емэйл введён некорректно или отсутствует!');					
-			location.href='#bottom';
-			yEmail.style.backgroundColor='yellow';
-			return false;
-		}
-		if (yPhone.value.length<7) {
-			alert('Вы не сообщили нам № своего телефона или указали его некорректно!');					
-			location.href='#bottom';
-			yPhone.style.backgroundColor='yellow';
-			return false;
-		}
-<?	}?>		
+<?	if ($checkCommonData) {?>
+		return checkCommonData();
+<? 	}?>		
 	}catch(e){
 		alert(e.message);
 	}
@@ -406,4 +365,3 @@ function controlCMSchoice(tdBlock){
 	}
 }
 </script>
-<a name="bottom"></a>

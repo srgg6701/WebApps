@@ -266,6 +266,12 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		return $db->loadAssocList();
 	}
 	/**
+	 * размещение заказа на выполнение отдельного компонента/(ов)
+	 */
+	function makeOrder(){
+		return JRequest::get('post');
+	}
+	/**
 	 * Подготовить данные для добавления/обновления
 	 */
 	function prepareDataSet($updated_id=false){
