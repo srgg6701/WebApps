@@ -52,8 +52,23 @@ div#account_menu td.tdActive a{
 	color:#FFF;
 	font-weight:bold;
 }
+.bgGrayEEE{
+	background:#EEE;
+}
+.bgOrangeSecond{
+	/* 	#call_us
+		div#components div.compDIV:hover
+		#div_user_menu a:hover
+		button.validate:hover, a.button:hover, button.button:hover
+		div#wrapper_menu table td a:hover
+	*/
+	background:#FEBE38 !important;
+}
 .bgOverWhite:hover{
 	background:#FFFFFF;
+}
+.bgSand{
+	background:#FFE3AA;
 }
 .bgWhite, tr.bgWhite, tr.bgWhite td{
 	background-color:#FFF;
@@ -171,6 +186,26 @@ div.offsetAuthorized{ /*тот же блок, что и div#com, но юзер �
 }
 div#com .item-page > h2, div#com .items-leading > h2, div#com .leading-0 > h2{ /*первый заголовок на странице*/
 	margin-top:0px;
+}
+div#components div{
+	display:inline-block; 
+	margin-top:4px; 
+	padding:4px; 
+	padding-right:12px;
+	border-radius:6px;
+	background:#FFE3AA;
+}
+div#components div.compDIV:hover{
+	background:#FEBE38; /* тот же, что и для главного bgOrangeSecond */
+	cursor:default;
+}
+div.compDIV input[type="checkbox"]{
+	margin:5px 8px 6px 6px;
+}
+div.compDIV > span{
+	vertical-align: top; 
+	padding-top:4px; 
+	display:inline-block;
 }
 form#connect{
 	margin:20px;
@@ -1000,6 +1035,14 @@ div#pseudo_bg{
 div#pseudo_bg > div{
 	height:64px; 
 	background:#dedede
+}
+div.put_file_field{
+	background:#efefef;
+	margin-bottom:4px;
+	/*width:400px;
+	display:inline-block; */
+	padding:6px;
+	border-radius:6px;
 }
 div.search input[type="image"]{
 	background-color:#FFFFFF;

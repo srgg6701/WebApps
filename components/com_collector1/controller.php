@@ -9,8 +9,7 @@
  
 // No direct access
 defined('_JEXEC') or die;
-jimport('joomla.application.component.controller');
-jimport('joomla.mail.mail');
+//echo "<h3>controller.php</h3>";
 //методы для работы с коллекциями также представлены в administrator/classes/SCollection.php
 class Collector1Controller extends JController
 {
@@ -45,11 +44,11 @@ class Collector1Controller extends JController
 	 * размещение заказа на выполнение отдельного компонента/(ов)
 	 */
 	function order(){ 
-		if($this->getModel()->makeOrder()) {
-			die ('Done!');
+		if($this->getModel('orders')->makeOrder()) {
+			//die ('Done!');
 			//$this->setRedirect(JRoute::_($this->go_page.'&site_deleted='.$collection_id));			
 		}else{
-			JMail::sendErrorMess('Данные не удалены.',"Удаление записи.");		
+			JMail::sendErrorMess('Данные не размещены.',"Добавление заказа.");		
 		}
 	}
 	/**
@@ -64,13 +63,16 @@ class Collector1Controller extends JController
 		}
 	}
 	/**
-	* Определиться с процедурой - обновлять/создавать коллекцию через установку action формы
-	* Отобразить представление
-	* @access public
-	*
-	*/
+	 * Определиться с процедурой - обновлять/создавать коллекцию через установку action формы
+	 * Отобразить представление
+	 * @access public
+	 *
+	 */
 	function display()
 	{	
+ 		// Set the view and the model
+        //$view = JRequest::getVar('view','collector1');
+		//$layout = JRequest::getVar('layout');
 		parent::display(); //отображает default view
 	}
 }

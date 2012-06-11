@@ -35,7 +35,7 @@ if (!$user)
 	$user = JFactory::getUser();
 if ($user->get('guest')==1){?>
     	<div class="h2" style="margin-top:0px;">Если вы уже <a href="<?=JRoute::_("index.php?option=com_users&view=registration")?>">зарегистрированы</a>,  <img src="<?
-        require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
+        //require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
 		$this->templatename=SSite::getCurrentTemplateName($app);?>
 <?php echo $this->baseurl ?>/templates/<?php echo $this->templatename ?>/images/user24.png" width="22" height="22" hspace="4" border="0" align="absmiddle"><b><a href="<?=JRoute::_("index.php?option=com_users&view=login")?>">заавторизуйтесь</a>!</b></div>
       <div style="margin:8px 0 12px;">Это позволит вам получить доступ ко всем опциям системы.</div>
@@ -86,11 +86,11 @@ if ($current_order_set){
 		for($d=0,$dc=count($arrColumnsNames);$d<$dc;$d++){?>
     <th><? echo $arrColumnsNames[$d]['name_ru'].'<div class="skinny">['.$arrColumnsNames[$d]['site_side'].']</div>';?></th>
     <?	}
-		if ($test){?>
+		/*if ($test){?>
     <th>Публичный (front-end)</th>
     <th>Личный кабинет</th>
     <th>Административный (back-end)</th>
-    <?	}?>
+    <?	}*/?>
   </tr>
 <?	//	
 	for($i=0,$j=count($table);$i<$j;$i++){
@@ -167,14 +167,30 @@ if ($current_order_set){
   </tr>
 <?	}?>
   <tr>
-    <td colspan="4" style="padding-right:20px;"><div style="padding-left:6px">Дополнительно:</div>
+    <td colspan="4" style="padding-right:20px;"><div style="padding-left:6px">Краткое описание (опционально):</div>
       <textarea rows="5" style="margin-top:6px; display:block;" class="widthFull" name="xtra" id="xtra"><?=$current_order_set['xtra']?></textarea></td>
+  </tr>
+  <tr>
+    <td colspan="4">
+  <div style="margin:8px 10px;">
+  	Дополнительные материалы &#8212; ТЗ, бриф и т.п.:
+    <div class="marginBottom12 marginTop6">(<?
+    	$SFiles=new SFiles();
+		echo $SFiles->allowed_formats;
+	?>)</div>
+  </div>
+<?	require_once JPATH_COMPONENT.DS.'helpers'.DS.'html'.DS.'upload.php';?>	
+    <div class="clearBoth marginTop10"></div>
+  <hr size="1" class="marginTop10">
+<div class="marginBottom4">Укажите желаемую дату выполнения задания в формате ГГГГ-ММ-ДД</div>
+или выберите её из календаря: <?php echo JHTML::_('calendar', $value = '', $name='finish_date', $id='finish_date', $format = '%Y-%m-%d', $attribs = 'size=9'); ?>    
+    </td>
   </tr>
 </table>
 <table cellpadding="8" cellspacing="0">
   <tr>
   	<td>
-<?	require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
+<?	//require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
 	$arrSMSs=SCollection::setCMStypes();?>    
 <h4 style="margin-bottom:4px;">Выберите движок:</h4>
     <div>(вы можете выбрать несколько возможных вариантов)</div>

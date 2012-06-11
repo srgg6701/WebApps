@@ -1,9 +1,5 @@
 <?php
 class JConfig {
-	/*emails:
-		webapps@2-all.com
-		error_webapps@2-all.com
-	password: webappshistory*/
 	public $offline = '0';
 	public $offline_message = 'Сайт закрыт на техническое обслуживание.<br /> Пожалуйста, зайдите позже.';
 	public $display_offline_message = '1';

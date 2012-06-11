@@ -9,7 +9,7 @@
 
 // No direct access
 defined('_JEXEC') or die;
-jimport('joomla.application.component.view');
+//jimport('joomla.application.component.view');
 require_once JPATH_COMPONENT.DS.'helpers/html/your_sites.php';
 //jimport('joomla.application.web.webclient');
 /**
@@ -29,7 +29,7 @@ class Collector1ViewCollector1 extends JView
 
 	function display($tpl = null)
 	{
-		require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
+		//require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
 		$app		= JFactory::getApplication();
 		$params		= $app->getParams();
 		$this->templatename=SSite::getCurrentTemplateName($app);
@@ -52,7 +52,7 @@ class Collector1ViewCollector1 extends JView
 		}//var_dump("<h1>user:</h1><pre>",$user,"</pre>"); die();
 		//проверим, создавал ли незаавторизованный юзер сайты в течение сессии:
 		if ($user->get('guest')==1){
-			require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SCollection.php';
+			//require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SCollection.php';
 			$this->guest_collections_ids=SCollection::getGuestCollections();
 		}
 		//получает HTML из контроллера (?), в случае, если он также вызывает у себя parent::display()

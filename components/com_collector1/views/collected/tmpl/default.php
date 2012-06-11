@@ -57,7 +57,7 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавто
 	
 	if (!empty($collections_data_array)){
 		
-		require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
+		//require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
 		$arrSMSs=SCollection::setCMStypes();
 
 		$j=count($collections_data_array);
@@ -181,10 +181,10 @@ function askToSignUp(){
 	
 	//echo "<div>guest? = ".$user->get('guest').", collection_of_user: ".$this->collection_of_user.", empty? = ".empty($this->guest_collections_ids)."</div>";
 	if (!$this->templatename) {
-			require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
+			//require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
 			$this->templatename=SSite::getCurrentTemplateName($app);
 	} 
 	if (!JRequest::getVar('site_deleted')) $forbidden=true; //иначе получается абсурд - "не ваш сайт", который был удалён.
 	require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
 }?>
-</div><?
+</div>

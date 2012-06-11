@@ -8,11 +8,24 @@
  */
 
 defined('_JEXEC') or die;
-// Include dependancies
-jimport('joomla.application.component.controller');
-//JPATH_ADMINISTRATOR
-JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_collector1/tables');
 
+// Include dependancies
+
+//массив подключаемых файлов:
+$arrPathReq=array('SData','SErrors','SFiles','SCollection','SSite','SUser');
+for($i=0,$j=count($arrPathReq);$i<$j;$i++)
+	require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.$arrPathReq[$i].'.php';
+
+jimport('joomla.mail.mail');
+jimport('joomla.application.component.controller');
+jimport('joomla.application.component.model');
+jimport('joomla.application.component.helper');
+jimport('joomla.application.component.view');
+
+JTable::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_collector1'.DS.'tables');
+
+//главный Контроллер компонента:
+//echo "<h3>collector1.php</h3>";
 // Execute the task.
 $controller	= JController::getInstance('Collector1');
 $controller->execute(JRequest::getCmd('task', 'display'));

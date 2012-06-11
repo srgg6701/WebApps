@@ -9,11 +9,6 @@
 
 // No direct access
 defined('_JEXEC') or die;
-jimport('joomla.application.component.model');
-jimport('joomla.application.component.helper');
-jimport('joomla.mail.mail');
-
-JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_collector1/tables');
 /**
  * Model
  */
@@ -33,7 +28,6 @@ class Collector1ModelCollector1 extends JModel
 		$table=$this->prepareDataSet();
 		if (!$table) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareDataSet()");		
 		//Добавить данные в таблицу и проверить состояние:
-		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
 		//добавить данные в dnior_webapps_customer_site_options:
 		SErrors::afterTable($table);
 		//выясним статус юзера:
@@ -48,7 +42,7 @@ class Collector1ModelCollector1 extends JModel
 			
 		}else{	//echo "<h1>! guest</h1>";
 			//получить id последней коллекции:
-			$last_site_id=SCollection::getLastCollectionId();
+			$last_site_id=SData::getLastId(SCollection::getDefaultTable());
 		}
 		return $last_site_id;
 	}
@@ -88,7 +82,6 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		}
 		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('precustomers', 'Collector1Table');
-		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
 		
 		if (!$table->load($pre_order_data['id'])) {
 			
@@ -192,7 +185,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 							break;
 			
 					case "2": //разработать собственный
-						require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
+						//require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
 						$arrSMSs=SCollection::setCMStypes();
 						$current_order_set['engines']=$arrSMSs[1][1];
 							break;
@@ -264,12 +257,6 @@ FROM #__webapps_site_types ORDER BY id DESC";
 			JError::raiseError(500, $db->getErrorMsg());
 		}
 		return $db->loadAssocList();
-	}
-	/**
-	 * размещение заказа на выполнение отдельного компонента/(ов)
-	 */
-	function makeOrder(){
-		return JRequest::get('post');
 	}
 	/**
 	 * Подготовить данные для добавления/обновления
@@ -379,8 +366,8 @@ FROM #__webapps_site_types ORDER BY id DESC";
 	 */
 	function savePreOrderData() { // #__webapps_customer_site_options.id
 		//получить id последней коллекции:
-		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SCollection.php';
-		$last_site_id=SCollection::getLastCollectionId();
+		//require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SCollection.php';
+		$last_site_id=SData::getLastId(SCollection::getDefaultTable());
 		//получить таблицу предзаказчиков:
 		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('precustomers', 'Collector1Table'); //таблица
@@ -396,7 +383,7 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		//то, что будем добавлять/изменять:
 		$arrPostData=array('name','phone','skype','email'); //email, session_id (next) - идентификаторы незарегистрированного юзера
 		//Обновить данные юзера:
-		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SUser.php';
+		//require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SUser.php';
 		if (!SUser::setUserData($arrPostData))
 			JMail::sendErrorMess("SUser::setUserData(\$arrPostData)"," Ошибка обновления данных юзера!");	
 		array_push($arrPostData,'session_id');	
@@ -410,7 +397,6 @@ FROM #__webapps_site_types ORDER BY id DESC";
 			//$table->set('session_id',session_id()); 
 			//$table->set('collections_ids',$last_site_id);
 			//Добавить данные в таблицу и проверить состояние:
-			require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
 			SErrors::afterTable($table);
 		
 		}else{	//емэйл предзаказчика совпадает с текущим, либо емэйл другой, но сессия та же, что означает, что он изменил данные в течение сессии 
@@ -510,7 +496,6 @@ FROM #__webapps_site_types ORDER BY id DESC";
 	function updateCollectionData($collection_id) {
 		$table=$this->prepareDataSet($collection_id); 
 		//Добавить данные в таблицу и проверить состояние:
-		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
 		//добавить данные:
 		SErrors::afterTable($table);
 		return true;

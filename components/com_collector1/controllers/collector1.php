@@ -10,7 +10,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.controller');
+//jimport('joomla.application.controller');
 
 class Collector1ControllerCollector1 extends JController
 {
