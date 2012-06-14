@@ -33,7 +33,7 @@ class Collector1ModelCollector1 extends JModel
 		//выясним статус юзера:
 		$user = JFactory::getUser();
 		//коллекция создавалась незарегистрированным юзером
-		if ($user->get('guest')==1) { echo "<h1>guest</h1>";
+		if ($user->get('guest')==1) { //echo "<h1>guest</h1>";
 			$last_site_id=$this->savePreOrderData();//echo "<h1>last_site_id before= $last_site_id</h1>";
 			//error?
 			if (!$last_site_id){ //echo "<h1>! last_site_id</h1>";
@@ -261,7 +261,7 @@ FROM #__webapps_site_types ORDER BY id DESC";
 	/**
 	 * Подготовить данные для добавления/обновления
 	 */
-	function prepareDataSet($updated_id=false){
+	function prepareDataSet($updated_id=false) {
 		$post_collection=JRequest::get('post');
 		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
@@ -351,26 +351,51 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		return $table;
 	}
 	/**
-	 * Подготовить данные для добавления в таблицу предзаказчиков
+	 * Подготовить данные для добавления в таблицу предзаказчиков, добавить или обновить.
 	 */
-	function preparePreOrderDataValues($table,$arrPostData,$post_collection,$last_site_id){ //
-		for($i=0,$j=count($arrPostData);$i<$j;$i++)
-			if ($post_collection[$arrPostData[$i]]) 
-				$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
+	function preparePreOrderDataValues(	//&$table,
+										//$arrPostData, //имена добавляемых/обновляемых полей
+										//$post_collection, //массив post
+										$last_site_id, //id последней коллекции или заказа
+										$record_id=false //если запись уже существует...
+									  ){ //
+		$table = JTable::getInstance('precustomers', 'Collector1Table'); //таблица
+		//var_dump("<h1>table:</h1><pre>",$table,"</pre>");
+		$table->reset();
+		if ($record_id) { //if uploading
+			if ($table->load($record_id)) {
+				JMail::sendErrorMess("Не получен id записи ()",$subject);
+				die('after');
+				return false;
+			}
+		} 
+		$post_collection=JRequest::get('post');
+		$fieldsToImpact=array('name','phone','skype','email','collections_ids','orders_ids');
+		for($i=0,$j=count($fieldsToImpact);$i<$j;$i++)
+			if ($post_collection[$fieldsToImpact[$i]]) 
+				$table->set($fieldsToImpact[$i],$post_collection[$fieldsToImpact[$i]]);
 		$table->set('session_id',session_id()); 
-		$table->set('collections_ids',$last_site_id);
-		return $table;
+		
+		switch (JRequest::getVar('task'))  { 
+			case "collect":
+				$order_obj_type="collections_ids";
+					break;
+			case "order":
+				$order_obj_type="orders_ids";
+					break;
+		}
+		//collections_ids or orders_ids:
+		$table->set($order_obj_type,$last_site_id);
+		if (!$record_id) SErrors::afterTable($table);
+		else SErrors::afterTableUpdate($table,true,$record_id);
+		return true;
 	}
 	/**
 	 * Сохранить данные предзаказчика (те, которых нет в таблице юзеров) и созданной им коллекции:
 	 */
 	function savePreOrderData() { // #__webapps_customer_site_options.id
 		//получить id последней коллекции:
-		//require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SCollection.php';
-		$last_site_id=SData::getLastId(SCollection::getDefaultTable());
-		//получить таблицу предзаказчиков:
-		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
-		$table = JTable::getInstance('precustomers', 'Collector1Table'); //таблица
+		$last_record_id=SData::getLastId(SCollection::getDefaultTable());
 		//добавим в таблицу данные предзаказчика:
 		$post_collection=JRequest::get('post');
 		//проверить, есть ли уже такая запись в таблице:
@@ -386,37 +411,22 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		//require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SUser.php';
 		if (!SUser::setUserData($arrPostData))
 			JMail::sendErrorMess("SUser::setUserData(\$arrPostData)"," Ошибка обновления данных юзера!");	
-		array_push($arrPostData,'session_id');	
+		//array_push($arrPostData,'session_id');	
 		//коллекции предзаказчика в таблице не обнаружены:
 		if (empty($result)) {
-			$table->reset(); //clear buffer
+			//$table->reset(); //clear buffer
 			//установить значения полей:
-			$table=self::preparePreOrderDataValues($table,$arrPostData,$post_collection,$last_site_id);
-			//for($i=0,$j=count($arrPostData);$i<$j;$i++)
-				//$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
-			//$table->set('session_id',session_id()); 
-			//$table->set('collections_ids',$last_site_id);
+			//$table=
+			self::preparePreOrderDataValues(/*$table,$arrPostData,$post_collection,*/$last_record_id);
 			//Добавить данные в таблицу и проверить состояние:
-			SErrors::afterTable($table);
+			//SErrors::afterTable($table);
 		
 		}else{	//емэйл предзаказчика совпадает с текущим, либо емэйл другой, но сессия та же, что означает, что он изменил данные в течение сессии 
 			//будем ОБНОВЛЯТЬ:
-			if (!$table->load($result['id'])) {
-				// handle failed load
-				JMail::sendErrorMess($table->getError()," (\$table->load())");			
-			}else{ 		
 				//установить значения полей:
-				$table=self::preparePreOrderDataValues($table,$arrPostData,$post_collection,$result['collections_ids'].','.$last_site_id);
-				//for($i=0,$j=count($arrPostData);$i<$j;$i++) {
-					//if ($post_collection[$arrPostData[$i]]) {
-						//echo "<div>added = ".$post_collection[$arrPostData[$i]]."</div>";
-						//$table->set($arrPostData[$i],$post_collection[$arrPostData[$i]]);
-					//}//else echo "<div>NOT added = ".$post_collection[$arrPostData[$i]]."</div>";
-				//}
-				//$table->set('session_id',session_id()); 				
-				//$table->set('collections_ids', $result['collections_ids'].','.$last_site_id);
-					//echo "<div>collections_ids = ".$result['collections_ids'].','.$last_site_id."</div>";
-				if ($table->check()) {
+				self::preparePreOrderDataValues(/*$table,$arrPostData,$post_collection,*/$result['collections_ids'].','.$last_record_id,$result['id']);
+				
+				/*if ($table->check()) {
 					if (!$table->store(true)){
 						// handle failed update
 						JMail::sendErrorMess($table->getError()," (\$table->store())");
@@ -424,10 +434,10 @@ FROM #__webapps_site_types ORDER BY id DESC";
 				}else{
 					// handle invalid input
 					JMail::sendErrorMess($table->getError()," (\$table->check())");
-				}
-			}
+				}*/
+			//}
 		}
-		return $last_site_id;
+		return $last_record_id;
 	}
 	/**
 	 * Получить стр. по умолчанию

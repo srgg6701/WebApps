@@ -28,7 +28,7 @@ if (!$this->baseurl){
 </head>
 <body>
 <?
-if(strstr($_SERVER['HTTP_HOST'],"localhost")||$_GET['debug']){?><div style="position:absolute; right:40px; top:16px; background:#FFFF00;" class="padding10 bold border_radius"><a href="index.php?option=com_content&view=app">Debug</a></div><? }
+if(strstr($_SERVER['HTTP_HOST'],"localhost")||$_GET['debug']){?><div style="position:absolute; right:40px; top:16px; background:#FFFF00;" class="padding10 bold border_radius"><a href="index.php?option=com_content&view=app&c=debug">Debug</a></div><? }
 ?>
 
 <? $path_to_images='templates/fastwebdev/images/'; 

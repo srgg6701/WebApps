@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     1.7.0
+ * @version     2.1.0
  * @package     com_collector1
- * @copyright   Copyright (C) 2012. All rights reserved.
+ * @copyright   Copyright (C) webapps 2012. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Created by com_combuilder - http://www.notwebdesign.com
+ * @author      srgg <srgg67@gmail.com> - http://www.facebook.com/srgg67
  */
 
 defined('_JEXEC') or die;
@@ -62,7 +62,7 @@ class Collector1Model_site_options_partial extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::populateState('a.sites_types_ids_location', 'asc');
+		parent::populateState('a.id', 'asc');
 	}
 
 	/**
@@ -107,10 +107,10 @@ class Collector1Model_site_options_partial extends JModelList
 		$query->from('`#__webapps_site_options_partial` AS a');
 
 
-                // Join over the users for the checked out user.
-                $query->select('uc.name AS editor');
-                $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
-            
+        // Join over the users for the checked out user.
+        $query->select('uc.name AS editor');
+        $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
+        
 
 
 
@@ -121,7 +121,7 @@ class Collector1Model_site_options_partial extends JModelList
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-                $query->where('( a.sites_types_ids_location LIKE '.$search.' )');
+                
 			}
 		}
 

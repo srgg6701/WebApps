@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     1.7.0
+ * @version     2.1.0
  * @package     com_collector1
- * @copyright   Copyright (C) 2012. All rights reserved.
+ * @copyright   Copyright (C) webapps 2012. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Created by com_combuilder - http://www.notwebdesign.com
+ * @author      srgg <srgg67@gmail.com> - http://www.facebook.com/srgg67
  */
 
 defined('_JEXEC') or die;
@@ -116,10 +116,10 @@ class Collector1Model_customers extends JModelList
 		$query->from('`#__webapps_customers` AS a');
 
 
-                // Join over the users for the checked out user.
-                $query->select('uc.name AS editor');
-                $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
-            
+        // Join over the users for the checked out user.
+        $query->select('uc.name AS editor');
+        $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
+        
 
 
 
@@ -130,7 +130,7 @@ class Collector1Model_customers extends JModelList
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-                $query->where('( a.surname LIKE '.$search.'  OR  a.middle_name LIKE '.$search.'  OR  a.work_phone LIKE '.$search.'  OR  a.mobila LIKE '.$search.'  OR  a.company_name LIKE '.$search.'  OR  a.city LIKE '.$search.'  OR  a.region LIKE '.$search.'  OR  a.zip_code LIKE '.$search.' )');
+                $query->where('( a.surname LIKE '.$search.'  OR  a.work_phone LIKE '.$search.'  OR  a.mobila LIKE '.$search.'  OR  a.company_name LIKE '.$search.'  OR  a.city LIKE '.$search.'  OR  a.zip_code LIKE '.$search.' )');
 			}
 		}
 

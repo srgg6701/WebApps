@@ -10,6 +10,7 @@
 defined('JPATH_PLATFORM') or die;
 
 jimport('phpmailer.phpmailer');
+require_once JPATH_ADMINISTRATOR.DS.'classes/SErrors.php';
 
 /**
  * Email Class.  Provides a common interface to send email from the Joomla! Platform
@@ -476,10 +477,10 @@ class JMail extends PHPMailer
 	 * Send mess about ERROR
 	 */
 	public function sendErrorMess($msg,$subject=false){
-		require_once JPATH_ADMINISTRATOR.DS.'classes/SErrors.php';
+		
 		SErrors::showDebugTrace(debug_backtrace());
 		if(strstr($_SERVER['HTTP_HOST'],"localhost")){
-			echo SErrors::$trace.'<br>';
+			echo "ERROR message: <div>$msg</div><hr>".SErrors::$trace.'<br>';
 		}else{
 			$msg.="<hr>".SErrors::$trace;
 			$siteName=JFactory::getConfig()->getValue('sitename');

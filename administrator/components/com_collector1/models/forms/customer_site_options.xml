@@ -7,20 +7,29 @@
                     description="JGLOBAL_FIELD_ID_DESC" /> 
 
        <field name="customer_id" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_CUSTOMER_ID" description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_CUSTOMER_ID" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_CUSTOMER_ID"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_CUSTOMER_ID" 
+                
                 
                 
                 filter="safehtml" /> 
 
        <field name="site_type_id" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_SITE_TYPE_ID" description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_SITE_TYPE_ID" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_SITE_TYPE_ID"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_SITE_TYPE_ID" 
+                
                 
                 
                 filter="safehtml" /> 
 
  <field id="engine_type_choice_id" name="engine_type_choice_id" type="radio"
                 class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_ENGINE_TYPE_CHOICE_ID" description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_ENGINE_TYPE_CHOICE_ID" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_ENGINE_TYPE_CHOICE_ID"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_ENGINE_TYPE_CHOICE_ID" 
+                
                 
                 >
                     <option value="0">JNO</option>
@@ -32,21 +41,39 @@
                 filter="safehtml"
                 
                 
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_ENGINES_IDS" description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_ENGINES_IDS"  /> 
+                
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_ENGINES_IDS"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_ENGINES_IDS"  /> 
 
        <field name="options_array" type="editor" buttons="true"
                 class="inputbox"
                 filter="safehtml"
                 
                 
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_OPTIONS_ARRAY" description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_OPTIONS_ARRAY"  /> 
+                
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_OPTIONS_ARRAY"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_OPTIONS_ARRAY"  /> 
 
        <field name="xtra" type="editor" buttons="true"
                 class="inputbox"
                 filter="safehtml"
                  required="true" 
                 
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_XTRA" description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_XTRA"  /> 
+                
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_XTRA"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_XTRA"  /> 
+
+       <field name="finish_date" type="calendar" class="inputbox"
+                 required="true" 
+                
+                 default="0000-00-00" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_SITE_OPTIONS_FINISH_DATE"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_SITE_OPTIONS_FINISH_DATE" 
+                filter="safehtml" /> 
 
                         <field name="checked_out" type="hidden" filter="unset" />
                 <field name="checked_out_time" type="hidden" filter="unset" />

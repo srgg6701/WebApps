@@ -7,20 +7,29 @@
                     description="JGLOBAL_FIELD_ID_DESC" /> 
 
        <field name="name_ru" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_NAME_RU" description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_NAME_RU" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_NAME_RU"
+            description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_NAME_RU" 
+                
                 
                  required="true" 
                 filter="safehtml" /> 
 
        <field name="name_en" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_NAME_EN" description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_NAME_EN" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_NAME_EN"
+            description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_NAME_EN" 
+                
                 
                  required="true" 
                 filter="safehtml" /> 
 
  <field id="option_stat" name="option_stat" type="radio"
                 class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_OPTION_STAT" description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_OPTION_STAT" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_OPTION_STAT"
+            description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_OPTION_STAT" 
+                
                 
                 >
                     <option value="0">JNO</option>

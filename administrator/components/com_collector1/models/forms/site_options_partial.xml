@@ -7,7 +7,10 @@
                     description="JGLOBAL_FIELD_ID_DESC" /> 
 
        <field name="site_option_id" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_PARTIAL_SITE_OPTION_ID" description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_PARTIAL_SITE_OPTION_ID" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_PARTIAL_SITE_OPTION_ID"
+            description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_PARTIAL_SITE_OPTION_ID" 
+                
                 
                 
                 filter="safehtml" /> 
@@ -17,7 +20,10 @@
                 filter="safehtml"
                 
                 
-                 label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_PARTIAL_SITES_TYPES_IDS_LOCATION" description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_PARTIAL_SITES_TYPES_IDS_LOCATION"  /> 
+                
+                
+            label="COM_COLLECTOR1_FORM_LBL_SITE_OPTIONS_PARTIAL_SITES_TYPES_IDS_LOCATION"
+            description="COM_COLLECTOR1_FORM_DESC_SITE_OPTIONS_PARTIAL_SITES_TYPES_IDS_LOCATION"  /> 
 
                         <field name="checked_out" type="hidden" filter="unset" />
                 <field name="checked_out_time" type="hidden" filter="unset" />

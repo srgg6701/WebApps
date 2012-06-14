@@ -7,13 +7,19 @@
                     description="JGLOBAL_FIELD_ID_DESC" /> 
 
        <field name="engine_id" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_ENGINES_RU_ENGINE_ID" description="COM_COLLECTOR1_FORM_DESC_ENGINES_RU_ENGINE_ID" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_ENGINES_RU_ENGINE_ID"
+            description="COM_COLLECTOR1_FORM_DESC_ENGINES_RU_ENGINE_ID" 
+                
                 
                  required="true" 
                 filter="safehtml" /> 
 
        <field name="name_ru" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_ENGINES_RU_NAME_RU" description="COM_COLLECTOR1_FORM_DESC_ENGINES_RU_NAME_RU" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_ENGINES_RU_NAME_RU"
+            description="COM_COLLECTOR1_FORM_DESC_ENGINES_RU_NAME_RU" 
+                
                 
                  required="true" 
                 filter="safehtml" /> 

@@ -7,26 +7,38 @@
                     description="JGLOBAL_FIELD_ID_DESC" /> 
 
        <field name="dnior_users_id" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_DNIOR_USERS_ID" description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_DNIOR_USERS_ID" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_DNIOR_USERS_ID"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_DNIOR_USERS_ID" 
+                
                 
                 
                 filter="safehtml" /> 
 
        <field name="surname" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_SURNAME" description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_SURNAME" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_SURNAME"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_SURNAME" 
+                
                 
                 
                 filter="safehtml" /> 
 
        <field name="middle_name" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_MIDDLE_NAME" description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_MIDDLE_NAME" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_MIDDLE_NAME"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_MIDDLE_NAME" 
+                
                 
                 
                 filter="safehtml" /> 
 
  <field id="sex" name="sex" type="radio"
                 class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_SEX" description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_SEX" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_SEX"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_SEX" 
+                
                 
                 >
                     <option value="0">JNO</option>
@@ -35,42 +47,63 @@
 
        <field name="birthday" type="calendar" class="inputbox"
                 
+                
                  default="0000-00-00" 
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_BIRTHDAY" description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_BIRTHDAY" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_BIRTHDAY"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_BIRTHDAY" 
                 filter="safehtml" /> 
 
        <field name="work_phone" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_WORK_PHONE" description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_WORK_PHONE" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_WORK_PHONE"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_WORK_PHONE" 
+                
                 
                 
                 filter="safehtml" /> 
 
        <field name="mobila" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_MOBILA" description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_MOBILA" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_MOBILA"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_MOBILA" 
+                
                 
                 
                 filter="safehtml" /> 
 
        <field name="company_name" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_COMPANY_NAME" description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_COMPANY_NAME" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_COMPANY_NAME"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_COMPANY_NAME" 
+                
                 
                 
                 filter="safehtml" /> 
 
        <field name="city" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_CITY" description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_CITY" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_CITY"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_CITY" 
+                
                 
                 
                 filter="safehtml" /> 
 
        <field name="region" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_REGION" description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_REGION" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_REGION"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_REGION" 
+                
                 
                 
                 filter="safehtml" /> 
 
        <field name="zip_code" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_ZIP_CODE" description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_ZIP_CODE" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_ZIP_CODE"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_ZIP_CODE" 
+                
                 
                 
                 filter="safehtml" /> 

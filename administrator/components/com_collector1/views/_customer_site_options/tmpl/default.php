@@ -1,10 +1,10 @@
 <?php
 /**
- * @version     1.7.0
+ * @version     2.1.0
  * @package     com_collector1
- * @copyright   Copyright (C) 2012. All rights reserved.
+ * @copyright   Copyright (C) webapps 2012. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Created by com_combuilder - http://www.notwebdesign.com
+ * @author      srgg <srgg67@gmail.com> - http://www.facebook.com/srgg67
  */
 
 
@@ -13,6 +13,10 @@ defined('_JEXEC') or die;
 
 JHtml::_('behavior.tooltip');
 JHTML::_('script','system/multiselect.js',false,true);
+// Import CSS
+$document = &JFactory::getDocument();
+$document->addStyleSheet('components/com_collector1/assets/css/collector1.css');
+
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
 $listOrder	= $this->state->get('list.ordering');
@@ -58,6 +62,9 @@ $saveOrder	= $listOrder == 'a.ordering';
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMER_SITE_OPTIONS_XTRA', 'a.xtra', $listDirn, $listOrder); ?>
+				</th>
+				<th class='left'>
+				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMER_SITE_OPTIONS_FINISH_DATE', 'a.finish_date', $listDirn, $listOrder); ?>
 				</th>
 
 
@@ -123,6 +130,9 @@ $saveOrder	= $listOrder == 'a.ordering';
 				</td>
 				<td>
 					<?php echo $item->xtra; ?>
+				</td>
+				<td>
+					<?php echo $item->finish_date; ?>
 				</td>
 
 

@@ -7,7 +7,19 @@
                     description="JGLOBAL_FIELD_ID_DESC" /> 
 
        <field name="site_side" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_OPTIONS_BEYOND_SIDES_SITE_SIDE" description="COM_COLLECTOR1_FORM_DESC_OPTIONS_BEYOND_SIDES_SITE_SIDE" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_OPTIONS_BEYOND_SIDES_SITE_SIDE"
+            description="COM_COLLECTOR1_FORM_DESC_OPTIONS_BEYOND_SIDES_SITE_SIDE" 
+                
+                
+                
+                filter="safehtml" /> 
+
+       <field name="name_ru" type="text" size="40" class="inputbox"
+                
+            label="COM_COLLECTOR1_FORM_LBL_OPTIONS_BEYOND_SIDES_NAME_RU"
+            description="COM_COLLECTOR1_FORM_DESC_OPTIONS_BEYOND_SIDES_NAME_RU" 
+                
                 
                 
                 filter="safehtml" /> 
@@ -17,13 +29,10 @@
                 filter="safehtml"
                 
                 
-                 label="COM_COLLECTOR1_FORM_LBL_OPTIONS_BEYOND_SIDES_SITE_OPTIONS_BEYOND_SIDE" description="COM_COLLECTOR1_FORM_DESC_OPTIONS_BEYOND_SIDES_SITE_OPTIONS_BEYOND_SIDE"  /> 
-
-       <field name="name_ru" type="text" size="40" class="inputbox"
-                 label="COM_COLLECTOR1_FORM_LBL_OPTIONS_BEYOND_SIDES_NAME_RU" description="COM_COLLECTOR1_FORM_DESC_OPTIONS_BEYOND_SIDES_NAME_RU" 
                 
                 
-                filter="safehtml" /> 
+            label="COM_COLLECTOR1_FORM_LBL_OPTIONS_BEYOND_SIDES_SITE_OPTIONS_BEYOND_SIDE"
+            description="COM_COLLECTOR1_FORM_DESC_OPTIONS_BEYOND_SIDES_SITE_OPTIONS_BEYOND_SIDE"  /> 
 
                         <field name="checked_out" type="hidden" filter="unset" />
                 <field name="checked_out_time" type="hidden" filter="unset" />

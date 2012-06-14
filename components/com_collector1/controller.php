@@ -14,6 +14,7 @@ defined('_JEXEC') or die;
 class Collector1Controller extends JController
 {
 	private $go_page='index.php?option=com_collector1&view=collected';
+	private $go_page_common="index.php?option=com_collector1";
 	/**
 	 *добавить данные в таблицу опций сайта заказчика, как для зарегистрированных, так и для временных
 	 */
@@ -43,10 +44,11 @@ class Collector1Controller extends JController
 	/**
 	 * размещение заказа на выполнение отдельного компонента/(ов)
 	 */
-	function order(){ 
-		if($this->getModel('orders')->makeOrder()) {
-			//die ('Done!');
-			//$this->setRedirect(JRoute::_($this->go_page.'&site_deleted='.$collection_id));			
+	function order(){
+		$model=$this->getModel();
+		if($this->getModel('orders')->makeOrder($model)) { 
+			die ('makeOrder is complited!');
+			$this->setRedirect(JRoute::_($this->go_page_common."&view=orders"));			
 		}else{
 			JMail::sendErrorMess('Данные не размещены.',"Добавление заказа.");		
 		}
