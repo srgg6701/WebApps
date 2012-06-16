@@ -42,7 +42,7 @@ if ($user->get('guest')==1){?>
       <hr size="2" color="#009900"><br>
 <? 	
 }?>    
-    <a name="select_site_type"></a>
+    <a name="select_site_type" id="select_site_type"></a>
   <label for="select"><h3 class="collector_head"><?
 
 if ($current_order_set){
@@ -248,7 +248,7 @@ if ($current_order_set){
 <br>
 <button id="make_site_prototype" type="submit"><?
 
-	if ($this->go_action=='update'){
+	if (JRequest::getVar('collection_id')){
 		?>Сохранить<? 	
 	}else{
 		?>Создать прототип<?
@@ -314,7 +314,7 @@ function checkRequired(){
 		
 		if (selST.options[selST.selectedIndex].value=='0') {
 			alert('Вы не указали, какой тип сайта вам нужен!');
-			location.href='#select_site_type';
+			scrollToY('select_site_type');
 			selST.style.backgroundColor='yellow';
 			return false;
 		}

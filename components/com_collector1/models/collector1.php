@@ -9,42 +9,47 @@
 
 // No direct access
 defined('_JEXEC') or die;
+//echo "<h3>MODEL: collector1.php</h3>";
 /**
  * Model
  */
 class Collector1ModelCollector1 extends JModel
 {
-	protected $_item;
 	protected $_action;
-	
+	protected $_item;
+	public $_customer_status; //статус юзера как юзера и заказчика/предзаказчика
+	protected $mainUserPostData=array('name','phone','skype','email');
+	/**
+	 * Конструктор
+	 */
 	function __construct(){
 		parent::__construct();
 		$this->_action=JRequest::getVar('task');
 	}
 	/**
-	 * Добавить набор опций 
+	 * Создать коллекцию 
 	 */
 	function addCollection(){
-		$table=$this->prepareDataSet();
-		if (!$table) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareDataSet()");		
-		//Добавить данные в таблицу и проверить состояние:
+		//подготовить данные для добавления новой коллекции:
+		$table=$this->prepareCollectionDataSet();
+		if (!$table) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareCollectionDataSet()");		
 		//добавить данные в dnior_webapps_customer_site_options:
 		SErrors::afterTable($table);
-		//выясним статус юзера:
-		$user = JFactory::getUser();
-		//коллекция создавалась незарегистрированным юзером
-		if ($user->get('guest')==1) { //echo "<h1>guest</h1>";
-			$last_site_id=$this->savePreOrderData();//echo "<h1>last_site_id before= $last_site_id</h1>";
-			//error?
-			if (!$last_site_id){ //echo "<h1>! last_site_id</h1>";
-				JMail::sendErrorMess('Не добавлена временная коллекция опций сайта для незарегистрированного заказачика.',"Добавление временной коллекции.");
-			}//else echo "<h1>last_site_id AFTER= $last_site_id</h1>";
-			
-		}else{	//echo "<h1>! guest</h1>";
-			//получить id последней коллекции:
-			$last_site_id=SData::getLastId(SCollection::getDefaultTable());
+		//получить статус субъекта:
+		$this->getCustomerStatus();
+		$customer_status=$this->_customer_status;
+		if(!$added_record_id=SData::getLastId(SCollection::getDefaultTable()))
+			JMail::sendErrorMess('Не добавлена временная коллекция опций сайта для незарегистрированного заказачика.',"Добавление временной коллекции.");
+		//Юзер неизвестен, будем ДОБАВЛЯТЬ данные в таблицу предзаказчика:
+		if ($customer_status=="unknown") {
+			//добавить запись в таблицу предзаказчиков
+			$this->handlePrecustomersTable( $added_record_id, //новая запись в таблице коллекций
+										 	JRequest::get('post')
+									      );
 		}
-		return $last_site_id;
+		if (!SFiles::handleFilesUploading('s',$added_record_id))
+			JMail::sendErrorMess('Не загружены файлы во время добавления заказа.','Ошибка загрузки файлов');
+		return $added_record_id; //id последней записи нужен для редиректа, устанавливаемом в контроллере
 	}
 	/**
 	 * Построить ячейки для frontend, backend, boudoire в строке опции
@@ -141,7 +146,9 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		}
 		return $this->_item;
 	}
-	//получить коллекцию по её id:
+	/**
+	 * Получить коллекцию по её id
+	 */
 	function getCollection($collection_id){
 		$user = JFactory::getUser();
 		if ($user->get('guest')!=1||$user->get('email')) { 
@@ -200,7 +207,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		}else return false;
 	}	
 	/**
-	 *Получить количество коллекций заказчика
+	 * Получить массив id id коллекций заказчика
 	 */
 	function getCollectionsIds($customer_id){
 		$db=JFactory::getDBO();
@@ -209,8 +216,43 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		return $db->loadResultArray();
 	}
 	/**
-	 *Получить массив всех данных для построения таблицы Коллектора
+	  * Получить статус заказчика/предзказчика 
 	 */
+	/**	
+	  * - [enabled,] activated		  				block = 0, activation [empty] 
+	  * -  enabled,  not activated (can log in) 	block = 0, activation [code]
+	  *	-  not enabled, not activated				block = 1, activation [code] 
+	  * -  disabled, activated	(can't log in)		block = 1, activation [empty]	
+	  -----------------------------------------------------------------------
+	  * * Нет в таблице юзеров:
+	  * - предзаказчик - уже создавал коллекции/заказы, но ещё не зарегистрировался
+	  * - новый предзаказчик
+	  */
+	function getCustomerStatus($user=false){
+		//выясним статус юзера:
+		if (!$user) $user = JFactory::getUser();
+		if ($user->get('guest')!=1){
+			$customer_status=($user->get('block')==1)? "disabled":"enabled";
+			$customer_status.=" ";
+			//код активации?
+			$customer_status.=($user->get('activation'))? "inactive":"active";
+		}else{
+			//проверить запись в таблице предзаказчиков по полученному емэйлу:
+			$customer_status=SUser::getPrecustomerStatus(JRequest::getVar('email'),$user);
+			if ($customer_status>1){
+				JMail::sendErrorMess('Обнаружено более 1 записи предзаказчика',"Лишние записи в таблице предзаказчиков");
+			}else{
+				$customer_status=($customer_status)? "precustomer":"unknown";
+			}
+		}
+		if (!$this->_customer_status=$customer_status)
+			JMail::sendErrorMess('Не получен статус субъекта в getCustomerStatus()','Не получен статус субъекта');
+		//echo "<div>$customer_status</div>";
+		return true;
+	}
+	/**
+	  * Получить массив всех данных для построения таблицы Коллектора
+	*/
 	function getDataForCollector(){
 		$db = JFactory::getDBO();
 		$query=" SELECT #__webapps_site_options.id AS option_id, 
@@ -235,7 +277,7 @@ IF ( sites_types_ids_location,
 	}
 	//Методы Joomla! здесь не используем просто потому, что не видим в данном случае необходимости	
 	/**
-	 *Получим таблицу разделов сайта
+	 * Получим таблицу разделов сайта
 	 */
 	function getSidesDesc(){
 		$db = JFactory::getDBO();
@@ -259,23 +301,21 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		return $db->loadAssocList();
 	}
 	/**
-	 * Подготовить данные для добавления/обновления
+	 * Подготовить данные для добавления/обновления таблицы Коллекций
 	 */
-	function prepareDataSet($updated_id=false) {
+	function prepareCollectionDataSet($updated_id=false) {
 		$post_collection=JRequest::get('post');
-		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
 		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
 		if ($updated_id) {
 			if (!$table->load($updated_id)) 
 				JMail::sendErrorMess($table->getError()," (\$table->load())");
 				//var_dump("<h1>updated_id:</h1><pre>",$updated_id,"</pre>"); die();
 		}
+		$table->reset();
 		$user = JFactory::getUser();
 		$selectSiteType=$post_collection["selectSiteType"]; //site type
-		$table->reset();
 		$table->set('customer_id', $user->id); //id заказчика
 		$table->set('site_type_id', $selectSiteType); //тип сайта
-		
 		//выяснить выбор типа движка:
 		switch ($post_collection["choose_engine"])  { 
 
@@ -341,6 +381,7 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		if (!empty($arrStoredOptions)){
 			$table->set('options_array',serialize($arrStoredOptions));
 		}
+		$table->set('finish_date', $post_collection["finish_date"]);
 		$table->set('xtra', $post_collection["xtra"]);
 		/*// Bind the data to the table
 		if (!$table->bind())
@@ -351,31 +392,19 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		return $table;
 	}
 	/**
-	 * Подготовить данные для добавления в таблицу предзаказчиков, добавить или обновить.
+	 * Добавить или обновить данные в таблице предзаказчиков
 	 */
-	function preparePreOrderDataValues(	//&$table,
-										//$arrPostData, //имена добавляемых/обновляемых полей
-										//$post_collection, //массив post
-										$last_site_id, //id последней коллекции или заказа
-										$record_id=false //если запись уже существует...
+	function handlePrecustomersTable(	$new_record_id, //id добавленной коллекции или заказа
+										$post_collection=false,
+										$current_record_id=false //если запись уже существует...
 									  ){ //
+		
 		$table = JTable::getInstance('precustomers', 'Collector1Table'); //таблица
 		//var_dump("<h1>table:</h1><pre>",$table,"</pre>");
 		$table->reset();
-		if ($record_id) { //if uploading
-			if ($table->load($record_id)) {
-				JMail::sendErrorMess("Не получен id записи ()",$subject);
-				die('after');
-				return false;
-			}
-		} 
-		$post_collection=JRequest::get('post');
-		$fieldsToImpact=array('name','phone','skype','email','collections_ids','orders_ids');
-		for($i=0,$j=count($fieldsToImpact);$i<$j;$i++)
-			if ($post_collection[$fieldsToImpact[$i]]) 
-				$table->set($fieldsToImpact[$i],$post_collection[$fieldsToImpact[$i]]);
-		$table->set('session_id',session_id()); 
-		
+		if (!SUser::setUserData($arrMainUserPostData)) //назначили юзеру данные из массива POST
+			JMail::sendErrorMess("SUser::setUserData(\$arrMainUserPostData)"," Ошибка обновления данных юзера!");
+		if (!$post_collection) $post_collection=JRequest::get('post');
 		switch (JRequest::getVar('task'))  { 
 			case "collect":
 				$order_obj_type="collections_ids";
@@ -384,60 +413,37 @@ FROM #__webapps_site_types ORDER BY id DESC";
 				$order_obj_type="orders_ids";
 					break;
 		}
-		//collections_ids or orders_ids:
-		$table->set($order_obj_type,$last_site_id);
-		if (!$record_id) SErrors::afterTable($table);
-		else SErrors::afterTableUpdate($table,true,$record_id);
-		return true;
-	}
-	/**
-	 * Сохранить данные предзаказчика (те, которых нет в таблице юзеров) и созданной им коллекции:
-	 */
-	function savePreOrderData() { // #__webapps_customer_site_options.id
-		//получить id последней коллекции:
-		$last_record_id=SData::getLastId(SCollection::getDefaultTable());
-		//добавим в таблицу данные предзаказчика:
-		$post_collection=JRequest::get('post');
-		//проверить, есть ли уже такая запись в таблице:
-		$db = JFactory::getDBO();
-		//ниже потребуются значения обоих полей:
-		$query="SELECT id, collections_ids FROM #__webapps_precustomers 
- WHERE `session_id` = '".session_id()."' OR email = '$post_collection[email]'";
-		$db->setQuery($query);
-		$result=$db->loadAssoc();
-		//то, что будем добавлять/изменять:
-		$arrPostData=array('name','phone','skype','email'); //email, session_id (next) - идентификаторы незарегистрированного юзера
-		//Обновить данные юзера:
-		//require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SUser.php';
-		if (!SUser::setUserData($arrPostData))
-			JMail::sendErrorMess("SUser::setUserData(\$arrPostData)"," Ошибка обновления данных юзера!");	
-		//array_push($arrPostData,'session_id');	
-		//коллекции предзаказчика в таблице не обнаружены:
-		if (empty($result)) {
-			//$table->reset(); //clear buffer
-			//установить значения полей:
-			//$table=
-			self::preparePreOrderDataValues(/*$table,$arrPostData,$post_collection,*/$last_record_id);
-			//Добавить данные в таблицу и проверить состояние:
-			//SErrors::afterTable($table);
-		
-		}else{	//емэйл предзаказчика совпадает с текущим, либо емэйл другой, но сессия та же, что означает, что он изменил данные в течение сессии 
-			//будем ОБНОВЛЯТЬ:
-				//установить значения полей:
-				self::preparePreOrderDataValues(/*$table,$arrPostData,$post_collection,*/$result['collections_ids'].','.$last_record_id,$result['id']);
-				
-				/*if ($table->check()) {
-					if (!$table->store(true)){
-						// handle failed update
-						JMail::sendErrorMess($table->getError()," (\$table->store())");
-					}
-				}else{
-					// handle invalid input
-					JMail::sendErrorMess($table->getError()," (\$table->check())");
-				}*/
-			//}
+		$arrMainUserPostData=$this->mainUserPostData;
+		if ($current_record_id) {
+			$arrDataPatch=array();
+			$user = JFactory::getUser();
+			$arrDataPatch['collections_ids']=$post_collection['collections_ids'];
+			$arrDataPatch['orders_ids']=$post_collection['orders_ids'];
+			//получить текущий набор
+			
+			$arrPrecustomerSet=SCollection::getGuestCollections($order_obj_type,$user);
+			$arrDataPatch[$order_obj_type]=implode(",",$arrPrecustomerSet).','.$new_record_id;
+			$arrDataPatch['session_id']=session_id();
+			foreach ($arrMainUserPostData as $key=>$value)
+				$arrDataPatch[$value]=$user->get($value);
+			//обновить данные в табл. предзаказчиков:
+			SErrors::afterTableUpdate($table,$arrDataPatch,$current_record_id);
+		}else{
+			if (!$new_record_id) {
+				JMail::sendErrorMess("Не получен id добавленной записи"," Ошибка получения id добавленной записи");
+				exit();
+			}else{
+				$table->set('collections_ids',$post_collection['collections_ids']);
+				$table->set('orders_ids',$post_collection['orders_ids']);
+				$table->set($order_obj_type,$new_record_id); 
+				$table->set('session_id',session_id()); 
+				foreach ($arrMainUserPostData as $key=>$value)
+					$table->set($value,$user->get($value));
+				//collections_ids or orders_ids:
+				SErrors::afterTable($table);
+			}
 		}
-		return $last_record_id;
+		return true;
 	}
 	/**
 	 * Получить стр. по умолчанию
@@ -501,10 +507,10 @@ FROM #__webapps_site_types ORDER BY id DESC";
 				);	
 	} 
 	/**
-	 * Обновить данные коллекции:
+	 * Обновить данные коллекции
 	 */
 	function updateCollectionData($collection_id) {
-		$table=$this->prepareDataSet($collection_id); 
+		$table=$this->prepareCollectionDataSet($collection_id); 
 		//Добавить данные в таблицу и проверить состояние:
 		//добавить данные:
 		SErrors::afterTable($table);

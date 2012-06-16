@@ -13,22 +13,22 @@ defined('_JEXEC') or die;
 //методы для работы с коллекциями также представлены в administrator/classes/SCollection.php
 class Collector1Controller extends JController
 {
-	private $go_page='index.php?option=com_collector1&view=collected';
-	private $go_page_common="index.php?option=com_collector1";
+	private $go_page='index.php?option=com_collector1&view=collected'; //ссылка на собранные коллекции
+	private $go_page_common="index.php?option=com_collector1"; //базовая ссылка на компонент
 	/**
-	 *добавить данные в таблицу опций сайта заказчика, как для зарегистрированных, так и для временных
+	 * Добавить данные в таблицу опций сайта (Коллекций)
 	 */
 	function collect(){ //task=collect
-		$last_site_id=$this->getModel()->addCollection();
-		if (!$last_site_id) { 
+		$last_record_id=$this->getModel()->addCollection();
+		if (!$last_record_id) { 
 			JMail::sendErrorMess('Не получен id добавленной записи.',"Добавление записи.");
 			return false;
 		}
 		//пслать дальше:
-		$this->setRedirect(JRoute::_($this->go_page.'&site_added='.$last_site_id));
+		$this->setRedirect(JRoute::_($this->go_page.'&site_added='.$last_record_id));
 	}
 	/**
-	 *удалить запись из таблицы опций сайта заказчика. Данные из таблицы *customers не удалять
+	 * Удалить запись из таблицы опций сайта заказчика. Данные из таблицы *customers не удалять
 	 */
 	function delete(){ //task=delete
 		$collection_id=JRequest::getVar('collection_id');
@@ -42,7 +42,7 @@ class Collector1Controller extends JController
 		}
 	}
 	/**
-	 * размещение заказа на выполнение отдельного компонента/(ов)
+	 * Добавить заказ на выполнение отдельного компонента/(ов)
 	 */
 	function order(){
 		$model=$this->getModel();
@@ -54,7 +54,7 @@ class Collector1Controller extends JController
 		}
 	}
 	/**
-	 * обновить данные в таблице опций сайта заказчика
+	 * Обновить данные в таблице Коллекций (опций сайта заказчика)
 	 */
 	function update(){ //task=update
 		$collection_id=JRequest::getVar('collection_id');
@@ -75,6 +75,11 @@ class Collector1Controller extends JController
  		// Set the view and the model
         //$view = JRequest::getVar('view','collector1');
 		//$layout = JRequest::getVar('layout');
+		//$view  = $this->getView( $view, 'html' );
+		//$model=$this->getModel();
+		//$model->getCustomerStatus();
+		//var_dump("<h1>model:</h1><pre>",$model,"</pre>");
+		//$view->setModel($model);
 		parent::display(); //отображает default view
 	}
 }

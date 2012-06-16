@@ -71,7 +71,7 @@ class Collector1ViewCollected extends JView
 				
 				if ($user->get('guest')==1){
 					//получить массив id id всех коллекций гостя:this->guest_collections_ids
-					$this->guest_collections_ids=SCollection::getGuestCollections($user);
+					$this->guest_collections_ids=SCollection::getPrecustomerSet('collections_ids',$user);
 				
 				}else{	
 					//если не гость, проверим - его ли коллекция

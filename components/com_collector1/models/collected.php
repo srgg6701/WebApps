@@ -19,7 +19,7 @@ class collector1ModelCollected extends JModel
 	function collected()
 	{	//guest?
 		//require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
-		if (!$arrCollectionsIds=SCollection::getGuestCollections()){
+		if (!$arrCollectionsIds=SCollection::getPrecustomerSet('collections_ids')){
 			$this->db->setQuery('SELECT id ' . $this->query . $where);
 			$arrCollectionsIds=$this->db->loadResultArray(); 
 		}
