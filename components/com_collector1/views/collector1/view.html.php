@@ -22,15 +22,14 @@ class Collector1ViewCollector1 extends JView
 	protected $item;
 	protected $current_order_set;
 	protected $collections_ids_array=array(); //массив id id коллекций заказчика
-	protected $go_submit='index.php?option=com_collector1&task='; //закготовка для URL формы
-	//protected $go_action='insert'; //идентификатор действия: добавить/обновить
-	public $go_signup="index.php?option=com_users&view=registration&task=fill_precustomer_data";
+	protected $go_submit='index.php?option=com_collector1&task='; //заготовка для URL формы
+	public $go_signup="index.php?option=com_users&view=registration&task=fill_precustomer_data"; //ссылка на создание коллекции с заполнением данных предзаказчика
 	protected $guest_collections_ids; //id id коллекций гостя
 	protected $templatename; //имя шаблона
 	/**
-	 * 
+	 * Заполнить и отобразить шаблон
 	 */
-	function display($tpl = null)
+	function display($tpl = NULL)
 	{
 		//require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
 		$app		= JFactory::getApplication();
@@ -43,14 +42,7 @@ class Collector1ViewCollector1 extends JView
 		$user = JFactory::getUser(); 
 		//получим данные переданной коллекции заказчика:
 		$current_set_id=JRequest::getVar('collection_id');
-		/*//получить модель, статус юзера:
-		$model=$this->getModel();
-		//$customer_status=$model->getCustomerStatus();
-		var_dump("<h1>model:</h1><pre>",$model,"</pre>");*/
-		/***** действия, зависящие от полученного статуса юзера *****/
-		if ($current_set_id
-			//&&$user->get('guest')!=1
-		   ) {
+		if ($current_set_id) {
 			
 			//$this->go_action='update';
 			$this->go_submit.="update&collection_id=".$current_set_id;		
@@ -67,8 +59,7 @@ class Collector1ViewCollector1 extends JView
 		}//var_dump("<h1>user:</h1><pre>",$user,"</pre>"); die();
 		//проверим, создавал ли незаавторизованный юзер сайты в течение сессии:
 		if ($user->get('guest')==1){
-			//require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SCollection.php';
-			$this->guest_collections_ids=SCollection::getGuestCollections('collections_ids');
+			$this->guest_collections_ids=SCollection::getPrecustomerSet('collections_ids',$user);
 		}
 		//получает HTML из контроллера (?), в случае, если он также вызывает у себя parent::display()
         parent::display($tpl);

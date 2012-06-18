@@ -32,9 +32,9 @@ class collector1ModelCollected extends JModel
 		return $collections_data_array;
 	}
 	/**
-	 * получить движок
+	 * получить движок // ПЕРЕНЕСЕНО  в отдельную модель (CMS.php)
 	 */
-	function get_cms_names($cms_picked_up){
+	/*function get_cms_names($cms_picked_up){
 		$arrEngines=Collector1ModelCollector1::tempCMSlist(); 
 		$cnt=count($cms_picked_up);
 		$cms_list=array();
@@ -56,20 +56,20 @@ class collector1ModelCollected extends JModel
 		if (!empty($cms_list)) sort($cms_list);
 		$smss=implode(',',$cms_list); 
 		return $smss;
-	}
+	}*/
 	/**
 	 * Получить название собственной cms
 	 */
-	function get_cms_own_name($collection_id){
+	/*function get_cms_own_name($collection_id){
 		$query="SELECT engines_ids FROM #__webapps_customer_site_options WHERE id = ".$collection_id;
 		$db=JFactory::getDBO();
 		$db->setQuery($query);
 		return $db->loadResult();
-	}
+	}*/
 	/**
 	 * название опции, по умолчанию - на русском
 	 */
-	function get_options_names($lang=false){
+	/*function get_options_names($lang=false){
 		if (!$lang) $lang='ru';
 		$name='name_'.$lang;
 		$query="SELECT id, $name FROM #__webapps_site_options ";
@@ -83,11 +83,11 @@ class collector1ModelCollected extends JModel
 			$arrOptions[$arr[$i]['id']]=$arr[$i][$name];
 		}
 		return $arrOptions;
-	}
+	}*/
 	/**
 	 * получить таблицу типов сайтов
 	 */
-	function get_sites_types($site_type_id=false){
+	/*function get_sites_types($site_type_id=false){
 		$query="SELECT";
 		$query.=($site_type_id)? " name_ru ":" * "; 
 		$query.="FROM #__webapps_site_types";
@@ -95,5 +95,6 @@ class collector1ModelCollected extends JModel
 		$db=JFactory::getDBO();
 		$db->setQuery($query);
 		return ($site_type_id)? $db->loadResult():$db->loadAssoc(); 
-	}
-}?>
+	}*/
+}
+?>

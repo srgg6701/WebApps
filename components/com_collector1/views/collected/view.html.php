@@ -9,10 +9,6 @@
 
 // No direct access
 defined('_JEXEC') or die;
-
-//jimport('joomla.application.component.view');
-//jimport('joomla.mail.mail');
-
 /**
  * HTML View class for the Collector1 component
  */
@@ -66,9 +62,6 @@ class Collector1ViewCollected extends JView
 			//проверим, получали ли команды работы с коллекциями:
 			//сравнить сессии для незаавторизованного юзера:
 			if ($got_collection_id){
-				
-				//require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
-				
 				if ($user->get('guest')==1){
 					//получить массив id id всех коллекций гостя:this->guest_collections_ids
 					$this->guest_collections_ids=SCollection::getPrecustomerSet('collections_ids',$user);
@@ -79,7 +72,6 @@ class Collector1ViewCollected extends JView
 					elseif (JRequest::getVar('site_deleted')!=$got_collection_id) $this->collection_of_user=-1;
 				}
 			}//die('<hr>collection_id_session='.$this->collection_id_session);
-			//require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
 			$this->templatename=SSite::getCurrentTemplateName($app);
 		}
 		parent::display($tpl);

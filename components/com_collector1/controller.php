@@ -44,7 +44,7 @@ class Collector1Controller extends JController
 	/**
 	 * Добавить заказ на выполнение отдельного компонента/(ов)
 	 */
-	function order(){
+	function order(){		
 		$model=$this->getModel();
 		if($this->getModel('orders')->makeOrder($model)) { 
 			die ('makeOrder is complited!');
@@ -65,21 +65,38 @@ class Collector1Controller extends JController
 		}
 	}
 	/**
+	 * Обновить данные в таблице заказов
+	 */
+	function updateorder(){ //task=update
+		$model=$this->getModel();
+		if($this->getModel('orders')->makeOrder($model,JRequest::getVar('order_id'))) { 
+			die ('makeOrder UPDATED is complited!');
+			$this->setRedirect(JRoute::_($this->go_page_common."&view=orders&site_updated=".$order_id));			
+		}else{
+			JMail::sendErrorMess('Данные не обновлены.',"Обновление заказа.");		
+		}
+	}
+	/**
 	 * Определиться с процедурой - обновлять/создавать коллекцию через установку action формы
 	 * Отобразить представление
 	 * @access public
 	 *
 	 */
-	function display()
+	function display($tpl=NULL)
 	{	
  		// Set the view and the model
-        //$view = JRequest::getVar('view','collector1');
-		//$layout = JRequest::getVar('layout');
-		//$view  = $this->getView( $view, 'html' );
-		//$model=$this->getModel();
+        /*$_view = JRequest::getVar('view','collector1');
+		if ($_view=='orders') {
+			//die('orders');
+			//$layout = JRequest::getVar('layout');
+			//$view  = $this->getView( $_view, 'html' );
+			$view->setModel($model,true);
+		}*/
 		//$model->getCustomerStatus();
-		//var_dump("<h1>model:</h1><pre>",$model,"</pre>");
 		//$view->setModel($model);
+		//$model=JModel::getInstance('CMS','collector1Model');
+		//$this->getModel('CMS');
+		//var_dump("<h1>model:</h1><pre>",$model,"</pre>");die();
 		parent::display(); //отображает default view
 	}
 }

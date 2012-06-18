@@ -154,7 +154,7 @@ class UsersModelRegistration extends JModelForm
 			$user->set('block', '0');
 			// Обработать коллекции юзераа - временные удалить, в таблице коллекций прописать его id
 			require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
-			if (!SCollection::makeCollectionPermanent($user))
+			if (!SCollection::makeCustomerDataPermanent($user))
 				
 			echo " madeCollectionPermanent ";
 		}
