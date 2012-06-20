@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 // Include dependancies
 
 //массив подключаемых файлов:
-$arrPathReq=array('SData','SErrors','SFiles','SCollection','SSite','SUser');
+$arrPathReq=array('SData','SDebug','SErrors','SFiles','SCollection','SSite','SUser');
 for($i=0,$j=count($arrPathReq);$i<$j;$i++)
 	require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.$arrPathReq[$i].'.php';
 

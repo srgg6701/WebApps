@@ -15,7 +15,7 @@ require_once JPATH_COMPONENT.'/helpers/query.php';
 
 if($c = JRequest::getVar('c')) { //call an additional controller and assign it as main one
 	require_once(JPATH_COMPONENT.DS.'controllers'.DS.$c.'.php');
-	$c	= 'ContentController'.$c;
+	$c	= 'ContentController'.$c; //будет отсылать на /component/content/?view=app&c=debug (test.php)
 	$controller = new $c();
 }else{
 	$controller = JController::getInstance('Content');

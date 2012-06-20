@@ -17,15 +17,18 @@ class collector1ModelCollected extends JModel
 	 * все сайты заказчика
 	 */
 	function collected()
-	{	//guest?
-		//require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
-		if (!$arrCollectionsIds=SCollection::getPrecustomerSet('collections_ids')){
-			$this->db->setQuery('SELECT id ' . $this->query . $where);
+	{	echo "<h1>collected</h1>";//guest?
+		$arrCollectionsIds=SCollection::getPrecustomerSet('collections_ids');
+		if (!$arrCollectionsIds){
+			$query='SELECT id ' . $this->query . $where;//var_dump("<h1>query(collected):</h1><pre>",$query,"</pre>");
+			$this->db->setQuery($query);
 			$arrCollectionsIds=$this->db->loadResultArray(); 
-		}
+		}//else var_dump("<h1>arrCollectionsIds:</h1><pre>",$arrCollectionsIds,"</pre>");
 		for ($i=0,$j=count($arrCollectionsIds);$i<$j;$i++){
-			$option_id=$arrCollectionsIds[$i];
-			$collections_data_array[$option_id]=Collector1ModelCollector1::getCollection($option_id);
+			$option_id=$arrCollectionsIds[$i]; //echo "<div class=''>option_id= ".$option_id."</div>";
+			$main_model=JModel::getInstance('collector1','Collector1Model');
+			$collections_data_array[$option_id]=$main_model->getCollection($option_id);
+			//echo "<div class=''>collections_data_array[$option_id]= ".$collections_data_array[$option_id]."</div>";
 			if ($collections_data_array[$option_id]===false) return false;
 			unset($collections_data_array[$option_id]['engines_ids']);
 		}

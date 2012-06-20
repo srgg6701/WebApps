@@ -18,7 +18,6 @@ class Collector1ModelCollector1 extends JModel
 	protected $_action;
 	protected $_item;
 	//public $_customer_status; //статус юзера как юзера и заказчика/предзаказчика
-	protected $mainUserPostData=array('name','phone','skype','email');
 	/**
 	 * Конструктор
 	 */
@@ -30,26 +29,23 @@ class Collector1ModelCollector1 extends JModel
 	 * Создать коллекцию 
 	 */
 	function addCollection(){
-		//подготовить данные для добавления новой коллекции:
-		$table=$this->prepareCollectionDataSet();
+		$table=$this->prepareCollectionDataSet(); //подготовить данные для добавления новой коллекции
 		if (!$table) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareCollectionDataSet()");		
-		//добавить данные в dnior_webapps_customer_site_options:
-		SErrors::afterTable($table);
-		//получить статус субъекта:
-		//$this->getCustomerStatus();
-		$user = JFactory::getUser();
-		SUser::getCustomerStatus($user);
-		$customer_status=$user->get('customer_status');
-		if(!$added_record_id=SData::getLastId(SCollection::getDefaultTable()))
+		SErrors::afterTable($table); //добавить данные в dnior_webapps_customer_site_options
+		$added_record_id=SData::getLastId(SCollection::getDefaultTable());
+		if(!$added_record_id)
 			JMail::sendErrorMess('Не добавлена временная коллекция опций сайта для незарегистрированного заказачика.',"Добавление временной коллекции.");
-		//Юзер неизвестен, будем ДОБАВЛЯТЬ данные в таблицу предзаказчика:
-		if ($customer_status=="unknown") {
+		$customer_status=SUser::handleUserData(JFactory::getUser()); //назначить данные/получить статус юзера
+		//будем ОБНОВЛЯТЬ/ДОБАВЛЯТЬ данные в таблице предзаказчика:
+		if ($customer_status=="precustomer"||$customer_status=="unknown") { //предзаказчик или неизвестен 
+			//ВНИМАНИЕ! Если в течение сессии юзер уже делал заказ, его статус будет precustomer
 			//добавить запись в таблицу предзаказчиков
 			SUser::handlePrecustomersTable( $added_record_id, //новая запись в таблице коллекций
 										 	JRequest::get('post')
 									      );
 		}
-		SFiles::handleFilesUploading('s',$added_record_id);
+		if (!SFiles::handleFilesUploading('s',$added_record_id)) JMail::sendErrorMess('Не выполнен метод загрузки файлов (не возвращено true).',"Загрузка файлов.");
+
 		return $added_record_id; //id последней записи нужен для редиректа, устанавливаемом в контроллере
 	}
 	/**
@@ -155,7 +151,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		if ($user->get('guest')!=1||$user->get('email')) { 
 			$db=JFactory::getDBO();
 			$query='SELECT `id`,`site_type_id`,`engine_type_choice_id`,`engines_ids`,`options_array`,`xtra` FROM '.self::setDefaultTable().' WHERE id = ' . (int)$collection_id;
-			$db->setQuery($query);
+			$db->setQuery($query); echo "<div class=''>query= ".$query."</div>";
 			//
 			$current_order_set=$db->loadAssoc();  
 			//transform serialized arrays:
@@ -203,7 +199,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 						break;
 			}
 			//$current_order_set['site_type_name']=collector1ModelCollected::get_sites_types($current_order_set['site_type_id']);
-			$current_order_set['site_type_name']=$modelCMS->get_sites_types($current_order_set['site_type_id']);
+			$current_order_set['site_type_name']=$this->get_sites_types($current_order_set['site_type_id']);
 			//var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");die();
 			return $current_order_set; 
 		}else return false;
@@ -279,6 +275,36 @@ IF ( sites_types_ids_location,
 		return $db->loadAssocList();
 	}
 	//Методы Joomla! здесь не используем просто потому, что не видим в данном случае необходимости	
+	/**
+	 * название опции, по умолчанию - на русском
+	 */
+	function get_options_names($lang=false){
+		if (!$lang) $lang='ru';
+		$name='name_'.$lang;
+		$query="SELECT id, $name FROM #__webapps_site_options ";
+		$db=JFactory::getDBO();
+		$db->setQuery($query);
+		$arr=$db->loadAssocList();
+		//будем смещать переменные массива вверх, чтобы избавиться от нумерованных индексов:
+		//array(var[0]=[[id]=id,[name]=name]) -> array(id=>name) 
+		$arrOptions=array();
+		for($i=0,$j=count($arr);$i<$j;$i++){
+			$arrOptions[$arr[$i]['id']]=$arr[$i][$name];
+		}
+		return $arrOptions;
+	}
+	/**
+	 * получить таблицу типов сайтов
+	 */
+	function get_sites_types($site_type_id=false){
+		$query="SELECT";
+		$query.=($site_type_id)? " name_ru ":" * "; 
+		$query.="FROM #__webapps_site_types";
+		if ($site_type_id) $query.=" WHERE id = $site_type_id";
+		$db=JFactory::getDBO();
+		$db->setQuery($query);
+		return ($site_type_id)? $db->loadResult():$db->loadAssoc(); 
+	}	
 	/**
 	 * Получим таблицу разделов сайта
 	 */

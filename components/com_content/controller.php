@@ -33,7 +33,6 @@ class ContentController extends JController
 		}
 		parent::__construct($config);
 	}
-
 	/**
 	 * Method to display a view.
 	 *

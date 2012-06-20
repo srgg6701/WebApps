@@ -25,10 +25,11 @@ class Collector1ViewCollected extends JView
 	
 	function display($tpl = NULL)
 	{	
-		require_once JPATH_COMPONENT.'/models/collector1.php';
-		$this->collections_data_array=$this->getModel()->collected();
+		$model=$this->getModel();//var_dump("<h1>model:</h1><pre>",$model,"</pre>");
+		$this->collections_data_array=$model->collected();
 		if ($this->collections_data_array!==false){
-			$this->get_options_names=$this->getModel()->get_options_names();
+			$collector1Model=JModel::getInstance('collector1','Collector1Model');
+			$this->get_options_names=$collector1Model->get_options_names();
 			$arrDone=array( 'site_added' => array("Сайт добавлен","#CCF","blue"),
 							'site_deleted' => array("Сайт удалён","#FCC","red"),
 							'site_updated' => array("Данные сайта изменены","#E4F9DD","green")	
@@ -59,19 +60,17 @@ class Collector1ViewCollected extends JView
 			}
 			if (!$got_collection_id&&JRequest::getVar('collection_id')) 
 				$got_collection_id=JRequest::getVar('collection_id');
-			//проверим, получали ли команды работы с коллекциями:
 			//сравнить сессии для незаавторизованного юзера:
-			if ($got_collection_id){
-				if ($user->get('guest')==1){
+			if ($got_collection_id){ 
+				if ($user->get('guest')==1){ //echo "<div>GUEST</div>";
 					//получить массив id id всех коллекций гостя:this->guest_collections_ids
 					$this->guest_collections_ids=SCollection::getPrecustomerSet('collections_ids',$user);
-				
-				}else{	
+				}else{	//echo "<div>NOT GUEST!</div>";
 					//если не гость, проверим - его ли коллекция
 					if(SCollection::checkCollectionAccessory($got_collection_id,$user->get('id'))) $this->collection_of_user=1;
 					elseif (JRequest::getVar('site_deleted')!=$got_collection_id) $this->collection_of_user=-1;
 				}
-			}//die('<hr>collection_id_session='.$this->collection_id_session);
+			}
 			$this->templatename=SSite::getCurrentTemplateName($app);
 		}
 		parent::display($tpl);

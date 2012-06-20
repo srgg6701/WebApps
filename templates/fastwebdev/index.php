@@ -28,10 +28,20 @@ if (!$this->baseurl){
 </head>
 <body>
 <?
-if(strstr($_SERVER['HTTP_HOST'],"localhost")||$_GET['debug']){?><div style="position:absolute; right:40px; top:16px; background:#FFFF00;" class="padding10 bold border_radius"><a href="index.php?option=com_content&view=app&c=debug">Debug</a></div><? }
-?>
-
-<? $path_to_images='templates/fastwebdev/images/'; 
+if(strstr($_SERVER['HTTP_HOST'],"localhost")||$_GET['debug']){
+	?><div style="position:fixed; right:10px; bottom:4px; background:#FFFF00; z-index:1;" class="padding10 bold border_radius"><a href="#" onclick="manageBlockDisplay('debug_menu');return false">Debug</a> 
+    <div id="debug_menu" class="padding10 bgSand border_radius" style="position:absolute; bottom:37px; right:0px; display:<?="none"?>; border:solid 1px #FF9900;">
+    	<div><a href="index.php?option=com_content&view=app">Objects</a></div>
+    	<div><a href="index.php?option=com_content&view=app&c=debug">test</a></div>
+        <div><a href="index.php?option=com_content&view=app&c=debug&task=_session_unset">session_unset</a></div>
+    </div>
+    </div>
+<script type="text/javascript">
+//document.getElementById().style.positionBottom='';
+</script>
+<? 
+}
+$path_to_images='templates/fastwebdev/images/'; 
 //var_dump("<h1>SESSION:</h1><pre>",$_SESSION,"</pre>");
 //$_SESSION['example1']='EXMPL';
 //echo "<hr>"; $session =& JFactory::getSession();
@@ -41,7 +51,6 @@ if(strstr($_SERVER['HTTP_HOST'],"localhost")||$_GET['debug']){?><div style="posi
 </div>
 <!-- block that fits space verically -->
 <div id="body">
-
     <!-- main container -->
     <div align="center" class="offsetBottom" id="container">
 		<!-- top offset -->

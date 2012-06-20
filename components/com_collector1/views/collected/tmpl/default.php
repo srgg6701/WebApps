@@ -17,9 +17,10 @@ $user = JFactory::getUser();?>
 //var_dump("<h1>guest_collections_ids:</h1><pre>",$this->guest_collections_ids,"</pre>");
 //echo "<hr>";
 //this->collections_data_array	//
-if ($_GET['cda']) {
-	echo "collection_of_user: ".$this->collection_of_user;
-	var_dump("<h1>collections_data_array:</h1><pre>",$this->collections_data_array,"</pre>");
+$test=true;
+if ($_GET['cda']||$test) {
+	 if ($user->get('guest')!=1) echo "collection_of_user: ".$this->collection_of_user;
+	 else var_dump("<h1>guest_collections_ids:</h1><pre>",$this->guest_collections_ids,"</pre>");
 }
 if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавторизован
 	 !empty($this->guest_collections_ids) //коллекция создана текущим гостем (проверяется по его емэйлу)
