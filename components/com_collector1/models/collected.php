@@ -17,7 +17,8 @@ class collector1ModelCollected extends JModel
 	 * все сайты заказчика
 	 */
 	function collected()
-	{	echo "<h1>collected</h1>";//guest?
+	{	SDebug::dOutput("collected",'h1');
+		//guest?
 		$arrCollectionsIds=SCollection::getPrecustomerSet('collections_ids');
 		if (!$arrCollectionsIds){
 			$query='SELECT id ' . $this->query . $where;//var_dump("<h1>query(collected):</h1><pre>",$query,"</pre>");

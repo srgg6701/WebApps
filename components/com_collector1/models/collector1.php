@@ -32,7 +32,9 @@ class Collector1ModelCollector1 extends JModel
 		$table=$this->prepareCollectionDataSet(); //подготовить данные для добавления новой коллекции
 		if (!$table) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareCollectionDataSet()");		
 		SErrors::afterTable($table); //добавить данные в dnior_webapps_customer_site_options
-		$added_record_id=SData::getLastId(SCollection::getDefaultTable());
+		$default_table=SCollection::getDefaultTable(); 
+		//echo "<div class=''>default_table= ".$default_table."</div>";
+		$added_record_id=SData::getLastId($default_table);
 		if(!$added_record_id)
 			JMail::sendErrorMess('Не добавлена временная коллекция опций сайта для незарегистрированного заказачика.',"Добавление временной коллекции.");
 		$customer_status=SUser::handleUserData(JFactory::getUser()); //назначить данные/получить статус юзера

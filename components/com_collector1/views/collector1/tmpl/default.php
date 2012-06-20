@@ -15,7 +15,7 @@ $current_order_set=$this->current_order_set;
 
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 
-<form name="form1" method="post" action="<?=JRoute::_($this->go_submit)?>" onSubmit="return checkRequired();">
+<form name="form1" method="post" enctype="multipart/form-data" action="<?=JRoute::_($this->go_submit)?>" onSubmit="return checkRequired();">
     <div>
 <?	
 //больше одной коллекции у юзера:
