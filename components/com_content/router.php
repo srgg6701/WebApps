@@ -6,7 +6,7 @@
  */
 
 defined('_JEXEC') or die;
-
+//SDebug::dOutput("router.php",'h1');
 jimport('joomla.application.categories');
 
 /**

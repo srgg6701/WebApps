@@ -10,7 +10,6 @@
 // No direct access
 defined('_JEXEC') or die;
 //jimport('joomla.application.component.view');
-require_once JPATH_COMPONENT.DS.'helpers/html/your_sites.php';
 //echo "<h3>view.html.php</h3>";
 //jimport('joomla.application.web.webclient');
 /**
@@ -60,7 +59,10 @@ class Collector1ViewCollector1 extends JView
 		//проверим, создавал ли незаавторизованный юзер сайты в течение сессии:
 		if ($user->get('guest')==1){
 			$this->guest_collections_ids=SCollection::getPrecustomerSet('collections_ids',$user);
+			//var_dump("<h1>guest_collections_ids:</h1><pre>",$this->guest_collections_ids,"</pre>");
 		}
+		//должно быть именно здесь, чтобы получить все установленные значения свойств класса:
+		require_once JPATH_COMPONENT.DS.'helpers/html/your_sites.php';
 		//получает HTML из контроллера (?), в случае, если он также вызывает у себя parent::display()
         parent::display($tpl);
 	}

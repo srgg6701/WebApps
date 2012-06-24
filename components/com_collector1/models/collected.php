@@ -17,7 +17,7 @@ class collector1ModelCollected extends JModel
 	 * все сайты заказчика
 	 */
 	function collected()
-	{	SDebug::dOutput("collected",'h1');
+	{	//SDebug::dOutput("collected",'h1');
 		//guest?
 		$arrCollectionsIds=SCollection::getPrecustomerSet('collections_ids');
 		if (!$arrCollectionsIds){
@@ -34,6 +34,17 @@ class collector1ModelCollected extends JModel
 			unset($collections_data_array[$option_id]['engines_ids']);
 		}
 		return $collections_data_array;
+	}
+	/**
+	 * Получить файлы
+	 */
+	function getUserFiles($identifier) {
+		$db=JFactory::getDBO();
+		$db->setQuery("SELECT files_names FROM #__webapps_files_names 
+ WHERE `identifier` = '$identifier'");
+ 		$row=explode(":",$db->loadResult());
+		//$row=implode("<br>",$row);
+		return $row;
 	}
 	/**
 	 * получить движок // ПЕРЕНЕСЕНО  в отдельную модель (CMS.php)

@@ -153,7 +153,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		if ($user->get('guest')!=1||$user->get('email')) { 
 			$db=JFactory::getDBO();
 			$query='SELECT `id`,`site_type_id`,`engine_type_choice_id`,`engines_ids`,`options_array`,`xtra` FROM '.self::setDefaultTable().' WHERE id = ' . (int)$collection_id;
-			$db->setQuery($query); echo "<div class=''>query= ".$query."</div>";
+			$db->setQuery($query); //SDebug::dOutput("query= $query"); 
 			//
 			$current_order_set=$db->loadAssoc();  
 			//transform serialized arrays:

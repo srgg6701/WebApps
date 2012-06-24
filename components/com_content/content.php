@@ -12,9 +12,18 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.controller');
 require_once JPATH_COMPONENT.'/helpers/route.php';
 require_once JPATH_COMPONENT.'/helpers/query.php';
-
 if($c = JRequest::getVar('c')) { //call an additional controller and assign it as main one
-	require_once(JPATH_COMPONENT.DS.'controllers'.DS.$c.'.php');
+	//массив подключаемых файлов:
+	$arrPathReq=array('SData','SDebug','SErrors','SFiles','SCollection','SSite','SUser');
+	for($i=0,$j=count($arrPathReq);$i<$j;$i++)
+		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.$arrPathReq[$i].'.php';
+	SDebug::dOutput("content.php",'h3','display:inline');
+	jimport('joomla.mail.mail');
+	jimport('joomla.application.component.controller');
+	jimport('joomla.application.component.model');
+	jimport('joomla.application.component.helper');
+	jimport('joomla.application.component.view');
+	require_once(JPATH_COMPONENT.DS.'controllers'.DS.$c.'.php');	
 	$c	= 'ContentController'.$c; //будет отсылать на /component/content/?view=app&c=debug (test.php)
 	$controller = new $c();
 }else{

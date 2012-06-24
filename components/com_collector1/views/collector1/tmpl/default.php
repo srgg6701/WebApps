@@ -357,7 +357,7 @@ function manageEnginesChoice(radio){
 		if (radio.id=="choose_engine_1"||radio.id=="choose_engine_2"){
 			if (radio.id=="choose_engine_0") d.getElementById('existing_cms').value='';	
 			d.getElementById('existing_cms_name').style.display='none';	
-			scrollTo(0,2000);//location.href='#bottom';
+			if (radio.id=="choose_engine_1") scrollTo(0,2000);//location.href='#bottom';
 		}		
 		if (radio.id=="choose_engine_1"){
 			d.getElementById('tr_cms_list').style.display='block';

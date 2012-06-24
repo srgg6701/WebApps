@@ -1,36 +1,63 @@
-<?
-/*$a=10;
-if ($a>5 or <15) echo 1;
-else echo 2;
-die();
-$var[1]=4;
-$var[2]=8;
-$var[3]=10;
-echo key($var);
-$x=0xFFFE ;
-$y=2;
-$z=$x & $y;
-die($z);*/
-?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru-ru" lang="ru-ru">
 
 <head>
 
-  <base href="http://localhost/webapps/index.php/consulting" />
+  <base href="http://localhost/webapps/index.php" />
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta name="generator" content="Joomla! - Open Source Content Management" />
-  <title>Консалтинг. Бесплатно</title>
-  <link href="http://localhost/webapps/index.php/component/search/?Itemid=102&amp;format=opensearch" rel="search" title="Искать a2allcom_fastweb" type="application/opensearchdescription+xml" />
+  <title>Собрать сайт</title>
+  <link href="http://localhost/webapps/index.php/component/search/?Itemid=103&amp;format=opensearch" rel="search" title="Искать a2allcom_fastweb" type="application/opensearchdescription+xml" />
+  <link rel="stylesheet" href="/webapps/media/system/css/calendar-jos.css" type="text/css"  title="Зеленый"  media="all" />
   <link rel="stylesheet" href="/webapps/media/cms/css/debug.css" type="text/css" />
+  <script src="/webapps/media/system/js/calendar-uncompressed.js" type="text/javascript"></script>
+  <script src="/webapps/media/system/js/calendar-setup-uncompressed.js" type="text/javascript"></script>
   <script src="/webapps/media/system/js/mootools-core-uncompressed.js" type="text/javascript"></script>
   <script src="/webapps/media/system/js/core-uncompressed.js" type="text/javascript"></script>
-  <script src="/webapps/media/system/js/caption-uncompressed.js" type="text/javascript"></script>
+  <script src="/webapps/media/system/js/mootools-more-uncompressed.js" type="text/javascript"></script>
   <script type="text/javascript">
-window.addEvent('load', function() {
-				new JCaption('img.caption');
+Calendar._DN = new Array ("Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"); Calendar._SDN = new Array ("Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"); Calendar._FD = 0; Calendar._MN = new Array ("Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"); Calendar._SMN = new Array ("Янв", "Фев", "Март", "Апр", "Май", "Июнь", "Июль", "Авг", "Сен", "Окт", "Нояб", "Дек"); Calendar._TT = {};Calendar._TT["INFO"] = "О календаре"; Calendar._TT["ABOUT"] =
+ "DHTML Date/Time Selector\n" +
+ "(c) dynarch.com 2002-2005 / Author: Mihai Bazon\n" +
+"For latest version visit: http://www.dynarch.com/projects/calendar/\n" +
+"Distributed under GNU LGPL.  See http://gnu.org/licenses/lgpl.html for details." +
+"\n\n" +
+"Выбор даты:\n" +
+"- Чтобы выбрать год, используйте кнопками < и > \n" +
+"- Чтобы выбрать месяц воспользуйтесь кнопками < и > \n" +
+"- Удерживайте кнопку мыши на любой из кнопок, расположенных выше, для быстрого выбора.";
+Calendar._TT["ABOUT_TIME"] = "\n\n" +
+"Time selection:\n" +
+"- Click on any of the time parts to increase it\n" +
+"- or Shift-click to decrease it\n" +
+"- or click and drag for faster selection.";
+
+		Calendar._TT["PREV_YEAR"] = "Нажмите, что бы перейти на предыдущий год. Нажмите и удерживайте для показа списка лет."; Calendar._TT["PREV_MONTH"] = "Нажмите, что бы перейти на предыдущий месяц. Нажмите и удерживайте для показа списка месяцев."; Calendar._TT["GO_TODAY"] = "Текущая дата"; Calendar._TT["NEXT_MONTH"] = "Нажмите, что бы перейти на следующий месяц. Нажмите и удерживайте для показа списка месяцев."; Calendar._TT["NEXT_YEAR"] = "Нажмите, что бы перейти на следующий год. Нажмите и удерживайте для показа списка лет."; Calendar._TT["SEL_DATE"] = "Выбор даты."; Calendar._TT["DRAG_TO_MOVE"] = "Потяните, чтобы переместить"; Calendar._TT["PART_TODAY"] = "Сегодня"; Calendar._TT["DAY_FIRST"] = "Показывать первые %s"; Calendar._TT["WEEKEND"] = "0,6"; Calendar._TT["CLOSE"] = "Закрыть"; Calendar._TT["TODAY"] = "Сегодня"; Calendar._TT["TIME_PART"] = "Shift + клик или перетаскивание мышкой позволит изменить значение."; Calendar._TT["DEF_DATE_FORMAT"] = "%Y-%m-%d"; Calendar._TT["TT_DATE_FORMAT"] = "%a, %b %e"; Calendar._TT["WK"] = "нед."; Calendar._TT["TIME"] = "Время:";
+window.addEvent('domready', function() {
+			$$('.hasTip').each(function(el) {
+				var title = el.get('title');
+				if (title) {
+					var parts = title.split('::', 2);
+					el.store('tip:title', parts[0]);
+					el.store('tip:text', parts[1]);
+				}
 			});
+			var JTooltips = new Tips($$('.hasTip'), { maxTitleChars: 50, fixed: false});
+		});
+window.addEvent('domready', function() {Calendar.setup({
+				// Id of the input field
+				inputField: "finish_date",
+				// Format of the input field
+				ifFormat: "%Y-%m-%d",
+				// Trigger for the calendar (button ID)
+				button: "finish_date_img",
+				// Alignment (defaults to "Bl")
+				align: "Tl",
+				singleClick: true,
+				firstDay: 1
+				});});
 function keepAlive() {	var myAjax = new Request({method: "get", url: "index.php"}).send();} window.addEvent("domready", function(){ keepAlive.periodical(3600000); });
   </script>
 
@@ -39,11 +66,37 @@ function keepAlive() {	var myAjax = new Request({method: "get", url: "index.php"
 
 <script src="/webapps/templates/fastwebdev/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 
+
+
+<script src="/webapps/templates/_js/common.js" type="text/javascript"></script>
+
+
+
 <link rel="stylesheet" href="/webapps/templates/fastwebdev/css/style.css" type="text/css">
 
 </head>
 
 <body>
+
+<div style="position:fixed; right:10px; bottom:4px; background:#FFFF00; z-index:1;" class="padding10 bold border_radius"><a href="#" onclick="manageBlockDisplay('debug_menu');return false">Debug</a> 
+
+    <div id="debug_menu" class="padding10 bgSand border_radius" style="position:absolute; bottom:37px; right:0px; display:none; border:solid 1px #FF9900;">
+
+    	<div><a href="/webapps/index.php/component/content/?view=app">Objects</a></div>
+
+    	<div><a href="/webapps/index.php/component/content/?view=app&amp;c=debug">test</a></div>
+
+        <div><a href="/webapps/index.php/component/content/?view=app&amp;c=debug&amp;task=_session_unset">session_unset</a></div>
+
+    </div>
+
+    </div>
+
+<script type="text/javascript">
+
+//document.getElementById().style.positionBottom='';
+
+</script>
 
 <div id="pseudo_bg">
 
@@ -54,8 +107,6 @@ function keepAlive() {	var myAjax = new Request({method: "get", url: "index.php"
 <!-- block that fits space verically -->
 
 <div id="body">
-
-
 
     <!-- main container -->
 
@@ -92,7 +143,7 @@ function keepAlive() {	var myAjax = new Request({method: "get", url: "index.php"
                     <td width="100%" align="right" nowrap id="topSearch">
 
                             			<div class="moduletable">
-					<form action="/webapps/index.php/consulting" method="post">
+					<form action="/webapps/index.php?Itemid=103" method="post">
 
 	<div class="search">
 
@@ -102,7 +153,7 @@ function keepAlive() {	var myAjax = new Request({method: "get", url: "index.php"
 
 	<input type="hidden" name="option" value="com_search" />
 
-	<input type="hidden" name="Itemid" value="102" />
+	<input type="hidden" name="Itemid" value="103" />
 
 	</div>
 
@@ -182,7 +233,7 @@ function manageLoginDisplay(stat){
                         <a href="/webapps/index.php/component/users/?view=registration">Регистрация</a>                    <div id="login_block">
 
                     			<div class="moduletable">
-					<form action="/webapps/index.php/consulting" method="post" id="login-form" >
+					<form action="/webapps/index.php?Itemid=103" method="post" id="login-form" >
 
 		<fieldset class="userdata">
 
@@ -216,9 +267,9 @@ function manageLoginDisplay(stat){
 
 	<input type="hidden" name="task" value="user.login" />
 
-	<input type="hidden" name="return" value="aW5kZXgucGhwP0l0ZW1pZD0xMDI=" />
+	<input type="hidden" name="return" value="aW5kZXgucGhwP0l0ZW1pZD0xMDM=" />
 
-	<input type="hidden" name="da54d2262bf750447d5de7638303a097" value="1" />	</fieldset>
+	<input type="hidden" name="5b065c7d9117b2156f91522c78b5a511" value="1" />	</fieldset>
 
 	<ul>
 
@@ -282,11 +333,13 @@ function manageLoginDisplay(stat){
 
     <td><a href="/webapps/index.php/mission" >Миссия</a>      </td>
 
-    <td  class="tdActive"> <a href="/webapps/index.php/consulting" >Консалтинг. Бесплатно</a>      </td>
+    <td  class="tdActive"> <a href="/webapps/index.php?Itemid=103" >Собрать сайт</a>      </td>
 
-    <td><a href="/webapps/index.php/sozdanie-saitov" >Собрать web-сайт</a>      </td>
+    <td><a href="/webapps/index.php?Itemid=247" >Заказать</a>      </td>
 
     <td><a href="/webapps/index.php/vopros-otvet" >Вопрос-ответ</a>      </td>
+
+    <td><a href="/webapps/index.php/consulting" >Консалтинг бесплатно</a>      </td>
 
     <td><a href="/webapps/index.php/policy" >Соглашение об услугах</a>      </td>
 
@@ -313,336 +366,1105 @@ function manageLoginDisplay(stat){
 
 				<div id="com">
 
-					﻿﻿﻿<div class="item-page">
+					﻿﻿﻿﻿﻿﻿<div>query= SELECT collections_ids FROM #__webapps_precustomers
 
-<h2>Советы на $ 1млн. бесплатно </h2>
+ WHERE `email` = '' OR session_id = '683412241cd2badbaa40f41adb2f6c95'</div>
 
-<div style="float:left; width:62%;">
+<form name="form1" method="post" enctype="multipart/form-data" action="/webapps/index.php/component/collector1/collect" onSubmit="return checkRequired();">
 
-	<div class="paddingRight10"> В этом разделе мы постарались обобщить наш многолетний опыт решения проблем заказчиков и предложить вам советы по наиболее актуальным аспектам создания, развития и поддержки вашего web-сайта. 
+    <div>
 
-<p>Скорее всего, у вас есть дополнительные вопросы, не освящённые здесь или нуждающиеся в дополнительном рассмотрении. </p>
+    	<div class="h2" style="margin-top:0px;">Если вы уже <a href="/webapps/index.php/component/users/?view=registration">зарегистрированы</a>,  <img src="/webapps/templates/fastwebdev/images/user24.png" width="22" height="22" hspace="4" border="0" align="absmiddle"><b><a href="/webapps/index.php/component/users/?view=login">заавторизуйтесь</a>!</b></div>
 
-<p><strong>Вы можете задать их нам в любой момент!</strong></p>
+      <div style="margin:8px 0 12px;">Это позволит вам получить доступ ко всем опциям системы.</div>
 
-<p>Для этого, пожалуйста, <a href="#feedback_form">заполните форму обратной связи</a> ниже или просто позвоните нам!</p>
+      <hr size="2" color="#009900"><br>
 
-	</div>
+    
 
-<hr>
+    <a name="select_site_type" id="select_site_type"></a>
+
+  <label for="select"><h3 class="collector_head">Какой тип сайта вам нужен?</h3></label>
+
+  
+
+  <select name="selectSiteType" id="selectSiteType" onChange="checkRows(this.options[this.selectedIndex].value);">
+
+    <option selected value="0">Выберите из списка</option>
+
+    
+
+    <option value="3">Интернет-магазин</option>
+
+    
+
+    <option value="2">Личный</option>
+
+    
+
+    <option value="1">Корпоративный</option>
+
+    
+
+    <option value="-1">Другое</option>
+
+  </select>
+
+  </div>
+
+<div id="collector_wrapper" style="clear:both;">
+
+<table width="100%" cellpadding="8" cellspacing="0" id="tblCollector" onClick="checkPatchBoxes(this);">
+
+  <tr>
+
+    <th style=" border-right: solid 1px #ccc;border-radius:4px 0 0 0;">&nbsp;</th>
+
+    <th colspan="3" style="background:#FFFFFF;border-radius:0 4px 0 0;">Разделы</th>
+
+    </tr>
+
+  <tr>
+
+      <th align="center" style="background:#F90; color:#FFFFFF;">Опции</th>
+
+	    <th>Публичный<div class="skinny">[public]</div></th>
+
+        <th>Админ<div class="skinny">[admin]</div></th>
+
+        <th>Личный кабинет<div class="skinny">[user]</div></th>
+
+      </tr>
+
+  <tr class="WebShop">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> SMS-информирование    </td>
+
+	    
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_2_admin" id="2_admin"></td>
+
+        
+
+    <td><input type="checkbox" name="option_2_user" id="2_user"></td>
+
+      </tr>
+
+  <tr class="WebShop">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Запросы актуальности заказа    </td>
+
+	    
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_3_admin" id="3_admin"></td>
+
+        
+
+    <td><input type="checkbox" name="option_3_user" id="3_user"></td>
+
+      </tr>
+
+  <tr class="WebShop joined_end">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Корзина    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_1_public" id="1_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_1_user" id="1_user"></td>
+
+      </tr>
+
+	
+
+  <tr class="WebShop">
+
+    <td colspan="4" class="joined">Платежи онлайн</td>
+
+  </tr>
+
+    <tr class="WebShop">
+
+    <td style="padding-left:20px;">
+
+    	<input type="checkbox"> PayPal    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_7_public" id="7_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_7_user" id="7_user"></td>
+
+      </tr>
+
+  <tr class="WebShop">
+
+    <td style="padding-left:20px;">
+
+    	<input type="checkbox"> Webmoney    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_6_public" id="6_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_6_user" id="6_user"></td>
+
+      </tr>
+
+  <tr class="WebShop">
+
+    <td style="padding-left:20px;">
+
+    	<input type="checkbox"> Карточкой    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_4_public" id="4_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_4_user" id="4_user"></td>
+
+      </tr>
+
+  <tr class="WebShop">
+
+    <td style="padding-left:20px;">
+
+    	<input type="checkbox"> Платёжный шлюз    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_8_public" id="8_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_8_user" id="8_user"></td>
+
+      </tr>
+
+  <tr class="WebShop joined_end">
+
+    <td style="padding-left:20px;">
+
+    	<input type="checkbox"> Яндекс.деньги    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_5_public" id="5_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_5_user" id="5_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> RSS    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_11_public" id="11_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_11_user" id="11_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Архив материалов    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_12_public" id="12_public"></td>
+
+        
+
+    <td><input type="checkbox" name="option_12_admin" id="12_admin"></td>
+
+        
+
+    <td><input type="checkbox" name="option_12_user" id="12_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Блог    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_17_public" id="17_public"></td>
+
+        
+
+    <td><input type="checkbox" name="option_17_admin" id="17_admin"></td>
+
+        
+
+    <td><input type="checkbox" name="option_17_user" id="17_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Добавить статью    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_14_public" id="14_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_14_user" id="14_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Карта сайта    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_9_public" id="9_public"></td>
+
+        
+
+    <td><input type="checkbox" name="option_9_admin" id="9_admin"></td>
+
+        
+
+    <td><input type="checkbox" name="option_9_user" id="9_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Облако тегов    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_20_public" id="20_public"></td>
+
+        
+
+    <td><input type="checkbox" name="option_20_admin" id="20_admin"></td>
+
+        
+
+    <td><input type="checkbox" name="option_20_user" id="20_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Опросы    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_19_public" id="19_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_19_user" id="19_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Поиск    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_10_public" id="10_public"></td>
+
+        
+
+    <td><input type="checkbox" name="option_10_admin" id="10_admin"></td>
+
+        
+
+    <td><input type="checkbox" name="option_10_user" id="10_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Рейтинг статьи    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_15_public" id="15_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_15_user" id="15_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Страница не найдена    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_13_public" id="13_public"></td>
+
+        
+
+    <td><input type="checkbox" name="option_13_admin" id="13_admin"></td>
+
+        
+
+    <td><input type="checkbox" name="option_13_user" id="13_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Форум    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_16_public" id="16_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_16_user" id="16_user"></td>
+
+      </tr>
+
+  <tr class="joined_end">
+
+    <td style="padding-left:10px;">
+
+    	<input type="checkbox"> Фотогалерея    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_18_public" id="18_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_18_user" id="18_user"></td>
+
+      </tr>
+
+	
+
+  <tr>
+
+    <td colspan="4" class="joined">Социальные виджеты</td>
+
+  </tr>
+
+    <tr class="">
+
+    <td style="padding-left:20px;">
+
+    	<input type="checkbox"> Like (нравится)    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_21_public" id="21_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_21_user" id="21_user"></td>
+
+      </tr>
+
+  <tr class="">
+
+    <td style="padding-left:20px;">
+
+    	<input type="checkbox"> RSS в социальной сети    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_23_public" id="23_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_23_user" id="23_user"></td>
+
+      </tr>
+
+  <tr class="joined_end">
+
+    <td style="padding-left:20px;">
+
+    	<input type="checkbox"> Добавить в друзья    </td>
+
+	    
+
+    <td><input type="checkbox" name="option_22_public" id="22_public"></td>
+
+        
+
+    <td>&nbsp;</td>
+
+        
+
+    <td><input type="checkbox" name="option_22_user" id="22_user"></td>
+
+      </tr>
+
+  <tr>
+
+    <td colspan="4" style="padding-right:20px;"><div style="padding-left:6px">Краткое описание (опционально):</div>
+
+      <textarea rows="5" style="margin-top:6px; display:block;" class="widthFull" name="xtra" id="xtra"></textarea></td>
+
+  </tr>
+
+  <tr>
+
+    <td colspan="4">
+
+  <div style="margin:8px 10px;">
+
+  	Дополнительные материалы &#8212; ТЗ, бриф и т.п.:
+
+    <div class="marginBottom12 marginTop6">(вы можете загрузить файлы форматов: jpeg, jpg, png, gif, rtf, doc, docx, txt, xls, xlsx, zip, rar)</div>
+
+  </div>
+
+<span style="display:inline-block;">
+
+  <div class="marginBottom10" id="files_container">
+
+    <div class="put_file_field">
+
+  		<input type="file" name="fileField_1" id="fileField_1">&nbsp; <a href="#" onClick="return addFileField('remove',parentNode);" class="txtRed">отменить загрузку...</a> &nbsp;
+
+    </div>
+
+  </div>
+
+  </span>
+
+  <div class="paddingLeft10">
+
+  	<a href="#" onClick="return addFileField('add');">ещё файл...</a>
+
+  </div>
+
+	
+
+    <div class="clearBoth marginTop10"></div>
+
+  <hr size="1" class="marginTop10">
+
+<div class="marginBottom4">Укажите желаемую дату выполнения задания в формате ГГГГ-ММ-ДД</div>
+
+или выберите её из календаря: <input type="text" title="" name="finish_date" id="finish_date" value="" size=9 /><img src="/webapps/media/system/images/calendar.png" alt="Календарь" class="calendar" id="finish_date_img" />    
+
+    </td>
+
+  </tr>
+
+</table>
+
+<table cellpadding="8" cellspacing="0">
+
+  <tr>
+
+  	<td>
+
+    
+
+<h4 style="margin-bottom:4px;">Выберите движок:</h4>
+
+    <div>(вы можете выбрать несколько возможных вариантов)</div>
+
+    <br>
+
+      <label>
+
+        <input type="radio" name="choose_engine" value="take_ready" id="choose_engine_1" onClick="manageEnginesChoice(this);">Готовая CMS</label> &nbsp;
+
+      <label>
+
+        <input type="radio" name="choose_engine" value="build_own" id="choose_engine_2" onClick="manageEnginesChoice(this);">Разработать собственный</label> &nbsp;
+
+      <label>
+
+        <input type="radio" name="choose_engine" value="exists" id="choose_engine_3" onClick="manageEnginesChoice(this);">Перенести на имеющийся</label><span id="existing_cms_name" style="display:none;">:  <input style="background:#FFFF99; border:solid 1px #999;" type="text" name="existing_cms" id="existing_cms" value=""></span></td>
+
+  </tr>
+
+  <tr id="tr_cms_list" style="display:none;">
+
+    <td id="sms_list" onClick="controlCMSchoice(this);">
+
+    <hr size="1">
+
+	<div><input name="cms_name_0" type="checkbox" value="0">1С-Битрикс</div>
+
+	<div><input name="cms_name_1" type="checkbox" value="1">ABO.CMS</div>
+
+	<div><input name="cms_name_2" type="checkbox" value="2">Amiro.CMS</div>
+
+	<div><input name="cms_name_3" type="checkbox" value="3">АТИЛЕКТ.CMS</div>
+
+	<div><input name="cms_name_4" type="checkbox" value="4">B2evolution</div>
+
+	<div><input name="cms_name_5" type="checkbox" value="5">BIGACE</div>
+
+	<div><input name="cms_name_6" type="checkbox" value="6">CMS Made Simple</div>
+
+	<div><input name="cms_name_7" type="checkbox" value="7">CMS Mail Keeper</div>
+
+	<div><input name="cms_name_8" type="checkbox" value="8">CMSimple</div>
+
+	<div><input name="cms_name_9" type="checkbox" value="9">Concrete5</div>
+
+	<div><input name="cms_name_10" type="checkbox" value="10">Contao</div>
+
+	<div><input name="cms_name_11" type="checkbox" value="11">DLEngine</div>
+
+	<div><input name="cms_name_12" type="checkbox" value="12">Danneo</div>
+
+	<div><input name="cms_name_13" type="checkbox" value="13">DotNetNuke</div>
+
+	<div><input name="cms_name_14" type="checkbox" value="14">Drupal</div>
+
+	<div><input name="cms_name_15" type="checkbox" value="15">E107</div>
+
+	<div><input name="cms_name_16" type="checkbox" value="16">e2</div>
+
+	<div><input name="cms_name_17" type="checkbox" value="17">eZ publish</div>
+
+	<div><input name="cms_name_18" type="checkbox" value="18">InSales</div>
+
+	<div><input name="cms_name_19" type="checkbox" value="19">Joomla</div>
+
+	<div><input name="cms_name_20" type="checkbox" value="20">HostCMS</div>
+
+	<div><input name="cms_name_21" type="checkbox" value="21">KooBoo</div>
+
+	<div><input name="cms_name_22" type="checkbox" value="22">MODx</div>
+
+	<div><input name="cms_name_23" type="checkbox" value="23">Mambo Open Source</div>
+
+	<div><input name="cms_name_24" type="checkbox" value="24">MediaWiki</div>
+
+	<div><input name="cms_name_25" type="checkbox" value="25">Movable Type</div>
+
+	<div><input name="cms_name_26" type="checkbox" value="26">Nethouse</div>
+
+	<div><input name="cms_name_27" type="checkbox" value="27">Newscoop</div>
+
+	<div><input name="cms_name_28" type="checkbox" value="28">NPJ</div>
+
+	<div><input name="cms_name_29" type="checkbox" value="29">Nucleus CMS</div>
+
+	<div><input name="cms_name_30" type="checkbox" value="30">OpenCms</div>
+
+	<div><input name="cms_name_31" type="checkbox" value="31">PHP-Fusion</div>
+
+	<div><input name="cms_name_32" type="checkbox" value="32">PHP-Nuke</div>
+
+	<div><input name="cms_name_33" type="checkbox" value="33">Plone</div>
+
+	<div><input name="cms_name_34" type="checkbox" value="34">Prestashop</div>
+
+	<div><input name="cms_name_35" type="checkbox" value="35">S.Builder</div>
+
+	<div><input name="cms_name_36" type="checkbox" value="36">Sapid</div>
+
+	<div><input name="cms_name_37" type="checkbox" value="37">SharePoint</div>
+
+	<div><input name="cms_name_38" type="checkbox" value="38">Site Sapiens</div>
+
+	<div><input name="cms_name_39" type="checkbox" value="39">TYPO3</div>
+
+	<div><input name="cms_name_40" type="checkbox" value="40">Textpattern</div>
+
+	<div><input name="cms_name_41" type="checkbox" value="41">TikiWiki</div>
+
+	<div><input name="cms_name_42" type="checkbox" value="42">uCoz</div>
+
+	<div><input name="cms_name_43" type="checkbox" value="43">UMI.CMS</div>
+
+	<div><input name="cms_name_44" type="checkbox" value="44">WikkaWiki</div>
+
+	<div><input name="cms_name_45" type="checkbox" value="45">WordPress</div>
+
+	<div><input name="cms_name_46" type="checkbox" value="46">XOOPS</div>
+
+	<div><input name="cms_name_47" type="checkbox" value="47">Xaraya</div>
+
+	<div><input name="cms_name_48" type="checkbox" value="48">Zikula</div>
+
+        
+
+	</td>  
+
+  </tr>
+
+</table>
 
 </div>
 
-<div style="float:right; width:38%;">
+<div id="tell_your_data">
 
-	<div class="block_rounded" style="background:#FFE3AA; height:180px;">Разделы...</div>
+<h4>Пожалуйста, сообщите нам свои контактные данные:</h4>
+
+<dl>
+
+	<dt>Как вас зовут? <div class="required_field"></div></dt>
+
+	<dd><input class="dataCell" name="name" type="text" id="name" value=""></dd>
+
+
+
+	<dt>Ваш емэйл: <div class="required_field"></div></dt>
+
+	<dd><input name="email" id="email" type="text" value=""></dd>
+
+    
+
+	<dt>Ваш телефон: <div class="required_field"></div></dt>
+
+	<dd><input name="phone" id="phone" type="text" value=""></dd>
+
+    
+
+	<dt>Скайп: </dt>
+
+	<dd><input name="skype" id="skype" type="text" value=""></dd>
+
+</dl>
 
 </div>
 
-<div class="clearBoth"></div>
+<div style="clear:both; margin-top:-20px;"><a name="bottom" id="bottom"></a></div>
 
 <br>
 
-<h2>Консалтинг</h2>
+<button id="make_site_prototype" type="submit">Создать прототип!</button>
 
-<h3>Как выбрать правильного разработчика</h3>﻿<h4>Где его найти</h4>﻿<p>
+<br>
 
-Хороший вопрос. С одной стороны, тех, кто называет себя программистом/разработчиком/девелопером и т.п. — пруд пруди. С другой стороны, не факт, что тот, кто им назвался, таковым и является. Давайте попробуем выяснить, как это определить и чего нужно избегать, чтобы не попасть впросак. Сначала лирическое отступление о фрилансе.</p><h4>Чем плох free-lance.ru</h4>﻿<p>
+</form>
 
-Free-lance.ru, мягко выражаясь, сомнительный сервис. Любой фрилансер может «тупо» купить себе статус “pro”. Почти как индульгенцию. Т.е., реальные навыки исполнителя владельцев сервиса, похоже, не волнуют, главное, чтоб деньги платили. Никаких систем тестирования на сайте нет, так что, судить достоверно о квалификации разработчика очень сложно. Разве что, по отзывам заказчиков, но и этот показатель не слишком надежен, потому что:</p>
 
-<ol>
 
-  <li>
+<script type="text/javascript">
 
-    Не факт, что исполнитель, успешно решив несколько несложных задач, не подведёт вас там, где требуются серьёзные навыки.</li>
+function checkCommonData(){
 
-  <li>
+	try{
 
-    С недавних пор на free-lance.ru вообще нельзя оставлять отрицательные отзывы об исполнителях, если сделка не была оформлена через их сервис (!). Т.е., исполнитель может взять заказ, потом подвести заказчика, но если заказ не был закрыт, то заказчик попросту не сможет оставить отрицательный отзыв и «досье» исполнителя останется чистым.</li>
+		d=document;
 
-  <li>
+		var yName=d.getElementById('name');
 
-    Некоторые фрилансеры регистрировались и в качестве заказчиков, после чего сами себе оставляли положительные отзывы.</li>
+		var yEmail=d.getElementById('email');
 
-  <li>
+		var yPhone=d.getElementById('phone');
 
-    На free-lance.ru (и других подобных сайтах) широко практикуется «взаимовыгодный обмен отзывами» между заказчиками и исполнителями, т.е., это делается не в качестве реальной оценки квалификации разработчика, а потому что это выгодно обеим сторонам.</li>
+		var err=0;
 
-</ol>
+		var mess='';
 
-<p>
+	
 
-  В общем, дело довольно тёмное. </p>
+		if (!yName.value||yName.value==' ') {
 
-<p>
+			mess='Вы не сообщили нам своё имя!';					
 
-Хотим заметить, что для Рунета этот подход является «нормальным», чего не скажешь о «настоящих» free-lance сайтах, таких, как odesk.com, например, где исполнители могут пройти массу тестов на профпригодность. Недостатком подобных free-lance marketplaces является то, что стороны могут общаться только на англ. языке (иное не допускается их правилами). </p>
+			yName.style.backgroundColor='yellow';
 
-<h4>Как его проверить</h4>﻿<p>
+		}
 
-Пожалуй, только поговорив с ним и, если получится, дав выполнить тестовое задание. Однако составить таковое, чтобы оно было полезным и более-менее достоверно определяло профессиональный уровень разработчика — целая головная боль. Мы долго думали над этим вопросом и, в конце концов, добавили возможность для наших клиентов протестировать потенциального разработчика. Работает это очень просто:</p>
+		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-<ol>
+		if (!filter.test(yEmail.value)) {
 
-  <li>
+			mess='Емэйл введён некорректно или отсутствует!';
 
-    Если у вас на примете есть кандидат, получите от него согласие на прохождение теста. Вряд ли ответственный специалист откажется от возможности лишний раз доказать свой профессионализм.</li>
+			yEmail.style.backgroundColor='yellow';
 
-  <li> Зарегистрируйтесь на нашем сайте.</li>
+		}
 
-  <li> Узнайте у своего потенциального разработчика емэйл, который он должен будет указать при прохождении теста.</li>
+		if (yPhone.value.length<7) {
 
-  <li> Укажите емэйл кандидата в своём аккаунте, чтобы мы знали, что результаты его тестирования нужно отправлять именно вам.</li>
+			mess='Вы не сообщили нам № своего телефона или указали его некорректно!';					
 
-  <li> Дайте ему ссылку на страницу тестирования.</li>
+			yPhone.style.backgroundColor='yellow';
 
-</ol>
+		}
 
-<p>
+		if(mess!=''){
 
-  После того, как тест будет пройден, вы получите результат по емэйлу и сможете решить — стоит ли сотрудничать с данным человеком.</p>
+			alert(mess);
 
-<p>
+			scrollToY('bottom');
 
-Тест включает в себя ответы на вопросы по основным технологиям, используемым в веб-строительстве плюс знание англ. языка и (неявно) тест на адекватность. Обратите внимание, что потенциальный разработчик не обязан проходить все тесты — это уж как он решит и/или как вы с ним договоритесь.</p>
+			return false;
 
-<p>
+		}
 
-Разумеется, что вы полностью освобождаетесь от подобных проблем в случае, если заказываете разработку веб-сайта у нас.</p>
+	}catch(e){
 
-<h4>Разработчик оказался не тем, кем казался…</h4>﻿<p>
+		alert(e.message);
 
-Если вы нашли его на фрилансе, то, боимся, выйти из этой ситуации без потерь вам будет нелегко. Если вы не делали предоплату, то, возможно, вы потеряете только время, что само по себе тоже неприятно, но лучше, чем потерять и время, и деньги. Помните, что фриланс-сайты не несут ответственности за качество выполнения работ. Даже, когда сами подбирают вам исполнителя (а это стоит несколько тысяч). В последнем случае они попросту делают рассылку среди фрилансеров, никак не выясняя реальную квалификацию кандидатов. Да-да, мы даже проводили специальное исследование на эту тему и задавали вопрос — а что будет, если мы заплатим вам эти несколько тысяч, вы найдёте исполнителя, а через некоторое время он не справится с заданием или попросту исчезнет? Вернёте ли вы нам деньги?</p>
+	}
 
-<p>
+}
 
-Угадайте с одного раза, какой ответ мы получили.</p>
+</script>
 
-<p>
 
-Однако всё это — цветочки. Настоящие проблемы начинаются не в процессе сотрудничества с фрилансером, а спустя некоторое (иногда довольно значительное) время, когда ВНЕЗАПНО выясняется, что сайт написан «криво» и «сам чёрт там ногу сломит». Ну, а того, кто «это» написал, уже и след простыл, естественно. Бесплатная поддержка и доработка…? Забудьте об этом.</p>
 
-<p>
+<script type="text/javascript">
 
-Знакомая ситуация? Понимаем и скорбим вместе с вами.</p>
+function loadCollection(collection_id){
 
-<h4>Что делать, если нужно делать не весь сайт</h4>﻿<p>
+	location.href='/webapps/index.php/component/collector1/?collection_id='+collection_id;
 
-Возникает вопрос — зачем же заказчики вообще ищут программистов на фрилансе? </p>
+}
 
-<p>
+function checkPatchBoxes(eventSrcElement){
 
-В большинстве случаев это происходит тогда, когда нужно выполнить относительно небольшую задачу — не нанимать же веб-студию для разработки, например, одного компонента для CMS! </p>
+	var tBox;
 
-<p>
+	try{
 
-Так обычно и рассуждали/рассуждают до сих пор некоторые заказчики. И нанимают фрилансера. Иногда успешно. Иногда —  см. выше. Веб-студии рассуждают так же. Мы, однако, считаем данный подход устаревшим. Мы выполняем для своих клиентов и такие работы, потому что можем позволить себе и такое. Узнайте, почему это выгодно не только для вас, но и для нас тоже.</p>
+		
 
-<h3>Свести к минимуму затраты на создание сайта</h3>﻿<h4>1. Критически важно: максимальное использование готовых решений</h4>﻿<p>
 
-Это не так просто, как может показаться на первый взгляд. Как правило, когда говорят о готовых решениях, прежде всего, имеют в виду CMS. Однако они, в свою очередь, могут включать в себя ряд дополнительных конструкций (расширений), таких, как:</p>
 
-<ul>
+		tBox=(navigator.appName.indexOf("Internet Explorer")==-1)? event.target:event.srcElement;
 
-  <li>
+		var rows=eventSrcElement.getElementsByTagName('tr');
 
-    Компоненты</li>
+		var row,boxes;
 
-  <li> Модули</li>
+		for(i=0,j=rows.length;i<j;i++){
 
-  <li> Шаблоны</li>
+			row=rows.item(i);
 
-  <li> Плагины</li>
+			
 
-  <li> Виджеты</li>
+			
 
-</ul>
+			boxes=row.getElementsByTagName('input');
 
-<p>
+					
 
-  …и т.п.</p>
+			f=boxes.length
 
-<p>
+			//если в строке есть чекбоксы:
 
-Их выбор и совместимость зависят от многих факторов, в первую очередь, таких, как популярность системы и тип (бесплатная/платная). Бытует мнение, что платные CMS лучше, но это совсем не факт! В действительности, различие не в качестве, а в том, кто и на каких условиях будет оказывать вам поддержку. Разработчики бесплатных CMS не несут перед вами никаких обязательств, тогда как разработчики проприетарных формально должны отвечать на ваши вопросы, консультировать вас и т.п. В реальности, однако, всё не так однозначно, потому что то, что будут делать для вас разработчики платной CMS, указано в лицензионном соглашении, т.о., вам, как минимум, необходимо его тщательнейшим образом изучить. Чего точно они не будут для вас делать бесплатно — так это создавать требуемые вам компоненты, не входящие в исходную комплектацию. В лучшем случае вы сможете купить у них какой-либо дополнительный модуль за дополнительные же деньги, но не факт, что он полностью удовлетворит вашим потребностям. Значит, вам придётся опять же нанимать стороннего программиста, чтобы он доработал его до нужного состояния. А вот тут-то вас подстерегает масса подводных камней.</p>
+			if (f>0){
 
-<h5>Бороться и искать, найти и перепрятать!</h5>﻿<p>
+				var bc=0; //counter for checked boxes in row
 
-Не факт, что вы найдёте нужного программиста, способного справиться с этой задачей. Хотя бы потому, что производители платных CMS отнюдь не заинтересованы в том, чтобы разработчики знали, как устроен их продукт. Ведь если это будет хорошо известно, то зачем платить деньги за каждую копию системы? Не проще ли купить одну, а потом использовать для каждого сайта собственную модификацию? Мы как-то попробовали препарировать DLE, но быстро бросили это дело, и не потому, что не разобрались, а потому, что у нас сложилось устойчивое впечатление, что разработчики гораздо больше озабочены тем, чтобы максимально запутать следы, нежели чем-то ещё. </p>
+				for(k=0;k<f;k++){
 
-<h5>Нравится? Забирайте!</h5>﻿<p>
+					//если не первая ячейка:
 
-Это поразительно контрастирует с подходом разработчиков таких CMS, как, например, Joomla!, по которой есть масса документации в открытых источниках, выложена её объектная модель, масса всевозможных форумов, и огромное международное сообщество, участники которого готовы помочь с решением практически любого вопроса. Разумеется, бесплатно! Плюс колоссальное количество всевозможных расширений от тысяч разработчиков.</p>
+					if (k>0){
 
-<h5>Видовой барьер</h5>﻿<p>
+						if (tBox==boxes.item(0)) 
 
-Ещё одна проблема — интеграция в проприетарную систему универсальных сторонних решений. Например, PHP-классов. Собственно, по той же самой причине. В результате стоимость не только разработки web-сайта, но и его поддержки в случае выбора проприетарной CMS может на порядок «превзойти» ваши ожидания. </p>
+							boxes.item(k).checked=(boxes.item(0).checked==true)? true:false;
 
-<p>
+					
 
-И, как было замечено выше, если ранее качество платных/бесплатных CMS, действительно, заметно отличалось, сейчас это отличие под вопросом. </p>
+						if (boxes.item(k).checked==true) {
 
-<p>
+							boxes.item(k).parentNode.style.background='#ccff99';
 
-Более подробно проблема выбора подходящей CMS рассмотрен в специальном разделе. Обратите внимание, что, воспользовавшись нашим конструктором сайтов, вы можете бесплатно экспериментировать с различными наборами опций и систем, чтобы, в конце концов, принять лучшее решение. Ниже вы можете ознакомиться со схемой критериев выбора CMS.</p>
+							bc++;
 
-<h4>2. Стратегия развития сайта — чего вы хотите?</h4>﻿<p>
+						}else boxes.item(k).parentNode.style.background='';
 
-Многие владельцы сайтов принимают необоснованные решения при выборе платформы и/или разработчика, потому что не совсем ясно видят концепцию своего ресурса. Однако иногда это, действительно, достаточно сложно, потому что web — чрезвычайно динамичная среда. Поэтому вторым критически важным фактором является выбор максимально гибкой архитектуры вашего приложения. Мы уделяем этому аспекту самое пристальное внимание. Современное веб-приложение должно быть таким, чтобы:</p>
+					}
 
-<p>
+				}
 
-1.	Любой функционал можно было бы добавить в максимально сжатый срок.</p>
+				var fm=(f-1);
 
-<p>
+				//проверить условие отмтки/разотметки пакетного чекбокса:
 
-2.	Любой модуль, компонент, плагин, виджет и т.п., можно было бы легко как инсталлировать, так и удалить из системы, не засоряя её исходники «мёртвым» кодом</p>
+				if (bc==fm) boxes.item(0).checked=true;
 
-<p>
+				if (bc==0) boxes.item(0).checked=false;
 
-3.	Любой компонент должен быть написан в соответствии с принятыми стандартами ООП и любому разработчику с первого взгляда должно быть понятно, «как это работает».</p>
+			}		
 
-<p>
+		}
 
-4.	Различные аспекты вашего сайта — дизайн, функционал, юзабилити — должны быть связаны друг с другом концептуально, но не физически. Т.е., смена дизайна, например, не должна вызывать каких-либо дополнительных работ, связанных с программированием и т.п.</p>
+		
 
-<p>
+	}catch(e){
 
-5.	Архитектура приложения должна позволять легко не только добавлять компоненты сторонних разработчиков, но и модифицировать их в рамках выбранной вами концепции.</p>
+		alert(e.message);
 
-<p>
+	}
 
-6.	Поддержка системы должна быть по силам обычному пользователю, не обременённому глубокими знаниями программирования.</p>
+}
 
-<h3>Как добиться от разработчика минимальных сроков разработки сайта</h3>﻿<h4>ТЗ</h4>﻿<p>
+function checkRequired(){
 
-Чем лучше вы составите ТЗ, тем больше у вас будет шансов на успех, как в смысле сроков выполнения задания, так и в соответствии результата вашим ожиданиям. Если у вас нет опыта в составлении ТЗ, обратитесь к тем, кто сможет помочь (мы с радостью сделаем это). Поверьте, оно того стоит.</p>
+	try{
 
-<h4>Кадры решают всё</h4>﻿<p>
+		d=document;
 
-Выбор наиболее квалифицированного разработчика. Об этом мы писали выше. Общие критерии перечислены далее.</p>
+		var selST=d.getElementById('selectSiteType');
 
-<h4>Договор предоставления услуг</h4>﻿<p>Старайтесь всегда заключать с разработчиком договор. На первый взгляд, на скорость разработки это не влияет, но на самом деле влияет ещё как, особенно, когда там чётко изложены его обязанности и санкции за их нарушение!</p>
+		
 
-<p>Однако, ещё раз хотим подчеркнуть (и призываем вас обратить на это самое пристальное внимание), что после завершения работа над заданием, всё отнюдь не заканчивается, а наоборот, — только начинается. Если вы не оговорили с разработчиком совершенно чётко условия поддержки — результат весьма сомнителен.</p>
+		if (selST.options[selST.selectedIndex].value=='0') {
 
-<h3>Полный контроль над собственным сайтом</h3>﻿<h4>Правильный выбор CMS</h4>﻿<p>
+			alert('Вы не указали, какой тип сайта вам нужен!');
 
-Итак, построение сайта на основе CMS позволит вам самостоятельно управлять многими аспектами его работы. Главное — не ошибиться с её выбором. Ниже приведены схемы основных критериев выбора —</p>
+			scrollToY('select_site_type');
 
-<ol>
+			selST.style.backgroundColor='yellow';
 
-  <li>
+			return false;
 
-    <a href="#free">Для бесплатной CMS</a></li>
+		}
 
-  <li><a href="#proprietary"> Для платной</a></li>
+		return checkCommonData();
 
-  <li><a href="#compare_both"> Общая (сравнительная) схема</a></li>
+		
 
-</ol>
+	}catch(e){
 
-<h4>Правильный выбор разработчика</h4>﻿<p>
+		alert(e.message);
 
-Складывается из следующих критериев:</p>
+	}
 
-<ol>
+}
 
-  <li>
+function checkRows(sel){
 
-    Профессиональные навыки</li>
+	
 
-  <li>
+	var rws=document.getElementsByTagName('tr');
 
-    Адекватность</li>
+	var tRow,arrClassName,newClassName,tClassName;
 
-  <li>
+	if(sel=='3') { //WebShop, именно число, иначе возникают проблемы при записи в БД 
 
-    Лояльность</li>
+		tClassName='WebShop';
 
-  <li>
+		changedClassName='hiddenShop';
 
-    Готовность к долгосрочному сотрудничеству</li>
+	}else{
 
-</ol>
+		tClassName='hiddenShop';
 
-<p>
+		changedClassName='WebShop';
 
-  О том, как выявить эти характеристики, мы писали выше.</p>
+	}
 
-<h4>Доступ к широкому кругу потенциальных разработчиков</h4>﻿<p>
+	for(i=0,j=rws.length;i<j;i++){
 
-Если вы нашли толкового программиста (или, что ещё лучше, коллектив высококлассных специалистов), считайте, что вы сделали самое главное. Однако необходимо иметь в виду, что программисты (особенно фрилансеры) приходят и уходят, а ваш сайт должен жить и развиваться независимо от их наличия/желания. Поэтому крайне важно располагать набором потенциально подходящих кандидатов. Это, как раз, один из принципов, которыми руководствуемся в своей работе мы — бывают очень ценные разработчики, но не бывает незаменимых. И у нас всегда есть достаточный выбор, что позволяет любому заказчику не думать о проблемах тех, кто не является нашим клиентом.</p><h4>Документальная поддержка</h4>﻿<p>
+		newClassName='';
 
-Конечно, в идеале вам не нужно знать, что у вашей системы «внутри». Реальность, однако, такова, что рано или поздно вас или того, кто занимается поддержкой вашего сайта, это заинтересует. Хотя бы просто потому, что web не стоит на месте, и, чтобы выжить и процветать, нужно двигаться вперёд. Поэтому наличие документации к вашей системе — критически важный аспект её жизнеспособности. К сожалению, подавляющее большинство разработчиков ненавидят (а некоторые попросту не считают нужным!) составлять документацию. Ещё более удивительно то, что некоторые не задумываются над тем простым фактом, что следующий разработчик, который придёт после текущего, не умеет читать его мысли на расстоянии. И то, что у него «в голове», это, фактически, то, чего попросту нет. Последствия этого могут быть катастрофическими.</p>
+		tRow=rws.item(i); 
 
-<p>
+		if (tRow.className.indexOf(tClassName)!=-1){
 
-Между тем, составление документации вовсе не является невыполнимой задачей. Более того, существует масса стандартных методов её быстрого создания. Разумеется, мы предоставляем своим клиентам её в нужном объёме. </p>
+			if (tRow.className!=tClassName){
 
-<h4>Всё как на ладони</h4>﻿<p>
+				arrClassName=tRow.className.split(' ');
 
-Однако мало создать хороший сайт и снабдить его пакетом документации. В конечном итоге всё это должно быть описано простым и понятным языком, чтобы заказчику не нужно было становиться экспертом в области ИТ. Владелец сайта должен быть в состоянии объяснить любые аспекты функционирования системы любому разработчику, используя обычные, «человеческие» понятия, без каких-либо мудрёных оборотов речи. Естественно, что это возможно только тогда, когда клиент разговаривает на одном языке с теми, кто занимается для него разработкой веб-сайта. Мы, со своей стороны, стараемся максимально упростить представление этого процесса. Любой клиент может позвонить нам и буквально в течение нескольких минут прояснить важнейшие вопросы создания сайта, те самые, которые до звонка могут казаться ему «китайской грамотой».</p>
+				for(b=0,c=arrClassName.length;b<c;b++){
 
-<h4>Дух сотрудничества</h4>﻿<p>
+					if (arrClassName[b]!=tClassName) newClassName+=' '+arrClassName[b];
 
-Мы очень ценим взаимоотношения со своими клиентами. Как говорится, старый друг — лучше новых двух. Совместная работа в такой увлекательной области, как веб-строительство — уже само по себе очень интересно и является наградой. Вдвойне приятно, когда заказчики это ценят и рекомендуют нас своим друзьям. Очень часто мы даём своим клиентам ценные советы совершенно бесплатно и считаем это абсолютно естественным, а в конечном итоге и взаимовыгодным. </p>
+				}
 
-<p>
+			} 
 
-Будем рады видеть вас в рядах тех, кто уже присоединился к нам!</p>
+			newClassName+=' '+changedClassName;
 
-<h3>
+			tRow.className=newClassName;
 
-  Остальные статьи:</h3>
+		}
 
-<ul class="marginBottom20">
+	}
 
-  <li><a href="#real_cost">
+}
 
-    Как определить реальную стоимость разработки сайта</a></li>
+function manageEnginesChoice(radio){
 
-  <li><a href="#site_support">
+	var d=document;
 
-    Стоит ли платить за поддержку сайта</a></li>
+	try{
 
-  <li><a href="#foreign_company">
+		if (radio.id=="choose_engine_1"||radio.id=="choose_engine_2"){
 
-    Стоит ли заказывать разработку сайта иногородней компании</a></li>
+			if (radio.id=="choose_engine_0") d.getElementById('existing_cms').value='';	
 
-  <li><a href="#technical_issue">
+			d.getElementById('existing_cms_name').style.display='none';	
 
-    Как грамотно составить ТЗ</a></li>
+			scrollTo(0,2000);//location.href='#bottom';
 
-  <li><a href="#bad_developer">
+		}		
 
-    Что делать, если во взаимоотношениях с разработчиком назревают проблемы</a></li>
+		if (radio.id=="choose_engine_1"){
 
-</ul>
+			d.getElementById('tr_cms_list').style.display='block';
 
-<hr>
+		}		
 
-</div>
+		if (radio.id=="choose_engine_2"||radio.id=="choose_engine_3"){
+
+			d.getElementById('tr_cms_list').style.display='none';
+
+		}		
+
+		if (radio.id=="choose_engine_3"){
+
+			d.getElementById('existing_cms_name').style.display='inline';				
+
+		}	
+
+	}catch(e){
+
+		alert(e.message);
+
+	}
+
+}
+
+function controlCMSchoice(tdBlock){
+
+	var cells=tdBlock.getElementsByTagName('input');
+
+	var cell;
+
+	for(i=0,j=cells.length;i<j;i++){
+
+		cell=cells.item(i);
+
+		cell.parentNode.style.backgroundColor=(cell.checked==true)? '#F90':'';
+
+	}
+
+}
+
+</script>
+
+
 
                     	    
 
                     	    
 
-                   				<div class="moduletable">
-					<a name="feedback_form">Обратная связь</a>
-
-<div class="send_rapid_mess">
-
-<style type="text/css"><!--div.rapid_contact tr, div.rapid_contact td { border: none; padding: 3px; }--></style><div class="rapid_contact "><form action="http://localhost/webapps/index.php/consulting" method="post">
-<div class="rapid_contact intro_text "></div>
-<table><tr><td>Ваш емэйл:</td><td><input class="rapid_contact inputbox " type="text" name="rp_email" size="45" value=""/></td></tr>
-<tr><td>Тема сообщения:</td><td><input class="rapid_contact inputbox " type="text" name="rp_subject" size="45" value=""/></td></tr>
-<tr><td valign="top">Текст сообщения:</td><td><textarea class="rapid_contact textarea " name="rp_message" cols="45" rows="4"></textarea></td></tr>
-<tr><td colspan="2"><div class="bold">Ответьте на вопрос:</div>Сколько у обычного человека глаз? (цифра): <input class="rapid_contact inputbox " type="text" name="rp_anti_spam_answer" size="45" value=""/></td></tr><tr><td></td><td></td></tr>
-<tr><td colspan="2"><button class="rapid_contact button " type="submit" style="width: 28%"/>Отправить!</button></td></tr></table></form></div>
-</div>		</div>
-	    
+                   		    
 
                     <!--/COM-->
 
@@ -699,15 +1521,15 @@ Free-lance.ru, мягко выражаясь, сомнительный серв�
 <script>function toggleContainer(name) {
 			var e = document.getElementById(name);// MooTools might not be available ;)
 			e.style.display =(e.style.display == 'none') ? 'block' : 'none';
-		}</script><div id="system-debug" class="profiler"><h1>Консоль отладки Joomla!</h1><div class="dbgHeader" onclick="toggleContainer('dbgContainersession');"><a href="javascript:void(0);"><h3>Сессия</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainersession"><div class="dbgHeader" onclick="toggleContainer('dbgContainer_session0');"><a href="javascript:void(0);"><h3>__default</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainer_session0"><code>session.counter &rArr; 95<br /></code><code>session.timer.start &rArr; 1338627694<br /></code><code>session.timer.last &rArr; 1338658196<br /></code><code>session.timer.now &rArr; 1338658221<br /></code><code>session.client.browser &rArr; Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.52 Safari/536.5<br /></code><code>registry &rArr; {}<br /></code><div class="dbgHeader" onclick="toggleContainer('dbgContainer_session1');"><a href="javascript:void(0);"><h3>user</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainer_session1"><code>id &rArr; 0<br /></code><code>name &rArr; <br /></code><code>username &rArr; <br /></code><code>email &rArr; <br /></code><code>password &rArr; <br /></code><code>password_clear &rArr; <br /></code><code>usertype &rArr; <br /></code><code>block &rArr; <br /></code><code>sendEmail &rArr; 0<br /></code><code>registerDate &rArr; <br /></code><code>lastvisitDate &rArr; <br /></code><code>activation &rArr; <br /></code><code>params &rArr; <br /></code><code>groups &rArr; Array<br /></code><code>guest &rArr; 1<br /></code><code>customer_data_array &rArr; Array<br /></code><code>aid &rArr; 0<br /></code></div><code>session.token &rArr; 69cafe5e113f09382b3eaf03a5da219b<br /></code></div></div><div class="dbgHeader" onclick="toggleContainer('dbgContainerprofile_information');"><a href="javascript:void(0);"><h3>Результаты профилирования</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainerprofile_information"><div><code>Application 0.001 seconds (+0.001); 0.77 MB (+0.769) - afterLoad</code></div><div><code>Application 0.102 seconds (+0.101); 3.84 MB (+3.068) - afterInitialise</code></div><div><code>Application 0.115 seconds (+0.013); 4.46 MB (+0.627) - afterRoute</code></div><div><code>Application 0.183 seconds (+0.068); 6.17 MB (+1.705) - afterDispatch</code></div><div><code>Application 0.191 seconds (+0.008); 6.37 MB (+0.197) - beforeRenderModule mod_menu (Footer)</code></div><div><code>Application 0.202 seconds (+0.011); 6.58 MB (+0.218) - afterRenderModule mod_menu (Footer)</code></div><div><code>Application 0.202 seconds (+0.000); 6.58 MB (-0.001) - beforeRenderModule mod_rapid_contact (Обратная связь)</code></div><div><code>Application 0.204 seconds (+0.002); 6.60 MB (+0.013) - afterRenderModule mod_rapid_contact (Обратная связь)</code></div><div><code>Application 0.204 seconds (+0.000); 6.59 MB (-0.010) - beforeRenderModule mod_menu (Main Menu)</code></div><div><code>Application 0.214 seconds (+0.009); 6.61 MB (+0.021) - afterRenderModule mod_menu (Main Menu)</code></div><div><code>Application 0.214 seconds (+0.000); 6.60 MB (-0.003) - beforeRenderModule mod_login (Логин)</code></div><div><code>Application 0.225 seconds (+0.011); 6.67 MB (+0.065) - afterRenderModule mod_login (Логин)</code></div><div><code>Application 0.225 seconds (+0.000); 6.67 MB (-0.000) - beforeRenderModule mod_search (Поиск)</code></div><div><code>Application 0.231 seconds (+0.005); 6.69 MB (+0.024) - afterRenderModule mod_search (Поиск)</code></div><div><code>Application 0.239 seconds (+0.008); 6.78 MB (+0.087) - afterRender</code></div></div><div class="dbgHeader" onclick="toggleContainer('dbgContainermemory_usage');"><a href="javascript:void(0);"><h3>Использование памяти</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainermemory_usage"><code>6.77 MB (7,099,736 Bytes)</code></div><div class="dbgHeader" onclick="toggleContainer('dbgContainerqueries');"><a href="javascript:void(0);"><h3>Запросы к базе данных</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainerqueries"><h4>11 SQL-запросов зафиксировано</h4><ol><li><code><span class="dbgCommand">SELECT</span> `data`
+		}</script><div id="system-debug" class="profiler"><h1>Консоль отладки Joomla!</h1><div class="dbgHeader" onclick="toggleContainer('dbgContainersession');"><a href="javascript:void(0);"><h3>Сессия</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainersession"><div class="dbgHeader" onclick="toggleContainer('dbgContainer_session0');"><a href="javascript:void(0);"><h3>__default</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainer_session0"><code>session.counter &rArr; 3<br /></code><code>session.timer.start &rArr; 1340250602<br /></code><code>session.timer.last &rArr; 1340250721<br /></code><code>session.timer.now &rArr; 1340250831<br /></code><code>session.client.browser &rArr; Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.165 Safari/535.19 YI<br /></code><code>registry &rArr; {}<br /></code><div class="dbgHeader" onclick="toggleContainer('dbgContainer_session1');"><a href="javascript:void(0);"><h3>user</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainer_session1"><code>id &rArr; 0<br /></code><code>name &rArr; <br /></code><code>username &rArr; <br /></code><code>email &rArr; <br /></code><code>password &rArr; <br /></code><code>password_clear &rArr; <br /></code><code>usertype &rArr; <br /></code><code>block &rArr; <br /></code><code>sendEmail &rArr; 0<br /></code><code>registerDate &rArr; <br /></code><code>lastvisitDate &rArr; <br /></code><code>activation &rArr; <br /></code><code>params &rArr; <br /></code><code>groups &rArr; Array<br /></code><code>guest &rArr; 1<br /></code><code>customer_data_array &rArr; Array<br /></code><code>aid &rArr; 0<br /></code></div><code>session.token &rArr; f5e13aaed2fd58611f3a1454c0e8db29<br /></code></div></div><div class="dbgHeader" onclick="toggleContainer('dbgContainerprofile_information');"><a href="javascript:void(0);"><h3>Результаты профилирования</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainerprofile_information"><div><code>Application 0.001 seconds (+0.001); 0.77 MB (+0.769) - afterLoad</code></div><div><code>Application 0.062 seconds (+0.062); 3.84 MB (+3.068) - afterInitialise</code></div><div><code>Application 0.074 seconds (+0.012); 4.47 MB (+0.633) - afterRoute</code></div><div><code>Application 0.149 seconds (+0.075); 6.42 MB (+1.955) - afterDispatch</code></div><div><code>Application 0.157 seconds (+0.008); 6.62 MB (+0.198) - beforeRenderModule mod_menu (Footer)</code></div><div><code>Application 0.170 seconds (+0.013); 6.79 MB (+0.168) - afterRenderModule mod_menu (Footer)</code></div><div><code>Application 0.170 seconds (+0.000); 6.79 MB (-0.003) - beforeRenderModule mod_menu (Main Menu)</code></div><div><code>Application 0.179 seconds (+0.009); 6.80 MB (+0.016) - afterRenderModule mod_menu (Main Menu)</code></div><div><code>Application 0.180 seconds (+0.000); 6.80 MB (-0.003) - beforeRenderModule mod_login (Логин)</code></div><div><code>Application 0.189 seconds (+0.009); 6.83 MB (+0.032) - afterRenderModule mod_login (Логин)</code></div><div><code>Application 0.189 seconds (+0.000); 6.83 MB (-0.000) - beforeRenderModule mod_search (Поиск)</code></div><div><code>Application 0.193 seconds (+0.004); 6.85 MB (+0.020) - afterRenderModule mod_search (Поиск)</code></div><div><code>Application 0.203 seconds (+0.010); 6.94 MB (+0.087) - afterRender</code></div></div><div class="dbgHeader" onclick="toggleContainer('dbgContainermemory_usage');"><a href="javascript:void(0);"><h3>Использование памяти</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainermemory_usage"><code>6.93 MB (7,263,200 Bytes)</code></div><div class="dbgHeader" onclick="toggleContainer('dbgContainerqueries');"><a href="javascript:void(0);"><h3>Запросы к базе данных</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainerqueries"><h4>41 SQL-запросов зафиксировано</h4><ol><li><code><span class="dbgCommand">SELECT</span> `data`
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> `<span class="dbgTable">dnior_session</span>`
 
-<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `session_id` <b class="dbgOperator">=</b> &#039;b7121be5def5ffd82ecb325bc9ea5db7&#039;</code></li><li><code><span class="dbgCommand">DELETE</span> 
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `session_id` <b class="dbgOperator">=</b> &#039;683412241cd2badbaa40f41adb2f6c95&#039;</code></li><li><code><span class="dbgCommand">DELETE</span> 
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> `<span class="dbgTable">dnior_session</span>`
 
-<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `time` &lt; &#039;1338640221&#039;</code></li><li><code><span class="dbgCommand">SELECT</span> folder <span class="dbgCommand">AS</span> type, element <span class="dbgCommand">AS</span> name, params
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `time` &lt; &#039;1340232831&#039;</code></li><li><code><span class="dbgCommand">SELECT</span> folder <span class="dbgCommand">AS</span> type, element <span class="dbgCommand">AS</span> name, params
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_extensions</span>
 
@@ -729,7 +1551,7 @@ Free-lance.ru, мягко выражаясь, сомнительный серв�
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_extensions</span>
 
-<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `type` <b class="dbgOperator">=</b> &#039;component&#039; <br />&#160;&#160;<span class="dbgCommand">AND</span> `element` <b class="dbgOperator">=</b> &#039;com_content&#039;</code></li><li><code><span class="dbgCommand">SELECT</span> <b style="color: red;">*</b>
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `type` <b class="dbgOperator">=</b> &#039;component&#039; <br />&#160;&#160;<span class="dbgCommand">AND</span> `element` <b class="dbgOperator">=</b> &#039;com_collector1&#039;</code></li><li><code><span class="dbgCommand">SELECT</span> <b style="color: red;">*</b>
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_languages</span>
 
@@ -741,7 +1563,141 @@ Free-lance.ru, мягко выражаясь, сомнительный серв�
 
 <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_extensions</span> as e <br />&#160;&#160;<span class="dbgCommand">ON</span> e.element<b class="dbgOperator">=</b>s.template <br />&#160;&#160;<span class="dbgCommand">AND</span> e.type<b class="dbgOperator">=</b>&#039;template&#039; <br />&#160;&#160;<span class="dbgCommand">AND</span> e.client_id<b class="dbgOperator">=</b>s.client_id
 
-<br />&#160;&#160;<span class="dbgCommand">WHERE</span> s.client_id <b class="dbgOperator">=</b> 0 <br />&#160;&#160;<span class="dbgCommand">AND</span> e.enabled <b class="dbgOperator">=</b> 1</code></li><li><code><span class="dbgCommand">SELECT</span> m.id, m.title, m.module, m.position, m.content, m.showtitle, m.params, mm.menuid
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> s.client_id <b class="dbgOperator">=</b> 0 <br />&#160;&#160;<span class="dbgCommand">AND</span> e.enabled <b class="dbgOperator">=</b> 1</code></li><li><code><span class="dbgCommand">SELECT</span> a.<b style="color: red;">*</b>
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_users</span> as a
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> a.id <b class="dbgOperator">=</b> 0</code></li><li><code><span class="dbgCommand">SELECT</span> a.<b style="color: red;">*</b>
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_users</span> as a
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> a.id <b class="dbgOperator">=</b> 0</code></li><li><code><span class="dbgCommand">SELECT</span> collections_ids <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_precustomers</span>
+
+ <br />&#160;&#160;<span class="dbgCommand">WHERE</span> `email` <b class="dbgOperator">=</b> &#039;&#039; <span class="dbgCommand">OR</span> session_id <b class="dbgOperator">=</b> &#039;683412241cd2badbaa40f41adb2f6c95&#039;</code></li><li><code><span class="dbgCommand">SELECT</span> <span class="dbgTable">dnior_webapps_site_options</span>.id <span class="dbgCommand">AS</span> option_id, 
+
+<span class="dbgCommand">IF</span> ( sites_types_ids_location,
+
+	 sites_types_ids_location,
+
+	 0 -- для корректной сортировки результатов внутри таблицы
+
+   ) as `site types`,
+
+   ( select name_ru <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_group</span> 
+
+	 <br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_ids 
+
+	 <span class="dbgCommand">REGEXP</span> <span class="dbgCommand">CONCAT</span>(&#039;(^|,)&#039;,<span class="dbgTable">dnior_webapps_site_options</span>.id,&#039;(,|$)&#039;) -- извлечь название групп опций
+
+   ) as `name_ru`, 
+
+<span class="dbgTable">dnior_webapps_site_options</span>.name_ru <span class="dbgCommand">AS</span> `option` 
+
+    <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options</span> 
+
+    <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_webapps_site_options_partial</span> 
+
+    <br />&#160;&#160;<span class="dbgCommand">ON</span> <span class="dbgTable">dnior_webapps_site_options_partial</span>.site_option_id <b class="dbgOperator">=</b> <span class="dbgTable">dnior_webapps_site_options</span>.id
+
+ <br />&#160;&#160;<span class="dbgCommand">WHERE</span> <span class="dbgTable">dnior_webapps_site_options</span>.name_ru &lt;&gt; &#039;Дополнительно&#039;
+
+ <br />&#160;&#160;<span class="dbgCommand">ORDER</span> <span class="dbgCommand">BY</span> `site types` <span class="dbgCommand">DESC</span>, `name_ru`, `option` <span class="dbgCommand">ASC</span>;</code></li><li><code><span class="dbgCommand">SELECT</span> id, name_ru, name_en
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_types</span> <br />&#160;&#160;<span class="dbgCommand">ORDER</span> <span class="dbgCommand">BY</span> id <span class="dbgCommand">DESC</span></code></li><li><code><span class="dbgCommand">SELECT</span> site_side, name_ru
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> <br />&#160;&#160;<span class="dbgCommand">ORDER</span> <span class="dbgCommand">BY</span> id</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,2,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,3,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,1,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,7,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,6,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,4,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,8,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,5,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,11,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,12,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,17,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,14,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,9,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,20,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,19,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,10,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,15,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,13,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,16,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,18,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,21,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,23,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
+
+<br />&#160;&#160;<span class="dbgCommand">WHEREspan> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,22,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> m.id, m.title, m.module, m.position, m.content, m.showtitle, m.params, mm.menuid
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_modules</span> <span class="dbgCommand">AS</span> m
 
@@ -749,30 +1705,43 @@ Free-lance.ru, мягко выражаясь, сомнительный серв�
 
 <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_extensions</span> <span class="dbgCommand">AS</span> e <br />&#160;&#160;<span class="dbgCommand">ON</span> e.element <b class="dbgOperator">=</b> m.module <br />&#160;&#160;<span class="dbgCommand">AND</span> e.client_id <b class="dbgOperator">=</b> m.client_id
 
-<br />&#160;&#160;<span class="dbgCommand">WHERE</span> m.published <b class="dbgOperator">=</b> 1 <br />&#160;&#160;<span class="dbgCommand">AND</span> e.enabled <b class="dbgOperator">=</b> 1 <br />&#160;&#160;<span class="dbgCommand">AND</span> (m.publish_up <b class="dbgOperator">=</b> &#039;0000-00-00 00:00:00&#039; <span class="dbgCommand">OR</span> m.publish_up &lt;<b class="dbgOperator">=</b> &#039;2012-06-02 17:30:21&#039;) <br />&#160;&#160;<span class="dbgCommand">AND</span> (m.publish_down <b class="dbgOperator">=</b> &#039;0000-00-00 00:00:00&#039; <span class="dbgCommand">OR</span> m.publish_down &gt;<b class="dbgOperator">=</b> &#039;2012-06-02 17:30:21&#039;) <br />&#160;&#160;<span class="dbgCommand">AND</span> m.access <span class="dbgCommand">IN</span> (1,1) <br />&#160;&#160;<span class="dbgCommand">AND</span> m.client_id <b class="dbgOperator">=</b> 0 <br />&#160;&#160;<span class="dbgCommand">AND</span> (mm.menuid <b class="dbgOperator">=</b> 102 <span class="dbgCommand">OR</span> mm.menuid &lt;<b class="dbgOperator">=</b> 0)
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> m.published <b class="dbgOperator">=</b> 1 <br />&#160;&#160;<span class="dbgCommand">AND</span> e.enabled <b class="dbgOperator">=</b> 1 <br />&#160;&#160;<span class="dbgCommand">AND</span> (m.publish_up <b class="dbgOperator">=</b> &#039;0000-00-00 00:00:00&#039; <span class="dbgCommand">OR</span> m.publish_up &lt;<b class="dbgOperator">=</b> &#039;2012-06-21 03:53:51&#039;) <br />&#160;&#160;<span class="dbgCommand">AND</span> (m.publish_down <b class="dbgOperator">=</b> &#039;0000-00-00 00:00:00&#039; <span class="dbgCommand">OR</span> m.publish_down &gt;<b class="dbgOperator">=</b> &#039;2012-06-21 03:53:51&#039;) <br />&#160;&#160;<span class="dbgCommand">AND</span> m.access <span class="dbgCommand">IN</span> (1,1) <br />&#160;&#160;<span class="dbgCommand">AND</span> m.client_id <b class="dbgOperator">=</b> 0 <br />&#160;&#160;<span class="dbgCommand">AND</span> (mm.menuid <b class="dbgOperator">=</b> 103 <span class="dbgCommand">OR</span> mm.menuid &lt;<b class="dbgOperator">=</b> 0)
 
 <br />&#160;&#160;<span class="dbgCommand">ORDER</span> <span class="dbgCommand">BY</span> m.position, m.ordering</code></li><li><code><span class="dbgCommand">SELECT</span> extension_id <span class="dbgCommand">AS</span> id, element <span class="dbgCommand">AS</span> &quot;option&quot;, params, enabled
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_extensions</span>
 
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `type` <b class="dbgOperator">=</b> &#039;component&#039; <br />&#160;&#160;<span class="dbgCommand">AND</span> `element` <b class="dbgOperator">=</b> &#039;com_content&#039;</code></li><li><code><span class="dbgCommand">SELECT</span> extension_id <span class="dbgCommand">AS</span> id, element <span class="dbgCommand">AS</span> &quot;option&quot;, params, enabled
+
+<br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_extensions</span>
+
 <br />&#160;&#160;<span class="dbgCommand">WHERE</span> `type` <b class="dbgOperator">=</b> &#039;component&#039; <br />&#160;&#160;<span class="dbgCommand">AND</span> `element` <b class="dbgOperator">=</b> &#039;com_users&#039;</code></li><li><code><span class="dbgCommand">UPDATE</span> `<span class="dbgTable">dnior_session</span>`
 
-<br />&#160;&#160;<span class="dbgCommand">SET</span> `data` <b class="dbgOperator">=</b> &#039;__default|a:8:{s:15:\&quot;session.counter\&quot;;i:95;s:19:\&quot;session.timer.start\&quot;;i:1338627694;s:18:\&quot;session.timer.last\&quot;;i:1338658196;s:17:\&quot;session.timer.now\&quot;;i:1338658221;s:22:\&quot;session.client.browser\&quot;;s:106:\&quot;Mozilla/5.0 (Windows <span class="dbgCommand">NT</span> 6.1; WOW64) AppleWebKit/536.5 (<span class="dbgCommand">KHTML</span>, like Gecko) Chrome/19.0.1084.52 Safari/536.5\&quot;;s:8:\&quot;registry\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:4:\&quot;user\&quot;;O:5:\&quot;JUser\&quot;:24:{s:9:\&quot;\0<b style="color: red;">*</b>\0isRoot\&quot;;b:0;s:2:\&quot;id\&quot;;i:0;s:4:\&quot;name\&quot;;N;s:8:\&quot;username\&quot;;N;s:5:\&quot;email\&quot;;N;s:8:\&quot;password\&quot;;N;s:14:\&quot;password_clear\&quot;;s:0:\&quot;\&quot;;s:8:\&quot;usertype\&quot;;N;s:5:\&quot;block\&quot;;N;s:9:\&quot;sendEmail\&quot;;i:0;s:12:\&quot;registerDate\&quot;;N;s:13:\&quot;lastvisitDate\&quot;;N;s:10:\&quot;activation\&quot;;N;s:6:\&quot;params\&quot;;N;s:6:\&quot;groups\&quot;;a:0:{}s:5:\&quot;guest\&quot;;i:1;s:10:\&quot;\0<b style="color: red;">*</b>\0_params\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:14:\&quot;\0<b style="color: red;">*</b>\0_authGroups\&quot;;a:1:{i:0;i:1;}s:14:\&quot;\0<b style="color: red;">*</b>\0_authLevels\&quot;;a:2:{i:0;i:1;i:1;i:1;}s:15:\&quot;\0<b style="color: red;">*</b>\0_authActions\&quot;;N;s:12:\&quot;\0<b style="color: red;">*</b>\0_errorMsg\&quot;;N;s:19:\&quot;customer_data_array\&quot;;a:0:{}s:10:\&quot;\0<b style="color: red;">*</b>\0_errors\&quot;;a:0:{}s:3:\&quot;aid\&quot;;i:0;}s:13:\&quot;session.token\&quot;;s:32:\&quot;69cafe5e113f09382b3eaf03a5da219b\&quot;;}&#039;
-	, `time` <b class="dbgOperator">=</b> &#039;1338658221&#039;
+<br />&#160;&#160;<span class="dbgCommand">SET</span> `data` <b class="dbgOperator">=</b> &#039;__default|a:8:{s:15:\&quot;session.counter\&quot;;i:3;s:19:\&quot;session.timer.start\&quot;;i:1340250602;s:18:\&quot;session.timer.last\&quot;;i:1340250721;s:17:\&quot;session.timer.now\&quot;;i:1340250831;s:22:\&quot;session.client.browser\&quot;;s:112:\&quot;Mozilla/5.0 (Windows <span class="dbgCommand">NT</span> 6.1; WOW64) AppleWebKit/535.19 (<span class="dbgCommand">KHTML</span>, like Gecko) Chrome/18.0.1025.165 Safari/535.19 <span class="dbgCommand">YI</span>\&quot;;s:8:\&quot;registry\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:4:\&quot;user\&quot;;O:5:\&quot;JUser\&quot;:24:{s:9:\&quot;\0<b style="color: red;">*</b>\0isRoot\&quot;;N;s:2:\&quot;id\&quot;;i:0;s:4:\&quot;name\&quot;;N;s:8:\&quot;username\&quot;;N;s:5:\&quot;email\&quot;;N;s:8:\&quot;password\&quot;;N;s:14:\&quot;password_clear\&quot;;s:0:\&quot;\&quot;;s:8:\&quot;usertype\&quot;;N;s:5:\&quot;block\&quot;;N;s:9:\&quot;sendEmail\&quot;;i:0;s:12:\&quot;registerDate\&quot;;N;s:13:\&quot;lastvisitDate\&quot;;N;s:10:\&quot;activation\&quot;;N;s:6:\&quot;params\&quot;;N;s:6:\&quot;groups\&quot;;a:0:{}s:5:\&quot;guest\&quot;;i:1;s:10:\&quot;\0<b style="color: red;">*</b>\0_params\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:14:\&quot;\0<b style="color: red;">*</b>\0_authGroups\&quot;;N;s:14:\&quot;\0<b style="color: red;">*</b>\0_authLevels\&quot;;a:2:{i:0;i:1;i:1;i:1;}s:15:\&quot;\0<b style="color: red;">*</b>\0_authActions\&quot;;N;s:12:\&quot;\0<b style="color: red;">*</b>\0_errorMsg\&quot;;N;s:19:\&quot;customer_data_array\&quot;;a:0:{}s:10:\&quot;\0<b style="color: red;">*</b>\0_errors\&quot;;a:0:{}s:3:\&quot;aid\&quot;;i:0;}s:13:\&quot;session.token\&quot;;s:32:\&quot;f5e13aaed2fd58611f3a1454c0e8db29\&quot;;}&#039;
+	, `time` <b class="dbgOperator">=</b> &#039;1340250831&#039;
 
-<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `session_id` <b class="dbgOperator">=</b> &#039;b7121be5def5ffd82ecb325bc9ea5db7&#039;</code></li></ol><h4>9 типов SQL-запросов зафиксировано, отсортировано по вхождениям</h4><h5>Запросы типа SELECT:</h5><ol><li><code>3 &#215; <span class="dbgCommand">SELECT</span> extension_id <span class="dbgCommand">AS</span> id, element <span class="dbgCommand">AS</span> &quot;option&quot;, params, enabled
- <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_extensions</span></code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> id, home, template, s.params
- <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_template_styles</span> as s
- <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_extensions</span> as e <br />&#160;&#160;<span class="dbgCommand">ON</span> e.element<b class="dbgOperator">=</b>s.template <br />&#160;&#160;<span class="dbgCommand">AND</span> e.type<b class="dbgOperator">=</b>&#039;template&#039; <br />&#160;&#160;<span class="dbgCommand">AND</span> e.client_id<b class="dbgOperator">=</b>s.client_id</code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> m.id, m.title, m.module, m.position, m.content, m.showtitle, m.params, mm.menuid
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `session_id` <b class="dbgOperator">=</b> &#039;683412241cd2badbaa40f41adb2f6c95&#039;</code></li></ol><h4>15 типов SQL-запросов зафиксировано, отсортировано по вхождениям</h4><h5>Запросы типа SELECT:</h5><ol><li><code>23 &#215; <span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+ <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span></code></li><li><code>4 &#215; <span class="dbgCommand">SELECT</span> extension_id <span class="dbgCommand">AS</span> id, element <span class="dbgCommand">AS</span> &quot;option&quot;, params, enabled
+ <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_extensions</span></code></li><li><code>2 &#215; <span class="dbgCommand">SELECT</span> a.<b style="color: red;">*</b>
+ <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_users</span> as a</code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> id, name_ru, name_en
+ <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_types</span></code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> site_side, name_ru
+ <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span></code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> folder <span class="dbgCommand">AS</span> type, element <span class="dbgCommand">AS</span> name, params
+ <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_extensions</span></code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> m.id, m.title, m.module, m.position, m.content, m.showtitle, m.params, mm.menuid
  <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_modules</span> <span class="dbgCommand">AS</span> m
  <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_modules_menu</span> <span class="dbgCommand">AS</span> mm <br />&#160;&#160;<span class="dbgCommand">ON</span> mm.moduleid <b class="dbgOperator">=</b> m.id
- <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_extensions</span> <span class="dbgCommand">AS</span> e <br />&#160;&#160;<span class="dbgCommand">ON</span> e.element <b class="dbgOperator">=</b> m.module <br />&#160;&#160;<span class="dbgCommand">AND</span> e.client_id <b class="dbgOperator">=</b> m.client_id</code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> <b style="color: red;">*</b>
- <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_languages</span></code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> m.id, m.menutype, m.title, m.alias, m.note, m.path <span class="dbgCommand">AS</span> route, m.link, m.type, m.level, m.language,m.browserNav, m.access, m.params, m.home, m.img, m.template_style_id, m.component_id, m.parent_id,e.element as component
+ <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_extensions</span> <span class="dbgCommand">AS</span> e <br />&#160;&#160;<span class="dbgCommand">ON</span> e.element <b class="dbgOperator">=</b> m.module <br />&#160;&#160;<span class="dbgCommand">AND</span> e.client_id <b class="dbgOperator">=</b> m.client_id</code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> <span class="dbgTable">dnior_webapps_site_options</span>.id <span class="dbgCommand">AS</span> option_id, 
+ <span class="dbgCommand">IF</span> ( sites_types_ids_location,
+   sites_types_ids_location,
+   0 -- для корректной сортировки результатов внутри таблицы
+    ) as `site types`,
+    ( select name_ru <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_group</span></code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> collections_ids <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_precustomers</span></code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> <b style="color: red;">*</b>
+ <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_languages</span></code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> id, home, template, s.params
+ <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_template_styles</span> as s
+ <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_extensions</span> as e <br />&#160;&#160;<span class="dbgCommand">ON</span> e.element<b class="dbgOperator">=</b>s.template <br />&#160;&#160;<span class="dbgCommand">AND</span> e.type<b class="dbgOperator">=</b>&#039;template&#039; <br />&#160;&#160;<span class="dbgCommand">AND</span> e.client_id<b class="dbgOperator">=</b>s.client_id</code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> `data`
+ <br />&#160;&#160;<span class="dbgCommand">FROM</span> `<span class="dbgTable">dnior_session</span>`</code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> m.id, m.menutype, m.title, m.alias, m.note, m.path <span class="dbgCommand">AS</span> route, m.link, m.type, m.level, m.language,m.browserNav, m.access, m.params, m.home, m.img, m.template_style_id, m.component_id, m.parent_id,e.element as component
  <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_menu</span> <span class="dbgCommand">AS</span> m
- <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_extensions</span> <span class="dbgCommand">AS</span> e <br />&#160;&#160;<span class="dbgCommand">ON</span> m.component_id <b class="dbgOperator">=</b> e.extension_id</code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> folder <span class="dbgCommand">AS</span> type, element <span class="dbgCommand">AS</span> name, params
- <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_extensions</span></code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> `data`
- <br />&#160;&#160;<span class="dbgCommand">FROM</span> `<span class="dbgTable">dnior_session</span>`</code></li></ol><h5>Прочие SQL-запросы:</h5><ol><li><code>1 &#215; <span class="dbgCommand">UPDATE</span> `<span class="dbgTable">dnior_session</span>`
- <br />&#160;&#160;<span class="dbgCommand">SET</span> `data` <b class="dbgOperator">=</b> &#039;__default|a:8:{s:15:\&quot;session.counter\&quot;;i:95;s:19:\&quot;session.timer.start\&quot;;i:1338627694;s:18:\&quot;session.timer.last\&quot;;i:1338658196;s:17:\&quot;session.timer.now\&quot;;i:1338658221;s:22:\&quot;session.client.browser\&quot;;s:106:\&quot;Mozilla/5.0 (Windows <span class="dbgCommand">NT</span> 6.1; WOW64) AppleWebKit/536.5 (<span class="dbgCommand">KHTML</span>, like Gecko) Chrome/19.0.1084.52 Safari/536.5\&quot;;s:8:\&quot;registry\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:4:\&quot;user\&quot;;O:5:\&quot;JUser\&quot;:24:{s:9:\&quot;\0<b style="color: red;">*</b>\0isRoot\&quot;;b:0;s:2:\&quot;id\&quot;;i:0;s:4:\&quot;name\&quot;;N;s:8:\&quot;username\&quot;;N;s:5:\&quot;email\&quot;;N;s:8:\&quot;password\&quot;;N;s:14:\&quot;password_clear\&quot;;s:0:\&quot;\&quot;;s:8:\&quot;usertype\&quot;;N;s:5:\&quot;block\&quot;;N;s:9:\&quot;sendEmail\&quot;;i:0;s:12:\&quot;registerDate\&quot;;N;s:13:\&quot;lastvisitDate\&quot;;N;s:10:\&quot;activation\&quot;;N;s:6:\&quot;params\&quot;;N;s:6:\&quot;groups\&quot;;a:0:{}s:5:\&quot;guest\&quot;;i:1;s:10:\&quot;\0<b style="color: red;">*</b>\0_params\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:14:\&quot;\0<b style="color: red;">*</b>\0_authGroups\&quot;;a:1:{i:0;i:1;}s:14:\&quot;\0<b style="color: red;">*</b>\0_authLevels\&quot;;a:2:{i:0;i:1;i:1;i:1;}s:15:\&quot;\0<b style="color: red;">*</b>\0_authActions\&quot;;N;s:12:\&quot;\0<b style="color: red;">*</b>\0_errorMsg\&quot;;N;s:19:\&quot;customer_data_array\&quot;;a:0:{}s:10:\&quot;\0<b style="color: red;">*</b>\0_errors\&quot;;a:0:{}s:3:\&quot;aid\&quot;;i:0;}s:13:\&quot;session.token\&quot;;s:32:\&quot;69cafe5e113f09382b3eaf03a5da219b\&quot;;}&#039;  , `time` <b class="dbgOperator">=</b> &#039;1338658221&#039;</code></li><li><code>1 &#215; <span class="dbgCommand">DELETE</span> 
+ <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_extensions</span> <span class="dbgCommand">AS</span> e <br />&#160;&#160;<span class="dbgCommand">ON</span> m.component_id <b class="dbgOperator">=</b> e.extension_id</code></li></ol><h5>Прочие SQL-запросы:</h5><ol><li><code>1 &#215; <span class="dbgCommand">UPDATE</span> `<span class="dbgTable">dnior_session</span>`
+ <br />&#160;&#160;<span class="dbgCommand">SET</span> `data` <b class="dbgOperator">=</b> &#039;__default|a:8:{s:15:\&quot;session.counter\&quot;;i:3;s:19:\&quot;session.timer.start\&quot;;i:1340250602;s:18:\&quot;session.timer.last\&quot;;i:1340250721;s:17:\&quot;session.timer.now\&quot;;i:1340250831;s:22:\&quot;session.client.browser\&quot;;s:112:\&quot;Mozilla/5.0 (Windows <span class="dbgCommand">NT</span> 6.1; WOW64) AppleWebKit/535.19 (<span class="dbgCommand">KHTML</span>, like Gecko) Chrome/18.0.1025.165 Safari/535.19 <span class="dbgCommand">YI</span>\&quot;;s:8:\&quot;registry\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:4:\&quot;user\&quot;;O:5:\&quot;JUser\&quot;:24:{s:9:\&quot;\0<b style="color: red;">*</b>\0isRoot\&quot;;N;s:2:\&quot;id\&quot;;i:0;s:4:\&quot;name\&quot;;N;s:8:\&quot;username\&quot;;N;s:5:\&quot;email\&quot;;N;s:8:\&quot;password\&quot;;N;s:14:\&quot;password_clear\&quot;;s:0:\&quot;\&quot;;s:8:\&quot;usertype\&quot;;N;s:5:\&quot;block\&quot;;N;s:9:\&quot;sendEmail\&quot;;i:0;s:12:\&quot;registerDate\&quot;;N;s:13:\&quot;lastvisitDate\&quot;;N;s:10:\&quot;activation\&quot;;N;s:6:\&quot;params\&quot;;N;s:6:\&quot;groups\&quot;;a:0:{}s:5:\&quot;guest\&quot;;i:1;s:10:\&quot;\0<b style="color: red;">*</b>\0_params\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:14:\&quot;\0<b style="color: red;">*</b>\0_authGroups\&quot;;N;s:14:\&quot;\0<b style="color: red;">*</b>\0_authLevels\&quot;;a:2:{i:0;i:1;i:1;i:1;}s:15:\&quot;\0<b style="color: red;">*</b>\0_authActions\&quot;;N;s:12:\&quot;\0<b style="color: red;">*</b>\0_errorMsg\&quot;;N;s:19:\&quot;customer_data_array\&quot;;a:0:{}s:10:\&quot;\0<b style="color: red;">*</b>\0_errors\&quot;;a:0:{}s:3:\&quot;aid\&quot;;i:0;}s:13:\&quot;session.token\&quot;;s:32:\&quot;f5e13aaed2fd58611f3a1454c0e8db29\&quot;;}&#039;  , `time` <b class="dbgOperator">=</b> &#039;1340250831&#039;</code></li><li><code>1 &#215; <span class="dbgCommand">DELETE</span> 
  <br />&#160;&#160;<span class="dbgCommand">FROM</span> `<span class="dbgTable">dnior_session</span>`</code></li></ol></div></div></body>
 
 </html>

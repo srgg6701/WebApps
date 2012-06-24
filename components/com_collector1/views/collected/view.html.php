@@ -22,6 +22,7 @@ class Collector1ViewCollected extends JView
 	protected $collection_of_user; //коллекция заавторизованного юзера
 	protected $templatename;
 	protected $go_signup="index.php?option=com_users&view=registration&task=fill_precustomer_data";
+	public $order_files;
 	
 	function display($tpl = NULL)
 	{	
@@ -72,6 +73,9 @@ class Collector1ViewCollected extends JView
 				}
 			}
 			$this->templatename=SSite::getCurrentTemplateName($app);
+			
+			if ($site_done=='site_added'||$site_done=='site_updated')
+				$this->order_files=$model->getUserFiles('s'.JRequest::getVar($site_done));
 		}
 		parent::display($tpl);
 	}

@@ -73,7 +73,6 @@ class ContentController extends JController
 		}
 		//if (JRequest::getVar('Itemid') == '111') die($vName);
 		parent::display($cachable, $safeurlparams);
-
 		return $this;
 	}
 }

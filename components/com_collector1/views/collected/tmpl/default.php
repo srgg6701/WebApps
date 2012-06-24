@@ -17,7 +17,7 @@ $user = JFactory::getUser();?>
 //var_dump("<h1>guest_collections_ids:</h1><pre>",$this->guest_collections_ids,"</pre>");
 //echo "<hr>";
 //this->collections_data_array	//
-$test=true;
+//$test=true;
 if ($_GET['cda']||$test) {
 	 if ($user->get('guest')!=1) echo "collection_of_user: ".$this->collection_of_user;
 	 else var_dump("<h1>guest_collections_ids:</h1><pre>",$this->guest_collections_ids,"</pre>");
@@ -149,6 +149,20 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавто
 				?></td>
 			  </tr>
 	<?php 	}?>
+    	  <tr>
+            <td align="right" class="bold">Файлы:</td>
+            <td><?
+            
+			$arrFiles=$this->order_files;
+			for($i=1,$j=count($arrFiles);$i<=$j;$i++):
+				$filename=$arrFiles[$i-1];
+				$ext=substr($filename,strrpos($filename,'.'));?>
+                <div><a href="<? echo $this->baseurl.'/components/com_collector1/files/'.$collection_set['id'].'.'.$i.$ext?>"><?=$filename?></a></div>
+		<?		echo "\n";
+			endfor;
+			
+			?></td>
+          </tr>
           <tr>
           	<td colspan="2" class="bgOverWhite linkButtons">
             	<br><a href="<?
