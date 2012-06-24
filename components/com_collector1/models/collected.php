@@ -40,10 +40,10 @@ class collector1ModelCollected extends JModel
 	 */
 	function getUserFiles($identifier) {
 		$db=JFactory::getDBO();
-		$db->setQuery("SELECT files_names FROM #__webapps_files_names 
- WHERE `identifier` = '$identifier'");
- 		$row=explode(":",$db->loadResult());
-		//$row=implode("<br>",$row);
+		$query="SELECT files_names FROM #__webapps_files_names 
+ WHERE `identifier` = '$identifier'";
+		$db->setQuery($query);
+ 		$row=explode(":",$db->loadResult()); 
 		return $row;
 	}
 	/**

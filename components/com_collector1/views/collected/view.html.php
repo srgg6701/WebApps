@@ -57,7 +57,7 @@ class Collector1ViewCollected extends JView
 						}
 					}
 					break;
-				}
+				}else unset($site_done); //чтобы не получить просто последний ключ, т.к. далее будет использоваться реальное значение
 			}
 			if (!$got_collection_id&&JRequest::getVar('collection_id')) 
 				$got_collection_id=JRequest::getVar('collection_id');
@@ -73,9 +73,10 @@ class Collector1ViewCollected extends JView
 				}
 			}
 			$this->templatename=SSite::getCurrentTemplateName($app);
-			
-			if ($site_done=='site_added'||$site_done=='site_updated')
-				$this->order_files=$model->getUserFiles('s'.JRequest::getVar($site_done));
+			if ($site_done!='site_deleted') { //не удаляли сайт, будем получать файлы
+				$idf=($site_done)? $site_done:'collection_id';
+				$this->order_files=$model->getUserFiles('s'.JRequest::getVar($idf));
+			}
 		}
 		parent::display($tpl);
 	}

@@ -150,14 +150,15 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавто
 			  </tr>
 	<?php 	}?>
     	  <tr>
-            <td align="right" class="bold">Файлы:</td>
+            <td valign="top" align="right" class="bold"><div style="display:inline-block;">Файлы</div> <img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
+	?>/images/folder.png" width="32" height="32" style="margin-left:10px; margin-top:-6px;" align="right"></td>
             <td><?
             
 			$arrFiles=$this->order_files;
 			for($i=1,$j=count($arrFiles);$i<=$j;$i++):
 				$filename=$arrFiles[$i-1];
 				$ext=substr($filename,strrpos($filename,'.'));?>
-                <div><a href="<? echo $this->baseurl.'/components/com_collector1/files/'.$collection_set['id'].'.'.$i.$ext?>"><?=$filename?></a></div>
+                <div><?=$i?> <a href="<? echo $this->baseurl.'/components/com_collector1/files/'.$collection_set['id'].'.'.$i.$ext?>"><?=$filename?></a></div>
 		<?		echo "\n";
 			endfor;
 			
