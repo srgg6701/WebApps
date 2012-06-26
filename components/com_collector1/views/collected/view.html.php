@@ -74,8 +74,8 @@ class Collector1ViewCollected extends JView
 			}
 			$this->templatename=SSite::getCurrentTemplateName($app);
 			if ($site_done!='site_deleted') { //не удаляли сайт, будем получать файлы
-				$idf=($site_done)? $site_done:'collection_id';
-				$this->order_files=$model->getUserFiles('s'.JRequest::getVar($idf));
+				//$idf=($site_done)? $site_done:'collection_id';
+				$this->order_files=SFiles::getUserFiles('collections_ids',$user);
 			}
 		}
 		parent::display($tpl);

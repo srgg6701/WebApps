@@ -269,7 +269,7 @@ function manageLoginDisplay(stat){
 
 	<input type="hidden" name="return" value="aW5kZXgucGhwP0l0ZW1pZD0xMDM=" />
 
-	<input type="hidden" name="5b065c7d9117b2156f91522c78b5a511" value="1" />	</fieldset>
+	<input type="hidden" name="28f4f3ecda19357bb214e27358572ed9" value="1" />	</fieldset>
 
 	<ul>
 
@@ -366,11 +366,17 @@ function manageLoginDisplay(stat){
 
 				<div id="com">
 
-					﻿﻿﻿﻿﻿﻿<div>query= SELECT collections_ids FROM #__webapps_precustomers
+					﻿﻿﻿﻿﻿﻿<div style="margin:-10px 20px 0px 0px; padding-bottom:10px;">Собранные вами сайты: 	# <a href="/webapps/index.php/component/collector1/?view=collected&amp;collection_id=54">54</a>,	# <a href="/webapps/index.php/component/collector1/?view=collected&amp;collection_id=55">55</a></div>
 
- WHERE `email` = '' OR session_id = '683412241cd2badbaa40f41adb2f6c95'</div>
+<div style="margin:10px 10px 20px 0px; padding:10px 20px 20px 10px; background:#FF9;" class="border_radius">
 
-<form name="form1" method="post" enctype="multipart/form-data" action="/webapps/index.php/component/collector1/collect" onSubmit="return checkRequired();">
+	<p><img src="/webapps/templates/fastwebdev/images/signs/Flag_red.png" width="24" height="24" hspace="6" align="left"><strong>ВНИМАНИЕ!</strong> Для того, чтобы иметь возможность редактировать  опции сайтов и получить доступ ко всем возможностям системы, вам необходимо <a href="/webapps/index.php/component/users/?view=registration&amp;task=fill_precustomer_data" style="text-decoration:underline;"><b>добавить к своим данным логин и пароль</b></a>.</p> 
+
+    <div style="padding-left:10px">Это займёт у вам не более нескольких секунд.</div>
+
+</div>
+
+<form name="form1" method="post" enctype="multipart/form-data" action="/webapps/index.php/component/collector1/collect" onSubmit="return checkRequired();return false;">
 
     <div>
 
@@ -440,7 +446,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> SMS-информирование    </td>
+    	<label><input type="checkbox"> SMS-информирование</label>
+
+    </td>
 
 	    
 
@@ -460,7 +468,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Запросы актуальности заказа    </td>
+    	<label><input type="checkbox"> Запросы актуальности заказа</label>
+
+    </td>
 
 	    
 
@@ -480,7 +490,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Корзина    </td>
+    	<label><input type="checkbox"> Корзина</label>
+
+    </td>
 
 	    
 
@@ -508,7 +520,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:20px;">
 
-    	<input type="checkbox"> PayPal    </td>
+    	<label><input type="checkbox"> PayPal</label>
+
+    </td>
 
 	    
 
@@ -528,7 +542,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:20px;">
 
-    	<input type="checkbox"> Webmoney    </td>
+    	<label><input type="checkbox"> Webmoney</label>
+
+    </td>
 
 	    
 
@@ -548,7 +564,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:20px;">
 
-    	<input type="checkbox"> Карточкой    </td>
+    	<label><input type="checkbox"> Карточкой</label>
+
+    </td>
 
 	    
 
@@ -568,7 +586,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:20px;">
 
-    	<input type="checkbox"> Платёжный шлюз    </td>
+    	<label><input type="checkbox"> Платёжный шлюз</label>
+
+    </td>
 
 	    
 
@@ -588,7 +608,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:20px;">
 
-    	<input type="checkbox"> Яндекс.деньги    </td>
+    	<label><input type="checkbox"> Яндекс.деньги</label>
+
+    </td>
 
 	    
 
@@ -608,7 +630,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> RSS    </td>
+    	<label><input type="checkbox"> RSS</label>
+
+    </td>
 
 	    
 
@@ -628,7 +652,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Архив материалов    </td>
+    	<label><input type="checkbox"> Архив материалов</label>
+
+    </td>
 
 	    
 
@@ -648,7 +674,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Блог    </td>
+    	<label><input type="checkbox"> Блог</label>
+
+    </td>
 
 	    
 
@@ -668,7 +696,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Добавить статью    </td>
+    	<label><input type="checkbox"> Добавить статью</label>
+
+    </td>
 
 	    
 
@@ -688,7 +718,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Карта сайта    </td>
+    	<label><input type="checkbox"> Карта сайта</label>
+
+    </td>
 
 	    
 
@@ -708,7 +740,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Облако тегов    </td>
+    	<label><input type="checkbox"> Облако тегов</label>
+
+    </td>
 
 	    
 
@@ -728,7 +762,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Опросы    </td>
+    	<label><input type="checkbox"> Опросы</label>
+
+    </td>
 
 	    
 
@@ -748,7 +784,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Поиск    </td>
+    	<label><input type="checkbox"> Поиск</label>
+
+    </td>
 
 	    
 
@@ -768,7 +806,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Рейтинг статьи    </td>
+    	<label><input type="checkbox"> Рейтинг статьи</label>
+
+    </td>
 
 	    
 
@@ -788,7 +828,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Страница не найдена    </td>
+    	<label><input type="checkbox"> Страница не найдена</label>
+
+    </td>
 
 	    
 
@@ -808,7 +850,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Форум    </td>
+    	<label><input type="checkbox"> Форум</label>
+
+    </td>
 
 	    
 
@@ -828,7 +872,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:10px;">
 
-    	<input type="checkbox"> Фотогалерея    </td>
+    	<label><input type="checkbox"> Фотогалерея</label>
+
+    </td>
 
 	    
 
@@ -856,7 +902,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:20px;">
 
-    	<input type="checkbox"> Like (нравится)    </td>
+    	<label><input type="checkbox"> Like (нравится)</label>
+
+    </td>
 
 	    
 
@@ -876,7 +924,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:20px;">
 
-    	<input type="checkbox"> RSS в социальной сети    </td>
+    	<label><input type="checkbox"> RSS в социальной сети</label>
+
+    </td>
 
 	    
 
@@ -896,7 +946,9 @@ function manageLoginDisplay(stat){
 
     <td style="padding-left:20px;">
 
-    	<input type="checkbox"> Добавить в друзья    </td>
+    	<label><input type="checkbox"> Добавить в друзья</label>
+
+    </td>
 
 	    
 
@@ -1002,103 +1054,103 @@ function manageLoginDisplay(stat){
 
     <hr size="1">
 
-	<div><input name="cms_name_0" type="checkbox" value="0">1С-Битрикс</div>
+	<label><div><input name="cms_name_0" type="checkbox" value="0">1С-Битрикс</div></label>
 
-	<div><input name="cms_name_1" type="checkbox" value="1">ABO.CMS</div>
+	<label><div><input name="cms_name_1" type="checkbox" value="1">ABO.CMS</div></label>
 
-	<div><input name="cms_name_2" type="checkbox" value="2">Amiro.CMS</div>
+	<label><div><input name="cms_name_2" type="checkbox" value="2">Amiro.CMS</div></label>
 
-	<div><input name="cms_name_3" type="checkbox" value="3">АТИЛЕКТ.CMS</div>
+	<label><div><input name="cms_name_3" type="checkbox" value="3">АТИЛЕКТ.CMS</div></label>
 
-	<div><input name="cms_name_4" type="checkbox" value="4">B2evolution</div>
+	<label><div><input name="cms_name_4" type="checkbox" value="4">B2evolution</div></label>
 
-	<div><input name="cms_name_5" type="checkbox" value="5">BIGACE</div>
+	<label><div><input name="cms_name_5" type="checkbox" value="5">BIGACE</div></label>
 
-	<div><input name="cms_name_6" type="checkbox" value="6">CMS Made Simple</div>
+	<label><div><input name="cms_name_6" type="checkbox" value="6">CMS Made Simple</div></label>
 
-	<div><input name="cms_name_7" type="checkbox" value="7">CMS Mail Keeper</div>
+	<label><div><input name="cms_name_7" type="checkbox" value="7">CMS Mail Keeper</div></label>
 
-	<div><input name="cms_name_8" type="checkbox" value="8">CMSimple</div>
+	<label><div><input name="cms_name_8" type="checkbox" value="8">CMSimple</div></label>
 
-	<div><input name="cms_name_9" type="checkbox" value="9">Concrete5</div>
+	<label><div><input name="cms_name_9" type="checkbox" value="9">Concrete5</div></label>
 
-	<div><input name="cms_name_10" type="checkbox" value="10">Contao</div>
+	<label><div><input name="cms_name_10" type="checkbox" value="10">Contao</div></label>
 
-	<div><input name="cms_name_11" type="checkbox" value="11">DLEngine</div>
+	<label><div><input name="cms_name_11" type="checkbox" value="11">DLEngine</div></label>
 
-	<div><input name="cms_name_12" type="checkbox" value="12">Danneo</div>
+	<label><div><input name="cms_name_12" type="checkbox" value="12">Danneo</div></label>
 
-	<div><input name="cms_name_13" type="checkbox" value="13">DotNetNuke</div>
+	<label><div><input name="cms_name_13" type="checkbox" value="13">DotNetNuke</div></label>
 
-	<div><input name="cms_name_14" type="checkbox" value="14">Drupal</div>
+	<label><div><input name="cms_name_14" type="checkbox" value="14">Drupal</div></label>
 
-	<div><input name="cms_name_15" type="checkbox" value="15">E107</div>
+	<label><div><input name="cms_name_15" type="checkbox" value="15">E107</div></label>
 
-	<div><input name="cms_name_16" type="checkbox" value="16">e2</div>
+	<label><div><input name="cms_name_16" type="checkbox" value="16">e2</div></label>
 
-	<div><input name="cms_name_17" type="checkbox" value="17">eZ publish</div>
+	<label><div><input name="cms_name_17" type="checkbox" value="17">eZ publish</div></label>
 
-	<div><input name="cms_name_18" type="checkbox" value="18">InSales</div>
+	<label><div><input name="cms_name_18" type="checkbox" value="18">InSales</div></label>
 
-	<div><input name="cms_name_19" type="checkbox" value="19">Joomla</div>
+	<label><div><input name="cms_name_19" type="checkbox" value="19">Joomla</div></label>
 
-	<div><input name="cms_name_20" type="checkbox" value="20">HostCMS</div>
+	<label><div><input name="cms_name_20" type="checkbox" value="20">HostCMS</div></label>
 
-	<div><input name="cms_name_21" type="checkbox" value="21">KooBoo</div>
+	<label><div><input name="cms_name_21" type="checkbox" value="21">KooBoo</div></label>
 
-	<div><input name="cms_name_22" type="checkbox" value="22">MODx</div>
+	<label><div><input name="cms_name_22" type="checkbox" value="22">MODx</div></label>
 
-	<div><input name="cms_name_23" type="checkbox" value="23">Mambo Open Source</div>
+	<label><div><input name="cms_name_23" type="checkbox" value="23">Mambo Open Source</div></label>
 
-	<div><input name="cms_name_24" type="checkbox" value="24">MediaWiki</div>
+	<label><div><input name="cms_name_24" type="checkbox" value="24">MediaWiki</div></label>
 
-	<div><input name="cms_name_25" type="checkbox" value="25">Movable Type</div>
+	<label><div><input name="cms_name_25" type="checkbox" value="25">Movable Type</div></label>
 
-	<div><input name="cms_name_26" type="checkbox" value="26">Nethouse</div>
+	<label><div><input name="cms_name_26" type="checkbox" value="26">Nethouse</div></label>
 
-	<div><input name="cms_name_27" type="checkbox" value="27">Newscoop</div>
+	<label><div><input name="cms_name_27" type="checkbox" value="27">Newscoop</div></label>
 
-	<div><input name="cms_name_28" type="checkbox" value="28">NPJ</div>
+	<label><div><input name="cms_name_28" type="checkbox" value="28">NPJ</div></label>
 
-	<div><input name="cms_name_29" type="checkbox" value="29">Nucleus CMS</div>
+	<label><div><input name="cms_name_29" type="checkbox" value="29">Nucleus CMS</div></label>
 
-	<div><input name="cms_name_30" type="checkbox" value="30">OpenCms</div>
+	<label><div><input name="cms_name_30" type="checkbox" value="30">OpenCms</div></label>
 
-	<div><input name="cms_name_31" type="checkbox" value="31">PHP-Fusion</div>
+	<label><div><input name="cms_name_31" type="checkbox" value="31">PHP-Fusion</div></label>
 
-	<div><input name="cms_name_32" type="checkbox" value="32">PHP-Nuke</div>
+	<label><div><input name="cms_name_32" type="checkbox" value="32">PHP-Nuke</div></label>
 
-	<div><input name="cms_name_33" type="checkbox" value="33">Plone</div>
+	<label><div><input name="cms_name_33" type="checkbox" value="33">Plone</div></label>
 
-	<div><input name="cms_name_34" type="checkbox" value="34">Prestashop</div>
+	<label><div><input name="cms_name_34" type="checkbox" value="34">Prestashop</div></label>
 
-	<div><input name="cms_name_35" type="checkbox" value="35">S.Builder</div>
+	<label><div><input name="cms_name_35" type="checkbox" value="35">S.Builder</div></label>
 
-	<div><input name="cms_name_36" type="checkbox" value="36">Sapid</div>
+	<label><div><input name="cms_name_36" type="checkbox" value="36">Sapid</div></label>
 
-	<div><input name="cms_name_37" type="checkbox" value="37">SharePoint</div>
+	<label><div><input name="cms_name_37" type="checkbox" value="37">SharePoint</div></label>
 
-	<div><input name="cms_name_38" type="checkbox" value="38">Site Sapiens</div>
+	<label><div><input name="cms_name_38" type="checkbox" value="38">Site Sapiens</div></label>
 
-	<div><input name="cms_name_39" type="checkbox" value="39">TYPO3</div>
+	<label><div><input name="cms_name_39" type="checkbox" value="39">TYPO3</div></label>
 
-	<div><input name="cms_name_40" type="checkbox" value="40">Textpattern</div>
+	<label><div><input name="cms_name_40" type="checkbox" value="40">Textpattern</div></label>
 
-	<div><input name="cms_name_41" type="checkbox" value="41">TikiWiki</div>
+	<label><div><input name="cms_name_41" type="checkbox" value="41">TikiWiki</div></label>
 
-	<div><input name="cms_name_42" type="checkbox" value="42">uCoz</div>
+	<label><div><input name="cms_name_42" type="checkbox" value="42">uCoz</div></label>
 
-	<div><input name="cms_name_43" type="checkbox" value="43">UMI.CMS</div>
+	<label><div><input name="cms_name_43" type="checkbox" value="43">UMI.CMS</div></label>
 
-	<div><input name="cms_name_44" type="checkbox" value="44">WikkaWiki</div>
+	<label><div><input name="cms_name_44" type="checkbox" value="44">WikkaWiki</div></label>
 
-	<div><input name="cms_name_45" type="checkbox" value="45">WordPress</div>
+	<label><div><input name="cms_name_45" type="checkbox" value="45">WordPress</div></label>
 
-	<div><input name="cms_name_46" type="checkbox" value="46">XOOPS</div>
+	<label><div><input name="cms_name_46" type="checkbox" value="46">XOOPS</div></label>
 
-	<div><input name="cms_name_47" type="checkbox" value="47">Xaraya</div>
+	<label><div><input name="cms_name_47" type="checkbox" value="47">Xaraya</div></label>
 
-	<div><input name="cms_name_48" type="checkbox" value="48">Zikula</div>
+	<label><div><input name="cms_name_48" type="checkbox" value="48">Zikula</div></label>
 
         
 
@@ -1118,19 +1170,19 @@ function manageLoginDisplay(stat){
 
 	<dt>Как вас зовут? <div class="required_field"></div></dt>
 
-	<dd><input class="dataCell" name="name" type="text" id="name" value=""></dd>
+	<dd><input class="dataCell" name="name" type="text" id="name" value="Нюша"></dd>
 
 
 
 	<dt>Ваш емэйл: <div class="required_field"></div></dt>
 
-	<dd><input name="email" id="email" type="text" value=""></dd>
+	<dd><input name="email" id="email" type="text" value="njusha@mail.ru"></dd>
 
     
 
 	<dt>Ваш телефон: <div class="required_field"></div></dt>
 
-	<dd><input name="phone" id="phone" type="text" value=""></dd>
+	<dd><input name="phone" id="phone" type="text" value="1-255-580-22-88"></dd>
 
     
 
@@ -1410,7 +1462,7 @@ function manageEnginesChoice(radio){
 
 			d.getElementById('existing_cms_name').style.display='none';	
 
-			scrollTo(0,2000);//location.href='#bottom';
+			if (radio.id=="choose_engine_1") scrollTo(0,2000);//location.href='#bottom';
 
 		}		
 
@@ -1521,15 +1573,15 @@ function controlCMSchoice(tdBlock){
 <script>function toggleContainer(name) {
 			var e = document.getElementById(name);// MooTools might not be available ;)
 			e.style.display =(e.style.display == 'none') ? 'block' : 'none';
-		}</script><div id="system-debug" class="profiler"><h1>Консоль отладки Joomla!</h1><div class="dbgHeader" onclick="toggleContainer('dbgContainersession');"><a href="javascript:void(0);"><h3>Сессия</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainersession"><div class="dbgHeader" onclick="toggleContainer('dbgContainer_session0');"><a href="javascript:void(0);"><h3>__default</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainer_session0"><code>session.counter &rArr; 3<br /></code><code>session.timer.start &rArr; 1340250602<br /></code><code>session.timer.last &rArr; 1340250721<br /></code><code>session.timer.now &rArr; 1340250831<br /></code><code>session.client.browser &rArr; Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.165 Safari/535.19 YI<br /></code><code>registry &rArr; {}<br /></code><div class="dbgHeader" onclick="toggleContainer('dbgContainer_session1');"><a href="javascript:void(0);"><h3>user</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainer_session1"><code>id &rArr; 0<br /></code><code>name &rArr; <br /></code><code>username &rArr; <br /></code><code>email &rArr; <br /></code><code>password &rArr; <br /></code><code>password_clear &rArr; <br /></code><code>usertype &rArr; <br /></code><code>block &rArr; <br /></code><code>sendEmail &rArr; 0<br /></code><code>registerDate &rArr; <br /></code><code>lastvisitDate &rArr; <br /></code><code>activation &rArr; <br /></code><code>params &rArr; <br /></code><code>groups &rArr; Array<br /></code><code>guest &rArr; 1<br /></code><code>customer_data_array &rArr; Array<br /></code><code>aid &rArr; 0<br /></code></div><code>session.token &rArr; f5e13aaed2fd58611f3a1454c0e8db29<br /></code></div></div><div class="dbgHeader" onclick="toggleContainer('dbgContainerprofile_information');"><a href="javascript:void(0);"><h3>Результаты профилирования</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainerprofile_information"><div><code>Application 0.001 seconds (+0.001); 0.77 MB (+0.769) - afterLoad</code></div><div><code>Application 0.062 seconds (+0.062); 3.84 MB (+3.068) - afterInitialise</code></div><div><code>Application 0.074 seconds (+0.012); 4.47 MB (+0.633) - afterRoute</code></div><div><code>Application 0.149 seconds (+0.075); 6.42 MB (+1.955) - afterDispatch</code></div><div><code>Application 0.157 seconds (+0.008); 6.62 MB (+0.198) - beforeRenderModule mod_menu (Footer)</code></div><div><code>Application 0.170 seconds (+0.013); 6.79 MB (+0.168) - afterRenderModule mod_menu (Footer)</code></div><div><code>Application 0.170 seconds (+0.000); 6.79 MB (-0.003) - beforeRenderModule mod_menu (Main Menu)</code></div><div><code>Application 0.179 seconds (+0.009); 6.80 MB (+0.016) - afterRenderModule mod_menu (Main Menu)</code></div><div><code>Application 0.180 seconds (+0.000); 6.80 MB (-0.003) - beforeRenderModule mod_login (Логин)</code></div><div><code>Application 0.189 seconds (+0.009); 6.83 MB (+0.032) - afterRenderModule mod_login (Логин)</code></div><div><code>Application 0.189 seconds (+0.000); 6.83 MB (-0.000) - beforeRenderModule mod_search (Поиск)</code></div><div><code>Application 0.193 seconds (+0.004); 6.85 MB (+0.020) - afterRenderModule mod_search (Поиск)</code></div><div><code>Application 0.203 seconds (+0.010); 6.94 MB (+0.087) - afterRender</code></div></div><div class="dbgHeader" onclick="toggleContainer('dbgContainermemory_usage');"><a href="javascript:void(0);"><h3>Использование памяти</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainermemory_usage"><code>6.93 MB (7,263,200 Bytes)</code></div><div class="dbgHeader" onclick="toggleContainer('dbgContainerqueries');"><a href="javascript:void(0);"><h3>Запросы к базе данных</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainerqueries"><h4>41 SQL-запросов зафиксировано</h4><ol><li><code><span class="dbgCommand">SELECT</span> `data`
+		}</script><div id="system-debug" class="profiler"><h1>Консоль отладки Joomla!</h1><div class="dbgHeader" onclick="toggleContainer('dbgContainersession');"><a href="javascript:void(0);"><h3>Сессия</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainersession"><div class="dbgHeader" onclick="toggleContainer('dbgContainer_session0');"><a href="javascript:void(0);"><h3>__default</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainer_session0"><code>session.counter &rArr; 32<br /></code><code>session.timer.start &rArr; 1340602458<br /></code><code>session.timer.last &rArr; 1340613646<br /></code><code>session.timer.now &rArr; 1340613653<br /></code><code>session.client.browser &rArr; Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.165 Safari/535.19 YI<br /></code><code>registry &rArr; {}<br /></code><div class="dbgHeader" onclick="toggleContainer('dbgContainer_session1');"><a href="javascript:void(0);"><h3>user</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainer_session1"><code>id &rArr; 0<br /></code><code>name &rArr; Нюша<br /></code><code>username &rArr; <br /></code><code>email &rArr; njusha@mail.ru<br /></code><code>password &rArr; <br /></code><code>password_clear &rArr; <br /></code><code>usertype &rArr; <br /></code><code>block &rArr; <br /></code><code>sendEmail &rArr; 0<br /></code><code>registerDate &rArr; <br /></code><code>lastvisitDate &rArr; <br /></code><code>activation &rArr; <br /></code><code>params &rArr; <br /></code><code>groups &rArr; Array<br /></code><code>guest &rArr; 1<br /></code><code>customer_data_array &rArr; Array<br /></code><code>aid &rArr; 0<br /></code><code>phone &rArr; 1-255-580-22-88<br /></code></div><code>session.token &rArr; c759bfa1f434c47384d241005a5e880d<br /></code></div></div><div class="dbgHeader" onclick="toggleContainer('dbgContainerprofile_information');"><a href="javascript:void(0);"><h3>Результаты профилирования</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainerprofile_information"><div><code>Application 0.001 seconds (+0.001); 0.77 MB (+0.769) - afterLoad</code></div><div><code>Application 0.074 seconds (+0.073); 3.84 MB (+3.068) - afterInitialise</code></div><div><code>Application 0.088 seconds (+0.014); 4.47 MB (+0.633) - afterRoute</code></div><div><code>Application 0.176 seconds (+0.088); 6.43 MB (+1.958) - afterDispatch</code></div><div><code>Application 0.183 seconds (+0.008); 6.63 MB (+0.198) - beforeRenderModule mod_menu (Footer)</code></div><div><code>Application 0.196 seconds (+0.013); 6.79 MB (+0.168) - afterRenderModule mod_menu (Footer)</code></div><div><code>Application 0.197 seconds (+0.000); 6.79 MB (-0.003) - beforeRenderModule mod_menu (Main Menu)</code></div><div><code>Application 0.206 seconds (+0.010); 6.81 MB (+0.016) - afterRenderModule mod_menu (Main Menu)</code></div><div><code>Application 0.206 seconds (+0.000); 6.80 MB (-0.003) - beforeRenderModule mod_login (Логин)</code></div><div><code>Application 0.216 seconds (+0.010); 6.84 MB (+0.032) - afterRenderModule mod_login (Логин)</code></div><div><code>Application 0.216 seconds (+0.000); 6.84 MB (-0.000) - beforeRenderModule mod_search (Поиск)</code></div><div><code>Application 0.221 seconds (+0.005); 6.86 MB (+0.020) - afterRenderModule mod_search (Поиск)</code></div><div><code>Application 0.231 seconds (+0.010); 6.94 MB (+0.089) - afterRender</code></div></div><div class="dbgHeader" onclick="toggleContainer('dbgContainermemory_usage');"><a href="javascript:void(0);"><h3>Использование памяти</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainermemory_usage"><code>6.93 MB (7,271,576 Bytes)</code></div><div class="dbgHeader" onclick="toggleContainer('dbgContainerqueries');"><a href="javascript:void(0);"><h3>Запросы к базе данных</h3></a></div><div  style="display: none;" class="dbgContainer" id="dbgContainerqueries"><h4>41 SQL-запросов зафиксировано</h4><ol><li><code><span class="dbgCommand">SELECT</span> `data`
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> `<span class="dbgTable">dnior_session</span>`
 
-<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `session_id` <b class="dbgOperator">=</b> &#039;683412241cd2badbaa40f41adb2f6c95&#039;</code></li><li><code><span class="dbgCommand">DELETE</span> 
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `session_id` <b class="dbgOperator">=</b> &#039;74aeb6830b949da8ec2180fcd11c517f&#039;</code></li><li><code><span class="dbgCommand">DELETE</span> 
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> `<span class="dbgTable">dnior_session</span>`
 
-<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `time` &lt; &#039;1340232831&#039;</code></li><li><code><span class="dbgCommand">SELECT</span> folder <span class="dbgCommand">AS</span> type, element <span class="dbgCommand">AS</span> name, params
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `time` &lt; &#039;1340595653&#039;</code></li><li><code><span class="dbgCommand">SELECT</span> folder <span class="dbgCommand">AS</span> type, element <span class="dbgCommand">AS</span> name, params
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_extensions</span>
 
@@ -1573,7 +1625,7 @@ function controlCMSchoice(tdBlock){
 
 <br />&#160;&#160;<span class="dbgCommand">WHERE</span> a.id <b class="dbgOperator">=</b> 0</code></li><li><code><span class="dbgCommand">SELECT</span> collections_ids <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_precustomers</span>
 
- <br />&#160;&#160;<span class="dbgCommand">WHERE</span> `email` <b class="dbgOperator">=</b> &#039;&#039; <span class="dbgCommand">OR</span> session_id <b class="dbgOperator">=</b> &#039;683412241cd2badbaa40f41adb2f6c95&#039;</code></li><li><code><span class="dbgCommand">SELECT</span> <span class="dbgTable">dnior_webapps_site_options</span>.id <span class="dbgCommand">AS</span> option_id, 
+ <br />&#160;&#160;<span class="dbgCommand">WHERE</span> `email` <b class="dbgOperator">=</b> &#039;njusha@mail.ru&#039; <span class="dbgCommand">OR</span> session_id <b class="dbgOperator">=</b> &#039;74aeb6830b949da8ec2180fcd11c517f&#039;</code></li><li><code><span class="dbgCommand">SELECT</span> <span class="dbgTable">dnior_webapps_site_options</span>.id <span class="dbgCommand">AS</span> option_id, 
 
 <span class="dbgCommand">IF</span> ( sites_types_ids_location,
 
@@ -1697,7 +1749,7 @@ function controlCMSchoice(tdBlock){
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span> 
 
-<br />&#160;&#160;<span class="dbgCommand">WHEREspan> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,22,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> m.id, m.title, m.module, m.position, m.content, m.showtitle, m.params, mm.menuid
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> site_options_beyond_side <span class="dbgCommand">REGEXP</span> concat(&#039;(^|,)&#039;,22,&#039;(,|$)&#039;)</code></li><li><code><span class="dbgCommand">SELECT</span> m.id, m.title, m.module, m.position, m.content, m.showtitle, m.params, mm.menuid
 
 <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_modules</span> <span class="dbgCommand">AS</span> m
 
@@ -1705,7 +1757,7 @@ function controlCMSchoice(tdBlock){
 
 <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_extensions</span> <span class="dbgCommand">AS</span> e <br />&#160;&#160;<span class="dbgCommand">ON</span> e.element <b class="dbgOperator">=</b> m.module <br />&#160;&#160;<span class="dbgCommand">AND</span> e.client_id <b class="dbgOperator">=</b> m.client_id
 
-<br />&#160;&#160;<span class="dbgCommand">WHERE</span> m.published <b class="dbgOperator">=</b> 1 <br />&#160;&#160;<span class="dbgCommand">AND</span> e.enabled <b class="dbgOperator">=</b> 1 <br />&#160;&#160;<span class="dbgCommand">AND</span> (m.publish_up <b class="dbgOperator">=</b> &#039;0000-00-00 00:00:00&#039; <span class="dbgCommand">OR</span> m.publish_up &lt;<b class="dbgOperator">=</b> &#039;2012-06-21 03:53:51&#039;) <br />&#160;&#160;<span class="dbgCommand">AND</span> (m.publish_down <b class="dbgOperator">=</b> &#039;0000-00-00 00:00:00&#039; <span class="dbgCommand">OR</span> m.publish_down &gt;<b class="dbgOperator">=</b> &#039;2012-06-21 03:53:51&#039;) <br />&#160;&#160;<span class="dbgCommand">AND</span> m.access <span class="dbgCommand">IN</span> (1,1) <br />&#160;&#160;<span class="dbgCommand">AND</span> m.client_id <b class="dbgOperator">=</b> 0 <br />&#160;&#160;<span class="dbgCommand">AND</span> (mm.menuid <b class="dbgOperator">=</b> 103 <span class="dbgCommand">OR</span> mm.menuid &lt;<b class="dbgOperator">=</b> 0)
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> m.published <b class="dbgOperator">=</b> 1 <br />&#160;&#160;<span class="dbgCommand">AND</span> e.enabled <b class="dbgOperator">=</b> 1 <br />&#160;&#160;<span class="dbgCommand">AND</span> (m.publish_up <b class="dbgOperator">=</b> &#039;0000-00-00 00:00:00&#039; <span class="dbgCommand">OR</span> m.publish_up &lt;<b class="dbgOperator">=</b> &#039;2012-06-25 08:40:53&#039;) <br />&#160;&#160;<span class="dbgCommand">AND</span> (m.publish_down <b class="dbgOperator">=</b> &#039;0000-00-00 00:00:00&#039; <span class="dbgCommand">OR</span> m.publish_down &gt;<b class="dbgOperator">=</b> &#039;2012-06-25 08:40:53&#039;) <br />&#160;&#160;<span class="dbgCommand">AND</span> m.access <span class="dbgCommand">IN</span> (1,1) <br />&#160;&#160;<span class="dbgCommand">AND</span> m.client_id <b class="dbgOperator">=</b> 0 <br />&#160;&#160;<span class="dbgCommand">AND</span> (mm.menuid <b class="dbgOperator">=</b> 103 <span class="dbgCommand">OR</span> mm.menuid &lt;<b class="dbgOperator">=</b> 0)
 
 <br />&#160;&#160;<span class="dbgCommand">ORDER</span> <span class="dbgCommand">BY</span> m.position, m.ordering</code></li><li><code><span class="dbgCommand">SELECT</span> extension_id <span class="dbgCommand">AS</span> id, element <span class="dbgCommand">AS</span> &quot;option&quot;, params, enabled
 
@@ -1717,10 +1769,10 @@ function controlCMSchoice(tdBlock){
 
 <br />&#160;&#160;<span class="dbgCommand">WHERE</span> `type` <b class="dbgOperator">=</b> &#039;component&#039; <br />&#160;&#160;<span class="dbgCommand">AND</span> `element` <b class="dbgOperator">=</b> &#039;com_users&#039;</code></li><li><code><span class="dbgCommand">UPDATE</span> `<span class="dbgTable">dnior_session</span>`
 
-<br />&#160;&#160;<span class="dbgCommand">SET</span> `data` <b class="dbgOperator">=</b> &#039;__default|a:8:{s:15:\&quot;session.counter\&quot;;i:3;s:19:\&quot;session.timer.start\&quot;;i:1340250602;s:18:\&quot;session.timer.last\&quot;;i:1340250721;s:17:\&quot;session.timer.now\&quot;;i:1340250831;s:22:\&quot;session.client.browser\&quot;;s:112:\&quot;Mozilla/5.0 (Windows <span class="dbgCommand">NT</span> 6.1; WOW64) AppleWebKit/535.19 (<span class="dbgCommand">KHTML</span>, like Gecko) Chrome/18.0.1025.165 Safari/535.19 <span class="dbgCommand">YI</span>\&quot;;s:8:\&quot;registry\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:4:\&quot;user\&quot;;O:5:\&quot;JUser\&quot;:24:{s:9:\&quot;\0<b style="color: red;">*</b>\0isRoot\&quot;;N;s:2:\&quot;id\&quot;;i:0;s:4:\&quot;name\&quot;;N;s:8:\&quot;username\&quot;;N;s:5:\&quot;email\&quot;;N;s:8:\&quot;password\&quot;;N;s:14:\&quot;password_clear\&quot;;s:0:\&quot;\&quot;;s:8:\&quot;usertype\&quot;;N;s:5:\&quot;block\&quot;;N;s:9:\&quot;sendEmail\&quot;;i:0;s:12:\&quot;registerDate\&quot;;N;s:13:\&quot;lastvisitDate\&quot;;N;s:10:\&quot;activation\&quot;;N;s:6:\&quot;params\&quot;;N;s:6:\&quot;groups\&quot;;a:0:{}s:5:\&quot;guest\&quot;;i:1;s:10:\&quot;\0<b style="color: red;">*</b>\0_params\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:14:\&quot;\0<b style="color: red;">*</b>\0_authGroups\&quot;;N;s:14:\&quot;\0<b style="color: red;">*</b>\0_authLevels\&quot;;a:2:{i:0;i:1;i:1;i:1;}s:15:\&quot;\0<b style="color: red;">*</b>\0_authActions\&quot;;N;s:12:\&quot;\0<b style="color: red;">*</b>\0_errorMsg\&quot;;N;s:19:\&quot;customer_data_array\&quot;;a:0:{}s:10:\&quot;\0<b style="color: red;">*</b>\0_errors\&quot;;a:0:{}s:3:\&quot;aid\&quot;;i:0;}s:13:\&quot;session.token\&quot;;s:32:\&quot;f5e13aaed2fd58611f3a1454c0e8db29\&quot;;}&#039;
-	, `time` <b class="dbgOperator">=</b> &#039;1340250831&#039;
+<br />&#160;&#160;<span class="dbgCommand">SET</span> `data` <b class="dbgOperator">=</b> &#039;__default|a:8:{s:15:\&quot;session.counter\&quot;;i:32;s:19:\&quot;session.timer.start\&quot;;i:1340602458;s:18:\&quot;session.timer.last\&quot;;i:1340613646;s:17:\&quot;session.timer.now\&quot;;i:1340613653;s:22:\&quot;session.client.browser\&quot;;s:112:\&quot;Mozilla/5.0 (Windows <span class="dbgCommand">NT</span> 6.1; WOW64) AppleWebKit/535.19 (<span class="dbgCommand">KHTML</span>, like Gecko) Chrome/18.0.1025.165 Safari/535.19 <span class="dbgCommand">YI</span>\&quot;;s:8:\&quot;registry\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:4:\&quot;user\&quot;;O:5:\&quot;JUser\&quot;:25:{s:9:\&quot;\0<b style="color: red;">*</b>\0isRoot\&quot;;b:0;s:2:\&quot;id\&quot;;i:0;s:4:\&quot;name\&quot;;s:8:\&quot;Нюша\&quot;;s:8:\&quot;username\&quot;;N;s:5:\&quot;email\&quot;;s:14:\&quot;njusha@mail.ru\&quot;;s:8:\&quot;password\&quot;;N;s:14:\&quot;password_clear\&quot;;s:0:\&quot;\&quot;;s:8:\&quot;usertype\&quot;;N;s:5:\&quot;block\&quot;;N;s:9:\&quot;sendEmail\&quot;;i:0;s:12:\&quot;registerDate\&quot;;N;s:13:\&quot;lastvisitDate\&quot;;N;s:10:\&quot;activation\&quot;;N;s:6:\&quot;params\&quot;;N;s:6:\&quot;groups\&quot;;a:0:{}s:5:\&quot;guest\&quot;;i:1;s:10:\&quot;\0<b style="color: red;">*</b>\0_params\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:14:\&quot;\0<b style="color: red;">*</b>\0_authGroups\&quot;;a:1:{i:0;i:1;}s:14:\&quot;\0<b style="color: red;">*</b>\0_authLevels\&quot;;a:2:{i:0;i:1;i:1;i:1;}s:15:\&quot;\0<b style="color: red;">*</b>\0_authActions\&quot;;N;s:12:\&quot;\0<b style="color: red;">*</b>\0_errorMsg\&quot;;N;s:19:\&quot;customer_data_array\&quot;;a:0:{}s:10:\&quot;\0<b style="color: red;">*</b>\0_errors\&quot;;a:0:{}s:3:\&quot;aid\&quot;;i:0;s:5:\&quot;phone\&quot;;s:15:\&quot;1-255-580-22-88\&quot;;}s:13:\&quot;session.token\&quot;;s:32:\&quot;c759bfa1f434c47384d241005a5e880d\&quot;;}&#039;
+	, `time` <b class="dbgOperator">=</b> &#039;1340613653&#039;
 
-<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `session_id` <b class="dbgOperator">=</b> &#039;683412241cd2badbaa40f41adb2f6c95&#039;</code></li></ol><h4>15 типов SQL-запросов зафиксировано, отсортировано по вхождениям</h4><h5>Запросы типа SELECT:</h5><ol><li><code>23 &#215; <span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
+<br />&#160;&#160;<span class="dbgCommand">WHERE</span> `session_id` <b class="dbgOperator">=</b> &#039;74aeb6830b949da8ec2180fcd11c517f&#039;</code></li></ol><h4>15 типов SQL-запросов зафиксировано, отсортировано по вхождениям</h4><h5>Запросы типа SELECT:</h5><ol><li><code>23 &#215; <span class="dbgCommand">SELECT</span> site_side <span class="dbgCommand">AS</span> `missing side name`
  <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_webapps_site_options_beyond_sides</span></code></li><li><code>4 &#215; <span class="dbgCommand">SELECT</span> extension_id <span class="dbgCommand">AS</span> id, element <span class="dbgCommand">AS</span> &quot;option&quot;, params, enabled
  <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_extensions</span></code></li><li><code>2 &#215; <span class="dbgCommand">SELECT</span> a.<b style="color: red;">*</b>
  <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_users</span> as a</code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> id, name_ru, name_en
@@ -1741,7 +1793,7 @@ function controlCMSchoice(tdBlock){
  <br />&#160;&#160;<span class="dbgCommand">FROM</span> `<span class="dbgTable">dnior_session</span>`</code></li><li><code>1 &#215; <span class="dbgCommand">SELECT</span> m.id, m.menutype, m.title, m.alias, m.note, m.path <span class="dbgCommand">AS</span> route, m.link, m.type, m.level, m.language,m.browserNav, m.access, m.params, m.home, m.img, m.template_style_id, m.component_id, m.parent_id,e.element as component
  <br />&#160;&#160;<span class="dbgCommand">FROM</span> <span class="dbgTable">dnior_menu</span> <span class="dbgCommand">AS</span> m
  <br />&#160;&#160;<span class="dbgCommand">LEFT</span> <span class="dbgCommand">JOIN</span> <span class="dbgTable">dnior_extensions</span> <span class="dbgCommand">AS</span> e <br />&#160;&#160;<span class="dbgCommand">ON</span> m.component_id <b class="dbgOperator">=</b> e.extension_id</code></li></ol><h5>Прочие SQL-запросы:</h5><ol><li><code>1 &#215; <span class="dbgCommand">UPDATE</span> `<span class="dbgTable">dnior_session</span>`
- <br />&#160;&#160;<span class="dbgCommand">SET</span> `data` <b class="dbgOperator">=</b> &#039;__default|a:8:{s:15:\&quot;session.counter\&quot;;i:3;s:19:\&quot;session.timer.start\&quot;;i:1340250602;s:18:\&quot;session.timer.last\&quot;;i:1340250721;s:17:\&quot;session.timer.now\&quot;;i:1340250831;s:22:\&quot;session.client.browser\&quot;;s:112:\&quot;Mozilla/5.0 (Windows <span class="dbgCommand">NT</span> 6.1; WOW64) AppleWebKit/535.19 (<span class="dbgCommand">KHTML</span>, like Gecko) Chrome/18.0.1025.165 Safari/535.19 <span class="dbgCommand">YI</span>\&quot;;s:8:\&quot;registry\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:4:\&quot;user\&quot;;O:5:\&quot;JUser\&quot;:24:{s:9:\&quot;\0<b style="color: red;">*</b>\0isRoot\&quot;;N;s:2:\&quot;id\&quot;;i:0;s:4:\&quot;name\&quot;;N;s:8:\&quot;username\&quot;;N;s:5:\&quot;email\&quot;;N;s:8:\&quot;password\&quot;;N;s:14:\&quot;password_clear\&quot;;s:0:\&quot;\&quot;;s:8:\&quot;usertype\&quot;;N;s:5:\&quot;block\&quot;;N;s:9:\&quot;sendEmail\&quot;;i:0;s:12:\&quot;registerDate\&quot;;N;s:13:\&quot;lastvisitDate\&quot;;N;s:10:\&quot;activation\&quot;;N;s:6:\&quot;params\&quot;;N;s:6:\&quot;groups\&quot;;a:0:{}s:5:\&quot;guest\&quot;;i:1;s:10:\&quot;\0<b style="color: red;">*</b>\0_params\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:14:\&quot;\0<b style="color: red;">*</b>\0_authGroups\&quot;;N;s:14:\&quot;\0<b style="color: red;">*</b>\0_authLevels\&quot;;a:2:{i:0;i:1;i:1;i:1;}s:15:\&quot;\0<b style="color: red;">*</b>\0_authActions\&quot;;N;s:12:\&quot;\0<b style="color: red;">*</b>\0_errorMsg\&quot;;N;s:19:\&quot;customer_data_array\&quot;;a:0:{}s:10:\&quot;\0<b style="color: red;">*</b>\0_errors\&quot;;a:0:{}s:3:\&quot;aid\&quot;;i:0;}s:13:\&quot;session.token\&quot;;s:32:\&quot;f5e13aaed2fd58611f3a1454c0e8db29\&quot;;}&#039;  , `time` <b class="dbgOperator">=</b> &#039;1340250831&#039;</code></li><li><code>1 &#215; <span class="dbgCommand">DELETE</span> 
+ <br />&#160;&#160;<span class="dbgCommand">SET</span> `data` <b class="dbgOperator">=</b> &#039;__default|a:8:{s:15:\&quot;session.counter\&quot;;i:32;s:19:\&quot;session.timer.start\&quot;;i:1340602458;s:18:\&quot;session.timer.last\&quot;;i:1340613646;s:17:\&quot;session.timer.now\&quot;;i:1340613653;s:22:\&quot;session.client.browser\&quot;;s:112:\&quot;Mozilla/5.0 (Windows <span class="dbgCommand">NT</span> 6.1; WOW64) AppleWebKit/535.19 (<span class="dbgCommand">KHTML</span>, like Gecko) Chrome/18.0.1025.165 Safari/535.19 <span class="dbgCommand">YI</span>\&quot;;s:8:\&quot;registry\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:4:\&quot;user\&quot;;O:5:\&quot;JUser\&quot;:25:{s:9:\&quot;\0<b style="color: red;">*</b>\0isRoot\&quot;;b:0;s:2:\&quot;id\&quot;;i:0;s:4:\&quot;name\&quot;;s:8:\&quot;Нюша\&quot;;s:8:\&quot;username\&quot;;N;s:5:\&quot;email\&quot;;s:14:\&quot;njusha@mail.ru\&quot;;s:8:\&quot;password\&quot;;N;s:14:\&quot;password_clear\&quot;;s:0:\&quot;\&quot;;s:8:\&quot;usertype\&quot;;N;s:5:\&quot;block\&quot;;N;s:9:\&quot;sendEmail\&quot;;i:0;s:12:\&quot;registerDate\&quot;;N;s:13:\&quot;lastvisitDate\&quot;;N;s:10:\&quot;activation\&quot;;N;s:6:\&quot;params\&quot;;N;s:6:\&quot;groups\&quot;;a:0:{}s:5:\&quot;guest\&quot;;i:1;s:10:\&quot;\0<b style="color: red;">*</b>\0_params\&quot;;O:9:\&quot;JRegistry\&quot;:1:{s:7:\&quot;\0<b style="color: red;">*</b>\0data\&quot;;O:8:\&quot;stdClass\&quot;:0:{}}s:14:\&quot;\0<b style="color: red;">*</b>\0_authGroups\&quot;;a:1:{i:0;i:1;}s:14:\&quot;\0<b style="color: red;">*</b>\0_authLevels\&quot;;a:2:{i:0;i:1;i:1;i:1;}s:15:\&quot;\0<b style="color: red;">*</b>\0_authActions\&quot;;N;s:12:\&quot;\0<b style="color: red;">*</b>\0_errorMsg\&quot;;N;s:19:\&quot;customer_data_array\&quot;;a:0:{}s:10:\&quot;\0<b style="color: red;">*</b>\0_errors\&quot;;a:0:{}s:3:\&quot;aid\&quot;;i:0;s:5:\&quot;phone\&quot;;s:15:\&quot;1-255-580-22-88\&quot;;}s:13:\&quot;session.token\&quot;;s:32:\&quot;c759bfa1f434c47384d241005a5e880d\&quot;;}&#039;  , `time` <b class="dbgOperator">=</b> &#039;1340613653&#039;</code></li><li><code>1 &#215; <span class="dbgCommand">DELETE</span> 
  <br />&#160;&#160;<span class="dbgCommand">FROM</span> `<span class="dbgTable">dnior_session</span>`</code></li></ol></div></div></body>
 
 </html>

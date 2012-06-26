@@ -148,7 +148,8 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	/**
 	 * Получить коллекцию по её id
 	 */
-	function getCollection($collection_id){
+	function getCollection($collection_id){	
+		//SDebug::dOutput("collection_id= $collection_id",'h1');
 		$user = JFactory::getUser();
 		if ($user->get('guest')!=1||$user->get('email')) { 
 			$db=JFactory::getDBO();

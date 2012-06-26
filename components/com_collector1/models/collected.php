@@ -11,7 +11,7 @@ class collector1ModelCollected extends JModel
 		parent::__construct();
 		$this->db=JFactory::getDBO();
 		$user = JFactory::getUser();  
-		$this->query.=' WHERE customer_id = '.$user->id;
+		//$this->query.=' WHERE customer_id = '.$user->id;
 	}
 	/**
 	 * все сайты заказчика
@@ -19,32 +19,23 @@ class collector1ModelCollected extends JModel
 	function collected()
 	{	//SDebug::dOutput("collected",'h1');
 		//guest?
-		$arrCollectionsIds=SCollection::getPrecustomerSet('collections_ids');
-		if (!$arrCollectionsIds){
-			$query='SELECT id ' . $this->query . $where;//var_dump("<h1>query(collected):</h1><pre>",$query,"</pre>");
-			$this->db->setQuery($query);
-			$arrCollectionsIds=$this->db->loadResultArray(); 
-		}//else var_dump("<h1>arrCollectionsIds:</h1><pre>",$arrCollectionsIds,"</pre>");
+		$user = JFactory::getUser();
+		//получить id id коллекций:
+		$arrCollectionsIds=($user->get('guest')==1)?
+			SCollection::getPrecustomerSet('collections_ids') : SCollection::getUserSet($user->get('id'));
+		//if ($user->get('guest')==1) $arrCollectionsIds=SCollection::getPrecustomerSet('collections_ids');
+		//else $arrCollectionsIds=SCollection::getUserSet($user->get('id'));
+		//else var_dump("<h1>arrCollectionsIds:</h1><pre>",$arrCollectionsIds,"</pre>");
 		for ($i=0,$j=count($arrCollectionsIds);$i<$j;$i++){
-			$option_id=$arrCollectionsIds[$i]; //echo "<div class=''>option_id= ".$option_id."</div>";
+			$collection_id=$arrCollectionsIds[$i]; //echo "<div class=''>collection_id= ".$collection_id."</div>";
 			$main_model=JModel::getInstance('collector1','Collector1Model');
-			$collections_data_array[$option_id]=$main_model->getCollection($option_id);
-			//echo "<div class=''>collections_data_array[$option_id]= ".$collections_data_array[$option_id]."</div>";
-			if ($collections_data_array[$option_id]===false) return false;
-			unset($collections_data_array[$option_id]['engines_ids']);
+			$collections_data_array[$collection_id]=$main_model->getCollection($collection_id);
+			//echo "<div class=''>collections_data_array[$collection_id]= ".$collections_data_array[$collection_id]."</div>";
+			if ($collections_data_array[$collection_id]===false) return false;
+			//var_dump("<h1>collections_data_array[$collection_id]:</h1><pre>",$collections_data_array[$collection_id],"</pre>");
+			unset($collections_data_array[$collection_id]['engines_ids']);
 		}
 		return $collections_data_array;
-	}
-	/**
-	 * Получить файлы
-	 */
-	function getUserFiles($identifier) {
-		$db=JFactory::getDBO();
-		$query="SELECT files_names FROM #__webapps_files_names 
- WHERE `identifier` = '$identifier'";
-		$db->setQuery($query);
- 		$row=explode(":",$db->loadResult()); 
-		return $row;
 	}
 	/**
 	 * получить движок // ПЕРЕНЕСЕНО  в отдельную модель (CMS.php)

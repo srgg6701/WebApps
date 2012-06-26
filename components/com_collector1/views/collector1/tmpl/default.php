@@ -134,7 +134,7 @@ if ($current_order_set){
 	if ($group_stat&&$group_stat!='finish'&&strlen($data_row['name_ru'])>0){
 		?> style="padding-left:20px;"<? 
 	}else echo ' style="padding-left:10px;"';?>>
-    	<input type="checkbox"> <?=$data_row['option']?>
+    	<label><input type="checkbox"> <?=$data_row['option']?></label>
     </td>
 	<?  $side_cells=Collector1ModelCollector1::buildOptionsSidesCells($data_row['option_id']);
 		//options cells:
@@ -229,7 +229,7 @@ if ($current_order_set){
 	$engines_set=explode(',',$current_order_set['engines']);
 	//var_dump("<h1>engines_set:</h1><pre>",$engines_set,"</pre>");
 	foreach($CMS as $key=>$cms){?>
-	<div<? 	
+	<label><div<? 	
 	
 		if (in_array($cms,$engines_set)){
 		
@@ -237,7 +237,7 @@ if ($current_order_set){
 	
 		}?>><input name="cms_name_<?=$i?>" type="checkbox" value="<?=$i?>"<? 
 		
-		if (in_array($cms,$engines_set)){?> checked<? }?>><?=$cms?></div>
+		if (in_array($cms,$engines_set)){?> checked<? }?>><?=$cms?></div></label>
 <?		$i++;
 	}?>        
 	</td>  

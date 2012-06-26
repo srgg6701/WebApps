@@ -58,16 +58,17 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавто
 	
 	if (!empty($collections_data_array)){
 		
-		//require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
 		$arrSMSs=SCollection::setCMStypes();
-
 		$j=count($collections_data_array);
-		foreach ($collections_data_array as $collection_id=>$collection_set){?>
+		$arrFiles=$this->order_files;
+		//
+		$fl=0;
+		foreach ($collections_data_array as $collection_id=>$collection_set){
+			$collection_id=$collection_set['id'];?>
           <tr>
-          	<td colspan="2" id="my_site_number">Сайт # <?=$collection_set['id']?></td>
+          	<td colspan="2" id="my_site_number">Сайт # <?=$collection_id?></td>
           </tr>
 		 <? 
-			//
 			foreach($collection_set as $option=>$data){ 
 				
 				if (in_array($option,$arrRightOptions)){
@@ -154,12 +155,15 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавто
 	?>/images/folder.png" width="32" height="32" style="margin-left:10px; margin-top:-6px;" align="right"></td>
             <td><?
             
-			$arrFiles=$this->order_files;
-			for($i=1,$j=count($arrFiles);$i<=$j;$i++):
-				$filename=$arrFiles[$i-1];
+			$filenames=explode(':',$arrFiles[$fl]['files_names']);
+			//var_dump("<h1>filenames:</h1><pre>",$filenames,"</pre>");
+			for($i=0,$j=count($filenames);$i<$j;$i++):
+				$filename=$filenames[$i];
+				//var_dump("<h1>array:</h1><pre>",$array,"</pre>");
+				$findex=substr($filename,0,strpos($filename,'.'));
 				$ext=substr($filename,strrpos($filename,'.'));?>
-                <div><?=$i?> <a href="<? echo $this->baseurl.'/components/com_collector1/files/'.$collection_set['id'].'.'.$i.$ext?>"><?=$filename?></a></div>
-		<?		echo "\n";
+                <div><a href="<? echo $this->baseurl.'/components/com_collector1/files/'.$collection_id.'.'.$findex.$ext?>"><?=$collection_id.'.'.$filename?></a></div>
+		<?		echo "\n";/**/
 			endfor;
 			
 			?></td>
@@ -170,18 +174,21 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавто
 			if (!empty($this->guest_collections_ids)){
 				?>javascript:void();" onclick="askToSignUp();<?	
 			}else{
-                echo JRoute::_("index.php?option=com_collector1&view=collector1&id=1&collection_id=".$collection_set['id']);
-			}?>">Изменить опции...</a> &nbsp; <a class="txtRed" href="<?=JRoute::_("index.php?option=com_collector1&collection_id=".$collection_set['id'])?>&task=delete" onclick="if (!confirm('Вы уверены, что хотите удалить этот сайт?')) return false;">Удалить сайт...</a><br>
+                echo JRoute::_("index.php?option=com_collector1&view=collector1&id=1&collection_id=".$collection_id);
+			}?>">Изменить опции...</a> &nbsp; <a class="txtRed" href="<?=JRoute::_("index.php?option=com_collector1&collection_id=".$collection_id)?>&task=delete" onclick="if (!confirm('Вы уверены, что хотите удалить этот сайт?')) return false;">Удалить сайт...</a><br>
 <br>
 
 			</td>
           </tr>
-<?		}
+<?			$fl++;
+		}
 	}?>
 </table>
-<?	}else{?>
+<?	
+}else{?>
 		<h3 class="collected_head">Сайтов нет</h3>
-<? 	}?>
+<? 	
+}?>
 <div class="button-green" style="margin-left:6px;">
     <a href="<?=JRoute::_("index.php?option=com_collector1&view=collector1");//view не убирать!?>">Добавить сайт...</a>
 </div>
