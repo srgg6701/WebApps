@@ -65,7 +65,11 @@ class Collector1ViewCollected extends JView
 			if ($got_collection_id){ 
 				if ($user->get('guest')==1){ //echo "<div>GUEST</div>";
 					//получить массив id id всех коллекций гостя:this->guest_collections_ids
-					$this->guest_collections_ids=SCollection::getPrecustomerSet('collections_ids',$user);
+					// ЦЕЛЕСООБРАЗНОСТЬ ПРОВЕРКИ ПОД ВОПРОСОМ, т.к. объект уже создаётся в модели:
+					if (!$uset=$model->arr_collections_ids) 
+						$uset=SCollection::getPrecustomerSet('collections_ids',$user);
+					if (is_array($uset)) //т.к. может вернуть id записи, а не массив
+						$this->guest_collections_ids=$uset;
 				}else{	//echo "<div>NOT GUEST!</div>";
 					//если не гость, проверим - его ли коллекция
 					if(SCollection::checkCollectionAccessory($got_collection_id,$user->get('id'))) $this->collection_of_user=1;
@@ -75,7 +79,7 @@ class Collector1ViewCollected extends JView
 			$this->templatename=SSite::getCurrentTemplateName($app);
 			if ($site_done!='site_deleted') { //не удаляли сайт, будем получать файлы
 				//$idf=($site_done)? $site_done:'collection_id';
-				$this->order_files=SFiles::getUserFiles('collections_ids',$user);
+				$this->order_files=($uset)? SFiles::requestUserFiles($uset):SFiles::getUserFiles('collections_ids',$user); //echo "<div class=''>order_files= ".$this->order_files."</div>"; die();
 			}
 		}
 		parent::display($tpl);

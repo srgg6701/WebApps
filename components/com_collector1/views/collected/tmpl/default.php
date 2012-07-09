@@ -60,7 +60,7 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавто
 		
 		$arrSMSs=SCollection::setCMStypes();
 		$j=count($collections_data_array);
-		$arrFiles=$this->order_files;
+		$arrFiles=$this->order_files; 
 		//
 		$fl=0;
 		foreach ($collections_data_array as $collection_id=>$collection_set){
@@ -155,18 +155,18 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавто
 	?>/images/folder.png" width="32" height="32" style="margin-left:10px; margin-top:-6px;" align="right"></td>
             <td><?
             
-			$filenames=explode(':',$arrFiles[$fl]['files_names']);
-			//var_dump("<h1>filenames:</h1><pre>",$filenames,"</pre>");
-			for($i=0,$j=count($filenames);$i<$j;$i++):
-				$filename=$filenames[$i];
-				//var_dump("<h1>array:</h1><pre>",$array,"</pre>");
-				$findex=substr($filename,0,strpos($filename,'.'));
-				$ext=substr($filename,strrpos($filename,'.'));?>
+			if (is_array($arrFiles)){ //может быть false
+				$filenames=explode(':',$arrFiles[$fl]['files_names']);
+				for($i=0,$j=count($filenames);$i<$j;$i++):
+					$filename=$filenames[$i];
+					//var_dump("<h1>array:</h1><pre>",$array,"</pre>");
+					$findex=substr($filename,0,strpos($filename,'.'));
+					$ext=substr($filename,strrpos($filename,'.'));?>
                 <div><a href="<? echo $this->baseurl.'/components/com_collector1/files/'.$collection_id.'.'.$findex.$ext?>"><?=$collection_id.'.'.$filename?></a></div>
-		<?		echo "\n";/**/
-			endfor;
-			
-			?></td>
+			<?		echo "\n";/**/
+                endfor;
+			}else{?>Файлов нет.
+		<?	}?></td>
           </tr>
           <tr>
           	<td colspan="2" class="bgOverWhite linkButtons">

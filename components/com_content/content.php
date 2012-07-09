@@ -17,7 +17,7 @@ if($c = JRequest::getVar('c')) { //call an additional controller and assign it a
 	$arrPathReq=array('SData','SDebug','SErrors','SFiles','SCollection','SSite','SUser');
 	for($i=0,$j=count($arrPathReq);$i<$j;$i++)
 		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.$arrPathReq[$i].'.php';
-	SDebug::dOutput("content.php",'h3','display:inline');
+	//SDebug::dOutput("content.php",'h3','display:inline');
 	jimport('joomla.mail.mail');
 	jimport('joomla.application.component.controller');
 	jimport('joomla.application.component.model');

@@ -9,7 +9,8 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-// Note. It is important to remove spaces between elements.?>
+// Note. It is important to remove spaces between elements. 
+	//die(var_dump("<h1>list:</h1><pre>",$list,"</pre>"));?>
 <table<? //=$_SESSION['menu_table_params']?> cellspacing="0">
   <tr<? //=$_SESSION['menu_tr_params']?>>  
 <?php
@@ -50,7 +51,7 @@ foreach ($list as $i => &$item) :
 		$class = ' class="'.trim($class) .'"';
 	}*/
 		if ($m>0||$_SESSION['skip_first']===false){?>
-    <td<? if ($item->id == $active_id){?>  class="tdActive"> <? }else echo '>';
+    <td<? if ($item->id == $active_id){?> class="tdActive"> <? }else echo '>';
 
 	// Render the menu item.
 	switch ($item->type) :

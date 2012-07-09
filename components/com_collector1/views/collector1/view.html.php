@@ -58,7 +58,9 @@ class Collector1ViewCollector1 extends JView
 		}//var_dump("<h1>user:</h1><pre>",$user,"</pre>"); die();
 		//проверим, создавал ли незаавторизованный юзер сайты в течение сессии:
 		if ($user->get('guest')==1){
-			$this->guest_collections_ids=SCollection::getPrecustomerSet('collections_ids',$user);
+			$aset=SCollection::getPrecustomerSet('collections_ids',$user);
+			if (is_array($aset)) //т.к. может вернуть id записи, а не массив
+				$this->guest_collections_ids;
 			//var_dump("<h1>guest_collections_ids:</h1><pre>",$this->guest_collections_ids,"</pre>");
 		}
 		//должно быть именно здесь, чтобы получить все установленные значения свойств класса:

@@ -40,11 +40,18 @@ class Collector1ModelCollector1 extends JModel
 		$customer_status=SUser::handleUserData(JFactory::getUser()); //назначить данные/получить статус юзера
 		//будем ОБНОВЛЯТЬ/ДОБАВЛЯТЬ данные в таблице предзаказчика:
 		if ($customer_status=="precustomer"||$customer_status=="unknown") { //предзаказчик или неизвестен 
+			$current_collection_object=($customer_status=="precustomer")? 'new':false;
 			//ВНИМАНИЕ! Если в течение сессии юзер уже делал заказ, его статус будет precustomer
-			//добавить запись в таблицу предзаказчиков
-			SUser::handlePrecustomersTable( $added_record_id, //новая запись в таблице коллекций
-										 	JRequest::get('post')
-									      );
+			$show_debug=true;
+			if ($show_debug) SDebug::alertDebugInfo("customer_status= $customer_status");
+			//echo "<div>customer_status= $customer_status</div>";
+			SUser::handlePrecustomersTable( //добавить запись в таблицу предзаказчиков
+						$customer_status,
+						$added_record_id, 	//новая запись в таблице коллекций
+						'collections_ids',	//Коллекция или Заказ?
+						'add',				//добавить (или обновить) к набору коллекций/заказов или удалить из него
+						JRequest::get('post')
+					  );
 		}
 		if (!SFiles::handleFilesUploading('s',$added_record_id)) JMail::sendErrorMess('Не выполнен метод загрузки файлов (не возвращено true).',"Загрузка файлов.");
 
@@ -216,42 +223,6 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		$db->setQuery($query);
 		return $db->loadResultArray();
 	}
-	/**
-	  * Получить статус заказчика/предзказчика 
-	 */
-	/**	
-	  * - [enabled,] activated		  				block = 0, activation [empty] 
-	  * -  enabled,  not activated (can log in) 	block = 0, activation [code]
-	  *	-  not enabled, not activated				block = 1, activation [code] 
-	  * -  disabled, activated	(can't log in)		block = 1, activation [empty]	
-	  -----------------------------------------------------------------------
-	  * * Нет в таблице юзеров:
-	  * - предзаказчик - уже создавал коллекции/заказы, но ещё не зарегистрировался
-	  * - новый предзаказчик
-	  */
-	/*function getCustomerStatus($user=false){
-		//выясним статус юзера:
-		if (!$user) $user = JFactory::getUser();
-		if ($user->get('guest')!=1){
-			$customer_status=($user->get('block')==1)? "disabled":"enabled";
-			$customer_status.=" ";
-			//код активации?
-			$customer_status.=($user->get('activation'))? "inactive":"active";
-		}else{
-			//проверить запись в таблице предзаказчиков по полученному емэйлу:
-			$customer_status=SUser::getPrecustomerStatus(JRequest::getVar('email'),$user);
-			if ($customer_status>1){
-				JMail::sendErrorMess('Обнаружено более 1 записи предзаказчика',"Лишние записи в таблице предзаказчиков");
-			}else{
-				$customer_status=($customer_status)? "precustomer":"unknown";
-			}
-		}
-		if (!$customer_status)
-			JMail::sendErrorMess('Не получен статус субъекта в getCustomerStatus()','Не получен статус субъекта');
-		//echo "<div>$customer_status</div>";
-		else $user->set('customer_status',$customer_status);
-		return true;
-	}*/
 	/**
 	  * Получить массив всех данных для построения таблицы Коллектора
 	*/
@@ -492,9 +463,9 @@ FROM #__webapps_site_types ORDER BY id DESC";
 			//var_dump("<h1>updated_id:</h1><pre>",$updated_id,"</pre>"); die();
 			return false;
 		}else{
-			SErrors::afterTableUpdate( $table,
+			SErrors::afterTableUpdate( $table/*,
 									   true, // если передаём true, пропускаем проверку $table->load($id) внутри
-									   $collection_id
+									   $collection_id*/
 									 );
 		}
 		return true;

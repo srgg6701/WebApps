@@ -47,7 +47,7 @@ class Collector1Controller extends JController
 	function order(){		
 		$model=$this->getModel();
 		if($this->getModel('orders')->makeOrder($model)) { 
-			die ('makeOrder is complited!');
+			//die ('makeOrder is complited!');
 			$this->setRedirect(JRoute::_($this->go_page_common."&view=orders"));			
 		}else{
 			JMail::sendErrorMess('Данные не размещены.',"Добавление заказа.");		
@@ -55,6 +55,7 @@ class Collector1Controller extends JController
 	}
 	/**
 	 * Обновить данные в таблице Коллекций (опций сайта заказчика)
+	 * ВНИМАНИЕ! Доступно только для зарегистрированных юзеров. Незарегистрированных просит зарегистироваться (JS)
 	 */
 	function update(){ //task=update
 		$collection_id=JRequest::getVar('collection_id');

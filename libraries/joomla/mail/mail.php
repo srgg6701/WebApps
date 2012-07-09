@@ -483,7 +483,11 @@ class JMail extends PHPMailer
 			echo "ERROR message: <div>$msg</div><hr>".SErrors::$trace.'<br>';
 		}else{
 			$msg.="<hr>".SErrors::$trace;
-			$siteName=JFactory::getConfig()->getValue('sitename');
+			$config=JFactory::getConfig();
+			$siteName=$config->getValue('sitename');
+			$adminEmail=$config->getValue('mailfrom');
+			//$siteName=->getValue('sitename');
+			//$adminEmail=JFactory::getConfig()->getValue('mailfrom');
 			JFactory::getMailer()->sendMail(SData::$error_mail, $siteName, $adminEmail, 'Сообщение об ошибке. '.$subject, $msg);
 		}
 		SErrors::$trace='';
