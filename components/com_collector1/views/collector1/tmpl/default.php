@@ -9,8 +9,9 @@
  * @license		License GNU General Public License version 2 or later
  */
 // No direct access to this file
-defined('_JEXEC') or die('Restricted access'); 
-$table=Collector1ModelCollector1::getDataForCollector();
+defined('_JEXEC') or die; 
+$collector_table=$this->collector_table;
+//Collector1ModelCollector1::getDataForCollector();
 $current_order_set=$this->current_order_set;
 
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
@@ -93,9 +94,9 @@ if ($current_order_set){
     <?	}*/?>
   </tr>
 <?	//	
-	for($i=0,$j=count($table);$i<$j;$i++){
+	for($i=0,$j=count($collector_table);$i<$j;$i++){
 		
-		$data_row=$table[$i];
+		$data_row=$collector_table[$i];
 		
 		unset($shopClass);
 		
@@ -103,8 +104,8 @@ if ($current_order_set){
 			$shopClass="WebShop";
 			if ($current_order_set['site_type_id']==3)  $shopClass="hiddenShop";
 		}
-		$data_next=$table[$i+1];
-		$data_prev=$table[$i-1];
+		$data_next=$collector_table[$i+1];
+		$data_prev=$collector_table[$i-1];
 		if ( $i && $data_row['name_ru'] &&
 			 ( !$data_prev['name_ru'] || $data_prev['name_ru'] != $data_row['name_ru'] )
 		   ){

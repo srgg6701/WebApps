@@ -138,10 +138,11 @@ function manageLoginDisplay(stat){
                 <!-- system messages -->
   				<jdoc:include type="message" />
 				<div id="com"<? if($user->get('guest')!=1){?> class="offsetAuthorized"<? }?>>
+                	<jdoc:include type="modules" name="precustomer_stuff" style="xhtml" />
 					<jdoc:include type="component" />
-                    	<jdoc:include type="modules" name="contacts" style="xhtml" />    
-                    	<jdoc:include type="modules" name="sdata" style="xhtml" />    
-                   		<jdoc:include type="modules" name="feedback" style="xhtml" />    
+                    <jdoc:include type="modules" name="contacts" style="xhtml" />    
+                    <jdoc:include type="modules" name="sdata" style="xhtml" />    
+                   	<jdoc:include type="modules" name="feedback" style="xhtml" />    
                     <!--/COM-->
            		</div>
                 <!--/WRAPPER_COMPONENT-->

@@ -33,6 +33,7 @@
 		<position>footer</position>
 		<position>login</position>
 		<position>logo_and_menu</position>
+		<position>precustomer_stuff</position>
 		<position>sdata</position>
 		<position>search</position>
 	</positions>

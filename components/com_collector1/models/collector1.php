@@ -155,12 +155,23 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	/**
 	 * Получить коллекцию по её id
 	 */
-	function getCollection($collection_id){	
+	function getCollection($collection_id,$user = false, $db = false){	
 		//SDebug::dOutput("collection_id= $collection_id",'h1');
-		$user = JFactory::getUser();
+		if (!$user) $user = JFactory::getUser();
 		if ($user->get('guest')!=1||$user->get('email')) { 
-			$db=JFactory::getDBO();
-			$query='SELECT `id`,`site_type_id`,`engine_type_choice_id`,`engines_ids`,`options_array`,`xtra` FROM '.self::setDefaultTable().' WHERE id = ' . (int)$collection_id;
+			//$query='SELECT `id`,`site_type_id`,`engine_type_choice_id`,`engines_ids`,`options_array`,`xtra` FROM '.self::setDefaultTable().' WHERE id = ' . (int)$collection_id;
+			$query="SELECT #__webapps_customer_site_options.id,
+       `site_type_id`,
+       `engine_type_choice_id`,
+       `engines_ids`,
+       `options_array`,
+       `xtra`, 
+       `files_names`
+  FROM #__webapps_customer_site_options 
+  LEFT JOIN #__webapps_files_names 
+    ON #__webapps_files_names.identifier = CONCAT('s',#__webapps_customer_site_options.id)
+ WHERE #__webapps_customer_site_options.id = $collection_id";
+			if (!$db) $db=JFactory::getDBO();
 			$db->setQuery($query); //SDebug::dOutput("query= $query"); 
 			//
 			$current_order_set=$db->loadAssoc();  
@@ -214,15 +225,6 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 			return $current_order_set; 
 		}else return false;
 	}	
-	/**
-	 * Получить массив id id коллекций заказчика
-	 */
-	function getCollectionsIds($customer_id){
-		$db=JFactory::getDBO();
-		$query='SELECT id FROM '.self::setDefaultTable().' WHERE customer_id = '. (int)$customer_id;
-		$db->setQuery($query);
-		return $db->loadResultArray();
-	}
 	/**
 	  * Получить массив всех данных для построения таблицы Коллектора
 	*/

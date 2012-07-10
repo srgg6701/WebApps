@@ -13,17 +13,8 @@ defined('_JEXEC') or die('Restricted access');
 $user = JFactory::getUser();?>
 <div class="item-page">
 <?
-//this->guest_collections_ids	//
-//var_dump("<h1>guest_collections_ids:</h1><pre>",$this->guest_collections_ids,"</pre>");
-//echo "<hr>";
-//this->collections_data_array	//
-//$test=true;
-if ($_GET['cda']||$test) {
-	 if ($user->get('guest')!=1) echo "collection_of_user: ".$this->collection_of_user;
-	 else var_dump("<h1>guest_collections_ids:</h1><pre>",$this->guest_collections_ids,"</pre>");
-}
-if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавторизован
-	 !empty($this->guest_collections_ids) //коллекция создана текущим гостем (проверяется по его емэйлу)
+if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) //заавторизован 
+	 || !empty($this->guest_collections_ids) //коллекция создана текущим гостем (проверяется по его емэйлу)
    ) {
 	//
 	$collections_data_array=$this->collections_data_array;
@@ -35,9 +26,8 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавто
 	?>/images/signs/Flag_<?=$done[2]?>.png" width="24" height="24" hspace="6" align="baseline" style="margin-bottom:-2px;"><?=$done[0]?>
     </div>
     <br>
-	<br><?
-
-	}else{
+	<br>
+<?	}else{
 		$margin_minus='-';
 		require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
 	
@@ -60,7 +50,8 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) || //заавто
 		
 		$arrSMSs=SCollection::setCMStypes();
 		$j=count($collections_data_array);
-		$arrFiles=$this->order_files; 
+		$arrFiles=$collections_data_array['files_names'];
+		//$this->order_files; 
 		//
 		$fl=0;
 		foreach ($collections_data_array as $collection_id=>$collection_set){
@@ -202,7 +193,6 @@ function askToSignUp(){
 
 }else{
 	
-	//echo "<div>guest? = ".$user->get('guest').", collection_of_user: ".$this->collection_of_user.", empty? = ".empty($this->guest_collections_ids)."</div>";
 	if (!$this->templatename) {
 			//require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
 			$this->templatename=SSite::getCurrentTemplateName($app);

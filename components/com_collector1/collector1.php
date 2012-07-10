@@ -25,7 +25,6 @@ jimport('joomla.application.component.view');
 JTable::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_collector1'.DS.'tables');
 
 //главный Контроллер компонента:
-//echo "<h3>collector1.php</h3>";
 // Execute the task.
 $controller	= JController::getInstance('Collector1');
 $controller->execute(JRequest::getCmd('task', 'display'));

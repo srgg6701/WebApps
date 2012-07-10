@@ -26,23 +26,25 @@ class Collector1ViewCollected extends JView
 	
 	function display($tpl = NULL)
 	{	
-		$model=$this->getModel();//var_dump("<h1>model:</h1><pre>",$model,"</pre>");
-		$this->collections_data_array=$model->collected();
+		$model=$this->getModel();
+		$this->collections_data_array=$model->collected();//var_dump("<h1>collections_data_array:</h1><pre>",$this->collections_data_array,"</pre>");
+		//ЕСЛИ коллекции обнаружены:
 		if ($this->collections_data_array!==false){
-			$collector1Model=JModel::getInstance('collector1','Collector1Model');
-			$this->get_options_names=$collector1Model->get_options_names();
-			$arrDone=array( 'site_added' => array("Сайт добавлен","#CCF","blue"),
-							'site_deleted' => array("Сайт удалён","#FCC","red"),
-							'site_updated' => array("Данные сайта изменены","#E4F9DD","green")	
-						  );
+			$modelCollector=JModel::getInstance('collector1','Collector1Model');
+			$this->get_options_names=$modelCollector->get_options_names();
+			$arrSiteActions=array('site_added' => array("Сайт добавлен","#CCF","blue"),
+								  'site_deleted' => array("Сайт удалён","#FCC","red"),
+								  'site_updated' => array("Данные сайта изменены","#E4F9DD","green")	
+						  		 );
 			$user = JFactory::getUser();
-			foreach ($arrDone as $site_done=>$message){
+			foreach ($arrSiteActions as $site_action_type=>$message){
 				
-				$got_collection_id=JRequest::getVar($site_done); //потребуется далее, после выполнения цикла, для определения доступа к странице, с учётом статуса юзера и соответствия сессий создания коллекции и её просмотра
+				if(!$got_collection_id=JRequest::getVar($site_action_type))
+					$got_collection_id=JRequest::getVar('collection_id'); //потребуется далее, после выполнения цикла, для определения доступа к странице, с учётом статуса юзера и соответствия сессий создания коллекции и её просмотра
 				
-				if (JRequest::getVar($site_done)) {
+				if (JRequest::getVar($site_action_type)) {
 					$this->done=$message;
-					if ($site_done=='site_added') {
+					if ($site_action_type=='site_added') {
 						if ($user->get('guest')==1){
 							$this->done[0]="Набор опций вашего сайта определён.
 <div style=\"padding: 6px 0;\">Пожалуйста, <a href=".JRoute::_($this->go_signup).">добавьте к своим данным логин и пароль</a>.</div> 
@@ -52,35 +54,22 @@ class Collector1ViewCollected extends JView
 						$adminEmail=JFactory::getConfig()->getValue('mailfrom');
 						$siteName=JFactory::getConfig()->getValue('sitename');
 						if (!JFactory::getMailer()->sendMail($adminEmail, $siteName, $adminEmail, $siteName.': Новый сайт', 'На сайте WebApps.2-all.com создана новая коллекция.'))
-						{	
 							JMail::sendErrorMess('','Ошибка отправки уведомления о новом сайте...');
-						}
 					}
 					break;
-				}else unset($site_done); //чтобы не получить просто последний ключ, т.к. далее будет использоваться реальное значение
+				}else unset($site_action_type); //чтобы не получить просто последний ключ, т.к. далее будет использоваться реальное значение
 			}
-			if (!$got_collection_id&&JRequest::getVar('collection_id')) 
-				$got_collection_id=JRequest::getVar('collection_id');
-			//сравнить сессии для незаавторизованного юзера:
+			//установить принадлежность коллекции юзеру:
 			if ($got_collection_id){ 
-				if ($user->get('guest')==1){ //echo "<div>GUEST</div>";
-					//получить массив id id всех коллекций гостя:this->guest_collections_ids
-					// ЦЕЛЕСООБРАЗНОСТЬ ПРОВЕРКИ ПОД ВОПРОСОМ, т.к. объект уже создаётся в модели:
-					if (!$uset=$model->arr_collections_ids) 
-						$uset=SCollection::getPrecustomerSet('collections_ids',$user);
-					if (is_array($uset)) //т.к. может вернуть id записи, а не массив
-						$this->guest_collections_ids=$uset;
-				}else{	//echo "<div>NOT GUEST!</div>";
-					//если не гость, проверим - его ли коллекция
-					if(SCollection::checkCollectionAccessory($got_collection_id,$user->get('id'))) $this->collection_of_user=1;
-					elseif (JRequest::getVar('site_deleted')!=$got_collection_id) $this->collection_of_user=-1;
-				}
+				//если не гость, проверим - его ли коллекция
+				if($model->checkCollectionAccessory($got_collection_id,$user)) $this->collection_of_user=1;
+				elseif (JRequest::getVar('site_deleted')!=$got_collection_id) $this->collection_of_user=-1;
 			}
 			$this->templatename=SSite::getCurrentTemplateName($app);
-			if ($site_done!='site_deleted') { //не удаляли сайт, будем получать файлы
-				//$idf=($site_done)? $site_done:'collection_id';
-				$this->order_files=($uset)? SFiles::requestUserFiles($uset):SFiles::getUserFiles('collections_ids',$user); //echo "<div class=''>order_files= ".$this->order_files."</div>"; die();
-			}
+			//НЕ АКТУАЛЬНО, Т.К. ИНФОРМАЦИЯ О ФАЙЛАХ ДОБАЛЕНА В МАССИВ КОЛЛЕКЦИЙ
+			//if ($site_action_type!='site_deleted') { //не удаляли сайт, будем получать файлы
+				//$this->order_files=($uset)? SFiles::requestUserFiles($uset):SFiles::getUserFiles('collections_ids',$user); 
+			//}
 		}
 		parent::display($tpl);
 	}
