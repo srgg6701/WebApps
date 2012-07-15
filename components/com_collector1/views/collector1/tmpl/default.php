@@ -14,7 +14,6 @@ $collector_table=$this->collector_table;
 $current_order_set=$this->current_order_set;
 $collections_ids_array=$this->collections_ids_array;
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
-
 <form name="form1" method="post" enctype="multipart/form-data" action="<?=JRoute::_($this->go_submit)?>" onSubmit="return checkRequired();">
     <div>
 <?	
@@ -34,7 +33,6 @@ endif;
 if (!$user) $user = JFactory::getUser();
 if ($user->get('guest')==1) :?>
     	<div class="h2" style="margin-top:0px;">Если вы уже <a href="<?=JRoute::_("index.php?option=com_users&view=registration")?>">зарегистрированы</a>,  <img src="<?
-        //require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
 		$this->templatename=SSite::getCurrentTemplateName($app);?>
 <?php echo $this->baseurl ?>/templates/<?php echo $this->templatename ?>/images/user24.png" width="22" height="22" hspace="4" border="0" align="absmiddle"><b><a href="<?=JRoute::_("index.php?option=com_users&view=login")?>">заавторизуйтесь</a>!</b></div>
       <div style="margin:8px 0 12px;">Это позволит вам получить доступ ко всем опциям системы.</div>

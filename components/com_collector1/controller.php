@@ -45,8 +45,7 @@ class Collector1Controller extends JController
 	 * Добавить заказ на выполнение отдельного компонента/(ов)
 	 */
 	function order(){		
-		$model=$this->getModel();
-		if($this->getModel('orders')->makeOrder($model)) { 
+		if($this->getModel('orders')->makeOrder($this->getModel())) { 
 			//die ('makeOrder is complited!');
 			$this->setRedirect(JRoute::_($this->go_page_common."&view=orders"));			
 		}else{

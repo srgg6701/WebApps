@@ -1,6 +1,5 @@
 <?php
 defined('_JEXEC') or die('Restricted access');
-echo "<h1 class='' style='background:yellow'>collector1ModelCollected</h1>";
 class collector1ModelCollected extends JModel
 {	
 	private $default_table='#__webapps_customer_site_options';

@@ -85,9 +85,11 @@ div#account_menu td.tdActive a{
 	color:#333 !important;
 }
 div.block_done{
-	padding:40px 65px 40px 50px; 
-	display:inline-block; 
+	display:block; 
 	border-radius:6px;
+}
+div.block_done > div:first-child {
+	padding:30px 65px 30px 30px;
 }
 .block_rounded{
 	padding:10px;
@@ -169,7 +171,7 @@ tr.center td{
 }
 .collector_head, .collected_head{
 	display:inline-block;
-	margin:0px 10px 8px 0px;
+	margin:20px 10px 8px 0px;
 	color:#060;
 }
 .collected_head{
@@ -189,6 +191,9 @@ div#com{
 div.offsetAuthorized{ /*тот же блок, что и div#com, но юзер заавторизован*/
 	/*margin-top:10px;
 	padding-top:0px;*/
+}
+div.collected-top {
+	margin-top:-30px;
 }
 div#com .item-page > h2, div#com .items-leading > h2, div#com .leading-0 > h2{ /*первый заголовок на странице*/
 	margin-top:0px;
@@ -715,7 +720,9 @@ div#mode_login button[type="submit"]{
 	padding-right:28px !important;
 	display:block;
 }
-
+div.moduletable_precustomer{
+	
+}
 #my_site_number{
 	padding-bottom:6px;
 	font-weight:bold;
@@ -936,6 +943,9 @@ tr.paddingTop10 td, tr.paddingTop10 th {
 table#tblCollected{
 	border: solid 1px #CCCCCC;
 }
+table#tblCollected, div.block_done {
+	width:700px;
+}
 table#tblCollector, table#tblCollected{
 	border-radius:6px 6px 0 0;
 	border-bottom:solid 1px #ccc;
@@ -960,6 +970,15 @@ table#tblCollector tr td +td {
 }
 table#tblCollector tr >td {
 	border-right:solid 1px #CCCCCC;
+}
+table.UnderCollected {
+	width:100%;
+}
+table.UnderCollected tr > th:first-child, table.UnderCollected tr > td:first-child {
+	padding-left:8px;
+}
+table.UnderCollected td, table.UnderCollected th{
+	padding:4px;
 }
 #tell_your_data{
 	padding:0px 20px 10px 10px;

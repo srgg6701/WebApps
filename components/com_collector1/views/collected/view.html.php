@@ -27,8 +27,7 @@ class Collector1ViewCollected extends JView
 	function display($tpl = NULL)
 	{	
 		$model=$this->getModel();
-		$this->collections_data_array=$model->collected();var_dump("<h1>collections_data_array:</h1><pre>",$this->collections_data_array,"</pre>");
-		
+		$this->collections_data_array=$model->collected();
 		//ЕСЛИ коллекции обнаружены:
 		if ($this->collections_data_array!==false){
 			$modelCollector=JModel::getInstance('collector1','Collector1Model');
