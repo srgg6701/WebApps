@@ -11,38 +11,35 @@
 // No direct access to this file
 defined('_JEXEC') or die; 
 $collector_table=$this->collector_table;
-//Collector1ModelCollector1::getDataForCollector();
 $current_order_set=$this->current_order_set;
-
+$collections_ids_array=$this->collections_ids_array;
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 
 <form name="form1" method="post" enctype="multipart/form-data" action="<?=JRoute::_($this->go_submit)?>" onSubmit="return checkRequired();">
     <div>
 <?	
 //больше одной коллекции у юзера:
-if (($j=count($collections_ids_array))>1){?>
-	
+if (($j=count($collections_ids_array))>1) :
+	if(in_array($this->jrequest_collection_id,$collections_ids_array)) {?>
 	<h3 class="collector_head">Выбранный сайт:</h3>   
+<?	}else require_once JPATH_COMPONENT.DS.'helpers/html/alien_site.php';?>    
 	<select name="selectSite" id="selectSite" onChange="loadCollection(this.options[this.selectedIndex].value);">
-<?	
-	for($i=0;$i<$j;$i++){?>
+	<?	for($i=0;$i<$j;$i++) :?>
 		<option value="<?=$collections_ids_array[$i]?>"<? if ($current_order_set['id']==$collections_ids_array[$i]){?> selected<? }?>>Сайт #<?=$collections_ids_array[$i]?></option>
-<? 	}?>    	
+	<? 	endfor;?>    	
 	</select>
     <br>	
 <?
-}
-if (!$user)
-	$user = JFactory::getUser();
-if ($user->get('guest')==1){?>
+endif;
+if (!$user) $user = JFactory::getUser();
+if ($user->get('guest')==1) :?>
     	<div class="h2" style="margin-top:0px;">Если вы уже <a href="<?=JRoute::_("index.php?option=com_users&view=registration")?>">зарегистрированы</a>,  <img src="<?
         //require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
 		$this->templatename=SSite::getCurrentTemplateName($app);?>
 <?php echo $this->baseurl ?>/templates/<?php echo $this->templatename ?>/images/user24.png" width="22" height="22" hspace="4" border="0" align="absmiddle"><b><a href="<?=JRoute::_("index.php?option=com_users&view=login")?>">заавторизуйтесь</a>!</b></div>
       <div style="margin:8px 0 12px;">Это позволит вам получить доступ ко всем опциям системы.</div>
       <hr size="2" color="#009900"><br>
-<? 	
-}?>    
+<? endif;?>    
     <a name="select_site_type" id="select_site_type"></a>
   <label for="select"><h3 class="collector_head"><?
 
@@ -59,23 +56,23 @@ if ($current_order_set){
   <select name="selectSiteType" id="selectSiteType" onChange="checkRows(this.options[this.selectedIndex].value);">
     <option<? 	if (!$current_order_set){?> selected<? }?> value="0">Выберите из списка</option>
 <?	$arrSitesTypes=Collector1ModelCollector1::getSitesTypes();
-	for($s=0,$st=count($arrSitesTypes);$s<$st;$s++){?>    
+	for($s=0,$st=count($arrSitesTypes);$s<$st;$s++) :?>    
     <option value="<?=$arrSitesTypes[$s]['id']?>"<?
-    	if ($current_order_set&&$current_order_set['site_type_id']==$arrSitesTypes[$s]['id']){
+    	if ($current_order_set&&$current_order_set['site_type_id']==$arrSitesTypes[$s]['id']) :
 			?> selected<? 
-		}?>><?=$arrSitesTypes[$s]['name_ru']?></option>
-<?	}
-	if ($test){?>
+		endif;?>><?=$arrSitesTypes[$s]['name_ru']?></option>
+<?	endfor;
+	if ($test) :?>
     <option value="corp">Корпоративный</option>
     <option value="private">Личный</option>
     <option value="shop">Интернет-магазин</option>
-<?	}?>    
+<?	endif;?>    
     <option value="-1">Другое</option>
   </select>
   </div>
 <div id="collector_wrapper" style="clear:both;">
 <table width="100%" cellpadding="8" cellspacing="0" id="tblCollector"<?	
-	if (!$firefox){?> onClick="checkPatchBoxes(this);"<? }?>>
+	if (!$firefox) :?> onClick="checkPatchBoxes(this);"<? endif;?>>
   <tr>
     <th style=" border-right: solid 1px #ccc;border-radius:4px 0 0 0;">&nbsp;</th>
     <th colspan="3" style="background:#FFFFFF;border-radius:0 4px 0 0;">Разделы</th>
@@ -84,39 +81,32 @@ if ($current_order_set){
       <th align="center" style="background:#F90; color:#FFFFFF;">Опции</th>
 	<?	//
 		$arrColumnsNames=Collector1ModelCollector1::getSidesDesc();
-		for($d=0,$dc=count($arrColumnsNames);$d<$dc;$d++){?>
+		for($d=0,$dc=count($arrColumnsNames);$d<$dc;$d++) :?>
     <th><? echo $arrColumnsNames[$d]['name_ru'].'<div class="skinny">['.$arrColumnsNames[$d]['site_side'].']</div>';?></th>
-    <?	}
-		/*if ($test){?>
-    <th>Публичный (front-end)</th>
-    <th>Личный кабинет</th>
-    <th>Административный (back-end)</th>
-    <?	}*/?>
+    <?	endfor;?>
   </tr>
 <?	//	
-	for($i=0,$j=count($collector_table);$i<$j;$i++){
+	for($i=0,$j=count($collector_table);$i<$j;$i++) :
 		
 		$data_row=$collector_table[$i];
 		
 		unset($shopClass);
 		
-		if ($data_row['site types']=='3') {
+		if ($data_row['site types']=='3') :
 			$shopClass="WebShop";
 			if ($current_order_set['site_type_id']==3)  $shopClass="hiddenShop";
-		}
+		endif;
 		$data_next=$collector_table[$i+1];
 		$data_prev=$collector_table[$i-1];
 		if ( $i && $data_row['name_ru'] &&
 			 ( !$data_prev['name_ru'] || $data_prev['name_ru'] != $data_row['name_ru'] )
-		   ){
+		   ) :
 			
 			if ($data_row['name_ru']!=NULL) $group_stat='start';?>	
-  <tr<?
-  	if ($shopClass) {?> class="<?=$shopClass?>"<? } 
-    ?>>
+  <tr<? if ($shopClass) :?> class="<?=$shopClass?>"<? endif; ?>>
     <td colspan="4" class="joined"><?=$data_row['name_ru']?></td>
   </tr>
-  <?	}?>
+  <?	endif; ?>
   <tr class="<? echo $shopClass;
   		//назначить стиль строке начала новой группы:
   		if ( 
@@ -166,7 +156,7 @@ if ($current_order_set){
     <?  }
 		if ($group_stat=='end') $group_stat='finish';?>
   </tr>
-<?	}?>
+<?	endfor;?>
   <tr>
     <td colspan="4" style="padding-right:20px;"><div style="padding-left:6px">Краткое описание (опционально):</div>
       <textarea rows="5" style="margin-top:6px; display:block;" class="widthFull" name="xtra" id="xtra"><?=$current_order_set['xtra']?></textarea></td>
@@ -191,15 +181,14 @@ if ($current_order_set){
 <table cellpadding="8" cellspacing="0">
   <tr>
   	<td>
-<?	//require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
-	$arrSMSs=SCollection::setCMStypes();?>    
+<?	$arrSMSs=SCollection::setCMStypes();?>    
 <h4 style="margin-bottom:4px;">Выберите движок:</h4>
     <div>(вы можете выбрать несколько возможных вариантов)</div>
     <br>
       <label>
         <input type="radio" name="choose_engine" value="<?=$arrSMSs[0][0];//take_ready?>" id="choose_engine_1" onClick="manageEnginesChoice(this);"<?
         
-		if ($current_order_set['engine_type_choice_id']==1) {?> checked<? }
+		if ($current_order_set['engine_type_choice_id']==1) :?> checked<? endif;
 		
 		?>><?=$arrSMSs[0][1];//Готовая CMS?></label> &nbsp;
       <label>
@@ -227,20 +216,15 @@ if ($current_order_set){
 <?	
 	$CMS=Collector1ModelCollector1::tempCMSlist();
 	$i=0;	
-	$engines_set=explode(',',$current_order_set['engines']);
-	//var_dump("<h1>engines_set:</h1><pre>",$engines_set,"</pre>");
-	foreach($CMS as $key=>$cms){?>
-	<label><div<? 	
-	
-		if (in_array($cms,$engines_set)){
+	$engines_set=explode(',',$current_order_set['engines']); //var_dump("<h1>engines_set:</h1><pre>",$engines_set,"</pre>");
+	foreach($CMS as $key=>$cms) :?>
+	<label>
+    	<div<? if (in_array($cms,$engines_set)) : ?> style="background-color:#f90;"<? endif;?>>
+    		<input name="cms_name_<?=$i?>" type="checkbox" value="<?=$i?>"<? 
 		
-			?> style="background-color:#f90;"<? 
-	
-		}?>><input name="cms_name_<?=$i?>" type="checkbox" value="<?=$i?>"<? 
-		
-		if (in_array($cms,$engines_set)){?> checked<? }?>><?=$cms?></div></label>
+		if (in_array($cms,$engines_set)) :?> checked<? endif;?>><?=$cms?></div></label>
 <?		$i++;
-	}?>        
+	endforeach;?>        
 	</td>  
   </tr>
 </table>

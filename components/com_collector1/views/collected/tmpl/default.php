@@ -10,33 +10,39 @@
  */
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
-$user = JFactory::getUser();?>
+if (!$user) $user = JFactory::getUser();
+if (!$this->templatename) $this->templatename=SSite::getCurrentTemplateName($app);
+$collections_data_array=$this->collections_data_array;?>
 <div class="item-page">
 <?
-if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) //заавторизован 
-	 || !empty($this->guest_collections_ids) //коллекция создана текущим гостем (проверяется по его емэйлу)
-   ) {
+
+echo "<hr>myTestHelper=$myTestHelper</hr>";
+//if ( ($user->get('guest')!=1 //заавторизован
+//	 && $this->user_collection_id!=-1) //не удалён 
+//	 || !empty($this->guest_collections_ids) //коллекция создана текущим гостем (проверяется по его емэйлу)
+//   ) {
 	//
-	$collections_data_array=$this->collections_data_array;
-	//
-	$done=$this->done;
-	if (!empty($done)){?>
+	//если производили какие-либо действия - добавляли/изменяли/удаляли:
+	$done=$this->done; 
+	if (!empty($done)){
+		if (is_array($collections_data_array)) {?>
     <div class="block_done" style="background:<?=$done[1]?>; margin-left:-6px;">
     	<img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
 	?>/images/signs/Flag_<?=$done[2]?>.png" width="24" height="24" hspace="6" align="baseline" style="margin-bottom:-2px;"><?=$done[0]?>
     </div>
+<?		}?>    
     <br>
 	<br>
 <?	}else{
 		$margin_minus='-';
 		require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
-	
-		if ($this->collection_of_user>0){?><h3 class="collected_head">Выбранные вами опции:</h3><? }
+			?><h3 class="collected_head">Выбранные вами опции:</h3><? 
 	}
-	if (!$this->collection_of_user||$this->collection_of_user>0||!empty($this->guest_collections_ids)){
-		if(!$this->collection_of_user){?>
+	//if (!$this->user_collection_id||$this->user_collection_id>0||!empty($this->guest_collections_ids)){
+	if (count($collections_data_array)) {
+		//if(!$this->user_collection_id) :?>
         <h3 class="collected_head">Текущие собранные сайты</h3>
-    <? 	}?>
+    <? 	//endif; ?>
 <table cellpadding="8" cellspacing="0" id="tblCollected">
   <tr>
     <th>Опция</th>
@@ -46,7 +52,7 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) //заавтор�
 	
 	$arrRightOptions=array('site_type_id','engine_type_choice_id','engines','options_array','xtra'); 
 	
-	if (!empty($collections_data_array)){
+	if (!empty($collections_data_array)) :
 		
 		$arrSMSs=SCollection::setCMStypes();
 		$j=count($collections_data_array);
@@ -54,15 +60,15 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) //заавтор�
 		//$this->order_files; 
 		//
 		$fl=0;
-		foreach ($collections_data_array as $collection_id=>$collection_set){
+		foreach ($collections_data_array as $collection_id=>$collection_set) :
 			$collection_id=$collection_set['id'];?>
           <tr>
           	<td colspan="2" id="my_site_number">Сайт # <?=$collection_id?></td>
           </tr>
 		 <? 
-			foreach($collection_set as $option=>$data){ 
+			foreach($collection_set as $option=>$data) : 
 				
-				if (in_array($option,$arrRightOptions)){
+				if (in_array($option,$arrRightOptions)) :
 						
 						switch ($option)  { 
 								
@@ -137,10 +143,9 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) //заавтор�
 						}
 						echo $data; 
 					}
-				}
-				?></td>
+				endif;?></td>
 			  </tr>
-	<?php 	}?>
+	<?php 	endforeach;?>
     	  <tr>
             <td valign="top" align="right" class="bold"><div style="display:inline-block;">Файлы</div> <img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
 	?>/images/folder.png" width="32" height="32" style="margin-left:10px; margin-top:-6px;" align="right"></td>
@@ -162,7 +167,7 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) //заавтор�
           <tr>
           	<td colspan="2" class="bgOverWhite linkButtons">
             	<br><a href="<?
-			if (!empty($this->guest_collections_ids)){
+			if ($user->get('guest')==1){
 				?>javascript:void();" onclick="askToSignUp();<?	
 			}else{
                 echo JRoute::_("index.php?option=com_collector1&view=collector1&id=1&collection_id=".$collection_id);
@@ -172,14 +177,13 @@ if ( ($user->get('guest')!=1 && $this->collection_of_user!=-1) //заавтор�
 			</td>
           </tr>
 <?			$fl++;
-		}
-	}?>
+		endforeach;
+	endif;?>
 </table>
 <?	
-}else{?>
+	}else{?>
 		<h3 class="collected_head">Сайтов нет</h3>
-<? 	
-}?>
+<? 	}?>
 <div class="button-green" style="margin-left:6px;">
     <a href="<?=JRoute::_("index.php?option=com_collector1&view=collector1");//view не убирать!?>">Добавить сайт...</a>
 </div>
@@ -191,13 +195,12 @@ function askToSignUp(){
 </script>
 <?
 
-}else{
+
+//}else{
 	
-	if (!$this->templatename) {
-			//require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
-			$this->templatename=SSite::getCurrentTemplateName($app);
-	} 
-	if (!JRequest::getVar('site_deleted')) $forbidden=true; //иначе получается абсурд - "не ваш сайт", который был удалён.
+	/*if (!JRequest::getVar('site_deleted')) {?><h4>$forbidden=true;</h4><?
+		$forbidden=true; //иначе получается абсурд - "не ваш сайт", который был удалён.
+	}*/
 	require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
-}?>
+//}?>
 </div>

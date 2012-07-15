@@ -17,6 +17,7 @@ class Collector1ModelCollector1 extends JModel
 {
 	protected $_action;
 	protected $_item;
+	//public $collections_ids_array; //id id 
 	//public $_customer_status; //статус юзера как юзера и заказчика/предзаказчика
 	/**
 	 * Конструктор
@@ -72,6 +73,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	}
 	/**
 	 * Удалить коллекцию
+	 * @ collections
 	 */
 	function deleteCollectionData($collection_id) {
 		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
@@ -80,6 +82,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	}
 	/**
 	 * Удалить коллекцию из набора предзаказчика
+	 * @ collections
 	 */
 	function deletePreCollection($collection_id) {
 		$query="SELECT id, collections_ids FROM #__webapps_precustomers WHERE $collection_id IN (collections_ids)";
@@ -153,7 +156,8 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 		return $this->_item;
 	}
 	/**
-	 * Получить коллекцию по её id
+	 * Получить данные коллекции по её id
+	 * @ collections, user, model
 	 */
 	function getCollection($collection_id,$user = false, $db = false){	
 		//SDebug::dOutput("collection_id= $collection_id",'h1');
@@ -307,6 +311,7 @@ FROM #__webapps_site_types ORDER BY id DESC";
 	}
 	/**
 	 * Подготовить данные для добавления/обновления таблицы Коллекций
+	 * @ collections
 	 */
 	function prepareCollectionDataSet($updated_id=false) {
 		$post_collection=JRequest::get('post');
@@ -454,6 +459,7 @@ FROM #__webapps_site_types ORDER BY id DESC";
 	} 
 	/**
 	 * Обновить данные коллекции
+	 * @ collections
 	 */
 	function updateCollectionData($collection_id) {
 		$table=$this->prepareCollectionDataSet($collection_id); 

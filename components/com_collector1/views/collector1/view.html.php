@@ -19,11 +19,11 @@ class Collector1ViewCollector1 extends JView
 {
 	protected $state;
 	protected $item;
-	protected $current_order_set;
-	protected $collections_ids_array=array(); //массив id id коллекций заказчика
+	protected $current_order_set; //набор опций текущей коллекции
+	protected $jrequest_collection_id; //collection id, переданный, как параметр URL
+	protected $collections_ids_array; //массив id id коллекций заказчика, нужен для построения списка ранее собранных сайтов
 	protected $go_submit='index.php?option=com_collector1&task='; //заготовка для URL формы
 	public $go_signup="index.php?option=com_users&view=registration&task=fill_precustomer_data"; //ссылка на создание коллекции с заполнением данных предзаказчика
-	protected $guest_collections_ids; //id id коллекций гостя
 	protected $templatename; //имя шаблона
 	protected $collector_table; //данные для построения таблицы коллектора
 	/**
@@ -40,24 +40,31 @@ class Collector1ViewCollector1 extends JView
 		$state		= $this->get('State');
 		$item		= $this->get('Item');
 		$user = JFactory::getUser(); 
+		//нужно для формирования списка коллекций в таблице для выбора и быстрой загрузки:
+		//$modelCollected=JModel::getInstance('Collected','Collector1Model');
+		//$collections_ids_array=$modelCollected->collections_ids_array;
+		//if (empty($collections_ids_array))  //
+			//$collections_ids_array=$modelCollected->getUserCollectionsIds($user); 
+		$this->collections_ids_array=$collections_ids_array=SCollection::getCurrentSetArray('collections_ids');
 		$model=$this->getModel();
 		//получим данные переданной коллекции заказчика:
-		$current_set_id=JRequest::getVar('collection_id');
-		if ($current_set_id) {
+		$current_set_id=$this->jrequest_collection_id=JRequest::getVar('collection_id');
+		//collection id, переданный, как параметр URL и коллекция принадлежит текущему юзеру:
+		if ( $current_set_id
+			 && is_array($collections_ids_array) //будет NULL, если незаавторизованный юзер ещё не вводил свой емэйл
+			 && in_array($current_set_id,$collections_ids_array)
+		   ) { 
 			$this->go_submit.="update&collection_id=".$current_set_id;		
 			$this->current_order_set=$model->getCollection($current_set_id,$user);
-			//нужно для формирования списка коллекций в таблице для выбора и быстрой загрузки:
-			if (!($this->collections_ids_array=$model->collections_ids_array)) 
-				$this->collections_ids_array=$model->getCollectionsIds($user->get('email'));
 		}else{
 			$this->go_submit.="collect";
 		}//var_dump("<h1>user:</h1><pre>",$user,"</pre>"); die();
 		//проверим, создавал ли незаавторизованный юзер сайты в течение сессии:
-		if ($user->get('guest')==1){
-			$aset=SCollection::getPrecustomerSet('collections_ids',$user);
-			if (is_array($aset)) //т.к. может вернуть id записи, а не массив
-				$this->guest_collections_ids=$aset; //получает строку из ячейки коллекций/заказов, значения разделены запятыми
-		}
+		//if ($user->get('guest')==1){
+			//$aset=SCollection::getPrecustomerSet('collections_ids',$user);
+			//if (is_array($aset)) //т.к. может вернуть id записи, а не массив
+				//$this->guest_collections_ids=$aset; //получает строку из ячейки коллекций/заказов, значения разделены запятыми
+		//}
 		//должно быть именно здесь, чтобы получить все установленные значения свойств класса:
 		//require_once JPATH_COMPONENT.DS.'helpers/html/your_sites.php';
 		//получает HTML из контроллера (?), в случае, если он также вызывает у себя parent::display()
