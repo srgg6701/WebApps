@@ -587,6 +587,9 @@ div#main{
 	text-align:left !important;
 	height:100%;
 }
+div.item-page.make-order {
+	padding-right:10px;
+}
 .marginLeft0{
 	margin-left:0 !important;
 }
@@ -798,6 +801,12 @@ div.button-green a
 	margin:0 10px 6px 0px;
 	list-style-type:square;
 	font-weight: bolder;
+}
+div.precustomer_obj_info{
+	display:inline-block; 
+	padding:16px; 
+	float:right; 
+	margin-right:10px;
 }
 button.validate:hover, a.button:hover, button.button:hover{
 	background:#FEBE38;
