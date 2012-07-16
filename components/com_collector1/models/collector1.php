@@ -33,8 +33,7 @@ class Collector1ModelCollector1 extends JModel
 		$table=$this->prepareCollectionDataSet(); //подготовить данные для добавления новой коллекции
 		if (!$table) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareCollectionDataSet()");		
 		SErrors::afterTable($table); //добавить данные в dnior_webapps_customer_site_options
-		$default_table=SCollection::getDefaultTable(); 
-		//echo "<div class=''>default_table= ".$default_table."</div>";
+		$default_table=SCollection::getDefaultTable(); //echo "<div class=''>default_table= ".$default_table."</div>";
 		$added_record_id=SData::getLastId($default_table);
 		if(!$added_record_id)
 			JMail::sendErrorMess('Не добавлена временная коллекция опций сайта для незарегистрированного заказачика.',"Добавление временной коллекции.");
@@ -44,8 +43,7 @@ class Collector1ModelCollector1 extends JModel
 			$current_collection_object=($customer_status=="precustomer")? 'new':false;
 			//ВНИМАНИЕ! Если в течение сессии юзер уже делал заказ, его статус будет precustomer
 			$show_debug=true;
-			if ($show_debug) SDebug::alertDebugInfo("customer_status= $customer_status");
-			//echo "<div>customer_status= $customer_status</div>";
+			if ($show_debug) SDebug::alertDebugInfo("customer_status= $customer_status"); //echo "<div>customer_status= $customer_status</div>";
 			SUser::handlePrecustomersTable( //добавить запись в таблицу предзаказчиков
 						$customer_status,
 						$added_record_id, 	//новая запись в таблице коллекций
@@ -55,7 +53,6 @@ class Collector1ModelCollector1 extends JModel
 					  );
 		}
 		if (!SFiles::handleFilesUploading('s',$added_record_id)) JMail::sendErrorMess('Не выполнен метод загрузки файлов (не возвращено true).',"Загрузка файлов.");
-
 		return $added_record_id; //id последней записи нужен для редиректа, устанавливаемом в контроллере
 	}
 	/**
@@ -159,11 +156,10 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	 * Получить данные коллекции по её id
 	 * @ collections, user, model
 	 */
-	function getCollection($collection_id,$user = false, $db = false){	
+	function getCollectionDataArray($collection_id,$user = false, $db = false){	
 		//SDebug::dOutput("collection_id= $collection_id",'h1');
 		if (!$user) $user = JFactory::getUser();
 		if ($user->get('guest')!=1||$user->get('email')) { 
-			//$query='SELECT `id`,`site_type_id`,`engine_type_choice_id`,`engines_ids`,`options_array`,`xtra` FROM '.self::setDefaultTable().' WHERE id = ' . (int)$collection_id;
 			$query="SELECT #__webapps_customer_site_options.id,
        `site_type_id`,
        `engine_type_choice_id`,
@@ -206,12 +202,9 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 				}
 			}
 			$current_order_set['options_array']=$arrCheckedMap;
-			//require_once JPATH_COMPONENT.'/models/collected.php';
 			$modelCMS=JModel::getInstance('CMS','collector1Model');
-			//new collector1ModelCollected;
 			switch ($current_order_set['engine_type_choice_id'])  { 
 				case "1":
-					//$current_order_set['engines']=collector1ModelCollected::get_cms_names($current_order_set['engines_ids']);
 					$current_order_set['engines']=$modelCMS->get_cms_names($current_order_set['engines_ids']);
 						break;
 				case "2": //разработать собственный
@@ -219,13 +212,15 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 					$current_order_set['engines']=$arrSMSs[1][1];
 						break;
 				case "3":
-					//$current_order_set['engines']=collector1ModelCollected::get_cms_own_name($collection_id);
 					$current_order_set['engines']=$modelCMS->get_cms_own_name($collection_id);
 						break;
 			}
-			//$current_order_set['site_type_name']=collector1ModelCollected::get_sites_types($current_order_set['site_type_id']);
 			$current_order_set['site_type_name']=$this->get_sites_types($current_order_set['site_type_id']);
-			//var_dump("<h1>current_order_set:</h1><pre>",$current_order_set,"</pre>");die();
+			if ($filenames=$current_order_set['files_names']) {
+				$filenames=explode(":",$filenames); //convert to array
+				$current_order_set['files_names']=$filenames;
+			}
+			//SDebug::showDebugContent($current_order_set,'current_order_set');
 			return $current_order_set; 
 		}else return false;
 	}	

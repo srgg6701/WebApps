@@ -12,7 +12,7 @@
 defined('_JEXEC') or die('Restricted access');
 if (!$user) $user = JFactory::getUser();
 if (!$this->templatename) $this->templatename=SSite::getCurrentTemplateName($app);
-$collections_data_array=$this->collections_data_array;?>
+$collections_data_array=$this->collections_data_array; ?>
 <div class="item-page">
 	<div class="collected-top">
 <?	//если производили какие-либо действия - добавляли/изменяли/удаляли:
@@ -33,11 +33,9 @@ $collections_data_array=$this->collections_data_array;?>
 		require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
 			/*?><h3 class="collected_head">Выбранные вами опции:</h3><? */
 	}
-	//if (!$this->user_collection_id||$this->user_collection_id>0||!empty($this->guest_collections_ids)){
-	if (count($collections_data_array)) {
-		//if(!$this->user_collection_id) :?>
+	if (count($collections_data_array)) {?>
         <h3 class="collected_head">Текущие собранные сайты:</h3>
-    <? 	//endif; ?>
+    <? 	//SDebug::showDebugContent($collections_data_array,'collections_data_array');?>
 <table cellpadding="8" cellspacing="0" id="tblCollected">
   <tr>
     <th>Опция</th>
@@ -50,7 +48,6 @@ $collections_data_array=$this->collections_data_array;?>
 	if (!empty($collections_data_array)) :
 		$arrSMSs=SCollection::setCMStypes();
 		$j=count($collections_data_array);
-		$arrFiles=$collections_data_array['files_names'];
 		$fl=0;
 		foreach ($collections_data_array as $collection_id=>$collection_set) :
 			$collection_id=$collection_set['id'];?>
@@ -132,16 +129,15 @@ $collections_data_array=$this->collections_data_array;?>
     	  <tr>
             <td valign="top" align="right" class="bold"><div style="display:inline-block;">Файлы</div> <img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
 	?>/images/folder.png" width="32" height="32" style="margin-left:10px; margin-top:-6px;" align="right"></td>
-            <td valign="top"><?
-            
-			if (is_array($arrFiles)){ //может быть false
-				$filenames=explode(':',$arrFiles[$fl]['files_names']);
+            <td valign="top"><? //SDebug::showDebugContent($collection_set,'collection_set');
+			$filenames=$collection_set['files_names'];
+			if (is_array($filenames)){ //может быть false
 				for($i=0,$j=count($filenames);$i<$j;$i++):
 					$filename=$filenames[$i];
-					//var_dump("<h1>array:</h1><pre>",$array,"</pre>");
 					$findex=substr($filename,0,strpos($filename,'.'));
 					$ext=substr($filename,strrpos($filename,'.'));?>
-                <div><a href="<? echo $this->baseurl.'/components/com_collector1/files/'.$collection_id.'.'.$findex.$ext?>"><?=$collection_id.'.'.$filename?></a></div>
+                <div><a href="<? echo $this->baseurl.'/components/com_collector1/files/'.$collection_id.'.'.$findex.$ext?>"><?=$collection_id.'.'.$filename?></a> <a href="#" onClick="return deleteFile(this);" class="txtRed"><img title="Удалить файл..." align="absmiddle" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
+	?>/images/commands/delete.gif" width="13" height="13" style="margin-bottom:4px;"></a></div>
 			<?		echo "\n";/**/
                 endfor;
 			}else{?>Файлов нет.
@@ -174,13 +170,27 @@ function askToSignUp(){
 	if (confirm('Чтобы изменить набор опций любого своего сайта, вам нужно добавить к своим данным логин и пароль.\nХотите сделать это сейчас?'))
 		location.href='<?=$this->go_signup?>';
 }
+function deleteFile(dlink){
+	var filename=dlink.parentNode.getElementsByTagName('A').item(0).innerHTML;
+	if(confirm('Подтверждаете удаление файла '+filename+'?')) {
+		try{
+			//go to script
+			// Адрес текущей страницы
+			var url = "<?=JRoute::_("index.php?option=com_ajax&format=raw&action=delete&object=file&name=");//view не убирать!?>"+filename;
+			// Объект XMLHttpRequest
+			var request = getXmlHttpRequest();
+			// Запрос на сервер
+			request.open("GET", url, false);
+			request.send(null);
+			// Чтение ответа
+			alert(request.responseText);
+		}catch(e){
+			alert(e.message);
+		}
+	}
+	return false;
+}
 </script>
-<? //}else{
-	
-	/*if (!JRequest::getVar('site_deleted')) {?><h4>$forbidden=true;</h4><?
-		$forbidden=true; //иначе получается абсурд - "не ваш сайт", который был удалён.
-	}*/
-	require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
-//}?>
+<? 	require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';?>
   </div>
 </div>

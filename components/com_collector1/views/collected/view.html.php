@@ -16,7 +16,6 @@ class Collector1ViewCollected extends JView
 {	/* возвращает всё ($this)*/
 	protected $_action; //тип выполненного действия
 	protected $collections_data_array; //то, что собрал юзер - массив ВСЕХ данных ВСЕХ коллекций. 
-	//public $collections_ids_array; //НУЖЕН для извлечения данных helper'ом модуля, собирающего данные о коллекциях предзаказчика! 
 	protected $jrequest_collection_id; //collection id, переданный, как параметр URL
 	protected $options_names;
 	protected $done=array();
@@ -27,7 +26,8 @@ class Collector1ViewCollected extends JView
 	function display($tpl = NULL)
 	{	
 		$model=$this->getModel();
-		$this->collections_data_array=$model->collected();
+		$this->collections_data_array=$model->collected(); 
+		//SDebug::showDebugContent($this->collections_data_array,'this->collections_data_array');
 		//ЕСЛИ коллекции обнаружены:
 		if ($this->collections_data_array!==false){
 			$modelCollector=JModel::getInstance('collector1','Collector1Model');

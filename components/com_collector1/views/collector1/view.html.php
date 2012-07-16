@@ -51,7 +51,7 @@ class Collector1ViewCollector1 extends JView
 			 && in_array($current_set_id,$collections_ids_array)
 		   ) { 
 			$this->go_submit.="update&collection_id=".$current_set_id;		
-			$this->current_order_set=$model->getCollection($current_set_id,$user);
+			$this->current_order_set=$model->getCollectionDataArray($current_set_id,$user);
 		}else{
 			$this->go_submit.="collect";
 		}//var_dump("<h1>user:</h1><pre>",$user,"</pre>"); die();

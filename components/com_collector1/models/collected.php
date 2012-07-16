@@ -4,8 +4,9 @@ class collector1ModelCollected extends JModel
 {	
 	private $default_table='#__webapps_customer_site_options';
 	protected $precustomers_table='#__webapps_precustomers';
-	//public $collections_ids_array; //id id // public - потому что будет изменяться другим методом
-	
+	/**
+	 *
+	 */	
 	function __construct(){
 		parent::__construct();
 		$this->db=JFactory::getDBO();
@@ -30,10 +31,9 @@ class collector1ModelCollected extends JModel
 			$collections_data_array=array(); 
 			for ($i=0,$j=count($arrCollectionsIds);$i<$j;$i++){
 				$collection_id=$arrCollectionsIds[$i]; 
-				$collections_data_array[$collection_id]=$modelCollector->getCollection($collection_id/*,$user*/); //все данные коллекции
-				//echo "<div class=''>collections_data_array[$collection_id]= ".$collections_data_array[$collection_id]."</div>";
+				$collections_data_array[$collection_id]=$modelCollector->getCollectionDataArray($collection_id); //все данные коллекции
+				//SDebug::showDebugContent($collections_data_array,'collections_data_array');
 				if ($collections_data_array[$collection_id]===false) return false;
-				//var_dump("<h1>collections_data_array[$collection_id]:</h1><pre>",$collections_data_array[$collection_id],"</pre>");
 				unset($collections_data_array[$collection_id]['engines_ids']);
 			}
 		}
@@ -62,23 +62,6 @@ class collector1ModelCollected extends JModel
 		$collections_ids_array=$db->loadResultArray();
 		$this->collections_ids_array=$collections_ids_array; //будет извлекаться также helper'ом предзаказчика
 		*return $collections_ids_array; 
-	}*/
-	/**
-	 * Получить массив id id КОЛЛЕКЦИЙ заказчика/предзаказчика
-	 * @ customer, precustomer, user, set
-	 */
-	/*function getUserCollectionsIds( $user = false, 
-									$db = false
-							  	  ){ 
-		if (!$user) $user = JFactory::getUser();
-		if (!$this->collections_ids_array){
-			if ($user->get('guest')==1){ 	//returns string
-				SCollection::getPrecustomerSet('collections_ids',$user,true);
-			}else{ //returns string
-				SCollection::getUserSet('collections_ids',$user->get('id'));
-			}
-		}
-		return $this->collections_ids_array;
 	}*/
 }
 ?>
