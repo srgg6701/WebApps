@@ -259,7 +259,7 @@ table.customerAccount td div{
 	color:#000;
 }
 table.customerAccount tr{
-	background:#CCC;
+	/*background:#CCC;*/
 }
 div.div_left, div.div_right{
 	text-align:left;
@@ -804,7 +804,7 @@ div.button-green a
 }
 div.precustomer_obj_info{
 	display:inline-block; 
-	padding:16px; 
+	padding:14px; 
 	float:right; 
 	margin-right:10px;
 }
@@ -963,7 +963,13 @@ table#tblCollector th, table#tblCollected th {
 	background:#efefef;
 	/*border-color:#CCCCCC #999999 #999999 #CCCCCC;*/
 }
-table#tblCollector tr:hover, table#tblCollected tr:hover, #my_site_number {
+table.customerAccount tr[id^="header-row"]{
+	background:#FFF;
+}
+table#tblCollector tr:hover, 
+table#tblCollected tr:hover, 
+#my_site_number, 
+table.customerAccount tr[id^="header-row"]:hover {
 	background:#E4F9DD;
 }
 table#tblCollector tr td, table#tblCollected tr td{

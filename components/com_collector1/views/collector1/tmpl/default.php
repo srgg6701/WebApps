@@ -13,43 +13,44 @@ defined('_JEXEC') or die;
 $collector_table=$this->collector_table;
 $current_order_set=$this->current_order_set;
 $collections_ids_array=$this->collections_ids_array;
+if (!$user) $user = JFactory::getUser();
 if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
 <form name="form1" method="post" enctype="multipart/form-data" action="<?=JRoute::_($this->go_submit)?>" onSubmit="return checkRequired();">
     <div>
 <?	
-//больше одной коллекции у юзера:
-if (($j=count($collections_ids_array))>1) :
-	if(in_array($this->jrequest_collection_id,$collections_ids_array)) {?>
-	<h3 class="collector_head">Выбранный сайт:</h3>   
-<?	}else require_once JPATH_COMPONENT.DS.'helpers/html/alien_site.php';?>    
-	<select name="selectSite" id="selectSite" onChange="loadCollection(this.options[this.selectedIndex].value);">
-	<?	for($i=0;$i<$j;$i++) :?>
-		<option value="<?=$collections_ids_array[$i]?>"<? if ($current_order_set['id']==$collections_ids_array[$i]){?> selected<? }?>>Сайт #<?=$collections_ids_array[$i]?></option>
-	<? 	endfor;?>    	
-	</select>
-    <br>	
-<?
-endif;
-if (!$user) $user = JFactory::getUser();
+$jrequest_collection_id=$this->jrequest_collection_id;
 if ($user->get('guest')==1) :?>
     	<div class="h2" style="margin-top:0px;">Если вы уже <a href="<?=JRoute::_("index.php?option=com_users&view=registration")?>">зарегистрированы</a>,  <img src="<?
 		$this->templatename=SSite::getCurrentTemplateName($app);?>
 <?php echo $this->baseurl ?>/templates/<?php echo $this->templatename ?>/images/user24.png" width="22" height="22" hspace="4" border="0" align="absmiddle"><b><a href="<?=JRoute::_("index.php?option=com_users&view=login")?>">заавторизуйтесь</a>!</b></div>
       <div style="margin:8px 0 12px;">Это позволит вам получить доступ ко всем опциям системы.</div>
-      <hr size="2" color="#009900"><br>
-<? endif;?>    
-    <a name="select_site_type" id="select_site_type"></a>
-  <label for="select"><h3 class="collector_head"><?
-
+      <hr size="2" color="#009900">
+      <? endif;?>
+	<h3 class="collector_head"><?
+if ($jrequest_collection_id) :	
+	//больше одной коллекции у юзера:
+	if (($j=count($collections_ids_array))>1) :
+		if(in_array($jrequest_collection_id,$collections_ids_array)) {?>Выбранный сайт:<?   
+		}
+		/*if (!$jrequest_collection_id){?>Текущие сайты:<? }*/?>    
+	<select name="selectSite" id="selectSite" onChange="loadCollection(this.options[this.selectedIndex].value);">
+		<?	if(!$jrequest_collection_id) :?><option>-Выберите-</option><? endif;
+            for($i=0;$i<$j;$i++) :?>
+		<option value="<?=$collections_ids_array[$i]?>"<? if ($current_order_set['id']==$collections_ids_array[$i]){?> selected<? 	}?>>Сайт #<?=$collections_ids_array[$i]?></option>
+		<? 	endfor;?>    	
+	</select>
+	&nbsp;
+<?	endif;
+    //получили id коллекции в URLно он отсутствует в коллекции юзера:
+    if ($jrequest_collection_id&&!in_array($jrequest_collection_id,$collections_ids_array)) :
+        require_once JPATH_COMPONENT.DS.'helpers/html/alien_site.php';
+    endif;
+endif;?><a name="select_site_type" id="select_site_type"></a><?
 if ($current_order_set){
-	
-	?>Выбранный вами тип сайта: <? 
-
+	?>Выбранный  тип сайта:<? 
 }else{
-	
 	?>Какой тип сайта вам нужен?<? 
-
-}			?></h3></label>
+}?>
   
   <select name="selectSiteType" id="selectSiteType" onChange="checkRows(this.options[this.selectedIndex].value);">
     <option<? 	if (!$current_order_set){?> selected<? }?> value="0">Выберите из списка</option>
@@ -67,6 +68,7 @@ if ($current_order_set){
 <?	endif;?>    
     <option value="-1">Другое</option>
   </select>
+  </h3>
   </div>
 <div id="collector_wrapper" style="clear:both;">
 <table width="100%" cellpadding="8" cellspacing="0" id="tblCollector"<?	

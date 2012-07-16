@@ -130,18 +130,11 @@ $collections_data_array=$this->collections_data_array; ?>
             <td valign="top" align="right" class="bold"><div style="display:inline-block;">Файлы</div> <img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
 	?>/images/folder.png" width="32" height="32" style="margin-left:10px; margin-top:-6px;" align="right"></td>
             <td valign="top"><? //SDebug::showDebugContent($collection_set,'collection_set');
-			$filenames=$collection_set['files_names'];
-			if (is_array($filenames)){ //может быть false
-				for($i=0,$j=count($filenames);$i<$j;$i++):
-					$filename=$filenames[$i];
-					$findex=substr($filename,0,strpos($filename,'.'));
-					$ext=substr($filename,strrpos($filename,'.'));?>
-                <div><a href="<? echo $this->baseurl.'/components/com_collector1/files/'.$collection_id.'.'.$findex.$ext?>"><?=$collection_id.'.'.$filename?></a> <a href="#" onClick="return deleteFile(this);" class="txtRed"><img title="Удалить файл..." align="absmiddle" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
-	?>/images/commands/delete.gif" width="13" height="13" style="margin-bottom:4px;"></a></div>
-			<?		echo "\n";/**/
-                endfor;
-			}else{?>Файлов нет.
-		<?	}?></td>
+			SFiles::showFiles( $collection_set['files_names'],
+							   $collection_id,
+							   $this->templatename,
+							   $this->baseurl //may not be
+					  		 );?></td>
           </tr>
           <tr>
           	<td colspan="2" class="bgOverWhite linkButtons">
@@ -169,26 +162,6 @@ $collections_data_array=$this->collections_data_array; ?>
 function askToSignUp(){
 	if (confirm('Чтобы изменить набор опций любого своего сайта, вам нужно добавить к своим данным логин и пароль.\nХотите сделать это сейчас?'))
 		location.href='<?=$this->go_signup?>';
-}
-function deleteFile(dlink){
-	var filename=dlink.parentNode.getElementsByTagName('A').item(0).innerHTML;
-	if(confirm('Подтверждаете удаление файла '+filename+'?')) {
-		try{
-			//go to script
-			// Адрес текущей страницы
-			var url = "<?=JRoute::_("index.php?option=com_ajax&format=raw&action=delete&object=file&name=");//view не убирать!?>"+filename;
-			// Объект XMLHttpRequest
-			var request = getXmlHttpRequest();
-			// Запрос на сервер
-			request.open("GET", url, false);
-			request.send(null);
-			// Чтение ответа
-			alert(request.responseText);
-		}catch(e){
-			alert(e.message);
-		}
-	}
-	return false;
 }
 </script>
 <? 	require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';?>
