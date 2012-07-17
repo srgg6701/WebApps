@@ -32,7 +32,7 @@ class Collector1ViewCollected extends JView
 		if ($this->collections_data_array!==false){
 			$modelCollector=JModel::getInstance('collector1','Collector1Model');
 			$this->get_options_names=$modelCollector->get_options_names();
-			$arrSiteActions=array('site_added' => array("Сайт добавлен","#CCF","blue"),
+			$arrSiteActions=array('site_added' => array("Сайт собран","#CCF","blue"),
 								  'site_deleted' => array("Сайт удалён","#FCC","red"),
 								  'site_updated' => array("Данные сайта изменены","#E4F9DD","green")	
 						  		 );

@@ -54,16 +54,7 @@ class Collector1ViewCollector1 extends JView
 			$this->current_order_set=$model->getCollectionDataArray($current_set_id,$user);
 		}else{
 			$this->go_submit.="collect";
-		}//var_dump("<h1>user:</h1><pre>",$user,"</pre>"); die();
-		//проверим, создавал ли незаавторизованный юзер сайты в течение сессии:
-		//if ($user->get('guest')==1){
-			//$aset=SCollection::getPrecustomerSet('collections_ids',$user);
-			//if (is_array($aset)) //т.к. может вернуть id записи, а не массив
-				//$this->guest_collections_ids=$aset; //получает строку из ячейки коллекций/заказов, значения разделены запятыми
-		//}
-		//должно быть именно здесь, чтобы получить все установленные значения свойств класса:
-		//require_once JPATH_COMPONENT.DS.'helpers/html/your_sites.php';
-		//получает HTML из контроллера (?), в случае, если он также вызывает у себя parent::display()
+		}		//получает HTML из контроллера (?), в случае, если он также вызывает у себя parent::display()
 		$this->collector_table=$model->getDataForCollector(); //данные для построения таблицы коллектора
         parent::display($tpl);
 	}
