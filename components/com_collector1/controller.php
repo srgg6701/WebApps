@@ -36,7 +36,6 @@ class Collector1Controller extends JController
 			//удалить из набора коллекций предзаказчика:
 			$this->getModel()->deletePreCollection($collection_id);
 			$this->setRedirect(JRoute::_($this->go_page.'&site_deleted='.$collection_id));
-			
 		}else{
 			JMail::sendErrorMess('Данные не удалены.',"Удаление записи.");		
 		}

@@ -333,6 +333,16 @@ div.feedback{
 	background:#E4E4E4;
 	border-radius:6px;
 }
+/*	блок с ссылками файлов	*/
+div.flslinks > div:first-child{
+	overflow:hidden;
+	float:left; 
+	margin:0;
+	text-wrap:none;
+}
+div.flslinks > div:first-child a span{
+	color:#0000FF;
+}
 .font_size1_1{
 	font-size:1.1em !important;
 }

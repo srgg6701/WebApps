@@ -72,10 +72,16 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	 * Удалить коллекцию
 	 * @ collections
 	 */
-	function deleteCollectionData($collection_id) {
-		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
+	function deleteCollectionData($collection_id) {		
 		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
-		return $table->delete($collection_id); 		
+		//if (!$table->delete($collection_id)) die("ОШИБКА!<HR>".$table->getError()); 		
+		//найти и удалить все файлы:
+		//die('handleFiles? Dir: '.);
+		if(!SFiles::handleFiles('deleteFile',JPATH_COMPONENT.DS.'files',$collection_id)) {
+			JMail::sendErrorMess('Не удалены файлы коллекции id '.$collection_id,'Ошибка удаления файлов');
+			return false;
+		}die('<div>deleteCollectionData</div>');
+		return true;
 	}
 	/**
 	 * Удалить коллекцию из набора предзаказчика
@@ -185,18 +191,20 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 			$arrCheckedMap=array();
 			//все опции в коллекции:
 			$boxes_set=$current_order_set['options_array'];
-			//препарируем набор опций построчно:		
-			foreach ($boxes_set as $option_id=>$current_array) {
-				//препарируем массив отмеченных опций для каждой строки:
-				for($i=0,$j=count($site_sides);$i<$j;$i++){
-					//по умолчанию элемент массива пуст:
-					$arrCheckedMap[$option_id][$i]='';
-					for ($b=0,$x=count($current_array);$b<$x;$b++){ 
-						//если текущий тип раздела отмечен для данной опции:
-						if (in_array($site_sides[$i],$current_array)) {
-							//заполняем элемент массива и прерываем цикл:
-							$arrCheckedMap[$option_id][$i]=$site_sides[$i];
-							break;	
+			if (is_array($boxes_set)&&!empty($boxes_set)) {
+				//препарируем набор опций построчно:		
+				foreach ($boxes_set as $option_id=>$current_array) {
+					//препарируем массив отмеченных опций для каждой строки:
+					for($i=0,$j=count($site_sides);$i<$j;$i++){
+						//по умолчанию элемент массива пуст:
+						$arrCheckedMap[$option_id][$i]='';
+						for ($b=0,$x=count($current_array);$b<$x;$b++){ 
+							//если текущий тип раздела отмечен для данной опции:
+							if (in_array($site_sides[$i],$current_array)) {
+								//заполняем элемент массива и прерываем цикл:
+								$arrCheckedMap[$option_id][$i]=$site_sides[$i];
+								break;	
+							}
 						}
 					}
 				}
