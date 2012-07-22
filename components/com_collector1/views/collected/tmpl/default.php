@@ -12,7 +12,7 @@
 defined('_JEXEC') or die('Restricted access');
 if (!$user) $user = JFactory::getUser();
 if (!$this->templatename) $this->templatename=SSite::getCurrentTemplateName($app);
-$collections_data_array=$this->collections_data_array; ?>
+$collections_data_array=$this->collections_data_array; //var_dump("<h1>collections_data_array:</h1><pre>",$collections_data_array,"</pre>");?>
 <div class="item-page">
 	<div class="collected-top">
 <?	//если производили какие-либо действия - добавляли/изменяли/удаляли:
@@ -47,6 +47,7 @@ $collections_data_array=$this->collections_data_array; ?>
 	
 	if (!empty($collections_data_array)) :
 		$arrSMSs=SCollection::setCMStypes();
+		var_dump("<h1>arrSMSs:</h1><pre>",$arrSMSs,"</pre>");
 		$j=count($collections_data_array);
 		$fl=0;
 		foreach ($collections_data_array as $collection_id=>$collection_set) :
@@ -70,7 +71,7 @@ $collections_data_array=$this->collections_data_array; ?>
 							$option_name="Отмеченные опции";
 							$option_value='options_array';
 								break;
-						case "engines":
+						case "engines":case "engine_type_choice_id":
 							$option_name="Подходящие CMS";
 							$option_value=str_replace(',',', ',$collection_set['engines']).' ';
 								break;
@@ -131,7 +132,7 @@ $collections_data_array=$this->collections_data_array; ?>
 	?>/images/folder.png" width="32" height="32" style="margin-left:10px; margin-top:-6px;" align="right"></td>
             <td valign="top"><? //SDebug::showDebugContent($collection_set,'collection_set');
 			SFiles::showFiles( $collection_set['files_names'],
-							   //$collection_id,
+							   $collection_id,
 							   $this->templatename,
 							   'collected',
 							   $this->baseurl //may not be
