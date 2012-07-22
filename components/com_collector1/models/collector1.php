@@ -178,7 +178,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
     ON #__webapps_files_names.identifier = CONCAT('s',#__webapps_customer_site_options.id)
  WHERE #__webapps_customer_site_options.id = $collection_id";
 			if (!$db) $db=JFactory::getDBO();
-			$db->setQuery($query); //SDebug::dOutput("query= $query"); 
+			$db->setQuery($query); SDebug::dOutput("query= $query"); 
 			//
 			$current_order_set=$db->loadAssoc();  
 			//transform serialized arrays:

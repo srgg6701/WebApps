@@ -178,25 +178,38 @@ if ($current_order_set){
     </td>
   </tr>
 </table>
+<style>
+td.labelInlineBlock label {
+	display:inline-block;
+	text-align:left;
+	vertical-align:top;
+}
+td.labelInlineBlock label input[type="radio"]{
+	margin-left:0;
+	margin-top:0;
+}
+</style>
 <table cellpadding="8" cellspacing="0">
   <tr>
-  	<td>
+  	<td class="labelInlineBlock">
 <?	$arrSMSs=SCollection::setCMStypes();?>    
-<h4 style="margin-bottom:4px;">Выберите движок:</h4>
-    <div>(вы можете выбрать несколько возможных вариантов)</div>
-    <br>
+<h4 style="margin-bottom:6px;">Выберите движок:</h4>
+    <!--<div>(вы можете выбрать несколько возможных вариантов)</div>-->
       <label>
         <input type="radio" name="choose_engine" value="<?=$arrSMSs[0][0];//take_ready?>" id="choose_engine_1" onClick="manageEnginesChoice(this);"<?
         
 		if ($current_order_set['engine_type_choice_id']==1) :?> checked<? endif;
 		
-		?>><?=$arrSMSs[0][1];//Готовая CMS?></label> &nbsp;
+		?>><?=$arrSMSs[0][1];//Готовая CMS?>
+        <div>(допускается несколько вариантов)</div></label> &nbsp;
+      
       <label>
         <input type="radio" name="choose_engine" value="<?=$arrSMSs[1][0];//build_own?>" id="choose_engine_2" onClick="manageEnginesChoice(this);"<?
         
 		if ($current_order_set['engine_type_choice_id']==2) {?> checked<? }
 		
 		?>><?=$arrSMSs[1][1];//Разработать собственный?></label> &nbsp;
+      
       <label>
         <input type="radio" name="choose_engine" value="<?=$arrSMSs[2][0];//exists?>" id="choose_engine_3" onClick="manageEnginesChoice(this);"<?
         
