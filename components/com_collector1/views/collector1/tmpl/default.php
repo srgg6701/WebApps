@@ -196,26 +196,26 @@ td.labelInlineBlock label input[type="radio"]{
 <h4 style="margin-bottom:6px;">Выберите движок:</h4>
     <!--<div>(вы можете выбрать несколько возможных вариантов)</div>-->
       <label>
-        <input type="radio" name="choose_engine" value="<?=$arrSMSs[0][0];//take_ready?>" id="choose_engine_1" onClick="manageEnginesChoice(this);"<?
+        <input type="radio" name="choose_engine" value="<?=$arrSMSs[1][0];//take_ready?>" id="choose_engine_1" onClick="manageEnginesChoice(this);"<?
         
 		if ($current_order_set['engine_type_choice_id']==1) :?> checked<? endif;
 		
-		?>><?=$arrSMSs[0][1];//Готовая CMS?>
+		?>><?=$arrSMSs[1][1];//Готовая CMS?>
         <div>(допускается несколько вариантов)</div></label> &nbsp;
       
       <label>
-        <input type="radio" name="choose_engine" value="<?=$arrSMSs[1][0];//build_own?>" id="choose_engine_2" onClick="manageEnginesChoice(this);"<?
+        <input type="radio" name="choose_engine" value="<?=$arrSMSs[2][0];//build_own?>" id="choose_engine_2" onClick="manageEnginesChoice(this);"<?
         
 		if ($current_order_set['engine_type_choice_id']==2) {?> checked<? }
 		
-		?>><?=$arrSMSs[1][1];//Разработать собственный?></label> &nbsp;
+		?>><?=$arrSMSs[2][1];//Разработать собственный?></label> &nbsp;
       
       <label>
-        <input type="radio" name="choose_engine" value="<?=$arrSMSs[2][0];//exists?>" id="choose_engine_3" onClick="manageEnginesChoice(this);"<?
+        <input type="radio" name="choose_engine" value="<?=$arrSMSs[3][0];//exists?>" id="choose_engine_3" onClick="manageEnginesChoice(this);"<?
         
 		if ($current_order_set['engine_type_choice_id']==3) {?> checked<? }
 		
-		?>><?=$arrSMSs[2][1];//Перенести на имеющийся?></label><span id="existing_cms_name"<?
+		?>><?=$arrSMSs[3][1];//Перенести на имеющийся?></label><span id="existing_cms_name"<?
         
 		if ($current_order_set['engine_type_choice_id']!=3) {
 			

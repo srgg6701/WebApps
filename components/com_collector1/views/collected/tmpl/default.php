@@ -12,7 +12,7 @@
 defined('_JEXEC') or die('Restricted access');
 if (!$user) $user = JFactory::getUser();
 if (!$this->templatename) $this->templatename=SSite::getCurrentTemplateName($app);
-$collections_data_array=$this->collections_data_array; SDebug::showDebugContent($collections_data_array,'collections_data_array');?>
+$collections_data_array=$this->collections_data_array; //SDebug::showDebugContent($collections_data_array,'collections_data_array');?>
 <div class="item-page">
 	<div class="collected-top">
 <?	//если производили какие-либо действия - добавляли/изменяли/удаляли:
@@ -26,8 +26,6 @@ $collections_data_array=$this->collections_data_array; SDebug::showDebugContent(
     	</div>
     </div>
 <?		}?>    
-    <br>
-	<br>
 <?	}else{
 		$margin_minus='-';
 		require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
@@ -47,7 +45,7 @@ $collections_data_array=$this->collections_data_array; SDebug::showDebugContent(
 	
 	if (!empty($collections_data_array)) :
 		$arrSMSs=SCollection::setCMStypes();
-		var_dump("<h1>arrSMSs:</h1><pre>",$arrSMSs,"</pre>");
+		//var_dump("<h1>arrSMSs:</h1><pre>",$arrSMSs,"</pre>");
 		$j=count($collections_data_array);
 		$fl=0;
 		foreach ($collections_data_array as $collection_set) :
@@ -63,30 +61,34 @@ $collections_data_array=$this->collections_data_array; SDebug::showDebugContent(
 							$option_name="Тип сайта";
 							$option_value=$collection_set['site_type_name'];
 								break;
-						case "engine_type_choice_id":
-							$option_name="Выбор движка";
-							$option_value=$arrSMSs[$data-1][1];	
-								break;
 						case "options_array":
 							$option_name="Отмеченные опции";
 							$option_value='options_array';
 								break;
 						case "engines":case "engine_type_choice_id":
-							$option_name="Подходящие CMS";
-							$option_value=str_replace(',',', ',$collection_set['engines']).' ';
-								break;
+							$option_name="Выбор движка";
+								switch ($collection_set['engine_type_choice_id'])  { 
+									case "3": $option_value="Мигрирация на ".$collection_set['engines'];
+										break;							
+									case "2": $option_value=$collection_set['engines'];
+										break;
+									case "1": $option_value=str_replace(',',', ',$collection_set['engines']).' ';
+										break;
+								}
+						break;
 						case "xtra":
 							$option_name="Дополнительные опции";
 								break;
-					endswitch;?>
-		  <tr<? 	if ($option_value=='options_array') :?> valign="top" class="rowMySiteOptions"<? endif;?>>
+					endswitch;
+					if($option!="engines"):?>
+		  <tr<? 		if ($option_value=='options_array') :?> valign="top" class="rowMySiteOptions"<? endif;?>>
 			<td><?=$option_name?>:</td>
 			<td><?php	
 			if ($option=="engine_type_choice_id") {
-				echo "data=$data";
-				var_dump("<h1>option_value:</h1><pre>",$option_value,"</pre>");
-				var_dump("<h1>engine_type_choice_id:</h1><pre>",$collection_set['engine_type_choice_id'],"</pre>");
-				var_dump("<h1>engines:</h1><pre>",$collection_set['engines'],"</pre>");
+				//echo "data=$data";
+				//var_dump("<h1>option_value:</h1><pre>",$option_value,"</pre>");
+				//var_dump("<h1>engine_type_choice_id:</h1><pre>",$collection_set['engine_type_choice_id'],"</pre>");
+				//var_dump("<h1>engines:</h1><pre>",$collection_set['engines'],"</pre>");
 			}
 					if ($option_value) {
 						//массив опций:
@@ -131,8 +133,9 @@ $collections_data_array=$this->collections_data_array; SDebug::showDebugContent(
 						echo $data; 
 					}
 				endif;?></td>
-			  </tr>
-	<?php 	endforeach;?>
+		  </tr>
+	<?php 			endif;
+			endforeach;?>
     	  <tr>
             <td valign="top" align="right" class="bold"><div style="display:inline-block;">Файлы</div> <img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
 	?>/images/folder.png" width="32" height="32" style="margin-left:10px; margin-top:-6px;" align="right"></td>
