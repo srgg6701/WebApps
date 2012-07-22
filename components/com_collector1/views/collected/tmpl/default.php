@@ -131,8 +131,9 @@ $collections_data_array=$this->collections_data_array; ?>
 	?>/images/folder.png" width="32" height="32" style="margin-left:10px; margin-top:-6px;" align="right"></td>
             <td valign="top"><? //SDebug::showDebugContent($collection_set,'collection_set');
 			SFiles::showFiles( $collection_set['files_names'],
-							   $collection_id,
+							   //$collection_id,
 							   $this->templatename,
+							   'collected',
 							   $this->baseurl //may not be
 					  		 );?></td>
           </tr>
