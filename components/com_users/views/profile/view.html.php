@@ -32,7 +32,7 @@ class UsersViewProfile extends JView
 	 * @since	1.6
 	 */
 	public function display($tpl = null)
-	{
+	{	die('profile, display');
 		// Get the view data.
 		$this->data		= $this->get('Data');
 		$this->form		= $this->get('Form');
@@ -78,7 +78,7 @@ class UsersViewProfile extends JView
 		$user		= JFactory::getUser();
 		$login		= $user->get('guest') ? true : false;
 		$title 		= null;
-
+		
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();

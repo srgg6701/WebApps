@@ -25,7 +25,7 @@ class Collector1Controller extends JController
 			return false;
 		}
 		//пслать дальше:
-		$this->setRedirect(JRoute::_($this->go_page.'&site_added='.$last_record_id));
+		$this->setRedirect(JRoute::_($this->go_page.'&site_new='.$last_record_id));
 	}
 	/**
 	 * Удалить запись из таблицы опций сайта заказчика. Данные из таблицы *customers не удалять

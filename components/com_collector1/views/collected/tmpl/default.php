@@ -14,6 +14,12 @@ if (!$user) $user = JFactory::getUser();
 if (!$this->templatename) $this->templatename=SSite::getCurrentTemplateName($app);
 $collections_data_array=$this->collections_data_array; //SDebug::showDebugContent($collections_data_array,'collections_data_array');?>
 <div class="item-page">
+<style>
+tr.site_id td{ 
+	line-height:0; 
+	visibility:hidden;
+}
+</style>
 	<div class="collected-top">
 <?	//если производили какие-либо действия - добавляли/изменяли/удаляли:
 	$done=$this->done; 
@@ -50,7 +56,8 @@ $collections_data_array=$this->collections_data_array; //SDebug::showDebugConten
 		$fl=0;
 		foreach ($collections_data_array as $collection_set) :
 			$collection_id=$collection_set['id'];?>
-          <tr>
+          <tr class="site_id"><td colspan="2" id="site_<?=$collection_set['id']?>">&nbsp;</td></tr>  
+      <tr>
           	<td colspan="2" id="my_site_number">Сайт # <?=$collection_id?></td>
           </tr>
 		 <? 
@@ -174,7 +181,18 @@ function askToSignUp(){
 	if (confirm('Чтобы изменить набор опций любого своего сайта, вам нужно добавить к своим данным логин и пароль.\nХотите сделать это сейчас?'))
 		location.href='<?=$this->go_signup?>';
 }
+function goNewSite(site_id){
+	try{
+		var aSite=document.getElementById('site_'+site_id);
+		var position = $(aSite).offset().top;
+		$("html, body").animate({scrollTop:position},1000)
+		return false;
+	}catch(e){
+		alert(e.message);
+	}
+}
 </script>
+
 <? 	require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';?>
   </div>
 </div>

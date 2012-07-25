@@ -101,7 +101,6 @@ function manageLoginDisplay(stat){
 	}
 }
 </script>
-
 					</td>
                     <td id="tdLogin">
 <? 	$user = JFactory::getUser();
@@ -138,7 +137,15 @@ function manageLoginDisplay(stat){
                 <!-- system messages -->
   				<jdoc:include type="message" />
 				<div id="com"<? if($user->get('guest')!=1){?> class="offsetAuthorized"<? }?>>
-                	<jdoc:include type="modules" name="precustomer_stuff" style="xhtml" />
+                	
+				<? if (JRequest::getVar('option')=="com_users"):
+						if ( JRequest::getVar('layout')=="complete"
+						     || $user->get('guest')!=1
+						   ) $hide_stuff=true;
+					endif;		  
+					if (!$hide_stuff):?>
+                    <jdoc:include type="modules" name="precustomer_stuff" style="xhtml" />
+                <?	endif;?>    
 					<jdoc:include type="component" />
                     <jdoc:include type="modules" name="contacts" style="xhtml" />    
                     <jdoc:include type="modules" name="sdata" style="xhtml" />    

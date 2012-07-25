@@ -32,9 +32,9 @@ class Collector1ViewCollected extends JView
 		if ($this->collections_data_array!==false){
 			$modelCollector=JModel::getInstance('collector1','Collector1Model');
 			$this->get_options_names=$modelCollector->get_options_names();
-			$arrSiteActions=array('site_added' => array("Сайт собран","#CCF","blue"),
-								  'site_deleted' => array("Сайт удалён","#FCC","red"),
-								  'site_updated' => array("Данные сайта изменены","#E4F9DD","green")	
+			$arrSiteActions=array('site_new' => array("Сайт собран! [<a href=\"#\" onClick=\"return goNewSite(".JRequest::getVar('site_new').");\">перейти к сайту...</a>]","#CCF","blue"),
+								  'site_deleted' => array("Сайт удалён.","#FCC","red"),
+								  'site_updated' => array("Данные сайта изменены!","#E4F9DD","green")	
 						  		 );
 			$user = JFactory::getUser();
 			foreach ($arrSiteActions as $site_action_type=>$site_action_type_data_array){
@@ -45,7 +45,7 @@ class Collector1ViewCollected extends JView
 				if (JRequest::getVar($site_action_type)) {
 					$this->done=$site_action_type_data_array; //действие, цвет фона блока сообщения, постфикс для флага
 					$this->_action=$site_action_type;
-					if ($site_action_type=='site_added') {
+					if ($site_action_type=='site_new') {
 						//if ($user->get('guest')==1){
 							//$this->done[0]="Набор опций вашего сайта определён.";
 						//}else $this->done[0].="!";
@@ -55,7 +55,7 @@ class Collector1ViewCollected extends JView
 						if (!JFactory::getMailer()->sendMail($adminEmail, $siteName, $adminEmail, $siteName.': Новый сайт', 'На сайте WebApps.2-all.com создана новая коллекция.'))
 							JMail::sendErrorMess('','Ошибка отправки уведомления о новом сайте...');
 					}
-					$this->done[0].="!
+					$this->done[0].="
 <div style=\"padding: 6px 0;\">Пожалуйста, <a href=".JRoute::_($this->go_signup).">добавьте к своим данным логин и пароль</a>.</div> 
 							<div>Это займёт несколько секунд и предоставит вам доступ ко всем опциям системы.</div>";
 					break;

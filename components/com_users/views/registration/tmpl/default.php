@@ -79,3 +79,9 @@ if (!$user) $user = JFactory::getUser();
 		</div>
 	</form>
 </div>
+<!--<script type="text/javascript">
+function checkFormFields(){
+	alert('checkFormFields');
+}
+</script>-->
+
