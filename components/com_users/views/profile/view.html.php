@@ -32,7 +32,7 @@ class UsersViewProfile extends JView
 	 * @since	1.6
 	 */
 	public function display($tpl = null)
-	{	die('profile, display');
+	{	
 		// Get the view data.
 		$this->data		= $this->get('Data');
 		$this->form		= $this->get('Form');
@@ -54,7 +54,7 @@ class UsersViewProfile extends JView
 
 		// Check for layout override
 		$active = JFactory::getApplication()->getMenu()->getActive();
-		if (isset($active->query['layout'])) {
+		if (isset($active->query['layout'])) { die('profile, display, active');
 			$this->setLayout($active->query['layout']);
 		}
 

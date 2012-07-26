@@ -129,23 +129,22 @@ function manageLoginDisplay(stat){
 </script>
 <? 	}?>
             <div id="wrapper_component">
-            <? 	if ($user->get('guest')!=1){?>  			
+            <? 	if ($user->get('guest')!=1) :?>  			
             	<div align="right" id="account_menu">
                 	<jdoc:include type="modules" name="account" style="xhtml" />
                 </div>
-            <?	}?>
+            <?	endif;?>
                 <!-- system messages -->
   				<jdoc:include type="message" />
 				<div id="com"<? if($user->get('guest')!=1){?> class="offsetAuthorized"<? }?>>
                 	
-				<? if (JRequest::getVar('option')=="com_users"):
-						if ( JRequest::getVar('layout')=="complete"
-						     || $user->get('guest')!=1
-						   ) $hide_stuff=true;
-					endif;		  
-					if (!$hide_stuff):?>
+			<?	if ( ( JRequest::getVar('option')=="com_users"
+                       && JRequest::getVar('layout')=="complete"
+                     ) || $user->get('guest')!=1
+                   ) $hide_stuff=true;
+                if (!$hide_stuff):?>
                     <jdoc:include type="modules" name="precustomer_stuff" style="xhtml" />
-                <?	endif;?>    
+			<?	endif;?>    
 					<jdoc:include type="component" />
                     <jdoc:include type="modules" name="contacts" style="xhtml" />    
                     <jdoc:include type="modules" name="sdata" style="xhtml" />    

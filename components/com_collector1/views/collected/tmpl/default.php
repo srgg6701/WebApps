@@ -32,9 +32,9 @@ tr.site_id td{
     	</div>
     </div>
 <?		}?>    
-<?	}else{
+<?	}elseif ($user->get('guest')==1){ 
 		$margin_minus='-';
-		require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'html'.DS.'go_register.php';
 			/*?><h3 class="collected_head">Выбранные вами опции:</h3><? */
 	}
 	if (count($collections_data_array)) {?>
@@ -158,7 +158,7 @@ tr.site_id td{
           	<td colspan="2" class="bgOverWhite linkButtons">
             	<br><a href="<?
 			if ($user->get('guest')==1){
-				?>javascript:void();" onclick="askToSignUp();<?	
+				?>javascript:void();" onclick="askToSignUp('<?=$this->go_signup?>');<?	
 			}else{
                 echo JRoute::_("index.php?option=com_collector1&view=collector1&id=1&collection_id=".$collection_id);
 			}?>">Изменить опции...</a> &nbsp; <a class="txtRed" href="<?=JRoute::_("index.php?option=com_collector1&collection_id=".$collection_id)?>&task=delete" onclick="if (!confirm('Вы уверены, что хотите удалить этот сайт?')) return false;">Удалить сайт...</a><br>
@@ -176,23 +176,6 @@ tr.site_id td{
 <div class="button-green" style="margin-left:6px;">
     <a href="<?=JRoute::_("index.php?option=com_collector1&view=collector1");//view не убирать!?>">Добавить сайт...</a>
 </div>
-<script type="text/javascript">
-function askToSignUp(){
-	if (confirm('Чтобы изменить набор опций любого своего сайта, вам нужно добавить к своим данным логин и пароль.\nХотите сделать это сейчас?'))
-		location.href='<?=$this->go_signup?>';
-}
-function goNewSite(site_id){
-	try{
-		var aSite=document.getElementById('site_'+site_id);
-		var position = $(aSite).offset().top;
-		$("html, body").animate({scrollTop:position},1000)
-		return false;
-	}catch(e){
-		alert(e.message);
-	}
-}
-</script>
-
-<? 	require_once JPATH_COMPONENT.DS.'helpers/html/go_register.php';?>
+<? 	if ($user->get('guest')==1) require_once JPATH_COMPONENT.DS.'helpers'.DS.'html'.DS.'go_register.php';?>
   </div>
 </div>

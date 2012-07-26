@@ -338,7 +338,7 @@ div.flslinks > div:first-child{
 	overflow:hidden;
 	float:left; 
 	margin:0;
-	text-wrap:none;
+	white-space:nowrap;
 }
 div.flslinks > div:first-child a span{
 	color:#0000FF;

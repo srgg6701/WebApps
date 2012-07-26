@@ -43,7 +43,7 @@ class Collector1Controller extends JController
 	/**
 	 * Добавить заказ на выполнение отдельного компонента/(ов)
 	 */
-	function order(){		
+	function order(){	
 		if($this->getModel('orders')->makeOrder($this->getModel())) { 
 			//die ('makeOrder is complited!');
 			$this->setRedirect(JRoute::_($this->go_page_common."&view=orders"));			
@@ -66,10 +66,9 @@ class Collector1Controller extends JController
 	/**
 	 * Обновить данные в таблице заказов
 	 */
-	function updateorder(){ //task=update
-		$model=$this->getModel();
+	function updateorder(){ //task=updateorder
+		$model=$this->getModel(); 
 		if($this->getModel('orders')->makeOrder($model,JRequest::getVar('order_id'))) { 
-			die ('makeOrder UPDATED is complited!');
 			$this->setRedirect(JRoute::_($this->go_page_common."&view=orders&site_updated=".$order_id));			
 		}else{
 			JMail::sendErrorMess('Данные не обновлены.',"Обновление заказа.");		

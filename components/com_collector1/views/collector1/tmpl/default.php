@@ -243,7 +243,7 @@ td.labelInlineBlock label input[type="radio"]{
 </table>
 </div>
 <?	require_once JPATH_COMPONENT.DS.'helpers'.DS.'html'.DS.'set_your_data.php';	?>
-<br>
+<div style="height:26px;">&nbsp;</div>
 <button id="make_site_prototype" type="submit"><?
 
 	if (JRequest::getVar('collection_id')){
