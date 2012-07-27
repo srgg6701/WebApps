@@ -398,7 +398,7 @@ dl {
 	margin-left:10px;
 	margin-bottom:10px;
 }
-dt > span {
+dt > span[class!="spacer"] {
 	float:left;
 	cursor:pointer;
 	margin-right:10px;
@@ -862,7 +862,7 @@ div.registration form fieldset .spacer{
 	float:none;
 	clear:both;
 	background:none !important;
-	border-radius: none;
+	border-radius:0;
 }
 .registration fieldset, 
 .profile fieldset,

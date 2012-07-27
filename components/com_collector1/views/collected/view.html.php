@@ -3,9 +3,7 @@
  * @version     1.4.0
  * @package     com_collector1
  * @copyright   Copyright (C) 2012. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Created by com_combuilder - http://www.notwebdesign.com
- */
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt*/
 
 // No direct access
 defined('_JEXEC') or die;
@@ -71,7 +69,7 @@ class Collector1ViewCollected extends JView
 			$this->templatename=SSite::getCurrentTemplateName($app);
 			//НЕ АКТУАЛЬНО, Т.К. ИНФОРМАЦИЯ О ФАЙЛАХ ДОБАЛЕНА В МАССИВ КОЛЛЕКЦИЙ
 			//if ($site_action_type!='site_deleted') { //не удаляли сайт, будем получать файлы
-				//$this->order_files=($uset)? SFiles::requestUserFiles($uset):SFiles::getUserFiles('collections_ids',$user); 
+				//$this->order_files=($uset)? SFiles::requestUserFilesByObjectId($uset):SFiles::getUserFiles('collections_ids',$user); 
 			//}
 		}
 		parent::display($tpl);

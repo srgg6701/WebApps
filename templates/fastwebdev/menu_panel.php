@@ -18,6 +18,6 @@ if (strstr($_SERVER['HTTP_USER_AGENT'],'Firefox')){?> onMouseOver="correctPositi
   </tr>
 </table>
 <? 	if (strstr($_SERVER['HTTP_USER_AGENT'],'Firefox')){?>
-<script type="text/javascript" src="tmpl/simple/js/firefox/correct_submenu_position.js">
+<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/firefox/correct_submenu_position.js">
 </script>
 <? 	}?>

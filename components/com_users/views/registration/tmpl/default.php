@@ -11,14 +11,14 @@ defined('_JEXEC') or die;
 
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
-JHtml::_('behavior.formvalidation');
+//JHtml::_('behavior.formvalidation');
 if (!$user) $user = JFactory::getUser();
 //var_dump("<h1>user:</h1><pre>",$user,"</pre>");?>
 <div class="registration<?php echo $this->pageclass_sfx?>">
 <?php if ($this->params->get('show_page_heading')) : ?>
 	<h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 <?php endif;?>
-	<form id="member-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=registration.register'); ?>" method="post" class="form-validate">
+	<form id="member-registration" action="<?php echo JRoute::_('index.php?option=com_users&task=registration.register'); ?>" method="post" class="form-validate" onSubmit="return checkFormFields(this);">
 <?php foreach ($this->form->getFieldsets() as $fieldset): // Iterate through the form fieldsets and display each one.?>
 	<?php $fields = $this->form->getFieldset($fieldset->name);?>
 	<?php if (count($fields)):?>
@@ -79,9 +79,46 @@ if (!$user) $user = JFactory::getUser();
 		</div>
 	</form>
 </div>
-<!--<script type="text/javascript">
-function checkFormFields(){
-	alert('checkFormFields');
+<script type="text/javascript">
+function checkFormFields(form){
+	try{
+		var fields='';
+		var wrong='';
+		var field_id,field,txt,t2,tElem;
+		for(i=0;i<form.length;i++){
+			field=form.elements[i];
+			if(field.id){
+				tElem=document.getElementById(field.id+'-lbl');
+				if (tElem) {
+					if (field.value=='') {
+						txt=tElem.innerText;
+						t2=txt.substring(0,txt.indexOf('*')-1);
+						fields+='* '+t2+'\n';
+					}else{
+						if( field.id=='jform_password2'
+							&& field.value!=document.getElementById('jform_password1').value
+						  ) wrong+='- Пароли\n';
+						if( field.id=='jform_email2'
+							&& field.value!=document.getElementById('jform_email1').value
+						  )  wrong+='- Адреса электронной почты\n';
+					}
+				}
+			}
+		}
+		if (fields!=''||wrong!='') {
+			var mess='Данные не могут быть отправлены, потому что';
+			if (fields!=''&&wrong!=''){
+				mess+=':\n1.Не заполнены поля формы - \n'+fields+'2. Не совпадают значения полей - \n'+wrong;
+			}else{
+				if (fields!='') mess+=' не заполнены следующие поля:\n'+fields; 
+				else mess+=' не совпадают значения полей:\n'+wrong;
+			}
+			alert(mess);
+			return false;
+		}else return true;
+	}catch(e){
+		alert(e.message);
+	}
 }
-</script>-->
+</script>
 

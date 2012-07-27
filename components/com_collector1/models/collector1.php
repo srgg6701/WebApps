@@ -3,9 +3,7 @@
  * @version     1.4.0
  * @package     com_collector1
  * @copyright   Copyright (C) 2012. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Created by com_combuilder - http://www.notwebdesign.com
- */
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt*/
 
 // No direct access
 defined('_JEXEC') or die;
@@ -72,55 +70,10 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 	 * Удалить коллекцию
 	 * @ collections
 	 */
-	function deleteCollectionData($collection_id) {		
-		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
-		//if (!$table->delete($collection_id)) die("ОШИБКА!<HR>".$table->getError()); 		
-		//найти и удалить все файлы:
-		//die('handleFiles? Dir: '.);
-		if(!SFiles::handleFiles('deleteFile',JPATH_COMPONENT.DS.'files',$collection_id)) {
-			JMail::sendErrorMess('Не удалены файлы коллекции id '.$collection_id,'Ошибка удаления файлов');
-			return false;
-		}die('<div>deleteCollectionData</div>');
+	function deleteCollection($collection_id,$table=false) {		
+		if (!$table) $table = JTable::getInstance('customer_site_options', 'Collector1Table');
+		if (!$table->delete($collection_id)) die("ОШИБКА удаления записи из таблицы!<HR>".$table->getError()); 		
 		return true;
-	}
-	/**
-	 * Удалить коллекцию из набора предзаказчика
-	 * @ collections
-	 */
-	function deletePreCollection($collection_id) {
-		$query="SELECT id, collections_ids FROM #__webapps_precustomers WHERE $collection_id IN (collections_ids)";
-		$db = JFactory::getDBO();
-		$db->setQuery($query);
-		$pre_order_data=$db->loadAssoc();
-		$current_collections=explode(',',$pre_order_data['collections_ids']);
-		$key=array_search($collection_id,$current_collections);
-		if ($key!==false){ //потому что может случиться 0
-			unset($current_collections[$key]);
-		}
-		//JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'tables');
-		$table = JTable::getInstance('precustomers', 'Collector1Table');
-		
-		if (!$table->load($pre_order_data['id'])) {
-			
-			JMail::sendErrorMess($table->getError()," (\$table->load())");
-			return false;
-		
-		}else{
-			$new_collections_ids=implode(',',$current_collections);
-			$table->set('collections_ids', $new_collections_ids);
-			if ($table->check()) {
-				
-				if (!$table->store(true)){
-					// handle failed update
-					JMail::sendErrorMess($table->getError()," (\$table->store())");
-				}
-			
-			}else{
-				// handle invalid input
-				JMail::sendErrorMess($table->getError()," (\$table->check())");
-			}
-		}
-		return true; 		
 	}
 	/**
 	 * Get the data for a banner

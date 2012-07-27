@@ -3,9 +3,7 @@
  * @version     1.4.0
  * @package     com_collector1
  * @copyright   Copyright (C) 2012. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Created by com_combuilder - http://www.notwebdesign.com
- */
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt*/
  
 // No direct access
 defined('_JEXEC') or die;
@@ -32,9 +30,16 @@ class Collector1Controller extends JController
 	 */
 	function delete(){ //task=delete
 		$collection_id=JRequest::getVar('collection_id');
-		if($this->getModel()->deleteCollectionData($collection_id)) {
-			//удалить из набора коллекций предзаказчика:
-			$this->getModel()->deletePreCollection($collection_id);
+		// удалить все файлы коллекции:
+		if ($arrUserFiles=SFiles::requestUserFilesByObjectId('collections_ids',$collection_id)) 
+			SFiles::deleteObjectFiles($arrUserFiles,$collection_id);
+		$user = JFactory::getUser();
+		if( // удалить данные из таблиц:
+			$deleting=($user->get('guest')==1)? 
+				SCollection::deletePrecustomerObject('collections_ids',$collection_id) : 
+				$this->getModel()->deleteCollection($collection_id)
+		  ) { 
+			SFiles::deleteFilesRecords('s'.$collection_id); //удалить записи из таблицы файлов 
 			$this->setRedirect(JRoute::_($this->go_page.'&site_deleted='.$collection_id));
 		}else{
 			JMail::sendErrorMess('Данные не удалены.',"Удаление записи.");		
@@ -82,19 +87,6 @@ class Collector1Controller extends JController
 	 */
 	function display($tpl=NULL)
 	{	
- 		// Set the view and the model
-        /*$_view = JRequest::getVar('view','collector1');
-		if ($_view=='orders') {
-			//die('orders');
-			//$layout = JRequest::getVar('layout');
-			//$view  = $this->getView( $_view, 'html' );
-			$view->setModel($model,true);
-		}*/
-		//$model->getCustomerStatus();
-		//$view->setModel($model);
-		//$model=JModel::getInstance('CMS','collector1Model');
-		//$this->getModel('CMS');
-		//var_dump("<h1>model:</h1><pre>",$model,"</pre>");die();
 		parent::display(); //отображает default view
 	}
 }

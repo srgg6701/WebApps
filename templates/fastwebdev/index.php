@@ -125,7 +125,7 @@ function manageLoginDisplay(stat){
 				<jdoc:include type="modules" name="menu" style="xhtml" />    
     		</div>
 <?	if (strstr($_SERVER['HTTP_USER_AGENT'],'Firefox')){?>
-<script type="text/javascript" src="tmpl/default/js/firefox/correct_submenu_position.js">
+<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/firefox/correct_submenu_position.js">
 </script>
 <? 	}?>
             <div id="wrapper_component">

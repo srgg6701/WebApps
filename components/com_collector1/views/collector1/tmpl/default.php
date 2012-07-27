@@ -166,7 +166,7 @@ if ($current_order_set){
   <div style="margin:8px 10px;">
   	Дополнительные материалы &#8212; ТЗ, бриф и т.п.:
     <div class="marginBottom12 marginTop6">(<?
-    	$SFiles=new SFiles();
+    	$SFiles=new SFiles(); 
 		echo $SFiles->allowed_formats;
 	?>)</div>
   </div>
