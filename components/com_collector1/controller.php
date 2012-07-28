@@ -32,7 +32,7 @@ class Collector1Controller extends JController
 		$collection_id=JRequest::getVar('collection_id');
 		// удалить все файлы коллекции:
 		if ($arrUserFiles=SFiles::requestUserFilesByObjectId('collections_ids',$collection_id)) 
-			SFiles::deleteObjectFiles($arrUserFiles,$collection_id);
+			SFiles::deleteObjectFiles($arrUserFiles,'s'.$collection_id);
 		$user = JFactory::getUser();
 		if( // удалить данные из таблиц:
 			$deleting=($user->get('guest')==1)? 

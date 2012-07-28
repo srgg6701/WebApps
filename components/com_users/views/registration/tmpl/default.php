@@ -84,25 +84,26 @@ function checkFormFields(form){
 	try{
 		var fields='';
 		var wrong='';
-		var field_id,field,txt,t2,tElem;
+		var field_id,field,txt,lbl_id,tLabel;
 		for(i=0;i<form.length;i++){
 			field=form.elements[i];
-			if(field.id){
-				tElem=document.getElementById(field.id+'-lbl');
-				if (tElem) {
+			if(field.id){ 
+				lbl_id=field.id+'-lbl';
+				tLabel=document.getElementById(lbl_id);
+				if (tLabel) { 
 					if (field.value=='') {
-						txt=tElem.innerText;
-						t2=txt.substring(0,txt.indexOf('*')-1);
-						fields+='* '+t2+'\n';
+						txt=tLabel.innerHTML.substr(0,tLabel.innerHTML.indexOf('<'));
+						fields+='* '+txt+'\n';
+						//alert(txt);
 					}else{
 						if( field.id=='jform_password2'
 							&& field.value!=document.getElementById('jform_password1').value
 						  ) wrong+='- Пароли\n';
 						if( field.id=='jform_email2'
 							&& field.value!=document.getElementById('jform_email1').value
-						  )  wrong+='- Адреса электронной почты\n';
-					}
-				}
+						  ) wrong+='- Адреса электронной почты\n';
+					}/**/
+				}/**/
 			}
 		}
 		if (fields!=''||wrong!='') {

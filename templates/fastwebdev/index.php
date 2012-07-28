@@ -1,29 +1,22 @@
 ﻿<?php
 /**
- * Date         January 30, 2012
- * Copyright    Copyright (C) 2012 Lal B. Saud
- * License  GPL
+ * License: Private Property
  */
-
-/*
-
-*/
 defined('_JEXEC') or die;
 
 if (!$app) $app = JFactory::getApplication();
 
 if (!$this->baseurl){
 	$this->baseurl="http://".$_SERVER['HTTP_HOST'];
-}
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+}?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <jdoc:include type="head" />
-<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/firefox/correct_submenu_position.js" type="text/javascript"></script>
-<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/jquery-1.7.1.min.js" type="text/javascript"></script>
-
-<script src="<?php echo $this->baseurl ?>/templates/_js/common.js" type="text/javascript"></script>
-
+<?	$scripts=array('firefox/correct_submenu_position','jquery-1.7.1.min','json2','common');
+	for($sl=0,$al=count($scripts);$sl<$al;$sl++) {?>
+<script src="<?=$this->baseurl.'/templates/'.$this->template.'/js/'.$scripts[$sl];?>.js" type="text/javascript"></script>
+<?	}?>
 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css">
 </head>
 <body>

@@ -590,6 +590,10 @@ abstract class JTable extends JObject
 	 */
 	public function store($updateNulls = false)
 	{
+		if (JRequest::getVar('test')) {
+			$test_mode=true;
+			echo "\ntable primary key\nname: ".$this->_tbl_key."\nvalue: ".$this->$this->_tbl_key."\n";
+		}
 		// Initialise variables.
 		$k = $this->_tbl_key;
 
@@ -600,96 +604,102 @@ abstract class JTable extends JObject
 		}
 
 		// If a primary key exists update the object, otherwise insert it.
-		if ($this->$k)
-		{
-			$stored = $this->_db->updateObject($this->_tbl, $this, $this->_tbl_key, $updateNulls);
+		if ($this->$k) {	
+			if ($test_mode) {
+				echo "\nJTable:store() updateObject\n";
+			}else{
+				$stored = $this->_db->updateObject($this->_tbl, $this, $this->_tbl_key, $updateNulls);
+			}
+		}else{
+			if ($test_mode) {
+				echo "\nJTable:store() insertObject\n";
+			}else{
+				$stored = $this->_db->insertObject($this->_tbl, $this, $this->_tbl_key);
+			}
 		}
-		else
-		{
-			$stored = $this->_db->insertObject($this->_tbl, $this, $this->_tbl_key);
-		}
-
-		// If the store failed return false.
-		if (!$stored)
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_STORE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
-			return false;
-		}
-
-		// If the table is not set to track assets return true.
-		if (!$this->_trackAssets)
-		{
-			return true;
-		}
-
-		if ($this->_locked)
-		{
-			$this->_unlock();
-		}
-
-		//
-		// Asset Tracking
-		//
-
-		$parentId = $this->_getAssetParentId();
-		$name = $this->_getAssetName();
-		$title = $this->_getAssetTitle();
-
-		$asset = JTable::getInstance('Asset', 'JTable', array('dbo' => $this->getDbo()));
-		$asset->loadByName($name);
-
-		// Re-inject the asset id.
-		$this->asset_id = $asset->id;
-
-		// Check for an error.
-		if ($error = $asset->getError())
-		{
-			$this->setError($error);
-			return false;
-		}
-
-		// Specify how a new or moved node asset is inserted into the tree.
-		if (empty($this->asset_id) || $asset->parent_id != $parentId)
-		{
-			$asset->setLocation($parentId, 'last-child');
-		}
-
-		// Prepare the asset to be stored.
-		$asset->parent_id = $parentId;
-		$asset->name = $name;
-		$asset->title = $title;
-
-		if ($this->_rules instanceof JAccessRules)
-		{
-			$asset->rules = (string) $this->_rules;
-		}
-
-		if (!$asset->check() || !$asset->store($updateNulls))
-		{
-			$this->setError($asset->getError());
-			return false;
-		}
-
-		if (empty($this->asset_id))
-		{
-			// Update the asset_id field in this table.
-			$this->asset_id = (int) $asset->id;
-
-			$query = $this->_db->getQuery(true);
-			$query->update($this->_db->quoteName($this->_tbl));
-			$query->set('asset_id = ' . (int) $this->asset_id);
-			$query->where($this->_db->quoteName($k) . ' = ' . (int) $this->$k);
-			$this->_db->setQuery($query);
-
-			if (!$this->_db->query())
+		
+		if (!$test_mode) {
+			// If the store failed return false.
+			if (!$stored)
 			{
-				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_STORE_FAILED_UPDATE_ASSET_ID', $this->_db->getErrorMsg()));
+				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_STORE_FAILED', get_class($this), $this->_db->getErrorMsg()));
 				$this->setError($e);
 				return false;
 			}
+	
+			// If the table is not set to track assets return true.
+			if (!$this->_trackAssets)
+			{
+				return true;
+			}
+	
+			if ($this->_locked)
+			{
+				$this->_unlock();
+			}
+	
+			//
+			// Asset Tracking
+			//
+	
+			$parentId = $this->_getAssetParentId();
+			$name = $this->_getAssetName();
+			$title = $this->_getAssetTitle();
+	
+			$asset = JTable::getInstance('Asset', 'JTable', array('dbo' => $this->getDbo()));
+			$asset->loadByName($name);
+	
+			// Re-inject the asset id.
+			$this->asset_id = $asset->id;
+	
+			// Check for an error.
+			if ($error = $asset->getError())
+			{
+				$this->setError($error);
+				return false;
+			}
+	
+			// Specify how a new or moved node asset is inserted into the tree.
+			if (empty($this->asset_id) || $asset->parent_id != $parentId)
+			{
+				$asset->setLocation($parentId, 'last-child');
+			}
+	
+			// Prepare the asset to be stored.
+			$asset->parent_id = $parentId;
+			$asset->name = $name;
+			$asset->title = $title;
+	
+			if ($this->_rules instanceof JAccessRules)
+			{
+				$asset->rules = (string) $this->_rules;
+			}
+	
+			if (!$asset->check() || !$asset->store($updateNulls))
+			{
+				$this->setError($asset->getError());
+				return false;
+			}
+	
+			if (empty($this->asset_id))
+			{
+				// Update the asset_id field in this table.
+				$this->asset_id = (int) $asset->id;
+	
+				$query = $this->_db->getQuery(true);
+				$query->update($this->_db->quoteName($this->_tbl));
+				$query->set('asset_id = ' . (int) $this->asset_id);
+				$query->where($this->_db->quoteName($k) . ' = ' . (int) $this->$k);
+				$this->_db->setQuery($query);
+	
+				if (!$this->_db->query())
+				{
+					$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_STORE_FAILED_UPDATE_ASSET_ID', $this->_db->getErrorMsg()));
+					$this->setError($e);
+					return false;
+				}
+			}
 		}
-
 		return true;
 	}
 
@@ -799,21 +809,24 @@ abstract class JTable extends JObject
 			}
 		}
 
-		// Delete the row by primary key.
-		$query = $this->_db->getQuery(true);
-		$query->delete();
-		$query->from($this->_tbl);
-		$query->where($this->_tbl_key . ' = ' . $this->_db->quote($pk));
-		$this->_db->setQuery($query);
-
-		// Check for a database error.
-		if (!$this->_db->query())
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_DELETE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
-			return false;
+		if (JRequest::getVar('test'))
+				echo "\nJTable:delete()\n";
+		else{
+			// Delete the row by primary key.
+			$query = $this->_db->getQuery(true);
+			$query->delete();
+			$query->from($this->_tbl);
+			$query->where($this->_tbl_key . ' = ' . $this->_db->quote($pk));
+			$this->_db->setQuery($query);
+	
+			// Check for a database error.
+			if (!$this->_db->query())
+			{
+				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_DELETE_FAILED', get_class($this), $this->_db->getErrorMsg()));
+				$this->setError($e);
+				return false;
+			}
 		}
-
 		return true;
 	}
 
