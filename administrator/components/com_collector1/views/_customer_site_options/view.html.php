@@ -52,7 +52,7 @@ class Collector1View_customer_site_options extends JView
 		$state	= $this->get('State');
 		$canDo	= Collector1Helper::getActions($state->get('filter.category_id'));
 
-		JToolBarHelper::title(JText::_('COM_COLLECTOR1_TITLE__CUSTOMER_SITE_OPTIONS'), '_customer_site_options.png');
+		JToolBarHelper::title(JText::_('Собранные коллекции'), '_customer_site_options.png'); // COM_COLLECTOR1_TITLE__CUSTOMER_SITE_OPTIONS
 
         //Check if the form exists before showing the add/edit buttons
         $formPath = JPATH_COMPONENT_ADMINISTRATOR.DS.'views'.DS.'customer_site_options';

@@ -18,7 +18,6 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_collector1')) {
 
 // Include dependancies
 jimport('joomla.application.component.controller');
-
 $controller	= JController::getInstance('Collector1');
 $controller->execute(JRequest::getCmd('task'));
 $controller->redirect();

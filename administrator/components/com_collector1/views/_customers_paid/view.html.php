@@ -52,7 +52,7 @@ class Collector1View_customers_paid extends JView
 		$state	= $this->get('State');
 		$canDo	= Collector1Helper::getActions($state->get('filter.category_id'));
 
-		JToolBarHelper::title(JText::_('COM_COLLECTOR1_TITLE__CUSTOMERS_PAID'), '_customers_paid.png');
+		JToolBarHelper::title(JText::_('Внесшие предоплату'), '_customers_paid.png'); // COM_COLLECTOR1_TITLE__CUSTOMERS_PAID
 
         //Check if the form exists before showing the add/edit buttons
         $formPath = JPATH_COMPONENT_ADMINISTRATOR.DS.'views'.DS.'';

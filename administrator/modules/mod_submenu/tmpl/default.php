@@ -15,7 +15,6 @@ if (JRequest::getVar('option')=='com_collector1'){
 	$list=$lists['parent_list'];
 	$list_options=$lists['drop_down_list'];
 	$width_style_ul=" style='float:left; width:75%; margin:0;'";
-	$width_style_drop_down=" style='float:right; width:23%; font-size:12px; margin:3px 12px 0 0px;'";
 }
 
 $hide = JRequest::getInt('hidemainmenu');?>
@@ -48,14 +47,4 @@ foreach ($list as $item) :
 	endif;	
 endforeach; ?>
 </ul>
-<?
-if(!empty($list_options)):?>
-<div align="right"<?=$width_style_drop_down?>>
-	<select name="view" style="margin:0;">
-    	<option value="0">-Выберите таблицу-</option>
-<?	foreach ($list_options as $text=>$link):?>
-		<option value="<?=$link?>"><?=$text?></option>
-<?	endforeach;?>
-	</select>
-</div>   
-<? endif; ?>
+<? if(!empty($list_options)): SAdminMenuHelper::buildTablesDropDownList($list_options); endif; ?>

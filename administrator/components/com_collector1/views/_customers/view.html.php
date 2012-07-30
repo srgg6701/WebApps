@@ -52,7 +52,7 @@ class Collector1View_customers extends JView
 		$state	= $this->get('State');
 		$canDo	= Collector1Helper::getActions($state->get('filter.category_id'));
 
-		JToolBarHelper::title(JText::_('COM_COLLECTOR1_TITLE__CUSTOMERS'), '_customers.png');
+		JToolBarHelper::title(JText::_('Заказчики'), '_customers.png'); // COM_COLLECTOR1_TITLE__CUSTOMERS
 
         //Check if the form exists before showing the add/edit buttons
         $formPath = JPATH_COMPONENT_ADMINISTRATOR.DS.'views'.DS.'customers';

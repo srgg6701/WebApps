@@ -22,7 +22,7 @@ abstract class modSubmenuHelper
 	public static function getItems()
 	{
 		// Initialise variables.
-		$menu = JToolBar::getInstance('submenu');
+		$menu = JToolBar::getInstance('submenu'); 
 		$list = $menu->getItems();
 		if (!is_array($list) || !count($list)) {
 			return false;
