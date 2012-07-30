@@ -1,4 +1,4 @@
-<?php	echo __FILE__;
+<?php	
 /**
  * @version     2.1.0
  * @package     com_collector1
