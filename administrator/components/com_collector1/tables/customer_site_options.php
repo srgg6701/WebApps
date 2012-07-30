@@ -142,8 +142,4 @@ class Collector1Tablecustomer_site_options extends JTable
         $this->setError('');
         return true;
     }
-
-
-
-
 }

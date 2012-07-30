@@ -152,8 +152,9 @@ class UsersModelRegistration extends JModelForm
 		{
 			$user->set('activation', '');
 			$user->set('block', '0');
-			// Обработать коллекции юзераа - временные удалить, в таблице коллекций прописать его id
+			// Обработать коллекции юзера - временные удалить, в таблице коллекций прописать его id
 			require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
+			// Активация юзера админом осуществляется в /administrator/components/com_users/models/user.php  // activate();
 			if (!SCollection::makeCustomerDataPermanent($user))
 				JMail::sendErrorMess('Не удалось конвертировать данные предзаказчика после его регистрации','Ошибка конвертации статуса предзаказчика');
 			//echo " madeCollectionPermanent ";

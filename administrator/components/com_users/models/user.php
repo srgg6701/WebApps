@@ -1,4 +1,4 @@
-<?php
+<?php	//die('MODEL');
 /**
  * @package     Joomla.Administrator
  * @subpackage  com_users
@@ -391,22 +391,25 @@ class UsersModelUser extends JModelAdmin
 	 * @since   1.6
 	 */
 	function activate(&$pks)
-	{
+	{	
 		// Initialise variables.
 		$dispatcher	= JDispatcher::getInstance();
-		$user		= JFactory::getUser();
+		$user		= JFactory::getUser(); 
 		// Check if I am a Super Admin
 		$iAmSuperAdmin	= $user->authorise('core.admin');
 		$table		= $this->getTable();
 		$pks		= (array) $pks;
-
+		
 		JPluginHelper::importPlugin('user');
+		// Обработать коллекции юзера - временные удалить, в таблице коллекций прописать его id
+		require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
 
 		// Access checks.
 		foreach ($pks as $i => $pk)
-		{
+		{	//if($test='test') echo "\npk= $pk\n";
 			if ($table->load($pk))
-			{
+			{	//if($test='test') echo "\nLOAD!\n";
+				
 				$old	= $table->getProperties();
 				$allow	= $user->authorise('core.edit.state', 'com_users');
 				// Don't allow non-super-admin to delete a super admin
@@ -446,6 +449,11 @@ class UsersModelUser extends JModelAdmin
 							return false;
 						}
 
+						// обработать данные предзаказчика:
+						SCollection::makeCustomerDataPermanent( $pk, // т.к. не объект, будет получать юзера по его id
+																false, // $db
+																$test // включить режим тестирования
+															  );
 						// Fire the onAftereStoreUser event
 						$dispatcher->trigger('onUserAfterSave', array($table->getProperties(), false, true, null));
 					}
@@ -464,7 +472,7 @@ class UsersModelUser extends JModelAdmin
 				}
 			}
 		}
-
+		if ($test) die("\nACTIVATED ?");
 		return true;
 	}
 

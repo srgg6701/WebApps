@@ -117,6 +117,12 @@ abstract class modQuickIconHelper
 						'text' => JText::_('MOD_QUICKICON_PROFILE'),
 						'access' => true
 					),
+					array(
+						'link' => JRoute::_('index.php?option=com_collector1'),
+						'image' => 'header/icon-48-webapps.png',
+						'text' => JText::_('WEB-APPS'),
+						'access' => array('core.manage', 'com_collector1')
+					),
 				);
 			}
 			else

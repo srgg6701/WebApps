@@ -1,4 +1,4 @@
-<?php
+<?php	
 /**
  * @package		Joomla.Administrator
  * @subpackage	com_users
@@ -21,5 +21,7 @@ jimport('joomla.application.component.controller');
 
 // Execute the task.
 $controller	= JController::getInstance('Users');
+//var_dump("<h1>controller:</h1><pre>",$controller,"</pre>");
+//die();
 $controller->execute(JRequest::getCmd('task'));
 $controller->redirect();

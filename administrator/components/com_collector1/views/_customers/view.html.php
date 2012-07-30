@@ -1,4 +1,4 @@
-<?php
+<?php echo __FILE__;
 /**
  * @version     2.1.0
  * @package     com_collector1
@@ -102,7 +102,5 @@ class Collector1View_customers extends JView
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_collector1');
 		}
-
-
 	}
 }

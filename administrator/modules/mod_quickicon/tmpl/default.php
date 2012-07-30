@@ -9,7 +9,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 $html = JHtml::_('icons.buttons', $buttons);
-?>
+?><h1 style="margin:6px 0 0 4px;">CPanel</h1>
 <?php if (!empty($html)): ?>
 	<div class="cpanel"><?php echo $html;?></div>
 <?php endif;?>

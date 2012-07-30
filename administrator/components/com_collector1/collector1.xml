@@ -38,7 +38,7 @@
     <administration>
         <menu img="components/com_collector1/assets/images/s_com_collector1.png" >COM_COLLECTOR1</menu>
         <submenu>
-            			<menu link="option=com_collector1&amp;view=_customers" view="_customers" img="components/com_collector1/assets/images/s__customers.png" alt="Collector1/_customers">COM_COLLECTOR1__CUSTOMERS</menu>
+            <!--<menu link="option=com_collector1&amp;view=_customers" view="_customers" img="components/com_collector1/assets/images/s__customers.png" alt="Collector1/_customers">COM_COLLECTOR1__CUSTOMERS</menu>-->
 			<menu link="option=com_collector1&amp;view=_customers_paid" view="_customers_paid" img="components/com_collector1/assets/images/s__customers_paid.png" alt="Collector1/_customers_paid">COM_COLLECTOR1__CUSTOMERS_PAID</menu>
 			<menu link="option=com_collector1&amp;view=_customer_site_options" view="_customer_site_options" img="components/com_collector1/assets/images/s__customer_site_options.png" alt="Collector1/_customer_site_options">COM_COLLECTOR1__CUSTOMER_SITE_OPTIONS</menu>
 			<menu link="option=com_collector1&amp;view=_engines_all" view="_engines_all" img="components/com_collector1/assets/images/s__engines_all.png" alt="Collector1/_engines_all">COM_COLLECTOR1__ENGINES_ALL</menu>

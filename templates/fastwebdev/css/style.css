@@ -413,7 +413,7 @@ dd{
 }
 dd, .login fieldset input[type="text"], .login fieldset input[type="password"]{
 	display:block;
-	margin:10px 0 4px 40px;
+	margin:6px 0 4px 40px;
 }
 html,body{
 	height:100%;
@@ -549,7 +549,7 @@ label{
 }
 fieldset input[type="text"], fieldset input[type="password"]{
 	border:solid 1px #999;
-	padding:4px;
+	padding:2px;
 }
 fieldset.userdata {
 	border:none;

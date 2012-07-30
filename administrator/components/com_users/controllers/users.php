@@ -1,8 +1,10 @@
-<?php
+<?php	
+//var_dump("<h1>REQUEST:</h1><pre>",$_REQUEST,"</pre>");
+//die('controller');
 /**
  * @package     Joomla.Administrator
  * @subpackage  com_users
- *
+ * @ user, customer, precustomer
  * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -113,11 +115,11 @@ class UsersControllerUsers extends JControllerAdmin
 	 * Method to activate a record.
 	 *
 	 * @return  void
-	 *
+	 * @ user, model, activation, customer, precustomer
 	 * @since   1.6
 	 */
 	public function activate()
-	{
+	{	
 		// Check for request forgeries.
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
@@ -132,7 +134,6 @@ class UsersControllerUsers extends JControllerAdmin
 		{
 			// Get the model.
 			$model = $this->getModel();
-
 			// Change the state of the records.
 			if (!$model->activate($ids))
 			{
