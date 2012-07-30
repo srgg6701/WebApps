@@ -23,13 +23,10 @@ abstract class modSubmenuHelper
 	{
 		// Initialise variables.
 		$menu = JToolBar::getInstance('submenu');
-
 		$list = $menu->getItems();
-
 		if (!is_array($list) || !count($list)) {
 			return false;
 		}
-
 		return $list;
 	}
 }

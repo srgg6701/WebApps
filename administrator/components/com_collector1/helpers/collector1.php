@@ -22,6 +22,11 @@ class Collector1Helper
 	{
 
 		JSubMenuHelper::addEntry(
+			JText::_('COM_COLLECTOR1_TITLE__PRECUSTOMERS'),
+			'index.php?option=com_collector1&view=_precustomers',
+			$vName == '_precustomers'
+		);
+		JSubMenuHelper::addEntry(
 			JText::_('COM_COLLECTOR1_TITLE__CUSTOMERS'),
 			'index.php?option=com_collector1&view=_customers',
 			$vName == '_customers'
@@ -36,6 +41,17 @@ class Collector1Helper
 			'index.php?option=com_collector1&view=_customer_site_options',
 			$vName == '_customer_site_options'
 		);
+		JSubMenuHelper::addEntry(
+			JText::_('COM_COLLECTOR1_TITLE__CUSTOMER_ORDERS'),
+			'index.php?option=com_collector1&view=_customer_orders',
+			$vName == '_customer_orders'
+		);
+		JSubMenuHelper::addEntry(
+			JText::_('COM_COLLECTOR1_TITLE__FILES_NAMES'),
+			'index.php?option=com_collector1&view=_files_names',
+			$vName == '_files_names'
+		);
+
 		JSubMenuHelper::addEntry(
 			JText::_('COM_COLLECTOR1_TITLE__ENGINES_ALL'),
 			'index.php?option=com_collector1&view=_engines_all',
@@ -71,27 +87,11 @@ class Collector1Helper
 			'index.php?option=com_collector1&view=_site_options_partial',
 			$vName == '_site_options_partial'
 		);
-		JSubMenuHelper::addEntry(
-			JText::_('COM_COLLECTOR1_TITLE__PRECUSTOMERS'),
-			'index.php?option=com_collector1&view=_precustomers',
-			$vName == '_precustomers'
-		);
-		JSubMenuHelper::addEntry(
-			JText::_('COM_COLLECTOR1_TITLE__FILES_NAMES'),
-			'index.php?option=com_collector1&view=_files_names',
-			$vName == '_files_names'
-		);
-		JSubMenuHelper::addEntry(
-			JText::_('COM_COLLECTOR1_TITLE__CUSTOMER_ORDERS'),
-			'index.php?option=com_collector1&view=_customer_orders',
-			$vName == '_customer_orders'
-		);
-		JSubMenuHelper::addEntry(
+		/*JSubMenuHelper::addEntry(
 			JText::_('COM_COLLECTOR1_TITLE__VIRTUAL_ORDERSS'),
 			'index.php?option=com_collector1&view=_virtual_orderss',
 			$vName == '_virtual_orderss'
-		);
-
+		);*/
 	}
 
 	/**

@@ -27,9 +27,9 @@ class Collector1Controller extends JController
 		require_once JPATH_COMPONENT.'/helpers/collector1.php';
 
 		// Load the submenu.
-		Collector1Helper::addSubmenu(JRequest::getCmd('view', '_customers'));
+		Collector1Helper::addSubmenu(JRequest::getCmd('view', '_precustomers'));
 
-		$view		= JRequest::getCmd('view', '_customers');
+		$view		= JRequest::getCmd('view', '_precustomers');
         JRequest::setVar('view', $view);
 
 		parent::display();

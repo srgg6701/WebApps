@@ -46,6 +46,12 @@ abstract class modQuickIconHelper
 
 				self::$buttons[$key] = array(
 					array(
+						'link' => JRoute::_('index.php?option=com_collector1'),
+						'image' => 'header/icon-48-webapps.png',
+						'text' => JText::_('WEB-APPS'),
+						'access' => array('core.manage', 'com_collector1')
+					),
+					array(
 						'link' => JRoute::_('index.php?option=com_content&task=article.add'),
 						'image' => 'header/icon-48-article-add.png',
 						'text' => JText::_('MOD_QUICKICON_ADD_NEW_ARTICLE'),
@@ -116,12 +122,6 @@ abstract class modQuickIconHelper
 						'image' => 'header/icon-48-user-profile.png',
 						'text' => JText::_('MOD_QUICKICON_PROFILE'),
 						'access' => true
-					),
-					array(
-						'link' => JRoute::_('index.php?option=com_collector1'),
-						'image' => 'header/icon-48-webapps.png',
-						'text' => JText::_('WEB-APPS'),
-						'access' => array('core.manage', 'com_collector1')
 					),
 				);
 			}
