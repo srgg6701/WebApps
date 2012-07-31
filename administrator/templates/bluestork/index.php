@@ -47,6 +47,11 @@ if ($this->params->get('highContrast')) {
 <!--[if gte IE 8]>
 <link href="templates/<?php echo  $this->template ?>/css/ie8.css" rel="stylesheet" type="text/css" />
 <![endif]-->
+<style>
+div#content-box div#toolbar-box div.m {
+	border-radius:6px 6px 0 0 !important;
+}
+</style>
 </head>
 <body id="minwidth-body">
 	<div id="border-top" class="h_blue">

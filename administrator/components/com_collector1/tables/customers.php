@@ -142,8 +142,4 @@ class Collector1Tablecustomers extends JTable
         $this->setError('');
         return true;
     }
-
-
-
-
 }

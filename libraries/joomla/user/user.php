@@ -261,7 +261,7 @@ class JUser extends JObject
 			}
 		}
 		else
-		{
+		{ 
 			$id = $identifier;
 		}
 

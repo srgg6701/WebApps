@@ -11,5 +11,12 @@ defined('_JEXEC') or die;
 
 // Get the component title div
 $title = JFactory::getApplication()->get('JComponentTitle');
-
+if (JRequest::getVar('tabletype')=='base') {
+	$title=str_replace("<h2> ","<h2> <span style='font-weight:300'>Базовая таблица:</span> ",$title);
+//$t = new DOMDocument();
+//$t->loadHTML($title);
+//$h2=$t->getElementsByTagName('H2');
+//echo $doc->saveHTML();
+	//var_dump($h2);
+}
 require JModuleHelper::getLayoutPath('mod_title', $params->get('layout', 'default'));

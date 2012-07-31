@@ -228,7 +228,10 @@ abstract class JFactory
 				$instance = self::getSession()->get('user');
 			}
 		}
-
+		if ($instance->get('guest')!=1) {
+			require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SUser.php';
+			$instance = SUser::extractCustomerTableData($instance);
+		}
 		return $instance;
 	}
 

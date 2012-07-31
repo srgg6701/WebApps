@@ -7,89 +7,72 @@
  * @since		1.6
  */
 defined('_JEXEC') or die;
-
-
-
 $custom_data = $this->data_custom;
-
-
-
 ?>
 <fieldset id="users-profile-custom" class="users-profile-custom-<?php echo $group;?>">
-	<legend><?php echo JText::_('COM_USERS_PROFILE_INFO_USER'); ?></legend>
+	<legend><?php 
+		echo JText::_('COM_USERS_PROFILE_INFO_USER'); ?></legend>
 	<dl>
-		<?php if($custom_data['surname']!=null && $custom_data['surname']!=''): ?>
 		<dt>
-			<?php echo JText::_('COM_USERS_PROFILE_SURNAMENAME_LABEL'); ?>
+		<?php echo JText::_('COM_USERS_PROFILE_SURNAMENAME_LABEL'); ?>
 		</dt>
 		<dd>
-			<?php echo $custom_data['surname']; ?>
+			<?php $this->showValue('name');?>
 		</dd>
-	<?php endif;?>
-	<?php if($custom_data['middle_name']!=null && $custom_data['middle_name']!=''): ?>
 		<dt>
-			<?php echo JText::_('COM_USERS_PROFILE_MIDDLENAME_LABEL'); ?>
-		</dt>
-		<dd>
-			<?php echo $custom_data['middle_name']; ?>
+		<?php echo JText::_('COM_USERS_PROFILE_MIDDLENAME_LABEL'); ?>
+		</dt>		
+        <dd>
+			<?php $this->showValue('middle_name');?>
 		</dd>
-	<?php endif;?>
-	<?php if($custom_data['sex']!=null && $custom_data['sex']!=''): ?>
 		<dt>
-			<?php echo JText::_('COM_USERS_PROFILE_SEX_LABEL'); ?>
-		</dt>
-		<dd>
-			<?php echo $custom_data['sex']; ?>
+		<?php echo JText::_('COM_USERS_PROFILE_SEX_LABEL'); ?>
+		</dt>		
+        <dd>
+			<?php $this->showValue('sex');?>
 		</dd>
-	<?php endif;?>
-	<?php if($custom_data['birthday']!=null && $custom_data['birthday']!=''): ?>
 		<dt>
-			<?php echo JText::_('COM_USERS_PROFILE_BIRTHDAY_LABEL'); ?>
-		</dt>
-		<dd>
-			<?php echo $custom_data['birthday']; ?>
+		<?php echo JText::_('COM_USERS_PROFILE_BIRTHDAY_LABEL'); ?>
+		</dt>		
+        <dd>
+			<?php $this->showValue('birthday');?>
 		</dd>
-	<?php endif;?>
-	<?php if($custom_data['work_phone']!=null && $custom_data['work_phone']!=''): ?>
 		<dt>
-			<?php echo JText::_('COM_USERS_PROFILE_WORK_PHONE_LABEL'); ?>
-		</dt>
-		<dd>
-			<?php echo $custom_data['work_phone']; ?>
+		<?php echo JText::_('COM_USERS_PROFILE_WORK_PHONE_LABEL'); ?>
+		</dt>		
+        <dd>
+			<?php $this->showValue('work_phone');?>
 		</dd>
-	<?php endif;?>
-	<?php if($custom_data['mobila']!=null && $custom_data['mobila']!=''): ?>
 		<dt>
-			<?php echo JText::_('COM_USERS_PROFILE_MOBILA_LABEL'); ?>
-		</dt>
-		<dd>
-			<?php echo $custom_data['mobila']; ?>
+		<?php echo JText::_('COM_USERS_PROFILE_MOBILA_LABEL'); ?>
+		</dt>		
+        <dd>
+			<?php $this->showValue('mobila');?>
 		</dd>
-	<?php endif;?>
-	<?php if($custom_data['company_name']!=null && $custom_data['company_name']!=''): ?>
 		<dt>
-			<?php echo JText::_('COM_USERS_PROFILE_COMPANY_NAME_LABEL'); ?>
-		</dt>
-		<dd>
-			<?php echo $custom_data['company_name']; ?>
+		<?php echo JText::_('COM_USERS_PROFILE_COMPANY_NAME_LABEL'); ?>
+		</dt>		
+        <dd>
+			<?php $this->showValue('company_name');?>
 		</dd>
-	<?php endif;?>
-	<?php if($custom_data['city']!=null && $custom_data['city']!=''): ?>
 		<dt>
-			<?php echo JText::_('COM_USERS_PROFILE_CITY_LABEL'); ?>
-		</dt>
-		<dd>
-			<?php echo $custom_data['city']; ?>
+		<?php echo JText::_('COM_USERS_PROFILE_CITY_LABEL'); ?>
+		</dt>		
+        <dd>
+			<?php $this->showValue('city');?>
 		</dd>
-	<?php endif;?>
-	<?php if($custom_data['region']!=null && $custom_data['region']!=''): ?>
 		<dt>
-			<?php echo JText::_('COM_USERS_PROFILE_REGION_LABEL'); ?>
-		</dt>
-		<dd>
-			<?php echo $custom_data['region']; ?>
+		<?php echo JText::_('COM_USERS_PROFILE_REGION_LABEL'); ?>
+		</dt>		
+        <dd>
+			<?php $this->showValue('region');?>
 		</dd>
-	<?php endif;?>
+		<dt>
+		<?php echo JText::_('COM_USERS_PROFILE_ZIP_LABEL'); ?>
+		</dt>
+        <dd>
+			<?php $this->showValue('zip');?>
+		</dd>
 	</dl>
 </fieldset>
 

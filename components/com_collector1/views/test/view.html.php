@@ -7,7 +7,7 @@
 
 // No direct access
 defined('_JEXEC') or die;
-
+die();
 //jimport('joomla.application.component.view');
 
 /**

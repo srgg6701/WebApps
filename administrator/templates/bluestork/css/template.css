@@ -259,13 +259,14 @@ p.footer-tip {
 #element-box,
 #toolbar-box,
 #submenu-box {
-	padding: 10px 10px 0 10px;
+	padding: 1px 10px;
 }
 #element-box {
 	/*padding-top:0;*/
 }
 #toolbar-box {
 	background: #fbfbfb;
+	padding-top:8px;
 	/*margin-bottom: 10px;*/
 }
 
@@ -3190,9 +3191,9 @@ div#element-box div.section-box div.m {
 	border: 1px solid #ccc;
 	padding: 8px;
 	background-color: #f4f4f4;
-	-webkit-border-radius: 10px;
+	/*-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
-	border-radius: 6px;
+	border-radius: 6px;*/
 }
 
 .submenu-box, #submenu-box div.m {
@@ -3218,6 +3219,8 @@ div#toolbar-box div.m {
 
 div#element-box div.m {
 	/*padding: 10px;*/
+	border-radius:0 0 8px 8px;
+	padding-top:0;
 }
 
 div#element-box div.section-box {
@@ -3264,3 +3267,4 @@ span.update-badge {
 	padding-left: 20px;
 	background: transparent url(../images/admin/icon-16-allow.png) center left no-repeat;
 }
+/*	srgg	*/

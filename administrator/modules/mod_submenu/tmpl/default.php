@@ -21,7 +21,7 @@ $hide = JRequest::getInt('hidemainmenu');?>
 <ul id="submenu"<?=$width_style_ul?>>
 	<?php 
 foreach ($list as $item) :
-	if (!$item[3]):?>
+	if (!strstr($item[1],"&tabletype=base")):?>
 	<li>
 	<?php
 		if ($hide) :

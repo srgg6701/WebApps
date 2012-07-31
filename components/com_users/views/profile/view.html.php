@@ -115,4 +115,9 @@ class UsersViewProfile extends JView
 			$this->document->setMetadata('robots', $this->params->get('robots'));
 		}
 	}
+	
+	function showValue($value){
+		//var_dump("<h1>this:</h1><pre>",$this->data->name,"</pre>");
+		echo $this->data->$value? $this->data->$value:"Нет данных";
+	}
 }

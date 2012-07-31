@@ -1,4 +1,4 @@
-<?php	echo __FILE__;
+<?php	
 /**
  * @version     2.1.0
  * @package     com_collector1
@@ -70,6 +70,9 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_MOBILA', 'a.mobila', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
+                <?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_SKYPE', 'a.skype', $listDirn, $listOrder); ?>
+                </th>
+				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_COMPANY_NAME', 'a.company_name', $listDirn, $listOrder); ?>
 				</th>
 				<th class='left'>
@@ -105,7 +108,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 		</thead>
 		<tfoot>
 			<tr>
-				<td colspan="10">
+				<td colspan="11">
 					<?php echo $this->pagination->getListFooter(); ?>
 				</td>
 			</tr>
@@ -152,6 +155,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<td>
 					<?php echo $item->mobila; ?>
 				</td>
+				<td>&nbsp;</td>
 				<td>
 					<?php echo $item->company_name; ?>
 				</td>

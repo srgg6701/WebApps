@@ -18,8 +18,11 @@ JHtml::_('behavior.tooltip');
 <?php endif; ?>
 
 <?php echo $this->loadTemplate('core'); ?>
+
 <?php echo $this->loadTemplate('custom'); ?>
+
 <?php echo $this->loadTemplate('params'); ?>
+
 <?php if (JFactory::getUser()->id == $this->data->id) : ?>
 	<div class="spacer4"></div>
 		<div style="padding-left:10px;"><a class="button" href="<?php echo JRoute::_('index.php?option=com_users&task=profile.edit&user_id='.(int) $this->data->id);?>">
