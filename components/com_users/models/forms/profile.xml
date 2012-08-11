@@ -72,4 +72,109 @@
 			validate="equals"
 		/>
 	</fieldset>
+	
+	<fieldset name="extra"
+		label="COM_USERS_PROFILE_EXTRA_LABEL">
+		
+		<field name="surname" type="text"
+			description="COM_USERS_PROFILE_SURNAME_DESC"
+			filter="string"
+			label="COM_USERS_PROFILE_SURNAME_LABEL"
+			message="COM_USERS_PROFILE_SURNAME_MESSAGE"
+			required="false"
+			size="30"
+		/>
+
+		<field name="middle_name" type="text"
+			description="COM_USERS_PROFILE_MIDDLE_NAME_DESC"
+			filter="string"
+			label="COM_USERS_PROFILE_MIDDLE_NAME_LABEL"
+			message="COM_USERS_PROFILE_MIDDLE_NAME_MESSAGE"
+			required="false"
+			size="30"
+		/>
+		
+		<field name="sex" type="radio"
+			description="COM_USERS_PROFILE_SEX_DESC"
+			label="COM_USERS_PROFILE_SEX_LABEL"
+			message="COM_USERS_PROFILE_SEX_MESSAGE"
+			required="false"
+			size="30">
+				<option value="m">Мужской</option>
+    			<option value="f">Женский</option>
+		</field>
+		
+		<field name="birthday" type="text"
+			description="COM_USERS_PROFILE_BIRTHDAY_DESC"
+			filter="string"
+			label="COM_USERS_PROFILE_BIRTHDAY_LABEL"
+			message="COM_USERS_PROFILE_BIRTHDAY_MESSAGE"
+			required="false"
+			size="30"
+		/>
+		
+		<field name="work_phone" type="text"
+			description="COM_USERS_PROFILE_WORK_PHONE_DESC"
+			filter="string"
+			label="COM_USERS_PROFILE_WORK_PHONE_LABEL"
+			message="COM_USERS_PROFILE_WORK_PHONE_MESSAGE"
+			required="false"
+			size="30"
+		/>
+		
+		<field name="mobila" type="text"
+			description="COM_USERS_PROFILE_MOBILA_DESC"
+			filter="string"
+			label="COM_USERS_PROFILE_MOBILA_LABEL"
+			message="COM_USERS_PROFILE_MOBILA_MESSAGE"
+			required="false"
+			size="30"
+		/>
+		
+		<field name="skype" type="text"
+			description="COM_USERS_PROFILE_SKYPE_DESC"
+			filter="string"
+			label="COM_USERS_PROFILE_SKYPE_LABEL"
+			message="COM_USERS_PROFILE_SKYPE_MESSAGE"
+			required="false"
+			size="30"
+		/>
+		
+		<field name="company_name" type="text"
+			description="COM_USERS_PROFILE_COMPANY_NAME_DESC"
+			filter="string"
+			label="COM_USERS_PROFILE_COMPANY_NAME_LABEL"
+			message="COM_USERS_PROFILE_COMPANY_NAME_MESSAGE"
+			required="false"
+			size="30"
+		/>
+		
+		<field name="city" type="text"
+			description="COM_USERS_PROFILE_CITY_DESC"
+			filter="string"
+			label="COM_USERS_PROFILE_CITY_LABEL"
+			message="COM_USERS_PROFILE_CITY_MESSAGE"
+			required="false"
+			size="30"
+		/>
+		
+		<field name="region" type="text"
+			description="COM_USERS_PROFILE_REGION_DESC"
+			filter="string"
+			label="COM_USERS_PROFILE_REGION_LABEL"
+			message="COM_USERS_PROFILE_REGION_MESSAGE"
+			required="false"
+			size="30"
+		/>
+		
+		<field name="zip_code" type="text"
+			description="COM_USERS_PROFILE_ZIP_CODE_DESC"
+			filter="string"
+			label="COM_USERS_PROFILE_ZIP_CODE_LABEL"
+			message="COM_USERS_PROFILE_ZIP_CODE_MESSAGE"
+			required="false"
+			size="30"
+		/>
+		
+	</fieldset>
 </form>

@@ -21,6 +21,7 @@ class UsersViewProfile extends JView
 {
 	protected $data;
 	protected $form;
+	protected $form2;
 	protected $params;
 	protected $state;
 	protected $data_custom;
@@ -36,6 +37,8 @@ class UsersViewProfile extends JView
 		// Get the view data.
 		$this->data		= $this->get('Data');
 		$this->form		= $this->get('Form');
+		//$this->form2	= $this->get('Form','customers');
+		//var_dump("<h1>form:</h1><pre>",$this->form,"</pre>");
 		$this->state	= $this->get('State');
 		$this->params	= $this->state->get('params');
 		$this->data_custom = $this->get('Custom');
@@ -115,9 +118,9 @@ class UsersViewProfile extends JView
 			$this->document->setMetadata('robots', $this->params->get('robots'));
 		}
 	}
-	
+	// в другой файл не переносить, т.к. придётся создавать массу доп. установок.
 	function showValue($value){
 		//var_dump("<h1>this:</h1><pre>",$this->data->name,"</pre>");
-		echo $this->data->$value? $this->data->$value:"Нет данных";
+		echo $this->data->$value? $this->data->$value:"<span class='no_data'>Нет данных</span>";
 	}
 }

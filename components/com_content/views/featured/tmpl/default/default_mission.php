@@ -1,18 +1,20 @@
     <div id="mission_possible"<? 
 	$user = JFactory::getUser();
-	if ($user->get('guest')==1
-		 && $user->get('email') //precustomer
-	   ){
-		?> style="margin-top:-40px;"<? $precustomer=true;
+	
+	if ($precustomer) $page_layout="precustomer";
+	elseif($user->get('customer_status')=="enabled active") $page_layout="customer";
+	   
+	if ($page_layout){
+		?> style="margin-top:<? if($page_layout=="precustomer"){?>-40<? }else{?>-24<? }?>px;"<? $precustomer=true;
     }?>>
         <div id="mission_possible_header" class="txtBlack"><a href="index.php/mission">Миссия выполнима!</a>
-<? 	if ($precustomer) {?> 
+<? 	if ($page_layout) {?> 
 		<div style="font-size:14px; margin-bottom:-3px; margin-top:9px;" align="center">
         	<span style="background:#FF9; padding:6px 18px 6px 15px;" class="border_radius">Мы уже работаем над этим...</span>
         </div>
 <? 	}?> 
         </div>
-<? 	if (!$precustomer) {?> 
+<? 	if (!$page_layout) {?> 
         <div id="your_the_best">Ваш web-сайт будет самым лучшим &#8212;</div>
 <? 	}?> 
     </div>
@@ -43,7 +45,7 @@
               </tr>
           </table>
         </div>
-        <div id="mission_content2"<? if ($precustomer){?> style="position:absolute; right:30px; top:191px;"<? }?>>
+        <div id="mission_content2"<? if ($page_layout=="precustomer"){?> style="position:absolute; right:30px; top:191px;"<? }?>>
 
             <div id="our_principles">4 наших главных принципа:</div>
             

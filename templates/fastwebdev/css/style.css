@@ -217,6 +217,9 @@
 	background:#009900;
 	display:block;
 }
+.no_data{
+	color:#999999;
+}
 .offsetBottom{
 	padding-bottom:54px;
 }
@@ -1031,6 +1034,10 @@ dl {
 	margin-left:10px;
 	margin-bottom:10px;
 }
+fieldset#jform_sex{
+	border:none;
+	margin:0;
+}
 form#connect{
 	margin:20px;
 }
@@ -1100,6 +1107,11 @@ img.inlist{
 input [type="text"],textarea{
 	padding:3px 5px;
 	color: #866D2D;
+}
+input.validate-username[required="required"]{
+	border:none;
+	background:none;
+	font-weight:bold;
 }
 label{
 	margin-top:6px;

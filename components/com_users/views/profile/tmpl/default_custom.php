@@ -11,16 +11,16 @@ $custom_data = $this->data_custom;
 ?>
 <fieldset id="users-profile-custom" class="users-profile-custom-<?php echo $group;?>">
 	<legend><?php 
-		echo JText::_('COM_USERS_PROFILE_INFO_USER'); ?></legend>
+		echo JText::_('COM_USERS_PROFILE_EXTRA_LABEL');//COM_USERS_PROFILE_INFO_USER ?></legend>
 	<dl>
 		<dt>
-		<?php echo JText::_('COM_USERS_PROFILE_SURNAMENAME_LABEL'); ?>
+		<?php echo JText::_('COM_USERS_PROFILE_SURNAME_LABEL'); ?>
 		</dt>
 		<dd>
 			<?php $this->showValue('name');?>
 		</dd>
 		<dt>
-		<?php echo JText::_('COM_USERS_PROFILE_MIDDLENAME_LABEL'); ?>
+		<?php echo JText::_('COM_USERS_PROFILE_MIDDLE_NAME_LABEL'); ?>
 		</dt>		
         <dd>
 			<?php $this->showValue('middle_name');?>
@@ -68,7 +68,7 @@ $custom_data = $this->data_custom;
 			<?php $this->showValue('region');?>
 		</dd>
 		<dt>
-		<?php echo JText::_('COM_USERS_PROFILE_ZIP_LABEL'); ?>
+		<?php echo JText::_('COM_USERS_PROFILE_ZIP_CODE_LABEL'); ?>
 		</dt>
         <dd>
 			<?php $this->showValue('zip');?>

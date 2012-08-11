@@ -15,6 +15,16 @@ JHtml::_('behavior.formvalidation');
 //load user_profile plugin language
 $lang = JFactory::getLanguage();
 $lang->load( 'plg_user_profile', JPATH_ADMINISTRATOR );
+
+/*	##################################################################
+	ВНИМАНИЕ!
+	Набор дополнительных полей определяется в /models/forms/profile.xml
+	Блок 
+
+
+
+*/
+
 ?>
 <div class="profile-edit<?php echo $this->pageclass_sfx?>">
 <?php if ($this->params->get('show_page_heading')) : ?>
@@ -22,8 +32,16 @@ $lang->load( 'plg_user_profile', JPATH_ADMINISTRATOR );
 <?php endif; ?>
 
 <form id="member-profile" action="<?php echo JRoute::_('index.php?option=com_users&task=profile.save'); ?>" method="post" class="form-validate" enctype="multipart/form-data">
-<?php foreach ($this->form->getFieldsets() as $group => $fieldset):// Iterate through the form fieldsets and display each one.?>
-	<?php $fields = $this->form->getFieldset($group);?>
+<?php 	// 2 iterations for: core, params 
+		foreach ($this->form->getFieldsets() as $group => $fieldset):// Iterate through the form fieldsets and display each one.?>
+	<?php $fields = $this->form->getFieldset($group); //
+			//$fields['customers_data']=array('data1','data2','data3');
+		if (JRequest::getVar('test')) {
+			echo "<div style='background:#efefef;padding:10px'>";
+				echo "<h1>KEY</h1>".key($fields)."<H1>GROUP</H1>".$group."<hr size='4'>";
+				var_dump("<h1>fields:</h1><pre>",$fields,"</pre>");
+			echo "</div>";
+		}?>
 	<?php if (count($fields)):?>
 	<fieldset>
 		<?php if (isset($fieldset->label)):// If the fieldset has a label set, display it as the legend.?>

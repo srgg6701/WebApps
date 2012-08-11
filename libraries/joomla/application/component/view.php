@@ -457,11 +457,14 @@ class JView extends JObject
 	 * @since   11.1
 	 */
 	public function get($property, $default = null)
-	{	  
+	{	
+		if (JRequest::getVar('test')) echo ("<hr><h1>view.php BASE</h1><br>prorepry = ".$property); 
+		
 		// If $model is null we use the default model
 		if (is_null($default))
 		{
 			$model = $this->_defaultModel;
+			if (JRequest::getVar('test')) echo ("<h1>model = ".$model."</h1>"); 
 		}
 		else
 		{
@@ -474,14 +477,13 @@ class JView extends JObject
 			$method = 'get' . ucfirst($property);
 			// Does the method exist?
 			if (method_exists($this->_models[$model], $method))
-			{
+			{	if (JRequest::getVar('test')) echo ("<h1>method = ".$method."</h1>"); 
 				// The method exists, let's call it and return what we get
 				$result = $this->_models[$model]->$method();
 				return $result;
 			}
 
 		}
-
 		// Degrade to JObject::get
 		$result = parent::get($property, $default); 
 		return $result;

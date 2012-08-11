@@ -22,7 +22,7 @@ class Collector1Tablecustomers extends JTable
 	 */
 	public function __construct(&$db)
 	{
-		parent::__construct('#__webapps_customers', 'id', $db);
+		parent::__construct('#__webapps_extra_contacts', 'id', $db);
 	}
 
 	/**

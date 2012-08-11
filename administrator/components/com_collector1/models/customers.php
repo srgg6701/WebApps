@@ -111,7 +111,7 @@ class Collector1Modelcustomers extends JModelAdmin
 			// Set ordering to the last item if not set
 			if (@$table->ordering === '') {
 				$db = JFactory::getDbo();
-				$db->setQuery('SELECT MAX(ordering) FROM #__webapps_customers');
+				$db->setQuery('SELECT MAX(ordering) FROM #__webapps_extra_contacts');
 				$max = $db->loadResult();
 				$table->ordering = $max+1;
 			}

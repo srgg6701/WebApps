@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `#__webapps_customers` (
+CREATE TABLE IF NOT EXISTS `#__webapps_extra_contacts` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 `dnior_users_id` INT(11)  NOT NULL ,
 `surname` VARCHAR(255)  NOT NULL ,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `#__webapps_customers` (
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT COLLATE=utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `#__webapps_customers_paid` (
+CREATE TABLE IF NOT EXISTS `#__webapps_extra_contacts_paid` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 `dnior_customers_id` INT(11)  NOT NULL ,
 PRIMARY KEY (`id`)

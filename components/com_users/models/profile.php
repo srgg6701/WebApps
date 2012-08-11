@@ -149,7 +149,12 @@ class UsersModelProfile extends JModelForm
 
 	//достаем информацию о пользователе
 	public function getCustom(){
-		if ($this->data_custom === null) {
+		
+		//	НЕ ИСПОЛЬЗУЕТСЯ. 
+		//	Дополнительные данные юзера (табл. *extra_contacts) 
+		//	МОЖНО ИЗВЛЕЧЬ НЕПОСРЕДСТВЕННО ИЗ ЕГО ОБЪЕКТА (JFactory::getUser()), имено полей те же 
+		
+		/*if ($this->data_custom === null) {
 
 			$userId = $this->getState('user.id');
 			$db = JFactory::getDbo();
@@ -162,7 +167,7 @@ class UsersModelProfile extends JModelForm
 							  company_name,
 							  city,
 							  region
-					FROM #__webapps_customers
+					FROM #__webapps_extra_contacts
 					WHERE dnior_users_id = '.$userId;
 			$db->setQuery($query);
 
@@ -170,7 +175,7 @@ class UsersModelProfile extends JModelForm
 
 		}
 
-		return $this->data_custom;
+		return $this->data_custom;*/
 
 	}
 
@@ -181,7 +186,7 @@ class UsersModelProfile extends JModelForm
 		if (empty($form)) {
 			return false;
 		}
-
+		if (JRequest::getVar('test')) var_dump("<h1>form:</h1><pre>",$form,"</pre>");
 		return $form;
 	}
 

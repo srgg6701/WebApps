@@ -26,7 +26,7 @@ class Collector1Controller extends JController
 		$this->setRedirect(JRoute::_($this->go_page.'&site_new='.$last_record_id));
 	}
 	/**
-	 * Удалить запись из таблицы опций сайта заказчика. Данные из таблицы *customers не удалять
+	 * Удалить запись из таблицы опций сайта заказчика. Данные из таблицы *extra_contacts не удалять
 	 */
 	function delete(){ //task=delete
 		$collection_id=JRequest::getVar('collection_id');

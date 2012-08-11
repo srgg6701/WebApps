@@ -228,8 +228,12 @@ abstract class JFactory
 				$instance = self::getSession()->get('user');
 			}
 		}
-		if ($instance->get('guest')!=1) {
-			require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SUser.php';
+		// получить дополнительные данные - статус заказчика контакты из таблицы customers
+		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SUser.php';
+		$instance->customer_status=SUser::getCustomerStatus($instance);
+		if ( $instance->get('guest')!=1
+		     && !SUser::detectAdminStat($instance) // not an Admin
+		   ) {
 			$instance = SUser::extractCustomerTableData($instance);
 		}
 		return $instance;

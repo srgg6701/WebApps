@@ -373,7 +373,6 @@ class JForm
 				$fields[$field->id] = $field;
 			}
 		}
-
 		return $fields;
 	}
 
@@ -394,7 +393,7 @@ class JForm
 
 		// Make sure there is a valid JForm XML document.
 		if (!($this->xml instanceof JXMLElement))
-		{
+		{	if (JRequest::getVar('test')) die("<div style='background:#efefef;padding:10px'>! INSTANCEOF</div>");
 			return $fieldsets;
 		}
 
@@ -413,21 +412,20 @@ class JForm
 			}
 		}
 		else
-		{
+		{	//if (JRequest::getVar('test')) die("<div style='background:#efefef;padding:10px'>! GROUP</div>");
 			// Get an array of <fieldset /> elements and fieldset attributes.
 			$sets = $this->xml->xpath('//fieldset[@name] | //field[@fieldset]/@fieldset');
 		}
 
 		// If no fieldsets are found return empty.
 		if (empty($sets))
-		{
-
+		{	if (JRequest::getVar('test')) var_dump("<h1 style='color:red'>fieldsets:</h1><pre>",$fieldsets,"</pre>");
 			return $fieldsets;
-		}
-
+		}elseif (JRequest::getVar('test')) var_dump("<h1 style='color:red'>sets:</h1><pre>",$sets,"</pre><hr color='red' size=4>");
+		
 		// Process each found fieldset.
 		foreach ($sets as $set)
-		{
+		{	//if (JRequest::getVar('test')) echo ("<div style='background:yellow;padding:10px; margin:4px;'>set = $set</div>");
 			// Are we dealing with a fieldset element?
 			if ((string) $set['name'])
 			{
@@ -753,7 +751,7 @@ class JForm
 	 * @since   11.1
 	 */
 	public function loadFile($file, $reset = true, $xpath = false)
-	{
+	{	
 		// Check to see if the path is an absolute path.
 		if (!is_file($file))
 		{
@@ -784,7 +782,7 @@ class JForm
 	 * @since   11.1
 	 */
 	public function removeField($name, $group = null)
-	{
+	{	
 		// Make sure there is a valid JForm XML document.
 		if (!($this->xml instanceof JXMLElement))
 		{
@@ -815,7 +813,7 @@ class JForm
 	 * @since   11.1
 	 */
 	public function removeGroup($group)
-	{
+	{	
 		// Make sure there is a valid JForm XML document.
 		if (!($this->xml instanceof JXMLElement))
 		{
@@ -844,7 +842,7 @@ class JForm
 	 * @since   11.1
 	 */
 	public function reset($xml = false)
-	{
+	{	
 		unset($this->data);
 		$this->data = new JRegistry;
 
