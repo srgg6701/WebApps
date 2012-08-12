@@ -53,8 +53,8 @@ class JConfig {
 	public $sef_suffix = '0';
 	public $unicodeslugs = '0';
 	public $feed_limit = '10';
-	public $log_path = 'Z:\\home\\localhost\\www\\fastwebdev1/logs';
-	public $tmp_path = 'Z:\\home\\localhost\\www\\fastwebdev1/tmp';
+	public $log_path = 'Z:\\home\\localhost\\www\\WebApps/logs';
+	public $tmp_path = 'Z:\\home\\localhost\\www\\WebApps/tmp';
 	public $lifetime = '300';
 	public $session_handler = 'database';
 	public $MetaRights = '';

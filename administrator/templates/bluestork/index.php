@@ -52,6 +52,7 @@ div#content-box div#toolbar-box div.m {
 	border-radius:6px 6px 0 0 !important;
 }
 </style>
+<script type="text/javascript" src="<?=JUri::root()?>templates/fastwebdev/js/common.js"></script>
 </head>
 <body id="minwidth-body">
 	<div id="border-top" class="h_blue">

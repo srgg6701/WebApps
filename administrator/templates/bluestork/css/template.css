@@ -1,84 +1,12 @@
 @charset "UTF-8";
 
-/**
- * @package		Joomla.Administrator
- * @subpackage	templates.bluestork
- * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
- *
- */
-
-/* ------------------------- COLOR PALETTE FOR BLUE STORK
-
-Dark blue color: 			#146295 		RGB: 20/98/149
-Med blue color: 			#025A8D 		RGB: 2/90/141
-Light blue color: 			#70ace4 		RGB: 112/172/228
-Extra light blue color: 	#BED6FF 		RGB: 190/214/255
-Orange color: 				#FC8F30 		RGB: 252/143/48
-Light grey color:			#f7f7f7 		RGB: 247/247/247
-Medium grey color:			#d7d7d7 		RGB: 215/215/215
-Dark grey color:			#666666 		RGB: 102/102/102
-Border grey color:			#CCCCCC 		RGB: 204/204/204
-
-----------------------------------------------------------*/
-html {
-	overflow-y: scroll;
-}
-
-body {
-	margin: 10px;
-	padding: 0;
-	background: #fff;
-	padding-bottom: 1px;
-	font-size: 68.8%; /* Set base to 11px */
-}
-
-body,td,th {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-body#minwidth-body {
-	height: 95%;
-	min-width: 960px;
+* :focus, a:active {
+	outline: none;
 }
 
 a,img {
 	padding: 0;
 	margin: 0;
-}
-
-img {
-	border: 0 none;
-}
-
-.clr {
-	clear: both;
-	overflow: hidden;
-	height: 0;
-}
-
-form {
-	margin: 0;
-	padding: 0;
-}
-
-h1 {
-	margin: 0;
-	padding-bottom: 8px;
-	color: #025A8D;
-	font-size: 1.818em;
-}
-
-h3 {
-	font-size: 1.182em;
-}
-
-h4 {
-	font-size: 1.182em;
-}
-
-* :focus, a:active {
-	outline: none;
 }
 
 a:link {
@@ -97,102 +25,30 @@ a:hover {
 	text-decoration: underline;
 }
 
-fieldset {
-	margin-bottom: 10px;
-	border: 1px #ccc solid;
-	padding: 5px;
-	text-align: left;
-}
-
-legend {
-	color: #146295;
-	font-size: 1.182em;
-	font-weight: bold;
-}
-
-input, select {
-	font-size: 0.909em;
-	border: 1px solid silver;
-	background: #fff;
-}
-
-textarea {
-	font-size: 1.273em;
-	border: 1px solid silver;
-}
-
-iframe {
-	border: 0;
-}
-
-.invalid {
-	color: red;
-	font-weight: bold;
-}
-
-input.invalid {
-	border: 1px solid red;
-}
-
-input.disabled {
-	background-color: #F0F0F0;
-}
-
-input.button {
-	cursor: pointer;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-	background-color: #ffd;
-}
-
-.enabled,
-.success {
-	color: green;
-	font-weight: bold;
-}
-
-.disabled,
-p.error {
-	color: red;
-	font-weight: bold;
-}
-
-.protected {
-	color: #999999;
-}
-
-p.warning {
-	color: red;
-	font-weight: bold;
-	font-size: 1.091em;
-}
-
-p.nowarning {
-	color: #333;
-	font-weight: bold;
-	font-size: 1.091em;
-}
-
 .allow,
 span.writable {
 	color: green;
 }
 
-.deny,
-span.unwritable  {
-	color: red;
+#module-status .backloggedin-users {
+	background: url(../images/menu/icon-16-back-user.png) 3px 3px no-repeat;
 }
 
-.none 			{ color: #aaa; }
-.hide 			{ display: none; }
-.hidebtn 		{ border: 0; padding: 0;margin:0;width: 0;height: 0;}
-.hidelabeltxt	{ text-indent: -9999em; }
+body {
+	margin: 10px;
+	padding: 0;
+	background: #fff;
+	padding-bottom: 1px;
+	font-size: 68.8%; /* Set base to 11px */
+}
 
-.nowrap {
-	white-space: nowrap;
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body#minwidth-body {
+	height: 95%;
+	min-width: 960px;
 }
 
 /* -- OVERALL STYLES ----------------------------- */
@@ -225,22 +81,6 @@ span.unwritable  {
 	padding: 7px 10px 0 0;
 }
 
-#header-box {
-	border: 1px solid #ccc;
-	background: #f0f0f0;
-}
-
-/* Footer */
-#footer .copyright {
-	margin: 10px;
-	text-align: center;
-	line-height: 160%;
-}
-
-p.footer-tip {
-	margin-top: 15px;
-}
-
 /* Body */
 #content-box {
 	border: 1px solid #ccc;
@@ -250,6 +90,30 @@ p.footer-tip {
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	margin-bottom: 5px;
+}
+
+.clr {
+	clear: both;
+	overflow: hidden;
+	height: 0;
+}
+
+/* Footer */
+#footer .copyright {
+	margin: 10px;
+	text-align: center;
+	line-height: 160%;
+}
+
+.deny,
+span.unwritable  {
+	color: red;
+}
+
+.disabled,
+p.error {
+	color: red;
+	font-weight: bold;
 }
 
 #element-box {
@@ -263,6 +127,160 @@ p.footer-tip {
 }
 #element-box {
 	/*padding-top:0;*/
+}
+
+.enabled,
+.success {
+	color: green;
+	font-weight: bold;
+}
+
+fieldset {
+	margin-bottom: 10px;
+	border: 1px #ccc solid;
+	padding: 5px;
+	text-align: left;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	margin: 0;
+	padding-bottom: 8px;
+	color: #025A8D;
+	font-size: 1.818em;
+}
+
+h3 {
+	font-size: 1.182em;
+}
+
+h4 {
+	font-size: 1.182em;
+}
+
+#header-box {
+	border: 1px solid #ccc;
+	background: #f0f0f0;
+}
+.hide 			{ display: none; }
+.hidebtn 		{ border: 0; padding: 0;margin:0;width: 0;height: 0;}
+.hidelabeltxt	{ text-indent: -9999em; }
+
+/**
+ * @package		Joomla.Administrator
+ * @subpackage	templates.bluestork
+ * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ *
+ */
+
+/* ------------------------- COLOR PALETTE FOR BLUE STORK
+
+Dark blue color: 			#146295 		RGB: 20/98/149
+Med blue color: 			#025A8D 		RGB: 2/90/141
+Light blue color: 			#70ace4 		RGB: 112/172/228
+Extra light blue color: 	#BED6FF 		RGB: 190/214/255
+Orange color: 				#FC8F30 		RGB: 252/143/48
+Light grey color:			#f7f7f7 		RGB: 247/247/247
+Medium grey color:			#d7d7d7 		RGB: 215/215/215
+Dark grey color:			#666666 		RGB: 102/102/102
+Border grey color:			#CCCCCC 		RGB: 204/204/204
+
+----------------------------------------------------------*/
+html {
+	overflow-y: scroll;
+}
+
+iframe {
+	border: 0;
+}
+
+img {
+	border: 0 none;
+}
+
+#module-unread img,
+#module-unread-new img {
+	border: 0;
+}
+
+input, select {
+	font-size: 0.909em;
+	border: 1px solid silver;
+	background: #fff;
+}
+
+input.invalid {
+	border: 1px solid red;
+}
+
+input.disabled {
+	background-color: #F0F0F0;
+}
+
+input.button {
+	cursor: pointer;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+	background-color: #ffd;
+}
+
+.invalid {
+	color: red;
+	font-weight: bold;
+}
+
+legend {
+	color: #146295;
+	font-size: 1.182em;
+	font-weight: bold;
+}
+
+#module-status .loggedin-users {
+	background: url(../images/menu/icon-16-user.png) 3px 3px no-repeat;
+}
+
+#module-status .logout {
+	background: url(../images/menu/icon-16-logout.png) 3px 3px no-repeat;
+}
+
+/* -- STATUS STYLES ----------------------------- */
+
+#module-status {
+	float: right;
+}
+
+.none 			{ color: #aaa; }
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.protected {
+	color: #999999;
+}
+
+p.warning {
+	color: red;
+	font-weight: bold;
+	font-size: 1.091em;
+}
+
+p.nowarning {
+	color: #333;
+	font-weight: bold;
+	font-size: 1.091em;
+}
+
+p.footer-tip {
+	margin-top: 15px;
 }
 #toolbar-box {
 	background: #fbfbfb;
@@ -281,12 +299,6 @@ p.footer-tip {
 
 #submenu-box .padding {
 	padding: 0;
-}
-
-/* -- STATUS STYLES ----------------------------- */
-
-#module-status {
-	float: right;
 }
 
 #module-status > span {
@@ -314,20 +326,8 @@ p.footer-tip {
 	font-weight: bold;
 }
 
-#module-status .loggedin-users {
-	background: url(../images/menu/icon-16-user.png) 3px 3px no-repeat;
-}
-
-#module-status .backloggedin-users {
-	background: url(../images/menu/icon-16-back-user.png) 3px 3px no-repeat;
-}
-
 #module-status .multilanguage {
 	background: url(../images/menu/icon-16-language.png) 3px 3px no-repeat;
-}
-
-#module-status .logout {
-	background: url(../images/menu/icon-16-logout.png) 3px 3px no-repeat;
 }
 
 #module-unread-new span {
@@ -339,11 +339,6 @@ p.footer-tip {
 #module-unread span {
 	color: black;
 	text-decoration: none;
-}
-
-#module-unread img,
-#module-unread-new img {
-	border: 0;
 }
 
 span.stat-notice {
@@ -385,6 +380,11 @@ span.note {
 textarea#codeedit {
 	width: 100%;
 	height: 500px;
+}
+
+textarea {
+	font-size: 1.273em;
+	border: 1px solid silver;
 }
 
 .temprev {
@@ -1304,7 +1304,22 @@ fieldset.panelform-legacy label.radiobtn-on	{
 p.jform_desc {
 	clear: left;
 }
-
+.pseudo_link_dotted{
+	cursor:pointer;
+	text-decoration:none;
+	border-bottom: dashed 1px #006600;
+	font-size:1.1em;
+	color:#006600;
+}
+.pseudo_link_dotted:hover{
+	color:#000000;
+	text-decoration:none;
+	border-bottom:none;
+	background:#FFF;
+}
+.madeEditable{
+	font-size:1.1em;
+}
 div#jform_ordering {
 	font-size: 1.091em;
 	margin-top: 3px;

@@ -117,4 +117,29 @@ class Collector1Helper
 
 		return $result;
 	}
+	/**
+	 * Convert objects' set (collections id is, orders id id)
+	 * @ orders, collections
+	 * @return	JObject
+	 * @since	1.6
+	 */
+	public function makeObjectsLinks($orders_ids){
+		$j=0;
+		foreach($orders_ids as $i=>$order_id) :
+			if ($j) echo ", ";
+			?><a href="#" onClick="return false;"><?
+			echo $order_id;
+			?></a><?	
+			$j++;
+		endforeach;
+	}	
+	/**
+	 * Convert object into editable field
+	 * @ objects
+	 * @return	JObject
+	 * @since	1.6
+	 */
+	public function makeObjectEditableField($object,$object_id){
+		?><span id="_<?=$object_id?>" title="DblClick" class="pseudo_link_dotted" onDblClick='makeObjectEditableField(this);'><?=$object?></span><?	
+	}
 }

@@ -10,6 +10,10 @@
 
 // no direct access
 defined('_JEXEC') or die;
+//массив подключаемых файлов:
+$arrPathReq=array('SData','SDebug','SErrors','SFiles','SCollection','SSite','SUser');
+for($i=0,$j=count($arrPathReq);$i<$j;$i++)
+	require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.$arrPathReq[$i].'.php';
 
 // Access check.
 if (!JFactory::getUser()->authorise('core.manage', 'com_collector1')) {

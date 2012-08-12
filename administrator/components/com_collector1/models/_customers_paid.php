@@ -102,7 +102,7 @@ class Collector1Model_customers_paid extends JModelList
 				'a.*'
 			)
 		);
-		$query->from('`#__webapps_extra_contacts_paid` AS a');
+		$query->from('`#__webapps_customers_paid` AS a');
 
 
 

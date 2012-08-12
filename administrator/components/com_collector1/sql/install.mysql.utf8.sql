@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `#__webapps_extra_contacts` (
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT COLLATE=utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `#__webapps_extra_contacts_paid` (
+CREATE TABLE IF NOT EXISTS `#__webapps_customers_paid` (
 `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 `dnior_customers_id` INT(11)  NOT NULL ,
 PRIMARY KEY (`id`)
