@@ -22,7 +22,7 @@ class Collector1Tablecustomers extends JTable
 	 */
 	public function __construct(&$db)
 	{
-		parent::__construct('#__webapps_extra_contacts', 'id', $db);
+		parent::__construct('#__users', 'id', $db);
 	}
 
 	/**
@@ -33,7 +33,7 @@ class Collector1Tablecustomers extends JTable
 	 * @see		JTable:bind
 	 * @since	1.5
 	 */
-	public function bind($array, $ignore = '')
+	/*public function bind($array, $ignore = '')
 	{
 		if (isset($array['params']) && is_array($array['params'])) {
 			$registry = new JRegistry();
@@ -47,12 +47,12 @@ class Collector1Tablecustomers extends JTable
 			$array['metadata'] = (string)$registry;
 		}
 		return parent::bind($array, $ignore);
-	}
+	}*/
 
     /**
     * Overloaded check function
     */
-    public function check() {
+    /*public function check() {
 
         //If there is an ordering column and this is a new row then get the next ordering value
         if (property_exists($this, 'ordering') && $this->id == 0) {
@@ -60,8 +60,7 @@ class Collector1Tablecustomers extends JTable
         }
         
         return parent::check();
-    }
-
+    }*/
 
     /**
      * Method to set the publishing state for a row or list of rows in the database
@@ -75,7 +74,7 @@ class Collector1Tablecustomers extends JTable
      * @return    boolean    True on success.
      * @since    1.0.4
      */
-    public function publish($pks = null, $state = 1, $userId = 0)
+    /*public function publish($pks = null, $state = 1, $userId = 0)
     {
         // Initialise variables.
         $k = $this->_tbl_key;
@@ -141,5 +140,5 @@ class Collector1Tablecustomers extends JTable
 
         $this->setError('');
         return true;
-    }
+    }*/
 }

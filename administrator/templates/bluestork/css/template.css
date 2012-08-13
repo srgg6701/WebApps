@@ -29,7 +29,13 @@ a:hover {
 span.writable {
 	color: green;
 }
-
+.addDataInPlace{
+	background:url(../images/admin/icon-16-add.png) top left no-repeat;
+	width:20px;
+	height:20px;
+	font-size:17px;
+	cursor:pointer;
+}
 #module-status .backloggedin-users {
 	background: url(../images/menu/icon-16-back-user.png) 3px 3px no-repeat;
 }

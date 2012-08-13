@@ -66,11 +66,12 @@ function dateValidation(dataField){
 	return true;		
 }
 //
-function changeFieldValue(fieldID/*,user_id*/){
+function changeFieldValue(fieldID,user_type){
   try{
-	var user_id=fieldID.id.substr(0,fieldID.id.indexOf("__"));
-	var field_name=fieldID.id.substr(fieldID.id.indexOf("__")+1);
+	var user_id=fieldID.substr(0,fieldID.indexOf("__"));
+	var field_name=fieldID.substr(fieldID.indexOf("__")+2);
 	var fieldValue=document.getElementById(fieldID).value;
+	var sourceContainerID=user_id+'_'+field_name;
 	var mess=false;
 	if(fieldID.indexOf('email')!=-1){ // email?
 		if (!fieldValue||fieldValue==' ')
@@ -81,28 +82,38 @@ function changeFieldValue(fieldID/*,user_id*/){
 				mess='Емэйл указан некорректно!';
 			}
 		}
+	}else if( fieldID.indexOf('skype')!=-1
+			  || fieldID.indexOf('phone')!=-1
+  			  || fieldID.indexOf('mobila')!=-1
+  			  || fieldID.indexOf('icq')!=-1
+  			  || fieldID.indexOf('gtalk')!=-1
+			){
+		fieldValue=fieldValue.replace(/\s/g,''); //удалить все пробелы
 	}
 	if (mess){
 		alert(mess);
 	}else{
 		//go to script
 		// Адрес текущей страницы
-		var url = 'index.php?option=com_ajax&format=raw&action=update&object=precustomer_data&data_type='+field_name+'&user_id='+user_id; // e.g. 25.2.doc
+		var url = 'index.php?option=com_ajax&format=raw&action=update&object='+user_type+'&data_type='+field_name+'&data_value='+fieldValue+'&user_id='+user_id; // e.g. 25.2.doc
 		// Объект XMLHttpRequest
 		var request = getXmlHttpRequest();
 
 		var domain='http://'+window.location.hostname;
 		if (window.location.hostname.indexOf('localhost')!=-1) domain+='/webapps';
 		url=domain+'/'+url;
-		alert(url);
+		//alert(url);
 		// Запрос на сервер
 		request.open("GET", url, false);
 		request.send(null);
 		// Чтение ответа
 		if (request.responseText.indexOf('ОШИБКА:')!=-1) {
 			alert('Bad request. ResponseText: '+request.responseText);
-		}else{
-			//var tLink=event_source_object.parentNode.parentNode.style.display='none'; //div
+		}else{ // сбросить состояние редактирования для поля с исходными данными:
+			var sourceContainer=document.getElementById(sourceContainerID);
+			sourceContainer.innerHTML=fieldValue;
+			makeObjectEditableField(sourceContainer,user_type);
+			
 		} 
 		var wtest1=0; // если надо протестироваться
 		if (wtest1>0) window.open(url,'ajax');
@@ -110,26 +121,20 @@ function changeFieldValue(fieldID/*,user_id*/){
   }catch(e){
 		alert(e.message);
   }
-}/*
-// сбросить состояние редактирования:
-function cancelEditableField(outerContainer,skipNodeId,style){
-  try{	
-	var sourceNode=document.getElementById(skipNodeId);
-	outerContainer.innerHTML='<'+sourceNode.tagName+' id="'+sourceNode.id+'" class="'+sourceNode.className+'" ondblclick="makeObjectEditableField(this);" title="DblClick">'+sourceNode.innerHTML+'</'+sourceNode.tagName+'>';
-  }catch(e){
-	  alert('cancelEditableField ERROR: '+e.message);
-  }
-}*/
+}
 //преобразовать текст в редактируемое поле
 function makeObjectEditableField( tObject, // text container // this // <SPAN>Content</SPAN>
-								  //user_id, // user data
+								  user_type,
 								  newElementType
 								){
   try{
+	if (!newElementType) newElementType='input';
 	var user_id=tObject.id.substr(0,tObject.id.indexOf("_"));
 	var OuterNode=tObject.parentNode; // TD
-	if (!newElementType) newElementType='input';
-	if (tObject.style.display!='none'){ 
+	var spanComType;
+	spanComType=(tObject.className.indexOf('addDataInPlace')!=-1)? 'add':'edit';
+	//перейти в режим редактирования:
+	if (tObject.style.display!='none'){	 
 		var objContent=tObject.innerHTML; 
 		var editableField=document.createElement(newElementType);
 		var fieldCommands=document.createElement('span');
@@ -137,19 +142,24 @@ function makeObjectEditableField( tObject, // text container // this // <SPAN>Co
 		editableField.className='madeEditable';
 		OuterNode.appendChild(editableField); // field
 		OuterNode.appendChild(fieldCommands); // commands - OK, cancel
-		if (newElementType=='input') editableField.value=objContent; 
+		if ( newElementType=='input'
+		     && spanComType=='edit'
+		   ) editableField.value=objContent; 
 		var allCommands='<img title="Подтвердить" src="templates/bluestork/images/menu/icon-16-apply.png" style="width:16px; height:16px; margin-left:10px;" ';
-		allCommands+='onClick="changeFieldValue(\''+editableField.id+'\');">';		
+		allCommands+='onClick="changeFieldValue(\''+editableField.id+'\',\''+user_type+'\');">';		
 		allCommands+='<img title="Отменить изменения" src="templates/bluestork/images/menu/return_back.png" style="width:16px; height:16px; margin-left:6px;" '; 
-		allCommands+='onClick="makeObjectEditableField(document.getElementById(\''+tObject.id+'\'),\''+newElementType+'\');">';	
+		allCommands+='onClick="makeObjectEditableField(document.getElementById(\''+tObject.id+'\'),\''+user_type+'\',\''+newElementType+'\');">';	
 		
 		fieldCommands.innerHTML=allCommands;		
 		
 		tObject.style.display='none';
 	
-	}else{
+	}else{	//выйти из режима редактирования
 		// <TD><SPAN>Content</SPAN></TD>
-		OuterNode.innerHTML='<'+tObject.tagName+' id="'+tObject.id+'" class="'+tObject.className+'" ondblclick="makeObjectEditableField(this);" title="DblClick">'+tObject.innerHTML+'</'+tObject.tagName+'>';
+		var spanEvent;
+		if(spanComType=='edit') spanEvent='ondblclick';
+		else spanEvent='onclick'; //alert('OuterNode HTML 1:\n'+OuterNode.innerHTML);
+		OuterNode.innerHTML='<'+tObject.tagName+' id="'+tObject.id+'" class="'+tObject.className+'" '+spanEvent+'="makeObjectEditableField(this);" title="'+spanEvent+'">'+tObject.innerHTML+'</'+tObject.tagName+'>'; //alert('OuterNode HTML 2:\n'+OuterNode.innerHTML);
 	}
   }catch(e){
 	alert(e.message);

@@ -139,7 +139,21 @@ class Collector1Helper
 	 * @return	JObject
 	 * @since	1.6
 	 */
-	public function makeObjectEditableField($object,$object_id){
-		?><span id="<?=$object_id?>" title="DblClick" class="pseudo_link_dotted" onDblClick='makeObjectEditableField(this);'><?=$object?></span><?	
+	public function makeObjectEditableField($object_id,$user_type,$object=false){
+		if (!$object) {
+			$class="addDataInPlace";
+			$event="onClick";
+		}
+		else {
+			$class="pseudo_link_dotted";
+			$event="onDblClick";
+		}
+		ob_start();
+		?><span id="<?=$object_id?>" title="<?=$event?>" class="<?=$class?>" <?=$event?>="makeObjectEditableField(this,'<?=$user_type?>');"><?
+			echo ($object)? $object:' &nbsp; &nbsp; &nbsp; &nbsp; ';
+		?></span>
+<?		$span=ob_get_contents();
+		ob_end_clean();
+		echo $span;
 	}
 }
