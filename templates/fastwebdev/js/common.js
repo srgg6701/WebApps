@@ -66,16 +66,20 @@ function dateValidation(dataField){
 	return true;		
 }
 //
-function changeFieldValue(fieldID,user_id){
+function changeFieldValue(fieldID/*,user_id*/){
   try{
+	var user_id=fieldID.id.substr(0,fieldID.id.indexOf("__"));
+	var field_name=fieldID.id.substr(fieldID.id.indexOf("__")+1);
 	var fieldValue=document.getElementById(fieldID).value;
 	var mess=false;
-	if (!fieldValue||fieldValue==' ')
-		mess='Редактируемое поле не заполнено!';
-	else if(fieldID.indexOf('email')!=-1){ // email?
-		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-		if (!filter.test(fieldValue)) {
-			mess='Емэйл указан некорректно!';
+	if(fieldID.indexOf('email')!=-1){ // email?
+		if (!fieldValue||fieldValue==' ')
+			mess='Редактируемое поле не заполнено!';
+		else{
+			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if (!filter.test(fieldValue)) {
+				mess='Емэйл указан некорректно!';
+			}
 		}
 	}
 	if (mess){
@@ -83,7 +87,7 @@ function changeFieldValue(fieldID,user_id){
 	}else{
 		//go to script
 		// Адрес текущей страницы
-		var url = 'index.php?option=com_ajax&format=raw&action=update&object=precustomer_data&user_id='+user_id; // e.g. 25.2.doc
+		var url = 'index.php?option=com_ajax&format=raw&action=update&object=precustomer_data&data_type='+field_name+'&user_id='+user_id; // e.g. 25.2.doc
 		// Объект XMLHttpRequest
 		var request = getXmlHttpRequest();
 
@@ -106,7 +110,7 @@ function changeFieldValue(fieldID,user_id){
   }catch(e){
 		alert(e.message);
   }
-}
+}/*
 // сбросить состояние редактирования:
 function cancelEditableField(outerContainer,skipNodeId,style){
   try{	
@@ -115,27 +119,36 @@ function cancelEditableField(outerContainer,skipNodeId,style){
   }catch(e){
 	  alert('cancelEditableField ERROR: '+e.message);
   }
-}
+}*/
 //преобразовать текст в редактируемое поле
-function makeObjectEditableField( tObject, // text container
-								  user_id, // user data
+function makeObjectEditableField( tObject, // text container // this // <SPAN>Content</SPAN>
+								  //user_id, // user data
 								  newElementType
 								){
   try{
+	var user_id=tObject.id.substr(0,tObject.id.indexOf("_"));
 	var OuterNode=tObject.parentNode; // TD
 	if (!newElementType) newElementType='input';
 	if (tObject.style.display!='none'){ 
 		var objContent=tObject.innerHTML; 
 		var editableField=document.createElement(newElementType);
 		var fieldCommands=document.createElement('span');
-		editableField.id=tObject.id.substr(1); // set id to field
+		editableField.id=user_id+'__'+tObject.id.substr(tObject.id.indexOf("_")+1); //43__email
 		editableField.className='madeEditable';
 		OuterNode.appendChild(editableField); // field
 		OuterNode.appendChild(fieldCommands); // commands - OK, cancel
 		if (newElementType=='input') editableField.value=objContent; 
-		fieldCommands.innerHTML='<img src="templates/bluestork/images/menu/icon-16-apply.png" style="width:16px; height:16px; margin-left:10px;" onClick="changeFieldValue(\''+editableField.id+'\',\''+user_id+'\');" title="Подтвердить"><img src="templates/bluestork/images/menu/return_back.png" style="width:16px; height:16px; margin-left:6px;" onClick="cancelEditableField(this.parentNode.parentNode,\''+tObject.id+'\');" title="Отменить изменения">';
+		var allCommands='<img title="Подтвердить" src="templates/bluestork/images/menu/icon-16-apply.png" style="width:16px; height:16px; margin-left:10px;" ';
+		allCommands+='onClick="changeFieldValue(\''+editableField.id+'\');">';		
+		allCommands+='<img title="Отменить изменения" src="templates/bluestork/images/menu/return_back.png" style="width:16px; height:16px; margin-left:6px;" '; 
+		allCommands+='onClick="makeObjectEditableField(document.getElementById(\''+tObject.id+'\'),\''+newElementType+'\');">';	
+		
+		fieldCommands.innerHTML=allCommands;		
+		
 		tObject.style.display='none';
+	
 	}else{
+		// <TD><SPAN>Content</SPAN></TD>
 		OuterNode.innerHTML='<'+tObject.tagName+' id="'+tObject.id+'" class="'+tObject.className+'" ondblclick="makeObjectEditableField(this);" title="DblClick">'+tObject.innerHTML+'</'+tObject.tagName+'>';
 	}
   }catch(e){
