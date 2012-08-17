@@ -90,7 +90,7 @@ function changeFieldValue(fieldID,user_type){
 			){
 		fieldValue=fieldValue.replace(/\s/g,''); //удалить все пробелы
 	}
-	if (mess){
+	if (mess){ // поле не заполнено
 		alert(mess);
 	}else{
 		//go to script
@@ -98,7 +98,6 @@ function changeFieldValue(fieldID,user_type){
 		var url = 'index.php?option=com_ajax&format=raw&action=update&object='+user_type+'&data_type='+field_name+'&data_value='+fieldValue+'&user_id='+user_id; // e.g. 25.2.doc
 		// Объект XMLHttpRequest
 		var request = getXmlHttpRequest();
-
 		var domain='http://'+window.location.hostname;
 		if (window.location.hostname.indexOf('localhost')!=-1) domain+='/webapps';
 		url=domain+'/'+url;
@@ -112,8 +111,7 @@ function changeFieldValue(fieldID,user_type){
 		}else{ // сбросить состояние редактирования для поля с исходными данными:
 			var sourceContainer=document.getElementById(sourceContainerID);
 			sourceContainer.innerHTML=fieldValue;
-			makeObjectEditableField(sourceContainer,user_type);
-			
+			makeObjectEditableField(sourceContainer,user_type); // вернуть объектам прежнее отображение
 		} 
 		var wtest1=0; // если надо протестироваться
 		if (wtest1>0) window.open(url,'ajax');
@@ -129,15 +127,24 @@ function makeObjectEditableField( tObject, // text container // this // <SPAN>Co
 								){
   try{
 	if (!newElementType) newElementType='input';
+	var spaces=" &nbsp; &nbsp; &nbsp; &nbsp; ";
 	var user_id=tObject.id.substr(0,tObject.id.indexOf("_"));
 	var OuterNode=tObject.parentNode; // TD
 	var spanComType;
-	spanComType=(tObject.className.indexOf('addDataInPlace')!=-1)? 'add':'edit';
-	//перейти в режим редактирования:
-	if (tObject.style.display!='none'){	 
-		var objContent=tObject.innerHTML; 
-		var editableField=document.createElement(newElementType);
-		var fieldCommands=document.createElement('span');
+	if (tObject.innerHTML==' '||!tObject.innerHTML) {
+		tObject.innerHTML=spaces;
+		tObject.className='addDataInPlace';
+		spanComType='add';
+	}else{
+		tObject.className='pseudo_link_dotted';
+		spanComType='edit';
+	}
+	//spanComType=(tObject.className.indexOf('addDataInPlace')!=-1)? 'add':'edit';
+	//БЛОК с данными отображён; переключиться на режим редактирования:
+	if (tObject.style.display!='none'){	// режим по умолчанию 
+		var objContent=tObject.innerHTML; // контент поля с данными 
+		var editableField=document.createElement(newElementType); // редактируемое поле для перенесения статических данных 
+		var fieldCommands=document.createElement('span'); // динамически создаваемый блок с командами для редактируемого поля
 		editableField.id=user_id+'__'+tObject.id.substr(tObject.id.indexOf("_")+1); //43__email
 		editableField.className='madeEditable';
 		OuterNode.appendChild(editableField); // field
@@ -145,6 +152,8 @@ function makeObjectEditableField( tObject, // text container // this // <SPAN>Co
 		if ( newElementType=='input'
 		     && spanComType=='edit'
 		   ) editableField.value=objContent; 
+		//alert('none');
+		if (tObject.innerHTML==spaces) editableField.value=''; 
 		var allCommands='<img title="Подтвердить" src="templates/bluestork/images/menu/icon-16-apply.png" style="width:16px; height:16px; margin-left:10px;" ';
 		allCommands+='onClick="changeFieldValue(\''+editableField.id+'\',\''+user_type+'\');">';		
 		allCommands+='<img title="Отменить изменения" src="templates/bluestork/images/menu/return_back.png" style="width:16px; height:16px; margin-left:6px;" '; 
@@ -157,7 +166,9 @@ function makeObjectEditableField( tObject, // text container // this // <SPAN>Co
 	}else{	//выйти из режима редактирования
 		// <TD><SPAN>Content</SPAN></TD>
 		var spanEvent;
-		if(spanComType=='edit') spanEvent='ondblclick';
+		if(spanComType=='edit') {
+			spanEvent='ondblclick';
+		}
 		else spanEvent='onclick'; //alert('OuterNode HTML 1:\n'+OuterNode.innerHTML);
 		OuterNode.innerHTML='<'+tObject.tagName+' id="'+tObject.id+'" class="'+tObject.className+'" '+spanEvent+'="makeObjectEditableField(this);" title="'+spanEvent+'">'+tObject.innerHTML+'</'+tObject.tagName+'>'; //alert('OuterNode HTML 2:\n'+OuterNode.innerHTML);
 	}
