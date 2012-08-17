@@ -147,7 +147,18 @@ fieldset {
 	padding: 5px;
 	text-align: left;
 }
-
+.floatTop{
+	display:inline-block; 
+	vertical-align:top;
+	margin-right:14px;
+}
+.floatTop h4{
+	margin-top:10px;
+	margin-bottom:8px;
+}
+.floatTop td{
+	padding:3px 10px 2px 4px;
+}
 form {
 	margin: 0;
 	padding: 0;

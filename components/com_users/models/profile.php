@@ -167,7 +167,7 @@ class UsersModelProfile extends JModelForm
 							  company_name,
 							  city,
 							  region
-					FROM #__webapps_extra_contacts
+					FROM #__users
 					WHERE dnior_users_id = '.$userId;
 			$db->setQuery($query);
 

@@ -40,7 +40,12 @@ abstract class JToolBarHelper
 		$app = JFactory::getApplication();
 		$app->set('JComponentTitle', $html);
 	}
-
+	/**
+	 * @ toolbar
+	 */
+	function go_back(){
+		?><div style="position:absolute; top:108px; right:40px;" title="Назад"><a href="javascript:history.back(1);"><img src="<?=JUri::root()?>administrator/templates/bluestork/images/header/back.png" border="0" align="absmiddle" width="48" height="48" hspace="10"></a></div><?
+	}
 	/**
 	 * Writes a spacer cell.
 	 *

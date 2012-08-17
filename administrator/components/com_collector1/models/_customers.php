@@ -113,7 +113,7 @@ class Collector1Model_customers extends JModelList
 				'a.*'
 			)
 		);
-		$query->from('`#__webapps_extra_contacts` AS a');
+		$query->from('`#__users` AS a');
 
 
         // Join over the users for the checked out user.

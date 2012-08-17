@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS `#__webapps_extra_contacts`;
 DROP TABLE IF EXISTS `#__webapps_customers_paid`;
 DROP TABLE IF EXISTS `#__webapps_customer_site_options`;
 DROP TABLE IF EXISTS `#__webapps_engines_all`;

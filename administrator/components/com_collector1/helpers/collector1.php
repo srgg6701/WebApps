@@ -123,11 +123,30 @@ class Collector1Helper
 	 * @return	JObject
 	 * @since	1.6
 	 */
-	public function makeObjectsLinks($orders_ids){
+	public function makeObjectsLinks( $objects_ids,
+									  $object_type,
+									  $customer_type,
+									  $user_id
+									){
 		$j=0;
-		foreach($orders_ids as $i=>$order_id) :
+		if ($object_type=='order'){
+			$layout='order';
+			$id_type='order_id';
+		}else{
+			$layout='collection';
+			$id_type='collection_id';
+		}
+		switch($customer_type){
+			case 'customer':
+				$view='customers';
+					break;
+			case 'precustomer':
+				$view='precustomers';
+					break;
+		}
+		foreach($objects_ids as $i=>$order_id) :
 			if ($j) echo ", ";
-			?><a href="#" onClick="return false;"><?
+			?><a href="<?=JUri::root()?>administrator/index.php?option=com_collector1&view=<?=$view?>&layout=<?=$layout?>&<?=$id_type?>=<?=$order_id?>&user_id=<?=$user_id?>"><? //onClick="return false;"
 			echo $order_id;
 			?></a><?	
 			$j++;
@@ -155,5 +174,5 @@ class Collector1Helper
 <?		$span=ob_get_contents();
 		ob_end_clean();
 		echo $span;
-	}
+	}	
 }
