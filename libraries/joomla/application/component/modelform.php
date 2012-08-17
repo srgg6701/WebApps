@@ -181,7 +181,7 @@ abstract class JModelForm extends JModel
 			{
 				$data = array();
 			}
-
+			if (JRequest::getVar('test')) var_dump("<h1>data:</h1><pre>",$data,"</pre>");
 			// Allow for additional modification of the form, and events to be triggered.
 			// We pass the data because plugins may require it.
 			$this->preprocessForm($form, $data);

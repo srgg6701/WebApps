@@ -578,7 +578,7 @@ class JForm
 		{
 			return $field->label;
 		}
-
+		
 		return '';
 	}
 
@@ -1410,7 +1410,6 @@ class JForm
 
 			// Get the fields elements for a given group.
 			$elements = &$this->findGroup($group);
-
 			// Get all of the field elements with the correct name for the fields elements.
 			foreach ($elements as $element)
 			{
