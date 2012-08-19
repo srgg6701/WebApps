@@ -145,11 +145,9 @@ class Collector1Helper
 					break;
 		}
 		foreach($objects_ids as $i=>$order_id) :
-			if ($j) echo ", ";
-			?><a href="<?=JUri::root()?>administrator/index.php?option=com_collector1&view=<?=$view?>&layout=<?=$layout?>&<?=$id_type?>=<?=$order_id?>&user_id=<?=$user_id?>"><? //onClick="return false;"
-			echo $order_id;
-			?></a><?	
-			$j++;
+			if ($j) echo ", ";?>
+            <a href="<?=JUri::root()?>administrator/index.php?option=com_collector1&view=<?=$view?>&layout=<?=$layout?>&<?=$id_type?>=<?=$order_id?>&user_id=<?=$user_id?>"><?=$order_id?></a>
+		<?	$j++;
 		endforeach;
 	}	
 	/**

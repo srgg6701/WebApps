@@ -29,7 +29,6 @@ class Collector1Model_customers extends JModelList
         if (empty($config['filter_fields'])) {
             $config['filter_fields'] = array(
                                 'id', 'a.id',
-                'dnior_users_id', 'a.dnior_users_id',
                 'surname', 'a.surname',
                 'middle_name', 'a.middle_name',
                 'sex', 'a.sex',
@@ -40,8 +39,6 @@ class Collector1Model_customers extends JModelList
                 'city', 'a.city',
                 'region', 'a.region',
                 'zip_code', 'a.zip_code',
-                'ordering', 'a.ordering',
-
             );
         }
 
@@ -105,24 +102,30 @@ class Collector1Model_customers extends JModelList
 		// Create a new query object.
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
-
 		// Select the required fields from the table.
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.*'
+				'a.*, 
+       IF ( a.sex = "f","Ж",
+           IF (a.sex = "m","М","")
+          ) AS sex'
 			)
-		);
+		); 
 		$query->from('`#__users` AS a');
-
-
+		
+		$query->where('a.id IN (
+				SELECT DISTINCT customer_id
+        FROM #__webapps_customer_orders
+        WHERE customer_id >0
+            UNION
+        SELECT DISTINCT customer_id
+        FROM #__webapps_customer_site_options
+        WHERE customer_id >0
+			)'
+		);
         // Join over the users for the checked out user.
-        $query->select('uc.name AS editor');
-        $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
-        
-
-
-
+        $query->select(' `name` AS editor');
 		// Filter by search in title
 		$search = $this->getState('filter.search');
 		if (!empty($search)) {
@@ -133,14 +136,12 @@ class Collector1Model_customers extends JModelList
                 $query->where('( a.surname LIKE '.$search.'  OR  a.work_phone LIKE '.$search.'  OR  a.mobila LIKE '.$search.'  OR  a.company_name LIKE '.$search.'  OR  a.city LIKE '.$search.'  OR  a.zip_code LIKE '.$search.' )');
 			}
 		}
-
 		// Add the list ordering clause.
 		$orderCol	= $this->state->get('list.ordering');
 		$orderDirn	= $this->state->get('list.direction');
         if ($orderCol && $orderDirn) {
 		    $query->order($db->getEscaped($orderCol.' '.$orderDirn));
-        }
-
+        } // echo "<div>4 query: <hr><pre>".$query."</pre></div>";
 		return $query;
 	}
 }

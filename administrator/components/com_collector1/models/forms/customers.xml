@@ -6,14 +6,14 @@
                     readonly="true" class="readonly"
                     description="JGLOBAL_FIELD_ID_DESC" /> 
 
-       <field name="dnior_users_id" type="text" size="40" class="inputbox"
+       <!--<field name="dnior_users_id" type="text" size="40" class="inputbox"
                 
             label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_DNIOR_USERS_ID"
             description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_DNIOR_USERS_ID" 
                 
                 
                 
-                filter="safehtml" /> 
+                filter="safehtml" />--> 
 
        <field name="surname" type="text" size="40" class="inputbox"
                 
@@ -99,7 +99,7 @@
                 
                 filter="safehtml" /> 
 
-       <field name="zip_code" type="text" size="40" class="inputbox"
+       <!--<field name="zip_code" type="text" size="40" class="inputbox"
                 
             label="COM_COLLECTOR1_FORM_LBL_CUSTOMERS_ZIP_CODE"
             description="COM_COLLECTOR1_FORM_DESC_CUSTOMERS_ZIP_CODE" 
@@ -109,7 +109,7 @@
                 filter="safehtml" /> 
 
                         <field name="checked_out" type="hidden" filter="unset" />
-                <field name="checked_out_time" type="hidden" filter="unset" />
+                <field name="checked_out_time" type="hidden" filter="unset" />-->
 
 	</fieldset>
 

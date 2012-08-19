@@ -47,10 +47,12 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<th width="1%">
 					<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
 				</th>
-
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_DNIOR_USERS_ID', 'a.dnior_users_id', $listDirn, $listOrder); ?>
-				</th>
+				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_USERNAME', 'a.username', $listDirn, $listOrder); ?>
+                </th>
+				<th class='left'>
+                <?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_NAME', 'a.name', $listDirn, $listOrder); ?>
+                </th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_SURNAME', 'a.surname', $listDirn, $listOrder); ?>
 				</th>
@@ -108,7 +110,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 		</thead>
 		<tfoot>
 			<tr>
-				<td colspan="11">
+				<td colspan="17">
 					<?php echo $this->pagination->getListFooter(); ?>
 				</td>
 			</tr>
@@ -125,14 +127,25 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<td class="center">
 					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 				</td>
-
 				<td>
-					<?php echo $item->dnior_users_id; ?>
-				</td>
-				<td>
-				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
-					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, '_customers.', $canCheckin); ?>
+				<?php if ($item->checked_out) : ?>
+					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'items.', $canCheckin); ?>
 				<?php endif; ?>
+				<?php if ($canEdit) : ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_collector1&task=customers.edit&id='.(int) $item->id); ?>">
+					<?php echo $this->escape($item->username); ?></a>
+				<?php else : ?>
+					<?php echo $this->escape($item->username); ?>
+                <?php endif; ?>
+                    </td>
+				<td><?php if ($canEdit) : ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_collector1&task=customers.edit&id='.(int) $item->id); ?>">
+					<?php echo $this->escape($item->name); ?></a>
+				<?php else : ?>
+					<?php echo $this->escape($item->name); ?>
+				<?php endif; ?>
+                </td>
+				<td>
 				<?php if ($canEdit) : ?>
 					<a href="<?php echo JRoute::_('index.php?option=com_collector1&task=customers.edit&id='.(int) $item->id); ?>">
 					<?php echo $this->escape($item->surname); ?></a>
@@ -141,7 +154,12 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<?php endif; ?>
 				</td>
 				<td>
+				<?php if ($canEdit) : ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_collector1&task=customers.edit&id='.(int) $item->id); ?>">
+					<?php echo $this->escape($item->middle_name); ?></a>
+				<?php else : ?>
 					<?php echo $item->middle_name; ?>
+				<?php endif; ?>
 				</td>
 				<td>
 					<?php echo $item->sex; ?>

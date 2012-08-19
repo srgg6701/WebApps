@@ -27,7 +27,7 @@ class Collector1View_customers extends JView
 	public function display($tpl = null)
 	{
 		$this->state		= $this->get('State');
-		$this->items		= $this->get('Items');
+		$this->items		= $this->get('Items'); SDebug::showDebugContent($this->items,'items');//var_dump("<h1>items:</h1><pre>",$this->items,"</pre>");
 		$this->pagination	= $this->get('Pagination');
 
 		// Check for errors.
@@ -83,9 +83,9 @@ class Collector1View_customers extends JView
 			    JToolBarHelper::divider();
 			    JToolBarHelper::archiveList('_customers.archive','JTOOLBAR_ARCHIVE');
             }
-            if (isset($this->items[0]->checked_out)) {
+            /*if (isset($this->items[0]->checked_out)) {
             	JToolBarHelper::custom('_customers.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
-            }
+            }*/
 		}
         
         //Show trash and delete for components that uses the state field
