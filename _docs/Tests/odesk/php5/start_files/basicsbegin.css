@@ -1,0 +1,1403 @@
+/**
+ * Basics
+ * 
+ * ...
+ */
+
+body
+{
+    background-color: #FFFFFF;
+    margin: 0px;
+    padding: 0px;
+}
+
+noscript {
+    font-family:Verdana;font-size:10px;font-weight:bold;
+    color: red ;
+    width: 100%;
+}
+
+img
+{
+    display: block;
+}
+
+a, a:visited, a img
+{
+    font-size: 11px;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    color: #225A94;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    margin: none;
+    padding: none;
+    border: none;
+}
+
+a:hover
+{
+    color: #959595;
+    text-decoration: underline;
+    text-transform: inherit;
+}
+
+a:active
+{
+    color: #333333;
+}
+
+form {
+    margin: 0px;
+}
+
+div#stdErrorMsg {
+  font-family: Verdana;
+  font-size: 12px;
+  font-weight: bold;
+  color: red ;
+  padding: 5px;
+  top: 130px;
+  left: 30%;
+  background: #ffff80;
+  border: 1px solid #999999;
+  width: 40%;
+  display: none;
+  position: absolute;
+  z-index: 5;
+}
+
+div#stdErrorMsg a {
+  display: block;
+  text-transform: uppercase;
+  text-align: right;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+
+
+/**
+ * Header styles
+ *
+ * These styles are used exclusively in the top
+ * ui header. Note the fixed image paths - these
+ * must be generated in any real app to ensure
+ * the client can find the images.
+ */
+
+table.TopHeader, table.TabHeader, table.SubBar, table.SubSubBar, table.Footer
+{
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+table.SubSubBar {
+    background: url(/images/SubSubTile.jpg) #f8f7f5 repeat-x;
+}
+
+table.TopHeader
+{
+    background: url(/images/TopBlueTile.jpg) repeat-x;
+}
+
+
+
+/**
+ * Table with logo and logout link
+ */
+
+td.TopHeaderLogo {
+    margin: 0px;
+    padding: 0px;
+    width: 100px;
+}
+
+td.TopHeaderWithTile
+{
+    background: url(/images/TopBlueTile.jpg) repeat-x;
+    width: 100%;    
+    font-size: 11px;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    color: #98BDD8;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+}
+
+
+
+table.Body
+{
+    margin: 0px;
+    width: 100%;
+    height: auto;
+    background-color: #F3F1EC;
+}
+
+table.Pane
+{
+    margin: 0px;
+    padding: 0px;
+    border-width: 1px;
+    width: 100%;
+    height: auto;
+    border-color: #999999;
+    border-style: solid;
+}
+
+td.PaneHeader
+{
+    background-image: url(/images/PaneHeaderTile.png);
+    background-repeat: repeat-x;
+    margin: 0px;
+    padding: 0px 10px 0px 10px;
+    border-width: 0px;
+    height: 27px;
+    font-size: 16px;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    color: #000000;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.PaneSubHeader
+{
+    margin: 0px;
+    font-size: 14px;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    c
+    olor: #000000;
+    font-style: normal;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+td.PaneSubHeaderWithLine {
+    padding-top: 5px;
+    border-top: 1px solid #D1CFCB;
+}
+
+td.PaneBody
+{
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-size: 12px;
+    margin: 0px;
+    padding: 10px 10px 10px 10px;
+    background-color: #FFFFFF;
+    white-space: nowrap;
+}
+td.PaneBody a, a:visited {
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-size: 12px;
+}
+
+td.FooterWithTile
+{
+   /* background-image: url(images/FooterTile.png);*/
+    width:100%;
+    background-repeat: repeat-x;
+    margin: 0px;
+    padding: 0px 7.5px 0px 7.5px;
+    border-width: 0px;
+    height: 10px;
+    font-size: 10px;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    color: #999999;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-align: right;
+}
+
+
+
+
+td.TabHeaderOneCompany
+{
+    font-size: 16px;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    border-bottom: 1px solid #999999;
+    height: 25px;
+    padding: 0px 0px 0px 5px;
+    white-space: nowrap;
+}
+
+td.TabHeaderWithTile
+{
+    border-bottom: 1px solid #999999;
+    height: 15px;
+    white-space: nowrap;
+}
+
+td.TabHighlightWithTile
+{
+    background-image: url(/images/TabHighlightMidTile.png);
+    background-repeat: repeat-x;
+    font-size: 12px;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    color: #333333;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+}
+
+
+td.TabBaseWithTile
+{
+    background-image: url(/images/TabBaseMidTile.png);
+    background-repeat: repeat-x;
+    padding: 0px 0px 2px 0px;
+}
+
+td.SubBarSpacer
+{
+    width: 10px;
+}
+
+input.SubBarSearchInput
+{
+    height: 15px;
+    border-color: #000;
+    border-width: 1px;
+    border-style: solid;
+}
+
+td.SubBarWithTile
+{
+    background-image: url(/images/SubBarTile.png);
+    background-repeat: repeat-x;
+    white-space: nowrap;
+}
+td.SubSubBarWithTile
+{
+    background-image: url(/images/SubSubBarTile.gif);
+    background-repeat: repeat-x;
+    white-space: nowrap;
+}
+
+td.SubBarTileOnly
+{
+    background-image: url(/images/SubBarTile.png);
+    background-repeat: repeat-x;
+    width: 100%;
+}
+td.SubSubBarTileOnly
+{
+    background-image: url(/images/SubSubBarTile.gif);
+    background-repeat: repeat-x;
+    width: 100%;
+}
+
+td.SubBarTabWithTile
+{
+    background-image: url(/images/SubBarTabMidTile.png);
+    background-repeat: repeat-x;
+    font-size: 12px;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    color: #333333;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    padding: 0px 10px 0px 10px;
+    white-space: nowrap;
+}
+td.SubSubBarTabWithTile
+{
+    background-image: url(/images/SubSubBarTabMidTile.gif);
+    background-repeat: repeat-x;
+    font-size: 12px;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    color: #333333;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    padding: 0px 10px 0px 10px;
+    white-space: nowrap;
+}
+
+a.TabLink, a.TabLink:visited
+{
+    font-size: 12px;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    color: #225A94;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+a.TabLink:hover
+{
+    color: #959595;
+    text-decoration: underline;
+    text-transform: inherit;
+}
+
+a.TabLink:active
+{
+    color: #333333;
+}
+
+a.SubBarLink, a.SubBarLink:visited
+{
+    font-size: 12px;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    color: #225A94;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+a.SubBarLink:hover
+{
+    color: #959595;
+    text-decoration: underline;
+    text-transform: inherit;
+}
+
+a.SubBarLink:active
+{
+    color: #333333;
+}
+
+a.UsernameHeaderLink, a.UsernameHeaderLink:visited
+{
+    color: #FFF;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    font-size: 11px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a.UsernameHeaderLink:hover
+{
+    color: #CCC;
+    text-decoration: underline;
+    text-transform: inherit;
+}
+
+a.UsernameHeaderLink:active
+{
+    color: #999;
+}
+
+a.HeaderUtilLink, a.HeaderUtilLink:visited
+{
+    color: #FFF;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    font-size: 12px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    margin: 3px 0 0 0;
+}
+
+a.HeaderUtilLink:hover
+{
+    color: #CCC;
+    text-decoration: underline;
+    text-transform: inherit;
+}
+
+a.HeaderUtilLink:active
+{
+    color: #999;
+}
+
+
+
+img.MyoDesk {
+    display: inline;
+    vertical-align: middle;
+}
+
+
+/* START - Footer section */
+div#footer_wrapper {
+  border-top: 1px dotted #000000;
+  background-color: #eeeeee;
+  background-image: url("/images/footerBgLeft.gif");
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  width: 100%;
+}
+div#footer {
+  background-image: url("/images/footerBgRight.gif");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  color : #999999;
+  padding: 0.3em 20px 0.3em 0;
+  text-align: right;
+  font-size: 13px;
+  font-family:  Arial, Lucida Grande, Lucida Sans, Verdana, sans-serif;
+  
+}
+div#footer_links {
+  float: left;
+}
+div#footer_links a {
+  color: #222222;
+  margin-left: 15px;
+}
+
+
+a.FooterLink, a.FooterLink:visited
+{
+    font-size: 11px;
+    font-family:  Arial, Lucida Grande, Lucida Sans, Verdana, sans-serif;
+    color: #222222;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+a.FooterLink:hover
+{
+    font-size: 11px;
+    color: #222222;
+    text-decoration: underline;
+    text-transform: inherit;
+}
+
+a.FooterLink:active
+{
+    font-size: 11px;
+    color: #222222;
+}
+
+/* END - Footer section */
+
+table.box {
+  font-size: 0.8em;
+  height: 100%;
+  width: 100%;
+}
+td.box_title {
+  vertical-align: top;
+  background: #bdbdbd url("/images/boxBg.gif") repeat-x top;
+  font-weight: bold;
+  padding: 0.4em 0.8em 0.2em 0.8em;
+}
+td.box_content {
+  background: #f0f0f0;
+  
+  border-bottom: none;
+  padding: 0.6em 0.8em;
+  vertical-align: top;
+}
+td.box_content li {
+  margin-bottom: 0.2em;
+}
+td.box_bottom {
+  background: #f0f0f0;
+  border: 1px solid #bdbdbd;
+  border-top: none;
+  padding: 0.6em 0.8em;
+  vertical-align: bottom;
+  text-align: right;
+}
+
+table.noblue td.box_title a {
+  color: #000000;
+}
+table.noblue td.box_content a {
+  color: #000000;
+}
+
+
+
+div#content {
+  margin: 0 0 10px 0;
+  font-size: 0.9em;
+}
+
+div#content h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0 0 0.3em 0;
+  border-bottom: 1px solid #9f9f9f;
+}
+
+div#content h2 {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 0.3em 0;
+}
+
+div#content h3 {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+div#content p {
+  text-align: justify;
+  margin: 0 0 0.5em 0;
+}
+
+div#content ul, ol {
+  margin: 0 0 0.3em 1.5em;
+}
+
+
+
+div#content form {
+  margin-top: 1em;
+}
+div#content form td.section_header {
+  padding-top: 2em;
+}
+div#content form .rpstyled {
+  background: #eeeeee;
+  border: 1px solid #999999;
+  padding: 0.2em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+}
+div#content form span.asterisk {
+  color: #ff2222;
+  margin-right: 0.3em;
+  font-weight: bold;
+}
+div#content form textarea.rpstyled {
+  width: 350px;
+  height: 120px;
+}
+div#content form select.rpstyled {
+  background: #eeeeee;
+  padding: 0;
+}
+div#content form input.rpstyled {
+  width: 150px;
+}
+/* END - Main section */
+
+
+
+/* START - Footer section */
+div#footer_wrapper {
+  border-top: 1px dotted #000000;
+  background-color: #ededed;
+  background-image: url("/images/footerBgLeft.gif");
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  width: 830px;
+}
+div#footer {
+  background-image: url("/images/footerBgRight.gif");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  font-size: 0.7em;
+  color : #999999;
+  padding: 0.3em 20px 0.3em 0;
+  text-align: right;
+}
+div#footer_links {
+  float: left;
+}
+div#footer_links a {
+  color: #222222;
+  margin-left: 15px;
+}
+/* END - Footer section */
+/**
+ * Content styles
+ *
+ * 
+ */
+
+.Title {
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: #000000;
+}
+
+.TitleNote {
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-size: 12px;
+    color: #737373;
+    margin-top: 7px;
+}
+
+/**
+ * Form styles
+ *
+ * 
+ */
+
+span.asterisk {
+  color: #ff2222;
+  margin-right: 3px;
+  font-weight: bold;
+}
+
+.FormPane {
+    border: 1px solid #D1CFCB;
+    background: #FFFFFF;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    font-size: 14px;
+    margin-top: 7px;
+    margin-bottom: 20px;
+    width: 640px;
+}
+
+.FormPane a:link, a:active, a:hover, a:visited {
+    font-size: 14px;
+}
+
+/* ------------------------------- */
+
+.FormError {
+    padding-top: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 10px;
+}
+
+.FormError div {
+    border-bottom: #D1CFCB;
+    border-width: 0 0 1px 0;
+    border-style: none none solid none;
+}
+
+.FormError ul
+{
+    color: #CE1100;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.FormError ul li
+{
+    white-space: normal;
+}
+
+/* ------------------------------- */
+
+.FormElementTitle {
+    height: 35px;
+    text-align: right;
+    vertical-align: middle;
+    width: 180px;
+}
+
+.FormElement {
+    padding-left: 12px;
+    text-align: left;
+    vertical-align: middle; 
+    width: 460px;
+}
+
+.FormElement input {
+    border: 1px solid #838383;
+    padding: 3px;
+    width: 180px;
+}
+
+.FormElementCheckbox, .FormElementCheckbox a {
+    color: #666666;
+    font-size: 12px;
+    height: 35px;
+    padding-left: 8px;
+    text-align: left;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.FormElementRadio {
+    font-size: 12px;
+    height: 35px;
+    padding-left: 8px;
+    text-align: left;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+
+.FormPane tr.FormButtonBar
+{
+    background: #F3F3F3;
+}
+
+/* --------------------------------- */
+.FormPane_alt {
+    border-bottom: 1px solid #D1CFCB;
+    background: #FFFFFF;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0px;
+    width: 100%;
+}
+.FormPane_alt .FormCustom td {
+    border-top: 1px solid #D1CFCB;
+    border-left: 1px solid #D1CFCB;
+    border-right: 1px solid #D1CFCB;
+    padding-left: 5px;
+}
+.FormPane_alt .FormButtonBar td
+{
+    border-bottom: 1px solid #D1CFCB;
+    background: transparent;
+    padding: 0 5px 10px 5px;
+    vertical-align: middle;
+}
+.FormPane_alt td.FormElementTitle {
+    border-left: 1px solid #D1CFCB;
+    border-right: none;
+    height: 35px;
+    text-align: right;
+    vertical-align: middle;
+    width: 20%;
+}
+
+.FormPane_alt td.FormElement {
+    border-right: 1px solid #D1CFCB;
+    border-left: none;
+    padding-left: 12px;
+    text-align: left;
+    vertical-align: middle; 
+    width: 80%;
+}
+
+.FormPane_alt td.FormElementCheckbox {
+    border-right: 1px solid #D1CFCB;
+}
+/* --------------------------------- */
+
+.FormButtonBarCel
+{
+    vertical-align: middle;
+    padding: 5px;
+    width: auto;
+}
+
+.FormButtonBarAdditional, .FormButtonBarAdditional a:link, .FormButtonBarAdditional a:visited, .FormButtonBarAdditional a:hover, .FormButtonBarAdditional a:active {
+    color: #27619A;
+    font-size: 14px;
+    padding-right: 12px;
+    text-align: right;
+    width: 100%;
+}
+
+.FormElementHintIcon {
+    cursor: help;
+    border: none;
+}
+
+.FormElementHintTip {
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    padding: 2px 2px 2px 5px;
+    font-size: 11px;
+    width: 200px;
+    z-index: 1;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    visibility: hidden;
+    background-color: #FFFFCC;
+    border: 1px solid #999999;
+    font-weight: normal;
+}
+
+/* ------------------------------- */
+
+table.UserWidget {
+    border: 1px solid #999999;
+    background-color: #FFFFFF;
+    width: 100%;
+    padding: none;
+    margin-top: 15px;
+}
+
+td.UserOnlineDisplay
+{
+    border-color: #999;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-size: 11px;
+    color: #666666;
+    line-height: 11px;
+    padding:  none;
+    background-color: #FFFFCC;
+}
+
+table.UserDisplay
+{
+    border: none;
+    width: 100%;
+}
+
+table.UserDisplay a:hover {
+    font-size: 12px;
+}
+
+
+
+img.UserPortrait {
+    border: 1px solid #999999;
+    padding:  none;
+}
+
+img.UserScreen {
+    border: 1px solid #999999;
+    padding:  none;
+}
+
+.UserFullName {
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000000;
+    white-space: nowrap;
+}
+
+.ValueLabel {
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: #666666;
+    white-space: nowrap;
+    padding: 3px 0px 3px 0px;
+}
+
+
+.ValueDisplay {
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: #000000;
+    margin-left: 5px;
+    white-space: nowrap;
+}
+
+
+
+/**
+ * Applications Selector
+ */   
+
+table.Applications {
+    border: 1px solid #d1cfcb;
+    background-color: #ffffff;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: #000000;
+    margin: 10px 0px 10px 0px;
+}
+
+td.ApplicationsHeader {
+    border-bottom: 1px solid #d1cfcb;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #f2ebda;
+    padding: 5px;
+}
+
+td.ApplicationsValue {
+    font-size: 14px;
+    padding: 5px;
+}
+
+a.ApplicationsLink:link, a.ApplicationsLink:visited, a.ApplicationsLink:active, a.ApplicationsLink:hover {
+    font-size: 14px;
+}
+
+
+
+.collapse_button {
+    float: left;
+    margin: 5px 5px 0px 0px;
+}
+
+
+
+
+.lister a:link, a:visited, a:active, a:hover {
+    font-size: 12px;
+}
+
+.img_inline 
+{
+    display: inline;
+}
+
+.filter_error
+{
+    color: #ff0000;
+    margin: 0px 0px 0px 5px;
+}
+
+.FormSignup input {
+    border: 1px solid #838383;
+    padding: 1px;
+}
+
+
+
+a.NavHeaderLink
+{
+    color: #FFF;
+    font-size: 12px;
+    text-decoration: none;
+    margin: 0 13px 0 13px;
+}
+a.NavHeaderLink:visited
+{
+    color: #FFF;
+    font-size: 12px;
+}
+a.NavHeaderLink:hover
+{
+    color: #CCC;
+    font-size: 12px;
+    text-decoration: underline;
+} 
+input.SearchFormText
+{
+    border: black 1px solid;
+    height: 17px;
+    font-size: 13px;
+}
+
+select.SearchFormSelect
+{    
+    font-size: 11px;
+}
+
+input.SearchFormSubmit
+{
+    background: #d4d0c8;
+    border: black 1px solid;
+    font-size: 13px;
+}
+
+div.HeaderLinksLine1
+{
+    white-space: nowrap;
+}
+
+table.HeaderLinksLine2
+{
+   border: #FCFFFF 1px solid;
+   border-right: none;
+   margin-top: 0.7em;
+   margin-left: 1em;
+}
+
+table.HeaderLinksLine2 td
+{
+    border-right: white 1px solid;
+}
+
+table.HeaderLinksLine2 td.Highlighted
+{
+    background: #FFFEFA;    
+}
+
+td.Highlighted a.NavHeaderLink
+{
+    color: #00327B !important;    
+}
+
+
+
+.formbutton
+{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  padding: 0 0.5em 0.2em 0.5em;
+
+  border-width: 1px;
+  border-color: #ffab0b #262625 #262625 #ffab0b;
+  background-color: #ffc24e;
+  
+  background-image: url("/images/buttonBg.gif");
+  background-repeat: no-repeat;
+  height: 22px;
+  vertical-align: middle;
+  cursor: pointer;
+  overflow: visible;
+/*
+  background-color: #ff8040;
+  border: 1px outset #b3b3b3;
+  padding: 2px 5px 3px 5px;
+  font-family: Lucida, Verdana, Arial, sans-serif;
+  font-size: 12px;
+  color: #fff;
+  overflow:visible;
+  width: auto;
+  margin: 0 5px 0 0px;
+*/
+}
+.formPrefButton
+{
+  font-family: Arial, Helvetica, sans-serif;;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  padding: 0 0.5em 0.2em 0.5em;
+
+  border-width: 1px;
+  border-color: #ffab0b #262625 #262625 #ffab0b;
+  background-color: #ffc24e;
+  
+  background-image: url("/images/buttonBg.gif");
+  background-repeat: no-repeat;
+  height: 22px;
+  min-width: 30px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  overflow: visible;
+}
+.horizontalArrowButton
+{
+  font-family : Times New Roman, Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  height: 22px;
+  width: 33px;
+  border: 1px solid #838383;
+  padding: 0 0.5em 0.2em 0.5em;
+
+ 
+}
+.verticalArrowButton
+{
+ font-family : Times New Roman, Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  height: 33px;
+  width: 22px;
+  border: 1px solid #838383;
+  padding: 3px;
+ 
+}
+.formbutton:hover
+{
+
+/*
+  background-color: #ffb945;
+  cursor: pointer;
+*/
+}
+
+div.pageBreadcrumb {
+    border-bottom: 1px solid #999;
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;    color: #404040;
+    font-size: 16px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    padding: 4px 0;
+    margin: 0 0 15px 0;
+    vertical-align: middle;
+}
+
+div.pageBreadcrumb img {
+    float: right;
+    position: relative;
+    top: 3px;
+    right: 10px;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+div.pageBreadcrumb a {
+  font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: normal;
+}
+div.pageBreadcrumb a:hover {
+  font-size: 12px;
+}
+
+
+
+td.ColumnHeader
+{
+    font-weight: bold;
+    white-space: nowrap;
+    text-align: center;
+    padding: 7px;
+}
+
+td.ColumnCell
+{
+    padding: 7px;
+}
+
+td.right
+{
+    text-align: right;
+}
+
+td.left
+{
+    text-align: left;
+}
+
+td.center
+{
+    text-align: center;
+}
+
+td.nowrap
+{
+    white-space: nowrap;
+}
+
+table.TableList
+{    
+    width: 100%;
+    border: 1px solid #999999;
+    border-collapse: collapse;
+    
+    font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+    font-size: 12px;
+    margin: 0px;
+    padding: 10px 10px 10px 10px;
+    background-color: #FFFFFF;
+    white-space: nowrap;
+}
+
+
+
+/* START - Header section */
+div#odesk_header {
+  font: 13px Arial, Helvetica, sans-serif;
+  position: relative;
+  width: 100%;
+}
+div#odesk_header a {
+  font: 13px Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
+
+div#odesk_logo {
+  padding-left: 20px;
+  position: absolute;
+  bottom: 0;
+}
+div#odesk_logo img {
+  display: block;
+}
+
+div#quick_links {
+  padding-top: 20px;
+  color: #222222;
+  text-align: right;
+  margin: 0 0 3px 0;
+  width: 100%;
+}
+div#quick_links a {
+  color: #222222;
+}
+div#quick_links a.strong {
+  color: #FF8000;
+  font-weight:bold;
+}
+div#quick_links span.divider {
+  margin: 0 2px;
+}
+
+div#top_nav {
+  color: #9c9c9c;
+  background: #000000;
+  margin: 0 0 0 140px;
+  padding: 0px 10px 0px 0px;
+}
+div#top_nav table {
+  width: 85%;
+}
+
+div#top_nav table td {
+  white-space: nowrap;
+}
+div#top_nav a {
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0 11px 0 0;
+}
+
+
+div#top_nav .selected {
+  background-color: #ffffff;
+}
+div#top_nav .selected a {
+  color: #000000;
+}
+div#top_nav .selected a:hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+div#top_nav table table td {
+  padding: 5px 0 4px 7px;
+}
+
+
+
+div#search_form {
+  width: 100%;
+  text-align: right;
+  color: #000000;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.inputBoxSmall {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9em;
+  vertical-align: middle;
+  padding: 2px 0 1px 2px;
+}
+.selectBoxSmall {
+  color: #000000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
+  width: 81px;
+  margin: 0 0.3em;
+  vertical-align: middle;
+}
+.inputButtonSmall {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #da8200;
+  padding: 0 0.5em 0.20em 0.5em;
+  border-color: #ffab0b #c47500 #c47500 #ffab0b;
+  background-image: url("/images/buttonBg.gif");
+  background-repeat: no-repeat;
+  height: 22px;
+  border-width: 1px;
+  vertical-align: middle;
+  cursor: pointer;
+  overflow: visible;
+}
+/* END - Header section */
+
+
+
+/* START - SubHeader section */
+div#subheader {
+  font: 13px Arial, Helvetica, sans-serif;
+  margin: 0 0;
+  width: 100%;
+}
+div#subheader a {
+  font: 13px Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
+div#subheader a:link {
+  color: #3399cc;
+  text-decoration: none;
+}
+div#subheader a:visited {
+  color: #3399cc;
+  text-decoration: none;
+}
+div#subheader a:hover {
+  color: #3399cc;
+  text-decoration: underline;
+}
+div#subheader a:active {
+  color: #3399cc;
+  text-decoration: underline;
+}
+
+
+div#login {
+  float: right;
+  padding-right: 10px;
+}
+/* END - SubHeader section */
+
+
+
+/* START - Alsett Clearing Method */
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  display: inline-block;
+}
+* html .clearfix {
+  height: 1%;
+}
+.clearfix {
+  display: block;
+}
+/* END - Alsett Clearing Method */
+div#DoNotNavigate {
+  display: block;
+}
+div#Msg1 {
+  display: none;
+}
+div#Msg2 {
+  display: none;
+}
+div#Msg3 {
+  display: none;
+}
+div#content form span.asterisk {
+  color: #ff2222;
+  margin-right: 0.3em;
+  font-weight: bold;
+}
+.sortings {
+  width: 100%; 
+  height: 300px; 
+  background-color: #FFFFFF; 
+  border: 1px solid #999999;
+  font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif;
+  font-size: 14px;
+  vertical-align: top;
+ 
+}
+.SelectTitle {
+  font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif; 
+  font-size: 14px;
+}
+.userBox {
+  color: #000000;
+  font-family: Lucida Grande, Lucida Sans, Verdana, Arial, sans-serif; 
+  font-size: 13px;
+  width: 240px;
+  margin: 0 0.3em;
+  vertical-align: middle;
+  height: 170px;
+  text-decoration: none;
+}

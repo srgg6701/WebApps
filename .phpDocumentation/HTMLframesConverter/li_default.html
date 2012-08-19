@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link rel="stylesheet" href="media/stylesheet.css" />
+  <script src="media/lib/classTree.js"></script>
+<link id="webfx-tab-style-sheet" type="text/css" rel="stylesheet" href="media/lib/tab.webfx.css" />
+<script type="text/javascript" src="media/lib/tabpane.js"></script>
+  <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+  <script language="javascript" type="text/javascript" src="media/lib/ua.js"></script>
+<script language="javascript" type="text/javascript">
+	var imgPlus = new Image();
+	var imgMinus = new Image();
+	imgPlus.src = "media/images/plus.gif";
+	imgMinus.src = "media/images/minus.gif";
+	
+	function showNode(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+				var oImg = document.layers["img" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+				var oImg = document.all["img" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+				var oImg = document.getElementById("img" + Node);
+        		break;
+        }
+		oImg.src = imgMinus.src;
+		oTable.style.display = "block";
+	}
+	
+	function hideNode(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+				var oImg = document.layers["img" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+				var oImg = document.all["img" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+				var oImg = document.getElementById("img" + Node);
+        		break;
+        }
+		oImg.src = imgPlus.src;
+		oTable.style.display = "none";
+	}
+	
+	function nodeIsVisible(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+        		break;
+        }
+		return (oTable && oTable.style.display == "block");
+	}
+	
+	function toggleNodeVisibility(Node){
+		if (nodeIsVisible(Node)){
+			hideNode(Node);
+		}else{
+			showNode(Node);
+		}
+	}
+</script>
+<!-- template designed by Julien Damon based on PHPEdit's generated templates, and tweaked by Greg Beaver -->
+<body bgcolor="#ffffff"  topmargin="3" leftmargin="3" rightmargin="2" bottommargin="3"><h3>Navigation: default</h3>
+<script language="Javascript">
+if (document.getElementById) {
+  var tree = new WebFXTree('Help : default', 'blank.html');
+  tree.setBehavior('classic');
+  tree.openIcon = 'media/images/Disk.gif';
+  tree.icon = 'media/images/Disk.gif';
+
+    var elements = new WebFXTreeItem('Index of elements', 'elementindex_default.html');
+    elements.openIcon = 'media/images/file.png';
+    elements.icon = 'media/images/file.png';
+	tree.add(elements);
+
+    var tree_function = new WebFXTreeItem('Function(s)', '');
+    tree_function.openIcon = 'media/images/Functions.gif';
+    tree_function.icon = 'media/images/Functions.gif';
+    	tree.add(tree_function);
+
+	var tree_interface = new WebFXTreeItem('Interface(s)', 'classtrees_default.html');
+    tree_interface.openIcon = 'media/images/classFolder.gif';
+    tree_interface.icon = 'media/images/classFolder.gif';
+                                                                                              	tree.add(tree_interface);
+	
+    var tree_classe = new WebFXTreeItem('Class(es)', 'classtrees_default.html');
+    tree_classe.openIcon = 'media/images/classFolder.gif';
+    tree_classe.icon = 'media/images/classFolder.gif';
+          	  var classe = new WebFXTreeItem('AjaxController', 'default/AjaxController.html');
+      classe.openIcon = 'media/images/Class.gif';
+      classe.icon = 'media/images/Class.gif';
+      tree_classe.add(classe);
+                	  var classe = new WebFXTreeItem('AjaxModelAjax', 'default/AjaxModelAjax.html');
+      classe.openIcon = 'media/images/Class.gif';
+      classe.icon = 'media/images/Class.gif';
+      tree_classe.add(classe);
+                	  var classe = new WebFXTreeItem('AppClass', 'default/AppClass.html');
+      classe.openIcon = 'media/images/Class.gif';
+      classe.icon = 'media/images/Class.gif';
+      tree_classe.add(classe);
+                	  var classe = new WebFXTreeItem('collector1ModelCMS', 'default/collector1ModelCMS.html');
+      classe.openIcon = 'media/images/Class.gif';
+      classe.icon = 'media/images/Class.gif';
+      tree_classe.add(classe);
+                	  var classe = new WebFXTreeItem('collector1ModelCollected', 'default/collector1ModelCollected.html');
+      classe.openIcon = 'media/images/Class.gif';
+      classe.icon = 'media/images/Class.gif';
+      tree_classe.add(classe);
+                	  var classe = new WebFXTreeItem('collector1ModelOrders', 'default/collector1ModelOrders.html');
+      classe.openIcon = 'media/images/Class.gif';
+      classe.icon = 'media/images/Class.gif';
+      tree_classe.add(classe);
+                	  var classe = new WebFXTreeItem('ContentModelApp', 'default/ContentModelApp.html');
+      classe.openIcon = 'media/images/Class.gif';
+      classe.icon = 'media/images/Class.gif';
+      tree_classe.add(classe);
+                	  var classe = new WebFXTreeItem('ContentModelDebug', 'default/ContentModelDebug.html');
+      classe.openIcon = 'media/images/Class.gif';
+      classe.icon = 'media/images/Class.gif';
+      tree_classe.add(classe);
+                	  var classe = new WebFXTreeItem('dateRus', 'default/dateRus.html');
+      classe.openIcon = 'media/images/Class.gif';
+      classe.icon = 'media/images/Class.gif';
+      tree_classe.add(classe);
+          	tree.add(tree_classe);
+
+    var tree_file = new WebFXTreeItem('File(s)', '');
+    tree_file.openIcon = 'media/images/FolderOpened.gif';
+    tree_file.icon = 'media/images/foldericon.png';
+    	  var file = new WebFXTreeItem('access_to_developers.php', 'default/_com_content---views---consulting---contents---access_to_developers.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('access_to_developers.php', 'default/_com_content---views---consulting---contents2---access_to_developers.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('ajax.php', 'default/_com_ajax---models---ajax.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('ajax.php', 'default/_com_ajax---ajax.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('alien_site.php', 'default/_com_collector1---helpers---html---alien_site.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('all_our.php', 'default/_com_content---views---featured---tmpl---default---all_our.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('app.php', 'default/_com_content---models---app.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('bad_developer.php', 'default/_com_content---views---consulting---tmpl---bad_developer.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('bad_freelance.php', 'default/_com_content---views---consulting---contents2---bad_freelance.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('bad_freelance.php', 'default/_com_content---views---consulting---contents---bad_freelance.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('CMS.php', 'default/_com_collector1---models---CMS.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('collected.php', 'default/_com_collector1---models---collected.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('controller.php', 'default/_com_ajax---controller.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('cooperation_spirit.php', 'default/_com_content---views---consulting---contents---cooperation_spirit.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('cooperation_spirit.php', 'default/_com_content---views---consulting---contents2---cooperation_spirit.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('critical_important.php', 'default/_com_content---views---consulting---contents---critical_important.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('critical_important.php', 'default/_com_content---views---consulting---contents2---critical_important.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('debug.php', 'default/_com_content---models---debug.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('default.php', 'default/_com_helloworld---views---hello---tmpl---default.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('default.php', 'default/_com_helloworld---views---all---tmpl---default.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('default_mission.php', 'default/_com_content---views---featured---tmpl---default---default_mission.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('devolopment_strategy.php', 'default/_com_content---views---consulting---contents2---devolopment_strategy.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('devolopment_strategy.php', 'default/_com_content---views---consulting---contents---devolopment_strategy.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('documents.php', 'default/_com_content---views---consulting---contents2---documents.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('documents.php', 'default/_com_content---views---consulting---contents---documents.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('find_and_hide.php', 'default/_com_content---views---consulting---contents---find_and_hide.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('find_and_hide.php', 'default/_com_content---views---consulting---contents2---find_and_hide.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('foreign_company.php', 'default/_com_content---views---consulting---tmpl---foreign_company.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('frontiers.php', 'default/_com_content---views---consulting---contents---frontiers.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('frontiers.php', 'default/_com_content---views---consulting---contents2---frontiers.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('hello.php', 'default/_com_helloworld---models---hello.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('how_to_check_him.php', 'default/_com_content---views---consulting---contents2---how_to_check_him.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('how_to_check_him.php', 'default/_com_content---views---consulting---contents---how_to_check_him.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('index.php', 'default/_com_content---views---featured---tmpl---default---index.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('orders.php', 'default/_com_collector1---models---orders.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('personal.php', 'default/_com_content---views---consulting---contents---personal.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('personal.php', 'default/_com_content---views---consulting---contents2---personal.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('policy.php', 'default/_com_content---views---consulting---contents---policy.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('policy.php', 'default/_com_content---views---consulting---contents2---policy.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('quick_and_free.php', 'default/_com_content---views---featured---tmpl---default---quick_and_free.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('real_cost.php', 'default/_com_content---views---consulting---tmpl---real_cost.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('right_advices.php', 'default/_com_content---views---featured---tmpl---default---right_advices.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('right_cms.php', 'default/_com_content---views---consulting---contents---right_cms.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('right_cms.php', 'default/_com_content---views---consulting---contents2---right_cms.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('right_developer.php', 'default/_com_content---views---consulting---contents2---right_developer.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('right_developer.php', 'default/_com_content---views---consulting---contents---right_developer.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('site_partial.php', 'default/_com_content---views---consulting---contents---site_partial.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('site_partial.php', 'default/_com_content---views---consulting---contents2---site_partial.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('site_support.php', 'default/_com_content---views---consulting---tmpl---site_support.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('take_it.php', 'default/_com_content---views---consulting---contents---take_it.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('take_it.php', 'default/_com_content---views---consulting---contents2---take_it.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('technical_issue.php', 'default/_com_content---views---consulting---tmpl---technical_issue.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('tech_issue.php', 'default/_com_content---views---consulting---contents---tech_issue.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('tech_issue.php', 'default/_com_content---views---consulting---contents2---tech_issue.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('test.php', 'default/_com_content---views---app---tmpl---test.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('test.php', 'default/_com_collector1---models---test.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('test.php', 'default/_com_collector1---views---collector1---tmpl---test.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('under_control.php', 'default/_com_content---views---consulting---contents2---under_control.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('under_control.php', 'default/_com_content---views---consulting---contents---under_control.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('view.html.php', 'default/_com_helloworld---views---hello---view.html.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('where_to_find_him.php', 'default/_com_content---views---consulting---contents2---where_to_find_him.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('where_to_find_him.php', 'default/_com_content---views---consulting---contents---where_to_find_him.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('wrong_developer.php', 'default/_com_content---views---consulting---contents2---wrong_developer.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	  var file = new WebFXTreeItem('wrong_developer.php', 'default/_com_content---views---consulting---contents---wrong_developer.php.html');
+      file.openIcon = 'media/images/file.png';
+      file.icon = 'media/images/file.png';
+      tree_file.add(file);
+    	tree.add(tree_file);
+  document.write(tree);
+}
+</script>
+<br />
+</div>
+<br />
+<span CLASS="small"><a href="http://www.phpdoc.org" target="_blank">phpDocumentor v <b>1.4.3</b></a><br />
+<br />
+<i>HTML layout inspired by </i><a href="http://www.phpedit.com" target="right">PHPEdit</a></span>
+</body>
+</html>

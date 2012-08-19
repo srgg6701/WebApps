@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>File Source for ajax.php</title>
+  <link rel="stylesheet" href="../media/stylesheet.css" />
+<!-- template designed by Julien Damon based on PHPEdit's generated templates, and tweaked by Greg Beaver -->
+<body bgcolor="#ffffff" ><h1 align="center">Source for file ajax.php</h1>
+<p>Documentation is available at <a href="../default/_com_ajax---ajax.php.html">ajax.php</a></p>
+<div class="src-code">
+<div class="src-code"><ol><li><div class="src-line"><a name="a1"></a><strong>&lt;?php</strong></div></li>
+<li><div class="src-line"><a name="a2"></a><font color="green">//&nbsp;no&nbsp;direct&nbsp;access</font></div></li>
+<li><div class="src-line"><a name="a3"></a><a href="http://www.php.net/defined">defined</a><strong>(&nbsp;</strong><font color="#66cccc">'_JEXEC'&nbsp;</font><strong>)&nbsp;</strong>or&nbsp;die<strong>;</strong></div></li>
+<li><div class="src-line"><a name="a4"></a><font color="green">//jimport('joomla.factory.php');</font></div></li>
+<li><div class="src-line"><a name="a5"></a>jimport<strong>(</strong><font color="#66cccc">'joomla.mail.mail'</font><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a6"></a>jimport<strong>(</strong><font color="#66cccc">'joomla.application.component.controller'</font><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a7"></a>jimport<strong>(</strong><font color="#66cccc">'joomla.application.component.model'</font><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a8"></a>JTable<strong>::</strong>addIncludePath<strong>(</strong>JPATH_ADMINISTRATOR.DS.<font color="#66cccc">'components'</font>.DS.<font color="#66cccc">'com_collector1'</font>.DS.<font color="#66cccc">'tables'</font><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a9"></a><font color="blue">require_once&nbsp;</font>JPATH_ADMINISTRATOR.DS.<font color="#66cccc">'classes'</font>.DS.<font color="#66cccc">'SDebug.php'</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a10"></a><font color="blue">require_once&nbsp;</font>JPATH_ADMINISTRATOR.DS.<font color="#66cccc">'classes'</font>.DS.<font color="#66cccc">'SCollection.php'</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a11"></a><font color="blue">require_once&nbsp;</font>JPATH_ADMINISTRATOR.DS.<font color="#66cccc">'classes'</font>.DS.<font color="#66cccc">'SFiles.php'</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a12"></a><font color="blue">require_once&nbsp;</font>JPATH_BASE.DS.<font color="#66cccc">'components'</font>.DS.<font color="#66cccc">'com_collector1'</font>.DS.<font color="#66cccc">'models'</font>.DS.<font color="#66cccc">'orders.php'</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a13"></a><strong>$controller&nbsp;&nbsp;&nbsp;&nbsp;</strong>=&nbsp;JController<strong>::</strong>getInstance<strong>(</strong><font color="#66cccc">'Ajax'</font><strong>)</strong><strong>;</strong><strong>?&gt;</strong></div></li>
+</ol></div>
+</div>
+	<div id="credit">
+		<hr />
+		Documentation generated on Sun, 29 Jul 2012 11:23:23 +0400 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</div>
+</body>
+</html>

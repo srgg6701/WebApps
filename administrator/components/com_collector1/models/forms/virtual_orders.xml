@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+
+              <field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL"
+                    readonly="true" class="readonly"
+                    description="JGLOBAL_FIELD_ID_DESC" /> 
+
+       <field name="precustomers_id" type="text" size="40" class="inputbox"
+                
+            label="COM_COLLECTOR1_FORM_LBL_VIRTUAL_ORDERS_PRECUSTOMERS_ID"
+            description="COM_COLLECTOR1_FORM_DESC_VIRTUAL_ORDERS_PRECUSTOMERS_ID" 
+                
+                
+                
+                filter="safehtml" /> 
+
+       <field name="type" type="text" size="40" class="inputbox"
+                
+            label="COM_COLLECTOR1_FORM_LBL_VIRTUAL_ORDERS_TYPE"
+            description="COM_COLLECTOR1_FORM_DESC_VIRTUAL_ORDERS_TYPE" 
+                
+                
+                
+                filter="safehtml" /> 
+
+       <field name="native_ids" type="editor" buttons="true"
+                class="inputbox"
+                filter="safehtml"
+                
+                
+                
+                
+            label="COM_COLLECTOR1_FORM_LBL_VIRTUAL_ORDERS_NATIVE_IDS"
+            description="COM_COLLECTOR1_FORM_DESC_VIRTUAL_ORDERS_NATIVE_IDS"  />
+
+	</fieldset>
+
+</form>

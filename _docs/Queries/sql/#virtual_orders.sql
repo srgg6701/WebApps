@@ -1,0 +1,1 @@
+SELECT * FROM a2allcom_fastweb.dnior_webapps_virtual_orders;

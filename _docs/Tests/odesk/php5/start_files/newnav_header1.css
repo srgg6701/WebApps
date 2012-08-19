@@ -1,0 +1,25 @@
+#header.navblock {
+  margin-top:18px;
+  padding:0 8px;
+  height:40px;
+  z-index:120;
+}
+#logo {
+  padding:0 0 6px;
+}
+#tagline {
+  color:#333;
+  font-size:12px;
+  left:140px;
+  position:absolute;
+  top:12px;
+}
+.navblock {
+  position:relative;
+}
+.navblock * {
+  font-family:Tahoma,sans-serif;
+  font-size:12px;
+  margin:0;
+  padding:0;
+}

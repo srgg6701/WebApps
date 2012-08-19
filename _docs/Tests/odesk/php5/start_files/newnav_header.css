@@ -1,0 +1,221 @@
+#header.navblock {
+  margin-top:18px;
+  padding:0 8px;
+  height:40px;
+  z-index:120;
+}
+#logo {
+  padding:0 0 6px;
+}
+#tagline {
+  color:#333;
+  font-size:12px;
+  left:140px;
+  position:absolute;
+  top:12px;
+}
+#logline {
+  position:absolute;
+  right:12px;
+  top:12px;
+}
+.navblock > .menu > .menuitem {
+  float: left;
+}
+.ie6 .navblock-menu-menuitem {
+  float: left;
+}
+#logline > .menuitem {
+  margin-left:12px;
+}
+.navblock {
+  position:relative;
+}
+.navblock * {
+  font-family:Tahoma,sans-serif;
+  font-size:12px;
+  margin:0;
+  padding:0;
+}
+.navblock ol, .navblock ul {
+  list-style-position:inside !important;
+}
+.navblock ul li {
+  list-style-type:none !important;
+}
+.navblock a, .navblock a:link, .navblock a:visited {
+  font-weight:bold;
+  text-decoration:none;
+}
+.navblock a:hover {
+  color:#000;
+  text-decoration: underline;
+}
+#bar1 {
+  background-color:#DCDACE;
+  height:24px;
+  padding:4px 8px;
+  position:relative;
+  z-index: 500;
+}
+
+body {
+background-color:#FFFFFF;
+margin:0px;
+padding:0 8px;
+}
+
+#new_header {
+  padding: 8px 8px 0 8px;
+  position: relative;
+  font-size: 12px;
+  font-family: Tahoma, sans-serif;
+}
+
+#new_header img {
+  border: none;
+  display: inline;
+}
+
+#new_header a#tagline {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  margin-top: 0.5em;
+  position: absolute;
+  color: #000000;
+}
+
+#tagline {
+  left: 160px;
+  top: 30px;
+  white-space: nowrap;
+}
+
+#navbar1 {
+  border-bottom: 1px solid #345b9e;
+  height: 30px;
+  padding: 4px 10px;
+  padding-right: 0px;
+  background: #dcdace url("/images/corner_uleft.gif") no-repeat scroll left top;
+  min-width: 830px;
+  font-size: 12px;
+  font-family: Tahoma, sans-serif;
+
+}
+
+#searchform {
+  background: transparent url("/images/corner_uright.gif") no-repeat scroll right top;
+  float: right;
+  margin-top: -4px;
+  padding-top: 8px;
+  padding-right: 10px;
+  white-space: nowrap;
+  padding-left: 533px;
+}
+
+.homepage_v1 #searchform, .navbar1_v2 #searchform, .navbar1_v3 #searchform {
+  padding-left: 0px;
+}
+
+#searchform select, #searchform input {
+  padding: 0pt;
+  font-size: 11px;
+}
+
+#searchform input {
+  padding: 1px 3px;
+}
+
+#searchform .yellow_button, .yellow_button {
+  height: 22px;
+  padding-bottom: 4px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 0pt;
+  background:#ffcc00 url("/images/btn_mid.gif") repeat-x scroll right top;
+  border-color:#ffda47 rgb(165, 132, 0) rgb(165, 132, 0) rgb(255, 218, 71);
+  border-style: solid;
+  border-width: 2px;
+}
+
+#searchText {
+  width: 90px;
+}
+#nav1 {
+  position: absolute;
+  top: 83px;
+  list-style-type: none;
+  white-space: nowrap;
+  width: auto;
+  padding: 0; 
+  margin: 0;
+}
+
+#nav1 li {
+  background: transparent url("/images/tab_off_left.gif") no-repeat scroll left top;
+  list-style-type: none;
+  margin: 0;
+  margin-left: 2px;
+  padding-left: 2px;
+  float: left;
+
+}
+
+#nav1 li a {
+  background: transparent url("/images/tab_off_right.gif") no-repeat scroll right top;
+  color: #345b9e;
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 7px 13px 4px 10px;  
+  text-decoration: none;
+  font-family: Tahoma, sans-serif;
+}
+
+#navbar2 {
+  background-color: #345b9e;
+  padding: 0px 30px;
+  font-size: 0px;
+  font-family: Tahoma, sans-serif;
+  min-width: 780px;
+}
+
+#nav2 {
+  position: relative;
+  top: 2px;
+  height: 20px;
+  list-style-type: none;
+  width: 600px;
+}
+
+#nav2 li {
+  border-left: 1px solid #c2cee2;
+  padding: 0px 12px;
+  float: left;
+  list-style-type: none;
+}
+
+#nav2 li a {
+  color: #c2cee2;
+  font-size: 12px;
+  display: block;
+}
+
+#nav2 li.current a {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.inputButtonSmall {
+  height: 22px;
+  padding-bottom: 0px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 0pt;
+  background:#ffcc00 url("/images/btn_mid.gif") repeat-x scroll right top;
+  border-color:#ffda47 rgb(165, 132, 0) rgb(165, 132, 0) rgb(255, 218, 71);
+  border-style: solid;
+  border-width: 2px;
+  font-weight: normal;
+  color: #000000;
+}

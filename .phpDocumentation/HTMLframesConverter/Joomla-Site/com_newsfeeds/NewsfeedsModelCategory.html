@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Docs For Class NewsfeedsModelCategory</title>
+  <link rel="stylesheet" href="../../media/stylesheet.css" />
+  <script src="../../media/lib/classTree.js"></script>
+<link id="webfx-tab-style-sheet" type="text/css" rel="stylesheet" href="../../media/lib/tab.webfx.css" />
+<script type="text/javascript" src="../../media/lib/tabpane.js"></script>
+  <script language="javascript" type="text/javascript" src="../../media/lib/ua.js"></script>
+<script language="javascript" type="text/javascript">
+	var imgPlus = new Image();
+	var imgMinus = new Image();
+	imgPlus.src = "../../media/images/plus.gif";
+	imgMinus.src = "../../media/images/minus.gif";
+	
+	function showNode(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+				var oImg = document.layers["img" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+				var oImg = document.all["img" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+				var oImg = document.getElementById("img" + Node);
+        		break;
+        }
+		oImg.src = imgMinus.src;
+		oTable.style.display = "block";
+	}
+	
+	function hideNode(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+				var oImg = document.layers["img" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+				var oImg = document.all["img" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+				var oImg = document.getElementById("img" + Node);
+        		break;
+        }
+		oImg.src = imgPlus.src;
+		oTable.style.display = "none";
+	}
+	
+	function nodeIsVisible(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+        		break;
+        }
+		return (oTable && oTable.style.display == "block");
+	}
+	
+	function toggleNodeVisibility(Node){
+		if (nodeIsVisible(Node)){
+			hideNode(Node);
+		}else{
+			showNode(Node);
+		}
+	}
+</script>
+<!-- template designed by Julien Damon based on PHPEdit's generated templates, and tweaked by Greg Beaver -->
+<body bgcolor="#ffffff" ><!-- Start of Class Data -->
+<h2>
+	Class NewsfeedsModelCategory
+</h2> (line <span class="linenumber">19</span>)
+<div class="tab-pane" id="tabPane1">
+<script type="text/javascript">
+tp1 = new WebFXTabPane( document.getElementById( "tabPane1" ));
+</script>
+
+<div class="tab-page" id="Description">
+<h2 class="tab">Description</h2>
+<pre>
+JModelList
+   |
+   --NewsfeedsModelCategory</pre>
+<p>
+	<b><i>Located in File: <a href="_com_newsfeeds---models---category.php.html">/com_newsfeeds/models/category.php</a></i></b><br>
+</p>
+<!-- ========== Info from phpDoc block ========= -->
+<h5>Newsfeeds Component Category Model</h5>
+<ul>
+		<li><strong>since:</strong> - 1.5</li>
+	</ul>
+<br /><hr />
+</div>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "Description" ) );</script>
+<div class="tab-page" id="tabPage1">
+
+<h2 class="tab">Class Variables</h2>
+<!-- ============ VARIABLE DETAIL =========== -->
+<strong>Summary:</strong><br />
+<div class="var-title">
+    <span class="var-type">mixed</span>
+    <a href="#var$_articles" title="details" class="property"><strong>$_articles</strong></a>
+</div>
+<div class="var-title">
+    <span class="var-type">array</span>
+    <a href="#var$_categories" title="details" class="property"><strong>$_categories</strong></a>
+</div>
+<div class="var-title">
+    <span class="var-type">object</span>
+    <a href="#var$_category" title="details" class="property"><strong>$_category</strong></a>
+</div>
+<div class="var-title">
+    <span class="var-type">mixed</span>
+    <a href="#var$_children" title="details" class="property"><strong>$_children</strong></a>
+</div>
+<div class="var-title">
+    <span class="var-type">array</span>
+    <a href="#var$_item" title="details" class="property"><strong>$_item</strong></a>
+</div>
+<div class="var-title">
+    <span class="var-type">mixed</span>
+    <a href="#var$_parent" title="details" class="property"><strong>$_parent</strong></a>
+</div>
+<div class="var-title">
+    <span class="var-type">mixed</span>
+    <a href="#var$_siblings" title="details" class="property"><strong>$_siblings</strong></a>
+</div>
+<hr />
+<a name="var$_articles" id="var$_articles"><!-- --></A>
+<div style="background='#ffffff'">
+<h4>
+<img src="../../media/images/PublicProperty.gif" border="0" /> <strong class="property">$_articles =  null</strong> (line <span class="linenumber">28</span>)
+ </h4>
+<h4>Data type : mixed</h4>
+<!-- ========== Info from phpDoc block ========= -->
+<ul>
+		<li><strong>access:</strong> - protected</li>
+	</ul>
+</div>
+<a name="var$_categories" id="var$_categories"><!-- --></A>
+<div style="background='#eeeeee'">
+<h4>
+<img src="../../media/images/PublicProperty.gif" border="0" /> <strong class="property">$_categories =  null</strong> (line <span class="linenumber">50</span>)
+ </h4>
+<h4>Data type : array</h4>
+<!-- ========== Info from phpDoc block ========= -->
+<h5>The list of other newfeed categories.</h5>
+<ul>
+		<li><strong>access:</strong> - protected</li>
+	</ul>
+</div>
+<a name="var$_category" id="var$_category"><!-- --></A>
+<div style="background='#ffffff'">
+<h4>
+<img src="../../media/images/PublicProperty.gif" border="0" /> <strong class="property">$_category =  null</strong> (line <span class="linenumber">42</span>)
+ </h4>
+<h4>Data type : object</h4>
+<!-- ========== Info from phpDoc block ========= -->
+<h5>The category that applies.</h5>
+<ul>
+		<li><strong>access:</strong> - protected</li>
+	</ul>
+</div>
+<a name="var$_children" id="var$_children"><!-- --></A>
+<div style="background='#eeeeee'">
+<h4>
+<img src="../../media/images/PublicProperty.gif" border="0" /> <strong class="property">$_children =  null</strong> (line <span class="linenumber">32</span>)
+ </h4>
+<h4>Data type : mixed</h4>
+<!-- ========== Info from phpDoc block ========= -->
+<ul>
+		<li><strong>access:</strong> - protected</li>
+	</ul>
+</div>
+<a name="var$_item" id="var$_item"><!-- --></A>
+<div style="background='#ffffff'">
+<h4>
+<img src="../../media/images/PublicProperty.gif" border="0" /> <strong class="property">$_item =  null</strong> (line <span class="linenumber">26</span>)
+ </h4>
+<h4>Data type : array</h4>
+<!-- ========== Info from phpDoc block ========= -->
+<h5>Category items data</h5>
+<ul>
+		<li><strong>access:</strong> - protected</li>
+	</ul>
+</div>
+<a name="var$_parent" id="var$_parent"><!-- --></A>
+<div style="background='#eeeeee'">
+<h4>
+<img src="../../media/images/PublicProperty.gif" border="0" /> <strong class="property">$_parent =  null</strong> (line <span class="linenumber">34</span>)
+ </h4>
+<h4>Data type : mixed</h4>
+<!-- ========== Info from phpDoc block ========= -->
+<ul>
+		<li><strong>access:</strong> - protected</li>
+	</ul>
+</div>
+<a name="var$_siblings" id="var$_siblings"><!-- --></A>
+<div style="background='#ffffff'">
+<h4>
+<img src="../../media/images/PublicProperty.gif" border="0" /> <strong class="property">$_siblings =  null</strong> (line <span class="linenumber">30</span>)
+ </h4>
+<h4>Data type : mixed</h4>
+<!-- ========== Info from phpDoc block ========= -->
+<ul>
+		<li><strong>access:</strong> - protected</li>
+	</ul>
+</div>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "tabPage1" ) );</script>
+</div>
+<div class="tab-page" id="constantsTabpage">
+
+<h2 class="tab">Class Constants</h2>
+<!-- ============ VARIABLE DETAIL =========== -->
+<strong>Summary:</strong><br />
+<hr />
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "constantsTabpage" ) );</script>
+</div>
+<div class="tab-page" id="tabPage2">
+<h2 class="tab">Method Detail</h2>
+<!-- ============ METHOD DETAIL =========== -->
+<strong>Summary:</strong><br />
+<div class="method-summary">
+    <div class="method-definition">
+            <span class="method-result">NewsfeedsModelCategory</span>
+        <a href="#method__construct" title="details" class="method-name">__construct</a>
+        ([<span class="var-type">array</span>&nbsp;<span class="var-name">$config</span> = <span class="var-default">array()</span>])
+        </div>
+    <div class="method-definition">
+            <span class="method-result">object</span>
+        <a href="#methodgetCategory" title="details" class="method-name">getCategory</a>
+        (<span class="var-type">int</span>&nbsp;<span class="var-name">0</span>)
+        </div>
+    <div class="method-definition">
+            <span class="method-result">mixed</span>
+        <a href="#methodgetChildren" title="details" class="method-name">&amp;getChildren</a>
+        (<span class="var-type">int</span>&nbsp;<span class="var-name">0</span>)
+        </div>
+    <div class="method-definition">
+            <span class="method-result">mixed</span>
+        <a href="#methodgetItems" title="details" class="method-name">getItems</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">mixed</span>
+        <a href="#methodgetLeftSibling" title="details" class="method-name">&amp;getLeftSibling</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">string</span>
+        <a href="#methodgetListQuery" title="details" class="method-name">getListQuery</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">mixed</span>
+        <a href="#methodgetParent" title="details" class="method-name">getParent</a>
+        (<span class="var-type">int</span>&nbsp;<span class="var-name">0</span>)
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodgetRightSibling" title="details" class="method-name">&amp;getRightSibling</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodpopulateState" title="details" class="method-name">populateState</a>
+        ([<span class="var-type"></span>&nbsp;<span class="var-name">$ordering</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$direction</span> = <span class="var-default">null</span>])
+        </div>
+</div>
+<hr />
+<A NAME='method_detail'></A>
+
+
+<a name="method__construct" id="method__construct"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../../media/images/Constructor.gif" border="0" /> <strong class="method">Constructor __construct</strong> (line <span class="linenumber">59</span>)
+ </h4> 
+<h4><i>NewsfeedsModelCategory</i> <strong>__construct(
+[array
+$config = array()])</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Constructor.</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong>array $config</strong>: An optional associative array of configuration settings.</li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>see</strong> - JController</li>
+			<li><strong>since</strong> - 1.6</li>
+			<li><strong>access</strong> - public</li>
+		</ul>
+</div>
+<a name="methodgetCategory" id="methodgetCategory"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getCategory</strong> (line <span class="linenumber">209</span>)
+ </h4> 
+<h4><i>object</i> <strong>getCategory(
+int
+0)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Method to get category data for the current category</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong>int 0</strong>: An optional ID</li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>since</strong> - 1.5</li>
+			<li><strong>access</strong> - public</li>
+		</ul>
+</div>
+<a name="methodgetChildren" id="methodgetChildren"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getChildren</strong> (line <span class="linenumber">292</span>)
+ </h4> 
+<h4><i>mixed</i> <strong>&amp;getChildren(
+int
+0)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Get the child categories.</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong>int 0</strong>: An optional category id. If not supplied, the model state 'category.id' will be used.</li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>return</strong> - An array of categories or false if an error occurs.</li>
+		</ul>
+</div>
+<a name="methodgetItems" id="methodgetItems"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getItems</strong> (line <span class="linenumber">79</span>)
+ </h4> 
+<h4><i>mixed</i> <strong>getItems(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Method to get a list of items.</h5>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>return</strong> - An array of objects on success, false on failure.</li>
+			<li><strong>access</strong> - public</li>
+		</ul>
+</div>
+<a name="methodgetLeftSibling" id="methodgetLeftSibling"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getLeftSibling</strong> (line <span class="linenumber">267</span>)
+ </h4> 
+<h4><i>mixed</i> <strong>&amp;getLeftSibling(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Get the sibling (adjacent) categories.</h5>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>return</strong> - An array of categories or false if an error occurs.</li>
+		</ul>
+</div>
+<a name="methodgetListQuery" id="methodgetListQuery"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getListQuery</strong> (line <span class="linenumber">103</span>)
+ </h4> 
+<h4><i>string</i> <strong>getListQuery(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Method to build an SQL query to load the list data.</h5>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>return</strong> - An SQL query</li>
+			<li><strong>since</strong> - 1.6</li>
+			<li><strong>access</strong> - protected</li>
+		</ul>
+</div>
+<a name="methodgetParent" id="methodgetParent"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getParent</strong> (line <span class="linenumber">253</span>)
+ </h4> 
+<h4><i>mixed</i> <strong>getParent(
+int
+0)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Get the parent category.</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong>int 0</strong>: An optional category id. If not supplied, the model state 'category.id' will be used.</li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>return</strong> - An array of categories or false if an error occurs.</li>
+			<li><strong>access</strong> - public</li>
+		</ul>
+</div>
+<a name="methodgetRightSibling" id="methodgetRightSibling"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getRightSibling</strong> (line <span class="linenumber">276</span>)
+ </h4> 
+<h4><i>void</i> <strong>&amp;getRightSibling(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodpopulateState" id="methodpopulateState"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method populateState</strong> (line <span class="linenumber">158</span>)
+ </h4> 
+<h4><i>void</i> <strong>populateState(
+[
+$ordering = null], [
+$direction = null])</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Method to auto-populate the model state.</h5>
+<div class="desc"><p>Note. Calling getState in this method will result in recursion.</p></div>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong> $ordering</strong>: </li>
+			<li><strong> $direction</strong>: </li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>since</strong> - 1.6</li>
+			<li><strong>access</strong> - protected</li>
+		</ul>
+</div>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "tabPage2" ) );</script></div>
+<div class="tab-page" id="iVars">
+<h2 class="tab">Inherited Variables</h2>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "iVars" ) );</script>
+<!-- =========== VAR INHERITED SUMMARY =========== -->
+<A NAME='var_inherited_summary'><!-- --></A>
+<h3>Inherited Class Variable Summary</h3>
+
+	</div>
+<div class="tab-page" id="iMethods">
+<h2 class="tab">Inherited Methods</h2>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "iMethods" ) );</script>
+<!-- =========== INHERITED METHOD SUMMARY =========== -->
+<A NAME='functions_inherited'><!-- --></A>
+<h3>Inherited Method Summary</h3>
+
+	</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+
+setupAllTabs();
+
+//]]>
+</script>
+	<div id="credit">
+		<hr />
+		Documentation generated on Sun, 29 Jul 2012 11:23:27 +0400 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="MM_css_include" value="../../../../../templates/fastwebdev/css/style.css" />
+	<infoitem key="MM_css_exclude" value="" />
+	<infoitem key="notes" value="*Раскомментировать заголовки в view.html.php / makeHeaders&#xD;*Раскомментировать блок ссылок на остальные статьи в конце файла&#xD;*Сделать извлечение данных внутри switch ($option) централизованным" />
+	<infoitem key="showOnOpen" value="true" />
+</info>

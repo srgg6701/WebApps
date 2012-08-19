@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+
+              <field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL"
+                    readonly="true" class="readonly"
+                    description="JGLOBAL_FIELD_ID_DESC" /> 
+
+       <field name="name" type="text" size="40" class="inputbox"
+                
+            label="COM_COLLECTOR1_FORM_LBL_PRECUSTOMERS_NAME"
+            description="COM_COLLECTOR1_FORM_DESC_PRECUSTOMERS_NAME" 
+                
+                
+                 required="false" 
+                filter="safehtml" /> 
+
+       <field name="email" type="text" size="40" class="inputbox"
+                
+            label="COM_COLLECTOR1_FORM_LBL_PRECUSTOMERS_EMAIL"
+            description="COM_COLLECTOR1_FORM_DESC_PRECUSTOMERS_EMAIL" 
+                
+                
+                 required="true" 
+                filter="safehtml" /> 
+
+       <field name="phone" type="text" size="40" class="inputbox"
+                
+            label="COM_COLLECTOR1_FORM_LBL_PRECUSTOMERS_PHONE"
+            description="COM_COLLECTOR1_FORM_DESC_PRECUSTOMERS_PHONE" 
+                
+                
+                 required="false" 
+                filter="safehtml" /> 
+
+       <field name="skype" type="text" size="40" class="inputbox"
+                
+            label="COM_COLLECTOR1_FORM_LBL_PRECUSTOMERS_SKYPE"
+            description="COM_COLLECTOR1_FORM_DESC_PRECUSTOMERS_SKYPE" 
+                
+                
+                 required="false" 
+                filter="safehtml" /> 
+
+       <field name="collections_ids" type="editor" buttons="true"
+                class="inputbox"
+                filter="safehtml"
+                 required="false" 
+                
+                
+                
+            label="COM_COLLECTOR1_FORM_LBL_PRECUSTOMERS_COLLECTIONS_IDS"
+            description="COM_COLLECTOR1_FORM_DESC_PRECUSTOMERS_COLLECTIONS_IDS"  /> 
+
+       <field name="orders_id" type="editor" buttons="true"
+                class="inputbox"
+                filter="safehtml"
+                 required="false" 
+                
+                
+                
+            label="COM_COLLECTOR1_FORM_LBL_PRECUSTOMERS_ORDERS_ID"
+            description="COM_COLLECTOR1_FORM_DESC_PRECUSTOMERS_ORDERS_ID"  /> 
+
+       <field name="session_id" type="text" size="40" class="inputbox"
+                
+            label="COM_COLLECTOR1_FORM_LBL_PRECUSTOMERS_SESSION_ID"
+            description="COM_COLLECTOR1_FORM_DESC_PRECUSTOMERS_SESSION_ID" 
+                
+                
+                
+                filter="safehtml" /> 
+
+         <field
+                name="state"
+                type="list"
+                label="JSTATUS"
+                description="JFIELD_PUBLISHED_DESC"
+                class="inputbox"
+                size="1"
+                default="1">
+                <option value="1">JPUBLISHED</option>
+                <option value="0">JUNPUBLISHED</option>
+            </field> 
+
+                        <field name="checked_out" type="hidden" filter="unset" />
+                <field name="checked_out_time" type="hidden" filter="unset" />
+
+	</fieldset>
+
+</form>

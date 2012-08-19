@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>File Source for collected.php</title>
+  <link rel="stylesheet" href="../media/stylesheet.css" />
+<!-- template designed by Julien Damon based on PHPEdit's generated templates, and tweaked by Greg Beaver -->
+<body bgcolor="#ffffff" ><h1 align="center">Source for file collected.php</h1>
+<p>Documentation is available at <a href="../default/_com_collector1---models---collected.php.html">collected.php</a></p>
+<div class="src-code">
+<div class="src-code"><ol><li><div class="src-line"><a name="a1"></a><strong>&lt;?php</strong></div></li>
+<li><div class="src-line"><a name="a2"></a><a href="http://www.php.net/defined">defined</a><strong>(</strong><font color="#66cccc">'_JEXEC'</font><strong>)&nbsp;</strong>or&nbsp;die<strong>(</strong><font color="#66cccc">'Restricted&nbsp;access'</font><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a3"></a><font color="blue">class&nbsp;</font><a href="../default/collector1ModelCollected.html">collector1ModelCollected</a>&nbsp;<font color="blue">extends&nbsp;</font>JModel</div></li>
+<li><div class="src-line"><a name="a4"></a><strong>{&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a5"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">private&nbsp;</font><a href="../default/collector1ModelCollected.html#var$default_table">$default_table</a>=<font color="#66cccc">'#__webapps_customer_site_options'</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a6"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">protected&nbsp;</font><a href="../default/collector1ModelCollected.html#var$precustomers_table">$precustomers_table</a>=<font color="#66cccc">'#__webapps_precustomers'</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a7"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#009999">/**</font></div></li>
+<li><div class="src-line"><a name="a8"></a><font color="#009999">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</font></div></li>
+<li><div class="src-line"><a name="a9"></a><font color="#009999">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/&nbsp;&nbsp;&nbsp;&nbsp;</font></div></li>
+<li><div class="src-line"><a name="a10"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">function&nbsp;</font><a href="../default/collector1ModelCollected.html#method__construct">__construct</a><strong>(</strong><strong>)</strong><strong>{</strong></div></li>
+<li><div class="src-line"><a name="a11"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent<strong>::</strong>__construct<strong>(</strong><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a12"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>$this</strong><strong>-&gt;</strong><strong>db</strong>=JFactory<strong>::</strong>getDBO<strong>(</strong><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a13"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>$user&nbsp;</strong>=&nbsp;JFactory<strong>::</strong>getUser<strong>(</strong><strong>)</strong><strong>;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a14"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">//$this-&gt;query.='&nbsp;WHERE&nbsp;customer_id&nbsp;=&nbsp;'.$user-&gt;id;</font></div></li>
+<li><div class="src-line"><a name="a15"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>}</strong></div></li>
+<li><div class="src-line"><a name="a16"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#009999">/**</font></div></li>
+<li><div class="src-line"><a name="a17"></a><font color="#009999">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;все&nbsp;сайты&nbsp;заказчика</font></div></li>
+<li><div class="src-line"><a name="a18"></a><font color="#009999">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;customer,&nbsp;precustomer</font></div></li>
+<li><div class="src-line"><a name="a19"></a><font color="#009999">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</font></div></li>
+<li><div class="src-line"><a name="a20"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">function&nbsp;</font><a href="../default/collector1ModelCollected.html#methodcollected">collected</a><strong>(</strong><strong>)&nbsp;</strong><strong>{&nbsp;&nbsp;&nbsp;&nbsp;</strong><font color="green">//SDebug::dOutput(&quot;collected&quot;,'h1');&nbsp;//die();</font></div></li>
+<li><div class="src-line"><a name="a21"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">//guest?</font></div></li>
+<li><div class="src-line"><a name="a22"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">//$user&nbsp;=&nbsp;JFactory::getUser();</font></div></li>
+<li><div class="src-line"><a name="a23"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">//получить&nbsp;id&nbsp;id&nbsp;коллекций:</font></div></li>
+<li><div class="src-line"><a name="a24"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">/*($user-&gt;get('guest')==1)?&nbsp;//назначает&nbsp;данные&nbsp;для&nbsp;$this-&gt;collections_ids_array</font></div></li>
+<li><div class="src-line"><a name="a25"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCollection::getPrecustomerSet('collections_ids')&nbsp;:&nbsp;SCollection::getUserSet('collections_ids',$user-&gt;get('id'));</font></div></li>
+<li><div class="src-line"><a name="a26"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$arrCollectionsIds=$this-&gt;collections_ids_array;&nbsp;var_dump(&quot;&lt;h1&gt;arrCollectionsIds:&lt;/h1&gt;&lt;pre&gt;&quot;,$arrCollectionsIds,&quot;&lt;/pre&gt;&quot;);</font></div></li>
+<li><div class="src-line"><a name="a27"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($arrCollectionsIds){&nbsp;//otherwise&nbsp;is&nbsp;null*/</font></div></li>
+<li><div class="src-line"><a name="a28"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">if&nbsp;</font><strong>(</strong><strong>$arrCollectionsIds</strong>=SCollection<strong>::</strong>getCurrentSetArray<strong>(</strong><font color="#66cccc">'collections_ids'</font><strong>))&nbsp;</strong><strong>{</strong></div></li>
+<li><div class="src-line"><a name="a29"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>$modelCollector</strong>=JModel<strong>::</strong>getInstance<strong>(</strong><font color="#66cccc">'collector1'</font><strong>,</strong><font color="#66cccc">'Collector1Model'</font><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">//будем&nbsp;создавать&nbsp;массив&nbsp;ВСЕХ&nbsp;данных&nbsp;для&nbsp;каждой&nbsp;коллекции:</font></div></li>
+<li><div class="src-line"><a name="a31"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>$collections_data_array</strong>=array<strong>(</strong><strong>)</strong><strong>;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a32"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">for&nbsp;</font><strong>(</strong><strong>$i</strong>=0<strong>,</strong><strong>$j</strong>=<a href="http://www.php.net/count">count</a><strong>(</strong><strong>$arrCollectionsIds</strong><strong>)</strong><strong>;</strong><strong>$i</strong>&lt;<strong>$j</strong><strong>;</strong><strong>$i</strong>++<strong>)</strong><strong>{</strong></div></li>
+<li><div class="src-line"><a name="a33"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>$collection_id</strong>=<strong>$arrCollectionsIds</strong><strong>[</strong><strong>$i</strong><strong>]</strong><strong>;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a34"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>$collections_data_array</strong><strong>[</strong><strong>$collection_id</strong><strong>]</strong>=<strong>$modelCollector</strong><strong>-&gt;</strong>getCollectionDataArray<strong>(</strong><strong>$collection_id</strong><strong>)</strong><strong>;&nbsp;</strong><font color="green">//все&nbsp;данные&nbsp;коллекции</font></div></li>
+<li><div class="src-line"><a name="a35"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">//SDebug::showDebugContent($collections_data_array,'collections_data_array');</font></div></li>
+<li><div class="src-line"><a name="a36"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">if&nbsp;</font><strong>(</strong><strong>$collections_data_array</strong><strong>[</strong><strong>$collection_id</strong><strong>]</strong>===false<strong>)&nbsp;</strong><font color="blue">return&nbsp;</font>false<strong>;</strong></div></li>
+<li><div class="src-line"><a name="a37"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unset<strong>(</strong><strong>$collections_data_array</strong><strong>[</strong><strong>$collection_id</strong><strong>]</strong><strong>[</strong><font color="#66cccc">'engines_ids'</font><strong>]</strong><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a38"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>}</strong></div></li>
+<li><div class="src-line"><a name="a39"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>}</strong></div></li>
+<li><div class="src-line"><a name="a40"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">return&nbsp;</font><strong>$collections_data_array</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a41"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>}</strong></div></li>
+<li><div class="src-line"><a name="a42"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#009999">/**</font></div></li>
+<li><div class="src-line"><a name="a43"></a><font color="#009999">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Проверить&nbsp;принадлежность&nbsp;коллекции&nbsp;юзеру</font></div></li>
+<li><div class="src-line"><a name="a44"></a><font color="#009999">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</font></div></li>
+<li><div class="src-line"><a name="a45"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">/*function&nbsp;checkCollectionAccessory($collection_id,&nbsp;$user&nbsp;=&nbsp;false,&nbsp;$db&nbsp;=&nbsp;false)&nbsp;{</font></div></li>
+<li><div class="src-line"><a name="a46"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$query=&quot;SELECT&nbsp;COUNT(*)&nbsp;FROM&nbsp;&quot;;</font></div></li>
+<li><div class="src-line"><a name="a47"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!$user)</font></div></li>
+<li><div class="src-line"><a name="a48"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$user&nbsp;=&nbsp;JFactory::getUser();</font></div></li>
+<li><div class="src-line"><a name="a49"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($user-&gt;get('guest')!=1){</font></div></li>
+<li><div class="src-line"><a name="a50"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$query.=$this-&gt;default_table.&quot;</font></div></li>
+<li><div class="src-line"><a name="a51"></a><font color="green">&nbsp;WHERE&nbsp;id&nbsp;=&nbsp;$collection_id</font></div></li>
+<li><div class="src-line"><a name="a52"></a><font color="green">&nbsp;&nbsp;&nbsp;AND&nbsp;`customer_id`&nbsp;=&nbsp;&quot;.$user-&gt;get('id');</font></div></li>
+<li><div class="src-line"><a name="a53"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{</font></div></li>
+<li><div class="src-line"><a name="a54"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$query.=$this-&gt;precustomers_table.&quot;&nbsp;</font></div></li>
+<li><div class="src-line"><a name="a55"></a><font color="green">&nbsp;WHERE&nbsp;collections_ids&nbsp;REGEXP&nbsp;CONCAT('(^|,)',$collection_id,'(,|$)')</font></div></li>
+<li><div class="src-line"><a name="a56"></a><font color="green">&nbsp;&nbsp;&nbsp;AND&nbsp;(&nbsp;email&nbsp;=&nbsp;'&quot;.$user-&gt;get('email').&quot;'</font></div></li>
+<li><div class="src-line"><a name="a57"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR&nbsp;session_id&nbsp;=&nbsp;'&quot;.session_id().&quot;'</font></div></li>
+<li><div class="src-line"><a name="a58"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&quot;;</font></div></li>
+<li><div class="src-line"><a name="a59"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</font></div></li>
+<li><div class="src-line"><a name="a60"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!$db)&nbsp;$db&nbsp;=&nbsp;JFactory::getDBO();</font></div></li>
+<li><div class="src-line"><a name="a61"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$db-&gt;setQuery($query);</font></div></li>
+<li><div class="src-line"><a name="a62"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$collections_ids_array=$db-&gt;loadResultArray();</font></div></li>
+<li><div class="src-line"><a name="a63"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;collections_ids_array=$collections_ids_array;&nbsp;//будет&nbsp;извлекаться&nbsp;также&nbsp;helper'ом&nbsp;предзаказчика</font></div></li>
+<li><div class="src-line"><a name="a64"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*return&nbsp;$collections_ids_array;&nbsp;</font></div></li>
+<li><div class="src-line"><a name="a65"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;}*/</font></div></li>
+<li><div class="src-line"><a name="a66"></a><strong>}</strong></div></li>
+<li><div class="src-line"><a name="a67"></a><strong>?&gt;</strong></div></li>
+</ol></div>
+</div>
+	<div id="credit">
+		<hr />
+		Documentation generated on Sun, 29 Jul 2012 11:23:28 +0400 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</div>
+</body>
+</html>

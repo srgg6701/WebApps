@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="notes" value="Разобраться с getPrecustomerSet() - нужна ли она? - т.к. уже есть методы:&#xD;getCollectionsIds($user_email,$db);&#xD;getCustomerOrdersIds($user,$db);" />
+</info>

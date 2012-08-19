@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Docs For Class Collector1ModelCollector1</title>
+  <link rel="stylesheet" href="../media/stylesheet.css" />
+  <script src="../media/lib/classTree.js"></script>
+<link id="webfx-tab-style-sheet" type="text/css" rel="stylesheet" href="../media/lib/tab.webfx.css" />
+<script type="text/javascript" src="../media/lib/tabpane.js"></script>
+  <script language="javascript" type="text/javascript" src="../media/lib/ua.js"></script>
+<script language="javascript" type="text/javascript">
+	var imgPlus = new Image();
+	var imgMinus = new Image();
+	imgPlus.src = "../media/images/plus.gif";
+	imgMinus.src = "../media/images/minus.gif";
+	
+	function showNode(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+				var oImg = document.layers["img" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+				var oImg = document.all["img" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+				var oImg = document.getElementById("img" + Node);
+        		break;
+        }
+		oImg.src = imgMinus.src;
+		oTable.style.display = "block";
+	}
+	
+	function hideNode(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+				var oImg = document.layers["img" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+				var oImg = document.all["img" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+				var oImg = document.getElementById("img" + Node);
+        		break;
+        }
+		oImg.src = imgPlus.src;
+		oTable.style.display = "none";
+	}
+	
+	function nodeIsVisible(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+        		break;
+        }
+		return (oTable && oTable.style.display == "block");
+	}
+	
+	function toggleNodeVisibility(Node){
+		if (nodeIsVisible(Node)){
+			hideNode(Node);
+		}else{
+			showNode(Node);
+		}
+	}
+</script>
+<!-- template designed by Julien Damon based on PHPEdit's generated templates, and tweaked by Greg Beaver -->
+<body bgcolor="#ffffff" ><!-- Start of Class Data -->
+<h2>
+	Class Collector1ModelCollector1
+</h2> (line <span class="linenumber">14</span>)
+<div class="tab-pane" id="tabPane1">
+<script type="text/javascript">
+tp1 = new WebFXTabPane( document.getElementById( "tabPane1" ));
+</script>
+
+<div class="tab-page" id="Description">
+<h2 class="tab">Description</h2>
+<pre>
+JModel
+   |
+   --Collector1ModelCollector1</pre>
+<p>
+	<b><i>Located in File: <a href="_com_collector1---models---collector1.php.html">/com_collector1/models/collector1.php</a></i></b><br>
+</p>
+<!-- ========== Info from phpDoc block ========= -->
+<h5>Model</h5>
+<ul>
+	</ul>
+<br /><hr />
+</div>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "Description" ) );</script>
+<div class="tab-page" id="tabPage1">
+
+<h2 class="tab">Class Variables</h2>
+<!-- ============ VARIABLE DETAIL =========== -->
+<strong>Summary:</strong><br />
+<div class="var-title">
+    <span class="var-type">mixed</span>
+    <a href="#var$_action" title="details" class="property"><strong>$_action</strong></a>
+</div>
+<div class="var-title">
+    <span class="var-type">mixed</span>
+    <a href="#var$_item" title="details" class="property"><strong>$_item</strong></a>
+</div>
+<hr />
+<a name="var$_action" id="var$_action"><!-- --></A>
+<div style="background='#ffffff'">
+<h4>
+<img src="../media/images/PublicProperty.gif" border="0" /> <strong class="property">$_action</strong> (line <span class="linenumber">16</span>)
+ </h4>
+<h4>Data type : mixed</h4>
+<!-- ========== Info from phpDoc block ========= -->
+<ul>
+		<li><strong>access:</strong> - protected</li>
+	</ul>
+</div>
+<a name="var$_item" id="var$_item"><!-- --></A>
+<div style="background='#eeeeee'">
+<h4>
+<img src="../media/images/PublicProperty.gif" border="0" /> <strong class="property">$_item</strong> (line <span class="linenumber">17</span>)
+ </h4>
+<h4>Data type : mixed</h4>
+<!-- ========== Info from phpDoc block ========= -->
+<ul>
+		<li><strong>access:</strong> - protected</li>
+	</ul>
+</div>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "tabPage1" ) );</script>
+</div>
+<div class="tab-page" id="constantsTabpage">
+
+<h2 class="tab">Class Constants</h2>
+<!-- ============ VARIABLE DETAIL =========== -->
+<strong>Summary:</strong><br />
+<hr />
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "constantsTabpage" ) );</script>
+</div>
+<div class="tab-page" id="tabPage2">
+<h2 class="tab">Method Detail</h2>
+<!-- ============ METHOD DETAIL =========== -->
+<strong>Summary:</strong><br />
+<div class="method-summary">
+    <div class="method-definition">
+            <span class="method-result">Collector1ModelCollector1</span>
+        <a href="#method__construct" title="details" class="method-name">__construct</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodaddCollection" title="details" class="method-name">addCollection</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodbuildOptionsSidesCells" title="details" class="method-name">buildOptionsSidesCells</a>
+        (<span class="var-type"></span>&nbsp;<span class="var-name">$option_id</span>)
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methoddeleteCollection" title="details" class="method-name">deleteCollection</a>
+        (<span class="var-type"></span>&nbsp;<span class="var-name">$collection_id</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$table</span> = <span class="var-default">false</span>])
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodgetCollectionDataArray" title="details" class="method-name">getCollectionDataArray</a>
+        (<span class="var-type"></span>&nbsp;<span class="var-name">$collection_id</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$user</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$db</span> = <span class="var-default">false</span>])
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodgetDataForCollector" title="details" class="method-name">getDataForCollector</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodgetItem" title="details" class="method-name">&amp;getItem</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodgetSidesDesc" title="details" class="method-name">getSidesDesc</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodgetSitesTypes" title="details" class="method-name">getSitesTypes</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodget_options_names" title="details" class="method-name">get_options_names</a>
+        ([<span class="var-type"></span>&nbsp;<span class="var-name">$lang</span> = <span class="var-default">false</span>])
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodget_sites_types" title="details" class="method-name">get_sites_types</a>
+        ([<span class="var-type"></span>&nbsp;<span class="var-name">$site_type_id</span> = <span class="var-default">false</span>])
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodprepareCollectionDataSet" title="details" class="method-name">prepareCollectionDataSet</a>
+        ([<span class="var-type"></span>&nbsp;<span class="var-name">$updated_id</span> = <span class="var-default">false</span>])
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodsetDefaultTable" title="details" class="method-name">setDefaultTable</a>
+        ([<span class="var-type"></span>&nbsp;<span class="var-name">$table</span> = <span class="var-default">false</span>])
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodtempCMSlist" title="details" class="method-name">tempCMSlist</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodupdateCollectionData" title="details" class="method-name">updateCollectionData</a>
+        (<span class="var-type"></span>&nbsp;<span class="var-name">$collection_id</span>)
+        </div>
+</div>
+<hr />
+<A NAME='method_detail'></A>
+
+
+<a name="method__construct" id="method__construct"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../media/images/Constructor.gif" border="0" /> <strong class="method">Constructor __construct</strong> (line <span class="linenumber">23</span>)
+ </h4> 
+<h4><i>Collector1ModelCollector1</i> <strong>__construct(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Конструктор</h5>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodaddCollection" id="methodaddCollection"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method addCollection</strong> (line <span class="linenumber">30</span>)
+ </h4> 
+<h4><i>void</i> <strong>addCollection(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Создать коллекцию</h5>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodbuildOptionsSidesCells" id="methodbuildOptionsSidesCells"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method buildOptionsSidesCells</strong> (line <span class="linenumber">59</span>)
+ </h4> 
+<h4><i>void</i> <strong>buildOptionsSidesCells(
+
+$option_id)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Построить ячейки для frontend, backend, boudoire в строке опции</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong> $option_id</strong>: </li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methoddeleteCollection" id="methoddeleteCollection"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method deleteCollection</strong> (line <span class="linenumber">73</span>)
+ </h4> 
+<h4><i>void</i> <strong>deleteCollection(
+
+$collection_id, [
+$table = false])</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Удалить коллекцию</h5>
+<div class="desc"><p>@ collections</p></div>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong> $collection_id</strong>: </li>
+			<li><strong> $table</strong>: </li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodgetCollectionDataArray" id="methodgetCollectionDataArray"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getCollectionDataArray</strong> (line <span class="linenumber">118</span>)
+ </h4> 
+<h4><i>void</i> <strong>getCollectionDataArray(
+
+$collection_id, [
+$user = false], [
+$db = false])</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Получить данные коллекции по её id</h5>
+<div class="desc"><p>@ collections, user, model</p></div>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong> $collection_id</strong>: </li>
+			<li><strong> $user</strong>: </li>
+			<li><strong> $db</strong>: </li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodgetDataForCollector" id="methodgetDataForCollector"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getDataForCollector</strong> (line <span class="linenumber">191</span>)
+ </h4> 
+<h4><i>void</i> <strong>getDataForCollector(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Получить массив всех данных для построения таблицы Коллектора</h5>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodgetItem" id="methodgetItem"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getItem</strong> (line <span class="linenumber">81</span>)
+ </h4> 
+<h4><i>void</i> <strong>&amp;getItem(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Get the data for a banner</h5>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodgetSidesDesc" id="methodgetSidesDesc"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getSidesDesc</strong> (line <span class="linenumber">247</span>)
+ </h4> 
+<h4><i>void</i> <strong>getSidesDesc(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Получим таблицу разделов сайта</h5>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodgetSitesTypes" id="methodgetSitesTypes"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getSitesTypes</strong> (line <span class="linenumber">259</span>)
+ </h4> 
+<h4><i>void</i> <strong>getSitesTypes(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Получим таблицу типов сайта</h5>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodget_options_names" id="methodget_options_names"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method get_options_names</strong> (line <span class="linenumber">217</span>)
+ </h4> 
+<h4><i>void</i> <strong>get_options_names(
+[
+$lang = false])</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>название опции, по умолчанию - на русском</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong> $lang</strong>: </li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodget_sites_types" id="methodget_sites_types"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method get_sites_types</strong> (line <span class="linenumber">235</span>)
+ </h4> 
+<h4><i>void</i> <strong>get_sites_types(
+[
+$site_type_id = false])</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>получить таблицу типов сайтов</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong> $site_type_id</strong>: </li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodprepareCollectionDataSet" id="methodprepareCollectionDataSet"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method prepareCollectionDataSet</strong> (line <span class="linenumber">272</span>)
+ </h4> 
+<h4><i>void</i> <strong>prepareCollectionDataSet(
+[
+$updated_id = false])</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Подготовить данные для добавления/обновления таблицы Коллекций</h5>
+<div class="desc"><p>@ collections</p></div>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong> $updated_id</strong>: </li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodsetDefaultTable" id="methodsetDefaultTable"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method setDefaultTable</strong> (line <span class="linenumber">358</span>)
+ </h4> 
+<h4><i>void</i> <strong>setDefaultTable(
+[
+$table = false])</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Получить стр. по умолчанию</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong> $table</strong>: </li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodtempCMSlist" id="methodtempCMSlist"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method tempCMSlist</strong> (line <span class="linenumber">364</span>)
+ </h4> 
+<h4><i>void</i> <strong>tempCMSlist(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Построить список CMS</h5>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<a name="methodupdateCollectionData" id="methodupdateCollectionData"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method updateCollectionData</strong> (line <span class="linenumber">420</span>)
+ </h4> 
+<h4><i>void</i> <strong>updateCollectionData(
+
+$collection_id)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Обновить данные коллекции</h5>
+<div class="desc"><p>@ collections</p></div>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong> $collection_id</strong>: </li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+		</ul>
+</div>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "tabPage2" ) );</script></div>
+<div class="tab-page" id="iVars">
+<h2 class="tab">Inherited Variables</h2>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "iVars" ) );</script>
+<!-- =========== VAR INHERITED SUMMARY =========== -->
+<A NAME='var_inherited_summary'><!-- --></A>
+<h3>Inherited Class Variable Summary</h3>
+
+	</div>
+<div class="tab-page" id="iMethods">
+<h2 class="tab">Inherited Methods</h2>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "iMethods" ) );</script>
+<!-- =========== INHERITED METHOD SUMMARY =========== -->
+<A NAME='functions_inherited'><!-- --></A>
+<h3>Inherited Method Summary</h3>
+
+	</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+
+setupAllTabs();
+
+//]]>
+</script>
+	<div id="credit">
+		<hr />
+		Documentation generated on Sun, 29 Jul 2012 11:23:28 +0400 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</div>
+</body>
+</html>

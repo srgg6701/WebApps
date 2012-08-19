@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Docs For Class PayModelpayment</title>
+  <link rel="stylesheet" href="../media/stylesheet.css" />
+  <script src="../media/lib/classTree.js"></script>
+<link id="webfx-tab-style-sheet" type="text/css" rel="stylesheet" href="../media/lib/tab.webfx.css" />
+<script type="text/javascript" src="../media/lib/tabpane.js"></script>
+  <script language="javascript" type="text/javascript" src="../media/lib/ua.js"></script>
+<script language="javascript" type="text/javascript">
+	var imgPlus = new Image();
+	var imgMinus = new Image();
+	imgPlus.src = "../media/images/plus.gif";
+	imgMinus.src = "../media/images/minus.gif";
+	
+	function showNode(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+				var oImg = document.layers["img" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+				var oImg = document.all["img" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+				var oImg = document.getElementById("img" + Node);
+        		break;
+        }
+		oImg.src = imgMinus.src;
+		oTable.style.display = "block";
+	}
+	
+	function hideNode(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+				var oImg = document.layers["img" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+				var oImg = document.all["img" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+				var oImg = document.getElementById("img" + Node);
+        		break;
+        }
+		oImg.src = imgPlus.src;
+		oTable.style.display = "none";
+	}
+	
+	function nodeIsVisible(Node){
+        switch(navigator.family){
+        	case 'nn4':
+        		// Nav 4.x code fork...
+				var oTable = document.layers["span" + Node];
+        		break;
+        	case 'ie4':
+        		// IE 4/5 code fork...
+				var oTable = document.all["span" + Node];
+        		break;
+        	case 'gecko':
+        		// Standards Compliant code fork...
+				var oTable = document.getElementById("span" + Node);
+        		break;
+        }
+		return (oTable && oTable.style.display == "block");
+	}
+	
+	function toggleNodeVisibility(Node){
+		if (nodeIsVisible(Node)){
+			hideNode(Node);
+		}else{
+			showNode(Node);
+		}
+	}
+</script>
+<!-- template designed by Julien Damon based on PHPEdit's generated templates, and tweaked by Greg Beaver -->
+<body bgcolor="#ffffff" ><!-- Start of Class Data -->
+<h2>
+	Class PayModelpayment
+</h2> (line <span class="linenumber">17</span>)
+<div class="tab-pane" id="tabPane1">
+<script type="text/javascript">
+tp1 = new WebFXTabPane( document.getElementById( "tabPane1" ));
+</script>
+
+<div class="tab-page" id="Description">
+<h2 class="tab">Description</h2>
+<pre>
+JModelForm
+   |
+   --PayModelpayment</pre>
+<p>
+	<b><i>Located in File: <a href="_com_pay---models---payment.php.html">/com_pay/models/payment.php</a></i></b><br>
+</p>
+<!-- ========== Info from phpDoc block ========= -->
+<h5>Pay model.</h5>
+<ul>
+	</ul>
+<br /><hr />
+</div>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "Description" ) );</script>
+<div class="tab-page" id="tabPage1">
+
+<h2 class="tab">Class Variables</h2>
+<!-- ============ VARIABLE DETAIL =========== -->
+<strong>Summary:</strong><br />
+<div class="var-title">
+    <span class="var-type">string</span>
+    <a href="#var$text_prefix" title="details" class="property"><strong>$text_prefix</strong></a>
+</div>
+<hr />
+<a name="var$text_prefix" id="var$text_prefix"><!-- --></A>
+<div style="background='#ffffff'">
+<h4>
+<img src="../media/images/PublicProperty.gif" border="0" /> <strong class="property">$text_prefix =  'COM_PAY'</strong> (line <span class="linenumber">23</span>)
+ </h4>
+<h4>Data type : string</h4>
+<!-- ========== Info from phpDoc block ========= -->
+<ul>
+		<li><strong>var:</strong> - The prefix to use with controller messages.</li>
+		<li><strong>since:</strong> - 1.6</li>
+		<li><strong>access:</strong> - protected</li>
+	</ul>
+</div>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "tabPage1" ) );</script>
+</div>
+<div class="tab-page" id="constantsTabpage">
+
+<h2 class="tab">Class Constants</h2>
+<!-- ============ VARIABLE DETAIL =========== -->
+<strong>Summary:</strong><br />
+<hr />
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "constantsTabpage" ) );</script>
+</div>
+<div class="tab-page" id="tabPage2">
+<h2 class="tab">Method Detail</h2>
+<!-- ============ METHOD DETAIL =========== -->
+<strong>Summary:</strong><br />
+<div class="method-summary">
+    <div class="method-definition">
+            <span class="method-result">JForm</span>
+        <a href="#methodgetForm" title="details" class="method-name">getForm</a>
+        ([<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$loadData</span> = <span class="var-default">true</span>])
+        </div>
+    <div class="method-definition">
+            <span class="method-result">mixed</span>
+        <a href="#methodgetItem" title="details" class="method-name">getItem</a>
+        ([<span class="var-type">integer</span>&nbsp;<span class="var-name">$pk</span> = <span class="var-default">null</span>])
+        </div>
+    <div class="method-definition">
+            <span class="method-result">JTable</span>
+        <a href="#methodgetTable" title="details" class="method-name">getTable</a>
+        ([<span class="var-type">type</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">'Payment'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span> = <span class="var-default">'PayTable'</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$config</span> = <span class="var-default">array()</span>])
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodgetTotal" title="details" class="method-name">getTotal</a>
+        (<span class="var-type"></span>&nbsp;<span class="var-name">$user_id</span>)
+        </div>
+    <div class="method-definition">
+            <span class="method-result">mixed</span>
+        <a href="#methodloadFormData" title="details" class="method-name">loadFormData</a>
+        ()
+        </div>
+    <div class="method-definition">
+            <span class="method-result">void</span>
+        <a href="#methodprepareTable" title="details" class="method-name">prepareTable</a>
+        (<span class="var-type"></span>&nbsp;<span class="var-name">&$table</span>)
+        </div>
+</div>
+<hr />
+<A NAME='method_detail'></A>
+
+
+<a name="methodgetForm" id="methodgetForm"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getForm</strong> (line <span class="linenumber">48</span>)
+ </h4> 
+<h4><i>JForm</i> <strong>getForm(
+[array
+$data = array()], [boolean
+$loadData = true])</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Method to get the record form.</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong>array $data</strong>: An optional array of data for the form to interogate.</li>
+			<li><strong>boolean $loadData</strong>: True if the form is to load its own data (default case), false if not.</li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>return</strong> - A JForm object on success, false on failure</li>
+			<li><strong>since</strong> - 1.6</li>
+			<li><strong>access</strong> - public</li>
+		</ul>
+</div>
+<a name="methodgetItem" id="methodgetItem"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getItem</strong> (line <span class="linenumber">89</span>)
+ </h4> 
+<h4><i>mixed</i> <strong>getItem(
+[integer
+$pk = null])</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Method to get a single record.</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong>integer $pk</strong>: The id of the primary key.</li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>return</strong> - Object on success, false on failure.</li>
+			<li><strong>since</strong> - 1.6</li>
+			<li><strong>access</strong> - public</li>
+		</ul>
+</div>
+<a name="methodgetTable" id="methodgetTable"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getTable</strong> (line <span class="linenumber">35</span>)
+ </h4> 
+<h4><i>JTable</i> <strong>getTable(
+[type
+$type = 'Payment'], [string
+$prefix = 'PayTable'], [array
+$config = array()])</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Returns a reference to the a Table object, always creating it.</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong>type $type</strong>: The table type to instantiate</li>
+			<li><strong>string $prefix</strong>: A prefix for the table class name. Optional.</li>
+			<li><strong>array $config</strong>: Configuration array for model. Optional.</li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>return</strong> - A database object</li>
+			<li><strong>since</strong> - 1.6</li>
+			<li><strong>access</strong> - public</li>
+		</ul>
+</div>
+<a name="methodgetTotal" id="methodgetTotal"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method getTotal</strong> (line <span class="linenumber">100</span>)
+ </h4> 
+<h4><i>void</i> <strong>getTotal(
+
+$user_id)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong> $user_id</strong>: </li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>access</strong> - public</li>
+		</ul>
+</div>
+<a name="methodloadFormData" id="methodloadFormData"><!-- --></a>
+<div style="background='#eeeeee'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method loadFormData</strong> (line <span class="linenumber">69</span>)
+ </h4> 
+<h4><i>mixed</i> <strong>loadFormData(
+)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Method to get the data that should be injected in the form.</h5>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>return</strong> - The data for the form.</li>
+			<li><strong>since</strong> - 1.6</li>
+			<li><strong>access</strong> - protected</li>
+		</ul>
+</div>
+<a name="methodprepareTable" id="methodprepareTable"><!-- --></a>
+<div style="background='#ffffff'"><h4>
+<img src="../media/images/PublicMethod.gif" border="0" /> <strong class="method">Method prepareTable</strong> (line <span class="linenumber">120</span>)
+ </h4> 
+<h4><i>void</i> <strong>prepareTable(
+
+&$table)</strong></h4>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<h5>Prepare and sanitise the table prior to saving.</h5>
+		<h4>Parameters</h4>
+	<ul>
+			<li><strong> &$table</strong>: </li>
+		</ul>
+		
+	<h4>Info</h4>
+	<ul>
+			<li><strong>since</strong> - 1.6</li>
+			<li><strong>access</strong> - protected</li>
+		</ul>
+</div>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "tabPage2" ) );</script></div>
+<div class="tab-page" id="iVars">
+<h2 class="tab">Inherited Variables</h2>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "iVars" ) );</script>
+<!-- =========== VAR INHERITED SUMMARY =========== -->
+<A NAME='var_inherited_summary'><!-- --></A>
+<h3>Inherited Class Variable Summary</h3>
+
+	</div>
+<div class="tab-page" id="iMethods">
+<h2 class="tab">Inherited Methods</h2>
+<script type="text/javascript">tp1.addTabPage( document.getElementById( "iMethods" ) );</script>
+<!-- =========== INHERITED METHOD SUMMARY =========== -->
+<A NAME='functions_inherited'><!-- --></A>
+<h3>Inherited Method Summary</h3>
+
+	</div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+
+setupAllTabs();
+
+//]]>
+</script>
+	<div id="credit">
+		<hr />
+		Documentation generated on Sun, 29 Jul 2012 11:23:42 +0400 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>File Source for test.php</title>
+  <link rel="stylesheet" href="../media/stylesheet.css" />
+<!-- template designed by Julien Damon based on PHPEdit's generated templates, and tweaked by Greg Beaver -->
+<body bgcolor="#ffffff" ><h1 align="center">Source for file test.php</h1>
+<p>Documentation is available at <a href="../default/_com_content---views---app---tmpl---test.php.html">test.php</a></p>
+<div class="src-code">
+<div class="src-code"><ol><li><div class="src-line"><a name="a1"></a><strong>&lt;?&nbsp;</strong><a href="http://www.php.net/defined">defined</a><strong>(</strong><font color="#66cccc">'_JEXEC'</font><strong>)&nbsp;</strong>or&nbsp;die<strong>(</strong><font color="#66cccc">'Restricted&nbsp;access'</font><strong>)</strong><strong>;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a2"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a3"></a><font color="green">//&nbsp;prepare&nbsp;the&nbsp;JavaScript&nbsp;parameters</font></div></li>
+<li><div class="src-line"><a name="a4"></a><strong>$params&nbsp;</strong>=&nbsp;array<strong>(</strong><font color="#66cccc">'size'</font>=&gt;array<strong>(</strong><font color="#66cccc">'x'</font>=&gt;100<strong>,&nbsp;</strong><font color="#66cccc">'y'</font>=&gt;100<strong>))</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a5"></a><font color="green">//&nbsp;add&nbsp;the&nbsp;JavaScript</font></div></li>
+<li><div class="src-line"><a name="a6"></a>JHTML<strong>::</strong>_<strong>(</strong><font color="#66cccc">'behavior.modal'</font><strong>,&nbsp;</strong><font color="#66cccc">'a.mymodal'</font><strong>,&nbsp;</strong><strong>$params</strong><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a7"></a><font color="green">//&nbsp;create&nbsp;the&nbsp;modal&nbsp;window&nbsp;link</font></div></li>
+<li><div class="src-line"><a name="a8"></a>echo&nbsp;<font color="#66cccc">'&lt;a&nbsp;class=&quot;mymodal&quot;&nbsp;title=&quot;example&quot;</font></div></li>
+<li><div class="src-line"><a name="a9"></a><font color="#66cccc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;href=&quot;index.php&quot;&nbsp;&nbsp;</font></div></li>
+<li><div class="src-line"><a name="a10"></a><font color="#66cccc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rel=&quot;{handler:&nbsp;\'iframe\',</font></div></li>
+<li><div class="src-line"><a name="a11"></a><font color="#66cccc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size:&nbsp;{x:&nbsp;400,&nbsp;y:&nbsp;150}}&quot;&gt;Example&nbsp;Modal&nbsp;Window&lt;/a&gt;'</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a12"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a13"></a><strong>$table&nbsp;</strong>=&nbsp;(array)JTable<strong>::</strong>getInstance<strong>(</strong><font color="#66cccc">'customer_site_options'</font><strong>,&nbsp;</strong><font color="#66cccc">'Collector1Table'</font><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a14"></a><font color="green">//echo&nbsp;$table[&quot;*_tbl&quot;];</font></div></li>
+<li><div class="src-line"><a name="a15"></a><font color="blue">foreach&nbsp;</font><strong>(</strong><strong>$table&nbsp;</strong>as&nbsp;<strong>$key</strong>=&gt;<strong>$val</strong><strong>)&nbsp;</strong><strong>{</strong></div></li>
+<li><div class="src-line"><a name="a16"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">//$t=;&nbsp;</font></div></li>
+<li><div class="src-line"><a name="a17"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">if&nbsp;</font><strong>(</strong><a href="http://www.php.net/preg_match">preg_match</a><strong>(</strong><font color="#66cccc">'/_tbl$/'</font><strong>,</strong><strong>$key</strong><strong>))&nbsp;</strong><strong>{</strong></div></li>
+<li><div class="src-line"><a name="a18"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<font color="#66cccc">&quot;</font><font color="#66cccc">&lt;div&gt;<strong>$key</strong>=&gt;<strong>$val</strong>&lt;/div&gt;</font><font color="#66cccc">&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a19"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>}</strong></div></li>
+<li><div class="src-line"><a name="a20"></a><strong>}</strong></div></li>
+<li><div class="src-line"><a name="a21"></a><font color="green">//var_dump(&quot;&lt;h1&gt;table:&lt;/h1&gt;&lt;pre&gt;&quot;,$table,&quot;&lt;/pre&gt;&quot;);</font></div></li>
+<li><div class="src-line"><a name="a22"></a><font color="blue">class&nbsp;</font><a href="../default/dateRus.html">dateRus</a><strong>{</strong></div></li>
+<li><div class="src-line"><a name="a23"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">function&nbsp;</font><a href="../default/dateRus.html#methodconvert_datetime">convert_datetime</a><strong>(</strong><strong>$str</strong><strong>)&nbsp;</strong><strong>{&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a24"></a>&nbsp;&nbsp;&nbsp;&nbsp;list<strong>(</strong><strong>$date</strong><strong>,&nbsp;</strong><strong>$time</strong><strong>)&nbsp;</strong>=&nbsp;<a href="http://www.php.net/explode">explode</a><strong>(</strong><font color="#66cccc">'&nbsp;'</font><strong>,&nbsp;</strong><strong>$str</strong><strong>)</strong><strong>;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a25"></a>&nbsp;&nbsp;&nbsp;&nbsp;list<strong>(</strong><strong>$year</strong><strong>,&nbsp;</strong><strong>$month</strong><strong>,&nbsp;</strong><strong>$day</strong><strong>)&nbsp;</strong>=&nbsp;<a href="http://www.php.net/explode">explode</a><strong>(</strong><font color="#66cccc">'-'</font><strong>,&nbsp;</strong><strong>$date</strong><strong>)</strong><strong>;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a26"></a>&nbsp;&nbsp;&nbsp;&nbsp;list<strong>(</strong><strong>$hour</strong><strong>,&nbsp;</strong><strong>$minute</strong><strong>,&nbsp;</strong><strong>$second</strong><strong>)&nbsp;</strong>=&nbsp;<a href="http://www.php.net/explode">explode</a><strong>(</strong><font color="#66cccc">':'</font><strong>,&nbsp;</strong><strong>$time</strong><strong>)</strong><strong>;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a27"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>$timestamp&nbsp;</strong>=&nbsp;<a href="http://www.php.net/mktime">mktime</a><strong>(</strong><strong>$hour</strong><strong>,&nbsp;</strong><strong>$minute</strong><strong>,&nbsp;</strong><strong>$second</strong><strong>,&nbsp;</strong><strong>$month</strong><strong>,&nbsp;</strong><strong>$day</strong><strong>,&nbsp;</strong><strong>$year</strong><strong>)</strong><strong>;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a28"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">return&nbsp;</font><strong>$timestamp</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a29"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>}</strong></div></li>
+<li><div class="src-line"><a name="a30"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">function&nbsp;</font><a href="../default/dateRus.html#methodmonth_rus">month_rus</a><strong>(</strong><strong>$ts</strong><strong>)</strong><strong>{</strong></div></li>
+<li><div class="src-line"><a name="a31"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>$m</strong>=<a href="http://www.php.net/date">date</a><strong>(</strong><font color="#66cccc">&quot;n&quot;</font><strong>,</strong><strong>$ts</strong><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a32"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">switch&nbsp;</font><strong>(</strong><strong>$m</strong><strong>)</strong><strong>{</strong></div></li>
+<li><div class="src-line"><a name="a33"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;1:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;января&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a34"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;2:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;февраля&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a35"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;3:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;марта&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a36"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;4:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;апреля&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a37"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;5:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;мая&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a38"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;6:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;июня&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a39"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;7:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;июля&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a40"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;8:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;августа&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a41"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;9:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;сентября&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a42"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;10:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;октября&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a43"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;11:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;ноября&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a44"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;12:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;декабря&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a45"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>}</strong></div></li>
+<li><div class="src-line"><a name="a46"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>}</strong></div></li>
+<li><div class="src-line"><a name="a47"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">function&nbsp;</font><a href="../default/dateRus.html#methodw_date">w_date</a><strong>(</strong><strong>$d</strong><strong>)</strong><strong>{</strong></div></li>
+<li><div class="src-line"><a name="a48"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>$d</strong>=<strong>$this</strong><strong>-&gt;</strong><a href="../default/dateRus.html#methodconvert_datetime">convert_datetime</a><strong>(</strong><strong>$d</strong><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a49"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">return&nbsp;</font><strong>$this</strong><strong>-&gt;</strong><a href="../default/dateRus.html#methodday_rus">day_rus</a><strong>(</strong><strong>)</strong>.<font color="#66cccc">'.,&nbsp;'</font>.<a href="http://www.php.net/date">date</a><strong>(</strong><font color="#66cccc">&quot;d&quot;</font><strong>,</strong><strong>$d</strong><strong>)</strong>.<font color="#66cccc">&quot;&nbsp;&quot;</font>.<strong>$this</strong><strong>-&gt;</strong><a href="../default/dateRus.html#methodmonth_rus">month_rus</a><strong>(</strong><strong>$d</strong><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a50"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">//.&quot;&nbsp;&quot;.date(&quot;Y&quot;,$d);</font></div></li>
+<li><div class="src-line"><a name="a51"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>}</strong></div></li>
+<li><div class="src-line"><a name="a52"></a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">function&nbsp;</font><a href="../default/dateRus.html#methodday_rus">day_rus</a><strong>(</strong><strong>)</strong><strong>{</strong></div></li>
+<li><div class="src-line"><a name="a53"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">switch&nbsp;</font><strong>(</strong><a href="http://www.php.net/date">date</a><strong>(</strong><font color="#66cccc">'N'</font><strong>))</strong><strong>{</strong></div></li>
+<li><div class="src-line"><a name="a54"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;1:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;Пнд&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a55"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;2:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;Втр&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a56"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;3:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;Срд&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a57"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;4:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;Чтв&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a58"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;5:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;Птн&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a59"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;6:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;Сбт&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a60"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;7:<font color="blue">return&nbsp;</font><font color="#66cccc">&quot;Вск&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a61"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>}</strong></div></li>
+<li><div class="src-line"><a name="a62"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>}</strong></div></li>
+<li><div class="src-line"><a name="a63"></a><strong>}</strong></div></li>
+<li><div class="src-line"><a name="a64"></a><strong>$dateRus</strong>=new&nbsp;<a href="../default/dateRus.html">dateRus</a><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a65"></a><font color="green">//echo&nbsp;$dateRus-&gt;w_date(date('Y-m-d&nbsp;H:i:s'));</font></div></li>
+<li><div class="src-line"><a name="a66"></a>echo&nbsp;<font color="#66cccc">&quot;&lt;hr&gt;&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a67"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a68"></a><strong>?&gt;</strong><strong>&lt;?php&nbsp;</strong>echo&nbsp;JHTML<strong>::</strong>_<strong>(</strong><font color="#66cccc">'date'</font><strong>,&nbsp;</strong><font color="#66cccc">'2012-06-17'</font><strong>,&nbsp;</strong>JText<strong>::</strong>_<strong>(</strong><font color="#66cccc">'DATE_FORMAT_LC'</font><strong>))</strong><strong>;&nbsp;</strong><strong>?&gt;</strong></div></li>
+<li><div class="src-line"><a name="a69"></a>&lt;hr&gt;</div></li>
+<li><div class="src-line"><a name="a70"></a><strong>&lt;?</strong></div></li>
+<li><div class="src-line"><a name="a71"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a72"></a><font color="green">//setlocale();</font></div></li>
+<li><div class="src-line"><a name="a73"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a74"></a><font color="green">//&nbsp;Установливаем&nbsp;русскую&nbsp;локаль</font></div></li>
+<li><div class="src-line"><a name="a75"></a><font color="green">//&nbsp;или&nbsp;setlocale(LC_ALL,&nbsp;'ru_RU');&nbsp;в&nbsp;PHP&nbsp;4</font></div></li>
+<li><div class="src-line"><a name="a76"></a><a href="http://www.php.net/setlocale">setlocale</a><strong>(</strong>LC_ALL<strong>,&nbsp;</strong><font color="#66cccc">'rus_RUS'</font><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a77"></a><font color="green">//&nbsp;Получаем&nbsp;сегодняшнюю&nbsp;дату</font></div></li>
+<li><div class="src-line"><a name="a78"></a><font color="green">//&nbsp;Формируем&nbsp;вывод</font></div></li>
+<li><div class="src-line"><a name="a79"></a><font color="green">//&nbsp;%a&nbsp;-&nbsp;короткая&nbsp;запись&nbsp;дня&nbsp;недели&nbsp;(Чт)</font></div></li>
+<li><div class="src-line"><a name="a80"></a><font color="green">//&nbsp;%A&nbsp;-&nbsp;обычная&nbsp;запись&nbsp;дня&nbsp;недели&nbsp;(Четверг)</font></div></li>
+<li><div class="src-line"><a name="a81"></a><font color="green">//&nbsp;%Y&nbsp;-&nbsp;год&nbsp;полностью&nbsp;(2008)</font></div></li>
+<li><div class="src-line"><a name="a82"></a><font color="green">//&nbsp;%y&nbsp;-&nbsp;год&nbsp;кратко&nbsp;(08)</font></div></li>
+<li><div class="src-line"><a name="a83"></a><font color="green">//&nbsp;Короче,&nbsp;смотрите&nbsp;маны</font></div></li>
+<li><div class="src-line"><a name="a84"></a><a href="http://www.php.net/setlocale">setlocale</a><strong>(</strong>LC_ALL<strong>,&nbsp;</strong><font color="#66cccc">'rus_RUS'</font><strong>)</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a85"></a>echo&nbsp;<font color="#66cccc">&quot;date:&nbsp;&quot;</font>.<a href="http://www.php.net/strftime">strftime</a><strong>(</strong><font color="#66cccc">&quot;%A,%d.%m.%Y&quot;</font><strong>,&nbsp;</strong><a href="http://www.php.net/time">time</a><strong>(</strong><strong>))</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a86"></a><font color="green">//&nbsp;В&nbsp;PHP4&nbsp;потребуется&nbsp;конвертация</font></div></li>
+<li><div class="src-line"><a name="a87"></a><font color="green">//&nbsp;$data&nbsp;=&nbsp;iconv('ISO-8859-5','windows-1251',&nbsp;$data);</font></div></li>
+<li><div class="src-line"><a name="a88"></a><font color="green">//echo&nbsp;$data;&nbsp;//&nbsp;В&nbsp;PHP&nbsp;4&nbsp;название&nbsp;дня&nbsp;недели</font></div></li>
+<li><div class="src-line"><a name="a89"></a><font color="green">//&nbsp;будет&nbsp;начинаться&nbsp;с&nbsp;заглавной&nbsp;буквы</font></div></li>
+<li><div class="src-line"><a name="a90"></a><font color="green">//&nbsp;в&nbsp;обычной&nbsp;форме&nbsp;записи</font></div></li>
+<li><div class="src-line"><a name="a91"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a92"></a><strong>?&gt;</strong>&lt;hr&gt;</div></li>
+<li><div class="src-line"><a name="a93"></a><strong>&lt;?</strong></div></li>
+<li><div class="src-line"><a name="a94"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a95"></a><strong>$edate</strong>=<font color="#66cccc">'08:17:35&nbsp;AM&nbsp;GMT'</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a96"></a>echo&nbsp;<font color="#66cccc">'start&nbsp;date:&nbsp;'</font>.<strong>$edate</strong>.<font color="#66cccc">&quot;&lt;br&gt;&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a97"></a><strong>$str_to_parse</strong>=<a href="http://www.php.net/substr">substr</a><strong>(</strong><strong>$edate</strong><strong>,</strong>9<strong>,</strong>2<strong>)</strong><strong>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><font color="green">//AM-PM</font></div></li>
+<li><div class="src-line"><a name="a98"></a>echo&nbsp;<strong>$str_to_parse</strong>.<font color="#66cccc">&quot;&lt;br&gt;&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a99"></a><strong>$utime</strong>=<a href="http://www.php.net/substr">substr</a><strong>(</strong><strong>$edate</strong><strong>,</strong>0<strong>,</strong>8<strong>)</strong><strong>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><font color="green">//H:i:s</font></div></li>
+<li><div class="src-line"><a name="a100"></a><font color="green">//echo&nbsp;$utime.&quot;&lt;br&gt;&quot;;</font></div></li>
+<li><div class="src-line"><a name="a101"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a102"></a><strong>$uhours</strong>=(int)<a href="http://www.php.net/substr">substr</a><strong>(</strong><strong>$utime</strong><strong>,</strong>0<strong>,</strong>2<strong>)</strong>+3<strong>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><font color="green">//&nbsp;МСК</font></div></li>
+<li><div class="src-line"><a name="a103"></a>echo&nbsp;<font color="#66cccc">'hours:&nbsp;'</font>.<strong>$uhours</strong>.<font color="#66cccc">&quot;&lt;br&gt;&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a104"></a><font color="blue">if&nbsp;</font><strong>(</strong><strong>$utime</strong>==<font color="#66cccc">'PM'</font><strong>)&nbsp;</strong><strong>$uhours</strong>+=12<strong>;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a105"></a>echo&nbsp;<font color="#66cccc">'hours&nbsp;2:&nbsp;'</font>.<strong>$uhours</strong>.<font color="#66cccc">&quot;&lt;br&gt;&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a106"></a><font color="blue">if&nbsp;</font><strong>(</strong><strong>$uhours</strong>&gt;12<strong>)&nbsp;</strong><strong>$uhours</strong>-=12<strong>;</strong></div></li>
+<li><div class="src-line"><a name="a107"></a>echo&nbsp;<font color="#66cccc">'hours&nbsp;3:&nbsp;'</font>.<strong>$uhours</strong>.<font color="#66cccc">&quot;&lt;br&gt;&quot;</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a108"></a><font color="blue">if&nbsp;</font><strong>(</strong><strong>$utime</strong>&gt;24<strong>)&nbsp;</strong><strong>$utime</strong>-=24<strong>;</strong></div></li>
+<li><div class="src-line"><a name="a109"></a>echo&nbsp;<strong>$uhours</strong><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a110"></a><strong>?&gt;</strong></div></li>
+</ol></div>
+</div>
+	<div id="credit">
+		<hr />
+		Documentation generated on Sun, 29 Jul 2012 11:23:46 +0400 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</div>
+</body>
+</html>

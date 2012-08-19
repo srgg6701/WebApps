@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="MM_css_include" value="../../../../../templates/fastwebdev/css/style.css" />
+	<infoitem key="MM_css_exclude" value="" />
+	<infoitem key="showOnOpen" value="true" />
+	<infoitem key="notes" value="Не сообщает о незаполнении обязательных полей и блокирует добавленные скрипты." />
+</info>

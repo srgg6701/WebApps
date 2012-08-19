@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+
+              <field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL"
+                    readonly="true" class="readonly"
+                    description="JGLOBAL_FIELD_ID_DESC" /> 
+
+       <field name="customer_id" type="text" size="40" class="inputbox"
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_ORDERS_CUSTOMER_ID"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_ORDERS_CUSTOMER_ID" 
+                
+                
+                 required="true" 
+                filter="safehtml" /> 
+
+       <field name="components_names" type="editor" buttons="true"
+                class="inputbox"
+                filter="safehtml"
+                 required="true" 
+                
+                
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_ORDERS_COMPONENTS_NAMES"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_ORDERS_COMPONENTS_NAMES"  /> 
+
+       <field name="description" type="editor" buttons="true"
+                class="inputbox"
+                filter="safehtml"
+                 required="true" 
+                
+                
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_ORDERS_DESCRIPTION"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_ORDERS_DESCRIPTION"  /> 
+
+       <field name="budget" type="text" size="40" class="inputbox"
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_ORDERS_BUDGET"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_ORDERS_BUDGET" 
+                
+                
+                
+                filter="safehtml" /> 
+
+       <field name="finish_date" type="calendar" class="inputbox"
+                 required="true" 
+                
+                 default="0000-00-00" 
+                
+            label="COM_COLLECTOR1_FORM_LBL_CUSTOMER_ORDERS_FINISH_DATE"
+            description="COM_COLLECTOR1_FORM_DESC_CUSTOMER_ORDERS_FINISH_DATE" 
+                filter="safehtml" /> 
+
+         <field
+                name="state"
+                type="list"
+                label="JSTATUS"
+                description="JFIELD_PUBLISHED_DESC"
+                class="inputbox"
+                size="1"
+                default="1">
+                <option value="1">JPUBLISHED</option>
+                <option value="0">JUNPUBLISHED</option>
+            </field> 
+
+                        <field name="checked_out" type="hidden" filter="unset" />
+                <field name="checked_out_time" type="hidden" filter="unset" />
+
+	</fieldset>
+
+</form>

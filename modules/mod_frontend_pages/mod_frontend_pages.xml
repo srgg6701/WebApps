@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="2.5" type="module" client="site">
+<name>Frontend pages</name>
+<author>srgg</author>
+<version>1.0</version>
+<description>Настраиваемые страницы</description>
+<files>
+<filename module="mod_frontend_pages">mod_frontend_pages.php</filename>
+</files>
+
+<param name="layout" type="filelist" label="Layout"
+		description="Style with which to display the module"
+		directory="/modules/mod_frontend_pages/tmpl"
+		default="" hide_default="1" hide_none="1"
+		stripext="1" filter="\.php$" exclude="^_" />
+</install>

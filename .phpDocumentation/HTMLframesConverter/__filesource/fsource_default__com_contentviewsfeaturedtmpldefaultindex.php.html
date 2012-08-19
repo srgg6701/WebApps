@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   <html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>File Source for index.php</title>
+  <link rel="stylesheet" href="../media/stylesheet.css" />
+<!-- template designed by Julien Damon based on PHPEdit's generated templates, and tweaked by Greg Beaver -->
+<body bgcolor="#ffffff" ><h1 align="center">Source for file index.php</h1>
+<p>Documentation is available at <a href="../default/_com_content---views---featured---tmpl---default---index.php.html">index.php</a></p>
+<div class="src-code">
+<div class="src-code"><ol><li><div class="src-line"><a name="a1"></a>﻿<strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a2"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a3"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="green">/*&nbsp;&nbsp;&nbsp;&nbsp;Продумать,&nbsp;что&nbsp;показывать&nbsp;юзеру,&nbsp;который&nbsp;заавторизовался&nbsp;в&nbsp;зависимости&nbsp;от&nbsp;состояния&nbsp;его&nbsp;сотрудничества&nbsp;с&nbsp;нами...</font></div></li>
+<li><div class="src-line"><a name="a4"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a5"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$user&nbsp;=&nbsp;JFactory::getUser();</font></div></li>
+<li><div class="src-line"><a name="a6"></a><font color="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($user-&gt;get('guest')==1){&nbsp;?&gt;&lt;?&nbsp;}else{?&gt;&lt;?&nbsp;}*/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></div></li>
+<li><div class="src-line"><a name="a7"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a8"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>$path_to_images</strong>=<font color="#66cccc">'templates/fastwebdev/images/'</font><strong>;</strong></div></li>
+<li><div class="src-line"><a name="a9"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a10"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="blue">if&nbsp;</font><strong>(</strong><strong>$dw_mode</strong><strong>)</strong><strong>{</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a11"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;</strong>require&nbsp;<font color="#66cccc">&quot;default_mission.php&quot;</font><strong>;</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a12"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;</strong><strong>}</strong>else&nbsp;require&nbsp;<strong>$req_tmpl_files</strong>.<font color="#66cccc">'default_mission.php'</font><strong>;</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a13"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div></li>
+<li><div class="src-line"><a name="a14"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div></li>
+<li><div class="src-line"><a name="a15"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;/&nbsp;section1&nbsp;--&gt;</div></li>
+<li><div class="src-line"><a name="a16"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div></li>
+<li><div class="src-line"><a name="a17"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;</div></li>
+<li><div class="src-line"><a name="a18"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;</div></li>
+<li><div class="src-line"><a name="a19"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;</div></li>
+<li><div class="src-line"><a name="a20"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;</strong><font color="blue">if&nbsp;</font><strong>(</strong><strong>$dw_mode</strong><strong>)</strong><strong>{</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a21"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;</strong>require&nbsp;<font color="#66cccc">&quot;quick_and_free.php&quot;</font><strong>;</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a22"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;</strong><strong>}</strong>else&nbsp;require&nbsp;<strong>$req_tmpl_files</strong>.<font color="#66cccc">'quick_and_free.php'</font><strong>;</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a23"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;section2&nbsp;--&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a24"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a25"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id=&quot;section2&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a26"></a><strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;</strong><font color="blue">if&nbsp;</font><strong>(</strong><strong>$dw_mode</strong><strong>)</strong><strong>{</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a27"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;</strong>require&nbsp;<font color="#66cccc">&quot;all_our.php&quot;</font><strong>;</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a28"></a><strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;</strong><strong>}</strong>else&nbsp;require&nbsp;<strong>$req_tmpl_files</strong>.<font color="#66cccc">'all_our.php'</font><strong>;</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a29"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id=&quot;right_advices&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;style=&quot;padding-left:10px;&quot;&gt;</div></li>
+<li><div class="src-line"><a name="a31"></a><strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;</strong><font color="blue">if&nbsp;</font><strong>(</strong><strong>$dw_mode</strong><strong>)</strong><strong>{</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a32"></a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;</strong>require&nbsp;<font color="#66cccc">&quot;right_advices.php&quot;</font><strong>;</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a33"></a><strong>&lt;?&nbsp;&nbsp;&nbsp;&nbsp;</strong><strong>}</strong>else&nbsp;require&nbsp;<strong>$req_tmpl_files</strong>.<font color="#66cccc">'right_advices.php'</font><strong>;</strong><strong>?&gt;&nbsp;&nbsp;&nbsp;&nbsp;</strong></div></li>
+<li><div class="src-line"><a name="a34"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div></li>
+<li><div class="src-line"><a name="a35"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div></li>
+<li><div class="src-line"><a name="a36"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a37"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;/&nbsp;section2&nbsp;--&gt;</div></li>
+</ol></div>
+</div>
+	<div id="credit">
+		<hr />
+		Documentation generated on Sun, 29 Jul 2012 11:23:41 +0400 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</div>
+</body>
+</html>

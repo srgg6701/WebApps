@@ -1,0 +1,403 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru-ru" lang="ru-ru">
+
+<head>
+
+  <base href="http://localhost/webapps/index.php/my-balance" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="Joomla! - Open Source Content Management" />
+  <title>Мой баланс</title>
+  <link href="http://localhost/webapps/index.php/component/search/?Itemid=221&amp;format=opensearch" rel="search" title="Искать fastdev" type="application/opensearchdescription+xml" />
+  <link rel="stylesheet" href="/webapps/media/cms/css/debug.css" type="text/css" />
+  <script src="/webapps/media/system/js/mootools-core-uncompressed.js" type="text/javascript"></script>
+  <script src="/webapps/media/system/js/core-uncompressed.js" type="text/javascript"></script>
+  <script type="text/javascript">
+function keepAlive() {	var myAjax = new Request({method: "get", url: "index.php"}).send();} window.addEvent("domready", function(){ keepAlive.periodical(3600000); });
+  </script>
+
+
+<script src="/webapps/templates/fastwebdev/js/firefox/correct_submenu_position.js" type="text/javascript"></script>
+
+<script src="/webapps/templates/fastwebdev/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="../templates/fastwebdev/css/style.css" type="text/css">
+</head>
+
+<body>
+
+<div id="pseudo_bg">
+
+    <div></div>
+
+</div>
+
+<!-- block that fits space verically -->
+
+<div id="body">
+
+
+
+    <!-- main container -->
+
+    <div align="center" class="offsetBottom" id="container">
+
+		<!-- top offset -->
+
+        <div style="height:4px;"></div>
+
+    	<!-- section1 -->
+
+        <div id="section1">
+
+            <div id="logoPanelWrapper">
+
+                <table height="59" width="100%" cellspacing="0" cellpadding="0">
+
+                  <tr>
+
+                    <td align="center" nowrap class="logotype">
+
+          <div title="Разработка web-приложений, CMS, EMS и их компонентов">
+
+          	<a href="/webapps/index.php">WebApps</a>.2-all<span style="color: #F4BD00;">.com</span>  
+
+          </div>
+
+          			</td>
+
+                    <td style="padding-top:2px;">
+
+		  <div id="call_us"><img src="/webapps/templates/fastwebdev/images/1335869184_contact.png" width="24" height="24" hspace="4" align="absmiddle">8(904)442-84-47 </div></td>
+
+                    <td width="100%" align="right" nowrap id="topSearch">
+
+                            			<div class="moduletable">
+					<form action="/webapps/index.php/my-balance" method="post">
+
+	<div class="search">
+
+		<label for="mod-search-searchword" id="swrd">Искать...</label>
+
+			<input name="searchword" id="mod-search-searchword" maxlength="20"  class="inputbox" type="text" size="40" value="Поиск"  onblur="if (this.value=='') this.value='Поиск';" onfocus="if (this.value=='Поиск') this.value='';" /><input type="submit" value="" class="button" onclick="this.form.searchword.focus();"/>	<input type="hidden" name="task" value="search" />
+
+	<input type="hidden" name="option" value="com_search" />
+
+	<input type="hidden" name="Itemid" value="221" />
+
+	</div>
+
+</form>
+
+		</div>
+	
+
+<script type="text/javascript">
+
+document.getElementById('swrd').innerHTML='Найти: ';
+
+function manageLoginDisplay(stat){
+
+	d=document;
+
+	try{
+
+		switch(stat){
+
+
+
+			case "exit":
+
+				d.getElementById('login-form').submit();
+
+				//option=com_users
+
+				//task=user.logout
+
+				break;		
+
+
+
+			case "menu":
+
+				d.getElementById('div_user_menu').style.display='block';
+
+				break;		
+
+
+
+			case "hide_menu":
+
+				d.getElementById('div_user_menu').style.display='none';
+
+				break;		
+
+
+
+			default: d.getElementById('login_block').style.display=stat;
+
+		}
+
+
+
+	}catch(e){
+
+		alert(e.message);
+
+	}
+
+}
+
+</script>
+
+
+
+					</td>
+
+                    <td id="tdLogin">
+
+<img src="/webapps/templates/fastwebdev/images/user24.png" width="22" height="22" align="absmiddle" style="margin-left:10px;" title="srgg67" /><span style="width:62px; padding-left:3px; text-align:left; display:inline-block; overflow:hidden;" title="srgg67">srgg67</span> &nbsp; <a href="javascript:void();" onclick="manageLoginDisplay('exit');">Выход</a>                    <div id="login_block">
+
+                    			<div class="moduletable">
+					<form action="/webapps/index.php/my-balance" method="post" id="login-form">
+
+	<div class="logout-button">
+
+		<input type="submit" name="Submit" class="button" value="Выйти" />
+
+		<input type="hidden" name="option" value="com_users" />
+
+		<input type="hidden" name="task" value="user.logout" />
+
+		<input type="hidden" name="return" value="aW5kZXgucGhwP0l0ZW1pZD0yMjE=" />
+
+		<input type="hidden" name="3261eb272116398060ebfe23bf3d10c7" value="1" />	</div>
+
+</form>
+
+		</div>
+	
+
+                        <div align="right">
+
+                            <div id="close_it"><a href="javascript:void();" onclick="manageLoginDisplay('none');">закрыть</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    </td>
+
+                  </tr>
+
+                </table>
+
+            </div>
+
+        	<!-- Menu panel -->
+
+            <div id="wrapper_menu">
+
+
+
+						<div class="moduletable_menu">
+					<table cellspacing="0">
+
+  <tr>  
+
+    <td><a href="/webapps/index.php/mission" >Миссия</a>      </td>
+
+    <td><a href="/webapps/index.php/consulting" >Консалтинг</a>      </td>
+
+    <td><a href="/webapps/index.php/build-and-calculate" >Собрать-и-посчитать</a>      </td>
+
+    <td><a href="/webapps/index.php/faq" >Вопрос-ответ</a>      </td>
+
+    <td><a href="/webapps/index.php/policy" >Соглашение об услугах</a>      </td>
+
+    <td><a href="/webapps/index.php/partnership" >Партнёрская программа</a>      </td>
+
+  </tr>
+
+</table>
+
+
+
+		</div>
+	    
+
+    		</div>
+
+
+
+            <div id="wrapper_component">
+
+              			
+
+            	<div align="right" id="account_menu" style="padding-right:34px; margin-bottom:-28px;">
+				<div align="center" style="position:absolute; top:167px; width:100%;">
+                	Показать проводки: <select name="show_payments" onChange="filter_payments();">
+                	  <option value="all">Все</option>
+                	  <option value="applied">Подтверждённые</option>
+                	  <option value="unapplied">Неподтверждённые</option>
+                	</select>
+                </div>
+       			  <div class="moduletable">
+                            	
+					<table cellspacing="0">
+
+  <tr> 
+
+    <td><a href="/webapps/index.php/my-data" >Мои данные</a>      </td>
+
+    <td><a href="/webapps/index.php/my-site-collected" >Мои сайты</a>      </td>
+
+    <td  class="tdActive"> <a href="/webapps/index.php/my-balance" >Мой баланс</a>      </td>
+
+  </tr>
+
+</table>
+
+
+
+		</div>
+	
+
+                </div>
+
+              <!-- system messages -->
+
+  				
+<div id="system-message-container">
+</div>
+
+
+
+				<div id="com">
+
+					﻿﻿<div class="profile">
+
+	<fieldset>
+
+    	<legend>Зачисления</legend> 
+        <br>
+		<table cellspacing="0" class="customerAccount">
+		  <tr>
+		    <th title="Отметить все проводки"><input type="checkbox" name="checkbox" id="checkbox" /></th>
+		    <th title="id проводки"><div>#</div></th>
+		    <th title="id сайта"><div>Сайт</div></th>
+		    <th title="Дата записи"><div>Проведено</div></th>
+		    <th title="Дата оплаты"><div>Оплачено</div></th>
+		    <th title="Сумма оплаты"><div>Сумма</div></th>
+		    <th title="Способ оплаты"><div>Способ оплаты</div></th>
+		    <th title="Ваш комментарий к проводке"><div>Мой комментарий </div></th>
+		    <th title="Зачисленная сумма"><div>Зачислено</div></th>
+		    <th title="Комментарий сотрудника"><div>Входящий комментарий</div></th>
+		    </tr>
+		  <tr class="bgWhite">
+		    <td><input title="Вы не можете редактировать и удалять подтверждённые проводки" disabled="disabled" type="checkbox" name="checkbox2" id="checkbox2" /></td>
+		    <td><div align="right">17</div></td>
+		    <td><div align="center"><a href="../Макеты/index.php?option=com_collector1&amp;view=collected#site_7">7</a></div></td>
+		    <td><div>29.05.2012</div></td>
+		    <td><div>28.05.2012</div></td>
+		    <td><div align="right">6000</div></td>
+		    <td><div>WebMoney</div></td>
+		    <td><div>Код протекции: 1862</div></td>
+		    <td><div align="right">5850</div></td>
+		    <td><div>roboxchange списал кучу денег :(</div></td>
+		    </tr>
+		  <tr>
+		    <td><input type="checkbox" name="checkbox3" id="checkbox3" /></td>
+		    <td><div align="right"><a title="Редактировать проводку" href="../Макеты/index.php?option=com_collector1&amp;view=collected&amp;task=edit">12</a></div></td>
+		    <td><div align="center"><a href="../Макеты/index.php?option=com_collector1&amp;view=collected#site_8">8</a></div></td>
+		    <td><div>24.05.2012</div></td>
+		    <td><div>24.05.2012</div></td>
+		    <td><div align="right">2000</div></td>
+		    <td><div>Яндекс.деньги</div></td>
+		    <td><div>с мобильного слал...</div></td>
+		    <td><div align="right">&nbsp;</div></td>
+		    <td><div>&nbsp;</div></td>
+		    </tr>
+		  </table>
+        <div style="padding:4px;"></div>
+		<div style="margin:10px 0;">
+                  <a href="javascript:void();" onclick="addPaymentRecord();" class="linkButtons addRec">Добавить проводку</a>
+                	<a href="javascript:void();" onclick="deletePaymentRecords();" class="linkButtons txtRed">Удалить отмеченные</a>
+		</div>
+    </fieldset>
+
+	<fieldset>
+
+    	<legend>Списания<br>
+    </legend>
+        <br>
+		<table cellspacing="0" class="customerAccount">
+		  <tr>
+		    <th title="id проводки"><div>#</div></th>
+		    <th title="id сайта"><div>Сайт</div></th>
+		    <th title="Дата списания"><div>Дата списания</div></th>
+		    <th title="Сумма списания"><div>Сумма списания</div></th>
+		    <th title="Комментарий сотрудника"><div>Комментарий сотрудника</div></th>
+		    </tr>
+		  <tr class="bgWhite">
+		    <td><div align="right">17</div></td>
+		    <td><div align="center"><a href="../Макеты/index.php?option=com_collector1&amp;view=collected#site_7">7</a></div></td>
+		    <td><div>30.05.2012</div></td>
+		    <td><div align="right">6000</div></td>
+		    <td><div>&nbsp;</div></td>
+		    </tr>
+		  </table>
+		<br>
+    </fieldset>
+
+</div>    
+
+   		  </div>
+
+		
+
+	  </div>
+
+  </div><!-- /section1 -->
+
+</div><!-- /main container -->
+
+</div>
+
+<!-- /body -->    
+
+<div id="footer">
+
+	<center>
+
+	  <div class="moduletable">
+					<table cellspacing="0">
+
+  <tr>  
+
+    <td><a href="/index.php" >На главную</a>      </td>
+
+    <td><a href="/webapps/index.php/pay-ways" >Способы оплаты</a>      </td>
+
+    <td><a href="/webapps/index.php/agreement" >Пользовательское соглашение</a>      </td>
+
+    <td><a href="/webapps/index.php/feedback" >Обратная связь</a>      </td>
+
+    <td><a href="/webapps/index.php?Itemid=132" >Hello</a>      </td>
+
+  </tr>
+
+</table>
+
+
+
+		</div>
+	
+
+    </center>
+
+</div></body>
+
+</html>

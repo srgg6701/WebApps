@@ -1,0 +1,1 @@
+SELECT * FROM a2allcom_fastweb.dnior_webapps_customer_site_options ORDER BY id DESC;
