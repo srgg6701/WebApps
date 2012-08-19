@@ -147,10 +147,10 @@ abstract class JFactory
 	public static function getSession($options = array())
 	{
 		if (!self::$session)
-		{
+		{	
 			self::$session = self::createSession($options);
 		}
-
+		//var_dump("<h1>session:</h1><pre>",$session,"</pre>"); 
 		return self::$session;
 	}
 
@@ -207,14 +207,15 @@ abstract class JFactory
 	 * @since   11.1
 	 */
 	public static function getUser($id = null)
-	{
+	{	
 		if (is_null($id))
 		{
 			$instance = self::getSession()->get('user');
+			
 			if (!($instance instanceof JUser))
-			{
+			{	
 				$instance = JUser::getInstance();
-			}
+			} 
 		}
 		else
 		{
@@ -656,7 +657,7 @@ abstract class JFactory
 	 * @since   11.1
 	 */
 	protected static function createSession($options = array())
-	{
+	{	
 		// Get the editor configuration setting
 		$conf = self::getConfig();
 		$handler = $conf->get('session_handler', 'none');

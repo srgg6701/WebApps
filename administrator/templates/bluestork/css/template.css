@@ -3300,3 +3300,70 @@ span.update-badge {
 	background: transparent url(../images/admin/icon-16-allow.png) center left no-repeat;
 }
 /*	srgg	*/
+.buttonMess{
+	padding:3px 6px;
+}
+.block{
+	display:block;
+}
+.marginBottom4{
+	margin-bottom:4px;
+}
+.marginBottom6{
+	margin-bottom:6px;
+}
+.marginBottom8{
+	margin-bottom:8px;
+}
+.marginTop0{
+	margin-top:0;
+}
+.marginTop2{
+	margin-top:2px;
+}
+.marginTop4{
+	margin-top:4px;
+}
+.marginTop6{
+	margin-top:6px;
+}
+.marginTop8{
+	margin-top:8px;
+}
+.messContent{
+	background:#FFF; 
+	border:solid 1px #ccc; 
+	border-radius:6px; 
+	height:100%; 
+	padding:10px;
+}
+.padding3{
+	padding:3px;
+}
+.paddingLeft6{
+	padding-left:6px;
+}
+.paddingLeft8{
+	padding-left:8px;
+}
+.paddingLeft10{
+	padding-left:10px;
+}
+table.tblMess {
+	border:solid 1px #999999;
+}
+table.tblMess td{
+	padding:4px;
+	border-bottom: dashed 1px #999999;
+}
+table.tblMess tbody > tr:first-child td{
+	padding:4px;
+	border-bottom: solid 1px #999999;
+}
+table.tblMess tbody > tr:last-child td{
+	padding:4px;
+	border-bottom:none;
+}
+.width99{
+	width:99%;
+}
