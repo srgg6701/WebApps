@@ -1,4 +1,4 @@
-﻿<?
+<?
 /**
  * Вывод ошибок (для localhost) и отправка их по емэйлу на error_webapps@2-all.com для удалённого сервера
  * @package com_collector1

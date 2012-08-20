@@ -1,4 +1,4 @@
-<?
+﻿<?
 // Передаем заголовки
 //header('Content-type: text/plain; charset=utf-8');
 //header('Cache-Control: no-store, no-cache');
@@ -147,14 +147,7 @@ class AjaxModelAjax extends JModel
 			//echo $field." => ".$value."\n";
 		}
 		//SErrors::afterTableUpdate($table);
-		//echo json_encode($arrJSon);
-		$json=json_encode($arrJSon);
-		//echo $json;
-		$arrDecoded=json_decode($json);
-		$str=implode(",",$arrDecoded);
-		echo $str;
-		//echo(json_decode($json));
-		//var_dump("<h1>json:</h1><pre>",json_decode($json),"</pre>");
+		echo json_encode($arrJSon);
 		exit;
 	}	
 	/**

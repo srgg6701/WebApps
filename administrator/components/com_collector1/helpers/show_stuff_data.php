@@ -173,6 +173,7 @@ function sendPostAjax(txtAreaID){
 	
 	
 	var requestPage = "<?=JUri::root()?>index.php?option=com_ajax";
+	//var requestPage2 = "<?=JUri::root()?>components/com_ajax/models/ajax2.php";
 	var url=false;
 	//var url=requestPage+'&'+messageContent;
 	//alert(url);
