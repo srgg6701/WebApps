@@ -85,7 +85,7 @@ class SCollection extends JTable{
 	 * Получить текущий набор id id коллекций/объектов независимо ни от того, был ли он уже создан и каков статус юзера
 	 * @ set, orders, collections
 	 */
-	function getCurrentSetArray($object_type){
+	function getCurrentSetArray($object_type){ 
 		$objs_array=$object_type.'_array'; //value!
 		if (!self::$$objs_array) { // collections_ids_array or orders_ids_array; equal to ${$objs_array}
 			self::getUserSet(false,$objs_array);
@@ -113,19 +113,6 @@ class SCollection extends JTable{
 		}else return false; //boolean - записей нет вообще
 	}
 	/**
-	 *
-	 */
-	function getPrecustomerContactData($db=false,$user=false){
-		if (!$db) $db	= JFactory::getDBO();
-		if (!$user) $user = JFactory::getUser(); 
-		//добавить доп. контактные данные в таблицу заказчиков:
-		$query="SELECT `phone`, `skype` FROM ".self::$precustomers_table." 
- WHERE `email` = '".$user->get('email')."' 
-    OR `session_id` ='".session_id()."'";
-		$db->setQuery($query);
-		return $db->loadAssoc();
-	}
-	/**
 	 * Получить все коллекции/заказы незарегистрированного юзера
 	 * @ ВНИМАНИЕ! Может вернуть 3 различных значения:
 	   @ - значение ячейки, если нашли
@@ -136,11 +123,19 @@ class SCollection extends JTable{
 	function getPrecustomerSet( $object_type, // collections_ids | orders_ids
 								$user=false,
 								$test=false
-							  ) { 
-		if (!$user) $user = JFactory::getUser(); //var_dump("<h1>user:</h1><pre>",$user,"</pre>"); //die();
+							  ) {
+		$db = JFactory::getDBO();  
+		if($user_id=JRequest::getVar('user_id')) { // для backend'а
+			$user=JFactory::getUser($user_id); // SDebug::showDebugContent($user,'USER');
+			$user_data=SUser::getPrecustomerContactData($db,false,$user_id); //var_dump("<h1>user_data:</h1><pre>",$user_data,"</pre>"); //die();
+			$user_email=$user_data['email'];
+		}elseif (!$user){ 
+			$user = JFactory::getUser(); 
+			$user_email=$user->get('email');
+		}
 		$query="SELECT id, $object_type FROM ".self::$precustomers_table."
- WHERE `email` = '".$user->get('email')."' OR session_id = '".session_id()."'";
-		$db = JFactory::getDBO(); if ($test) echo "<div>query: <hr><pre>".$query."</pre></div>";
+ WHERE `email` = '".$user_email."' OR session_id = '".session_id()."'";
+		$test=true; if ($test) // echo "<div>query: <hr><pre>".$query."</pre></div>";
 		$db->setQuery($query);  //SDebug::dOutput("query= $query",false,true); //die('getPrecustomerSet');
 		if ($row=$db->loadAssoc()) { //получает строку из ячейки коллекций/заказов, значения разделены запятыми
 			if ($cell=$row[$object_type]) { //данные поля обнаружены - Коллекция или Заказ существуют
@@ -156,9 +151,14 @@ class SCollection extends JTable{
 	function getUserSet( $user=false,
 						 $object_type=false // collections_ids | orders_ids
 					   ) {
-		if (!$user) $user = JFactory::getUser();
-		if ($user->get('email')) {
-			$call_method=($user->get('guest')==1)? 'getPrecustomerSet':'getCustomerSet'; // ? customer / precustomer
+		$user_id=JRequest::getVar('user_id'); // для backend'а
+		if (!$user) $user = JFactory::getUser($user_id);
+		if ($user->get('email')) { 
+			if ($user_id){ // для backend'а
+				$call_method=(JRequest::getVar('view')=='precustomers')? 'getPrecustomerSet':'getCustomerSet';
+			}else{
+				$call_method=($user->get('guest')==1)? 'getPrecustomerSet':'getCustomerSet'; // ? customer / precustomer
+			}
 			if ($object_type!='orders_ids') self::$call_method('collections_ids',$user);
 			if ($object_type!='collections_ids') self::$call_method('orders_ids',$user);
 		}else return NULL; //т.к. массив коллекций и заказов может существовать только для зарегистированного или указавшего емэйл юзера
@@ -209,7 +209,7 @@ class SCollection extends JTable{
 			}
 		}
 		// будем добавлять запись в таблицу USERS:
-		if ($contacts=self::getPrecustomerContactData($db,$user)){ // not NULL
+		if ($contacts=SUser::getPrecustomerContactData($db,$user)){ // not NULL
 			$table = JTable::getInstance('customers', 'Collector1Table');
 			$table->reset();
 			$table->set('skype', $contacts['skype']);

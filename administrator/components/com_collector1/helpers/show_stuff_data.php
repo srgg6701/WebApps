@@ -7,9 +7,9 @@ if ($order_id=JRequest::getVar('order_id')){
 	$user_stuff_key='orders_of_user';
 }
 elseif ($collection_id=JRequest::getVar('collection_id')) {
-	$objs='collections';
+	$objs='collected';
 	$object_id=$collection_id;
-	$viewClass='Collector1ViewCollector1';
+	$viewClass='Collector1ViewCollected';
 	$user_stuff_type='collections';
 	$user_stuff_key='collections_of_user';
 }
@@ -28,11 +28,17 @@ $Data=$viewInstance->getData($object_id,$user);?>
 if (!$get_layout) $get_layout=JRequest::getVar('layout');
 echo ($get_layout=="order")? "заказа":"коллекции"; ?></h4>
 <?
-//echo "<div class=''>ORDER</div>"; 
-$viewInstance->buildComponentsBlocks( $Data[$user_stuff_type], // все доступные компоненты
-								  $Data[$user_stuff_key][0], // данные заказа
-								  $user
-								);?>
+if ($objs=='orders') {
+	//echo "<div class=''>ORDER</div>"; 
+	$viewInstance->buildComponentsBlocks( $Data[$user_stuff_type], // все доступные компоненты
+									  $Data[$user_stuff_key][0], // данные заказа
+									  $user
+									);
+}else{
+
+	
+
+}?>
 </div>
 <div class="floatTop">
 <h4>Данные <? 
@@ -95,9 +101,10 @@ echo ($got_view=="precustomers")? "предзаказчика":"заказчик
     </div>
 </div>
 <div class="fltlft width-50">
-	<h4 class="marginBottom8">Список сообщений по заказу &nbsp; | &nbsp; <a href="javascript:void();" onClick="composeMessage();">Добавить сообщение...</a></h4>
+	<h4 class="marginBottom8">Список сообщений по <? 
+	if ($objs=='orders'){?>заказу<? }else{?>коллекции<? }?> &nbsp; | &nbsp; <a href="javascript:void();" onClick="composeMessage();">Добавить сообщение...</a></h4>
     <table width="100%" cellspacing="0" class="tblMess">
-  <tr>
+  <tr class="trMessHeaders">
     <td>#</td>
     <td>Дата</td>
     <td>Напр.</td>
@@ -167,7 +174,7 @@ function sendPostAjax(txtAreaID){
 	
 	var requestPage = "<?=JUri::root()?>index.php?option=com_ajax";
 	var url=false;
-	var url=requestPage+'&'+messageContent;
+	//var url=requestPage+'&'+messageContent;
 	//alert(url);
 	
 	//var requestPage = window.open("<?=JUri::root()?>components/com_ajax/ajax.php",'goPost');

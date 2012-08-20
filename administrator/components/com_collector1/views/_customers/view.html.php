@@ -27,7 +27,7 @@ class Collector1View_customers extends JView
 	public function display($tpl = null)
 	{
 		$this->state		= $this->get('State');
-		$this->items		= $this->get('Items'); SDebug::showDebugContent($this->items,'items');//var_dump("<h1>items:</h1><pre>",$this->items,"</pre>");
+		$this->items		= $this->get('Items'); // SDebug::showDebugContent($this->items,'items');//var_dump("<h1>items:</h1><pre>",$this->items,"</pre>");
 		$this->pagination	= $this->get('Pagination');
 
 		// Check for errors.

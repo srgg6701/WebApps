@@ -9,8 +9,4 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
-//JHtml::_('behavior.tooltip');
-//JHtml::_('behavior.formvalidation');
-// Import CSS
 require_once JPATH_COMPONENT.DS.'helpers'.DS.'show_stuff_data.php';

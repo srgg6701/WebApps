@@ -47,6 +47,24 @@ class SUser{
 		return $customer_status;
 	}
 	/**
+	 * @ user, precustomer
+	 */
+	function getPrecustomerContactData($db=false,$user=false,$user_id=false){
+		if (!$db) $db	= JFactory::getDBO();
+		if (!$user) $user = JFactory::getUser(); 
+		$query="SELECT";
+		$from_where=' FROM #__webapps_precustomers 
+ WHERE ';
+		if (self::detectAdminStat($user)){
+			$query.=" `email` ".$from_where." id = ".(int)$user_id;
+		}else{
+			$query.=" `phone`, `skype` ".$from_where." `email` = '".$user->get('email')."' 
+    OR `session_id` ='".session_id()."'";
+		}
+		$db->setQuery($query); // echo "<div>query: <hr><pre>".$query."</pre></div>";
+		return $db->loadAssoc();
+	}
+	/**
 	 * Проверить, не является ли текущий юзер предзаказчиком?
 	  * @ user, precustomer, status
 	 */
@@ -181,7 +199,7 @@ class SUser{
 	 * Установить данные юзера
 	 * @ user, data
 	 */
-	function setUserData($user=false) {
+	function setUserData($user=false) { 
 		if (!$user) $user = JFactory::getUser();
 		$arrMainUserPostData=array('name','phone','skype','email');
 		for($i=0,$j=count($arrMainUserPostData);$i<$j;$i++)
@@ -193,9 +211,9 @@ class SUser{
 	 * Установить данные юзера
 	 * @ user, status
 	 */
-	function detectAdminStat($user){ 
-
+	function detectAdminStat($user=false){ 
 		if (self::$isAdmin===NULL) {
+			if (!$user) $user = JFactory::getUser();
 			//echo "<div class=''>detectAdminStat</div>";
 			$groupsUserIsIn = JAccess::getGroupsByUser($user->id);
 			// admin OR user

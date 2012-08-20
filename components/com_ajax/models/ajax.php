@@ -144,14 +144,17 @@ class AjaxModelAjax extends JModel
 		foreach ($arrData as $field => $value){
 			$table->set($field,$value);
 			$arrJSon[]=$value;
-			echo $field." => ".$value."\n";
+			//echo $field." => ".$value."\n";
 		}
 		//SErrors::afterTableUpdate($table);
 		//echo json_encode($arrJSon);
-		$json =json_encode($arrJSon);
-		//$error = json_last_error();
-		echo($json);
-		//var_dump("<h1>enc:</h1><pre>",json_decode($enc),"</pre>");
+		$json=json_encode($arrJSon);
+		//echo $json;
+		$arrDecoded=json_decode($json);
+		$str=implode(",",$arrDecoded);
+		echo $str;
+		//echo(json_decode($json));
+		//var_dump("<h1>json:</h1><pre>",json_decode($json),"</pre>");
 		exit;
 	}	
 	/**

@@ -21,6 +21,16 @@ class Collector1ViewCollected extends JView
 	protected $go_signup="index.php?option=com_users&view=registration&task=fill_precustomer_data";
 	public $order_files;
 	
+	function getData($collection_id,$user=false){
+		$model=JModel::getInstance('collected','Collector1Model');
+		// $model=$this->getModel(); - не использовать, т.к. не сработает для backend
+		$Data=array(); // SDebug::showDebugContent($model,'model');
+		$Data=$model->collected(); // SDebug::showDebugContent($Data,'Data');
+		//$Data['components']=$model->getComponentsNames();
+		//if ($user) $Data['orders_of_user']=$model->getCustomerOrders($user,false,$order_id);
+		return $Data;
+	}
+
 	function display($tpl = NULL)
 	{	
 		$model=$this->getModel();
@@ -44,9 +54,6 @@ class Collector1ViewCollected extends JView
 					$this->done=$site_action_type_data_array; //действие, цвет фона блока сообщения, постфикс для флага
 					$this->_action=$site_action_type;
 					if ($site_action_type=='site_new') {
-						//if ($user->get('guest')==1){
-							//$this->done[0]="Набор опций вашего сайта определён.";
-						//}else $this->done[0].="!";
 						//a notification for admin:
 						$adminEmail=JFactory::getConfig()->getValue('mailfrom');
 						$siteName=JFactory::getConfig()->getValue('sitename');
@@ -59,18 +66,7 @@ class Collector1ViewCollected extends JView
 					break;
 				}else unset($site_action_type); //чтобы не получить просто последний ключ, т.к. далее будет использоваться реальное значение
 			}
-			//установить принадлежность коллекции юзеру:
-			/*if ($jrequest_collection_id){ 
-				//проверяет как для гостя, так и для заавторизованного юзера:
-				if($model->checkCollectionAccessory($jrequest_collection_id,$user)) 
-					$this->user_collection_id=1; //коллекция юзера (ДАЖЕ, если она была удалена)
-				elseif ($site_action_type!='site_deleted') $this->user_collection_id=-1; //сайт не удалялся и в коллекциях юзера не обнаружен
-			}*/
 			$this->templatename=SSite::getCurrentTemplateName($app);
-			//НЕ АКТУАЛЬНО, Т.К. ИНФОРМАЦИЯ О ФАЙЛАХ ДОБАЛЕНА В МАССИВ КОЛЛЕКЦИЙ
-			//if ($site_action_type!='site_deleted') { //не удаляли сайт, будем получать файлы
-				//$this->order_files=($uset)? SFiles::requestUserFilesByObjectId($uset):SFiles::getUserFiles('collections_ids',$user); 
-			//}
 		}
 		parent::display($tpl);
 	}

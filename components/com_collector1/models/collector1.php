@@ -164,19 +164,31 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 			}
 			$current_order_set['options_array']=$arrCheckedMap;
 			$modelCMS=JModel::getInstance('CMS','collector1Model');
+			if (SUser::detectAdminStat($user)){
+				$isAdmin=true;
+				require_once JPATH_SITE.DS.'components'.DS.'com_collector1'.DS.'models'.DS.'CMS.php';
+				self::get_sites_types($current_order_set['site_type_id']);
+			}else
+				$current_order_set['site_type_name']=$this->get_sites_types($current_order_set['site_type_id']);
+				
 			switch ($current_order_set['engine_type_choice_id'])  { 
 				case "1":
-					$current_order_set['engines']=$modelCMS->get_cms_names($current_order_set['engines_ids']);
-						break;
+					if ($isAdmin){
+						$current_order_set['engines']=collector1ModelCMS::get_cms_names($current_order_set['engines_ids']);
+					}else
+						$current_order_set['engines']=$modelCMS->get_cms_names($current_order_set['engines_ids']);
+					break;
 				case "2": //разработать собственный
 					$arrSMSs=SCollection::setCMStypes();
 					$current_order_set['engines']=$arrSMSs[2][1];
-						break;
+					break;
 				case "3":
-					$current_order_set['engines']=$modelCMS->get_cms_own_name($collection_id);
-						break;
+					if ($isAdmin){
+						$current_order_set['engines']=collector1ModelCMS::get_cms_own_name($collection_id);
+					}else
+						$current_order_set['engines']=$modelCMS->get_cms_own_name($collection_id);
+					break;
 			}
-			$current_order_set['site_type_name']=$this->get_sites_types($current_order_set['site_type_id']);
 			if ($filenames=$current_order_set['files_names']) {
 				$filenames=explode(":",$filenames); //convert to array
 				$current_order_set['files_names']=$filenames;

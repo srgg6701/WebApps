@@ -13,10 +13,10 @@ class JConfig {
 	public $debug_lang = '0';
 	public $dbtype = 'mysql';
 	public $host = 'localhost';
-	public $user = 'a2allcom_fastweb';
-	//root
-	public $password = 'outofcontrol';
-	//
+	public $user = 'root';
+	//a2allcom_fastweb
+	public $password = '';
+	//outofcontrol
 	public $db = 'a2allcom_fastweb';
 	public $dbprefix = 'dnior_';
 	public $live_site = '';

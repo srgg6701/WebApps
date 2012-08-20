@@ -17,21 +17,19 @@ class collector1ModelCollected extends JModel
 	 * все сайты заказчика
 	 * customer, precustomer
 	 */
-	function collected() {	//SDebug::dOutput("collected",'h1'); //die();
-		//guest?
-		//$user = JFactory::getUser();
-		//получить id id коллекций:
-		/*($user->get('guest')==1)? //назначает данные для $this->collections_ids_array
-			SCollection::getPrecustomerSet('collections_ids') : SCollection::getUserSet('collections_ids',$user->get('id'));
-		$arrCollectionsIds=$this->collections_ids_array; var_dump("<h1>arrCollectionsIds:</h1><pre>",$arrCollectionsIds,"</pre>");
-		if ($arrCollectionsIds){ //otherwise is null*/
+	function collected() {	
 		if ($arrCollectionsIds=SCollection::getCurrentSetArray('collections_ids')) {
-			$modelCollector=JModel::getInstance('collector1','Collector1Model');
+			$modelCollector=JModel::getInstance('collector1','Collector1Model'); //SDebug::showDebugContent($modelCollector,'modelCollector');
 			//будем создавать массив ВСЕХ данных для каждой коллекции:
 			$collections_data_array=array(); 
 			for ($i=0,$j=count($arrCollectionsIds);$i<$j;$i++){
 				$collection_id=$arrCollectionsIds[$i]; 
-				$collections_data_array[$collection_id]=$modelCollector->getCollectionDataArray($collection_id); //все данные коллекции
+				if (SUser::detectAdminStat($user)){
+					require_once JPATH_SITE.DS.'components'.DS.'com_collector1'.DS.'models'.DS.'collector1.php';
+					$collections_data_array[$collection_id]=Collector1ModelCollector1::getCollectionDataArray($collection_id);
+				}
+				else
+					$collections_data_array[$collection_id]=$modelCollector->getCollectionDataArray($collection_id); //все данные коллекции
 				//SDebug::showDebugContent($collections_data_array,'collections_data_array');
 				if ($collections_data_array[$collection_id]===false) return false;
 				unset($collections_data_array[$collection_id]['engines_ids']);
@@ -39,29 +37,5 @@ class collector1ModelCollected extends JModel
 		}
 		return $collections_data_array;
 	}
-	/**
-	  * Проверить принадлежность коллекции юзеру
-	 */
-	/*function checkCollectionAccessory($collection_id, $user = false, $db = false) {
-		$query="SELECT COUNT(*) FROM ";
-		if (!$user)
-			$user = JFactory::getUser();
-		if ($user->get('guest')!=1){
-			$query.=$this->default_table."
- WHERE id = $collection_id
-   AND `customer_id` = ".$user->get('id');
-		}else{
-			$query.=$this->precustomers_table." 
- WHERE collections_ids REGEXP CONCAT('(^|,)',$collection_id,'(,|$)')
-   AND ( email = '".$user->get('email')."'
-         OR session_id = '".session_id()."'
-       )";
-		}
-		if (!$db) $db = JFactory::getDBO();
-		$db->setQuery($query);
-		$collections_ids_array=$db->loadResultArray();
-		$this->collections_ids_array=$collections_ids_array; //будет извлекаться также helper'ом предзаказчика
-		*return $collections_ids_array; 
-	}*/
 }
 ?>
