@@ -138,8 +138,7 @@ function makeObjectEditableField( tObject, // text container // this // <SPAN>Co
 	}else{
 		tObject.className='pseudo_link_dotted';
 		spanComType='edit';
-	}
-	//spanComType=(tObject.className.indexOf('addDataInPlace')!=-1)? 'add':'edit';
+	} 
 	//БЛОК с данными отображён; переключиться на режим редактирования:
 	if (tObject.style.display!='none'){	// режим по умолчанию 
 		var objContent=tObject.innerHTML; // контент поля с данными 

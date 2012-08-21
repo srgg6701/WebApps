@@ -66,10 +66,24 @@ class AjaxController extends JController
 					break;
 					
 					case "message":
-						
-						if ($action=="send"){
-							$model->sendMessage();
+						switch($action){
+							case "send":
+							$method="sendMessage";
+							break;
+
+							case "get":
+							$method="getMessage";
+							break;
+
+							case "switch_read_status":
+							$method="switchMessageReadStatus";
+							break;
+
+							case "delete":
+							$method="deleteMessage";
+							break;
 						}
+						$model->$method();
 					break;
 				}
 		}

@@ -1,10 +1,5 @@
 ﻿<?
-// Передаем заголовки
-//header('Content-type: text/plain; charset=utf-8');
-//header('Cache-Control: no-store, no-cache');
-//header('Expires: ' . date('r'));
-
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 class AjaxModelAjax extends JModel
 {	
 	/**
@@ -114,7 +109,30 @@ class AjaxModelAjax extends JModel
 		echo implode("|",$data);
 	}
 	/**
-	 *
+	 * Получить текст сообщения и пометить его как прочтённое
+	 * @ user, customer, precustomer, message, content
+	 */
+	function getMessage(){
+		$message_id=(int)JRequest::getVar('object_id');
+		$user_id_read=(int)JRequest::getVar('user_id_read');
+		$messages=SUser::getMessages( false,
+						  false,
+						  false,
+						  false,
+						  " id = ".$message_id,
+						  false,
+						  'message'
+						); //var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
+		$message=$messages[0]; 
+		// добавить к прочтённым:
+		if (!SUser::checkMessageReadStatus($user_id_read,$message_id)){
+			$this->setMessRead($message_id,$user_id_read);
+		} //var_dump("<h1>message:</h1><pre>",$message,"</pre>");
+		echo json_encode($message);
+		exit;
+	}	
+	/**
+	 * @ user, customer, precustomer, message, contacts
 	 */
 	function sendMessage(){
 		//order/collection_id
@@ -140,15 +158,71 @@ class AjaxModelAjax extends JModel
 						'message'=>JRequest::getVar('message'),
 						'obj_identifier'=>$objtype.$objid
 					  );
-		$arrJSon=array();
+		$jData=array( 'id'=>0,
+					  'status'=>'прочтено',
+					  'direction'=>'исходящее',
+					  'date_time'=>date('d.m.Y H:i')
+					);
 		foreach ($arrData as $field => $value){
 			$table->set($field,$value);
-			$arrJSon[]=$value;
-			//echo $field." => ".$value."\n";
+			if ($field=='subject') 
+				$jData[$field] = $value;
 		}
-		//SErrors::afterTableUpdate($table);
-		echo json_encode($arrJSon);
+		SErrors::afterTableUpdate($table);
+		// получить id добавленной записи
+		$db = JFactory::getDBO();
+		$jData['id']=$db->insertid(); //var_dump("<h1>jData:</h1><pre>",$jData,"</pre>"); die();
+		echo json_encode($jData);
 		exit;
+	}
+	/**
+	 * Переключить статус сообщения
+	 * @ user, customer, precustomer
+	 */
+	function setMessRead($message_id,$user_id){
+		//создаём запись...:
+		$table = JTable::getInstance('messages_read', 'Collector1Table');
+		$table->reset();
+		$table->set('message_id', $message_id);
+		$table->set('user_id', $user_id);
+		$table->set('date_time', date("Y-m-d H:i:s"));
+		//если есть поле ordering
+		//$test=true;
+		if ($test){
+			$message['message_id']=$message_id;
+			$message['user_id']=$user_id;
+			$message['date_time']=date("Y-m-d H:i:s");
+		}else SErrors::afterTable($table);
+	}
+	/**
+	 * Переключить статус сообщения
+	 * @ user, customer, precustomer
+	 */
+	function switchMessageReadStatus(){
+		$user_id=(int)JRequest::getVar('user_id');
+		$message_id=(int)JRequest::getVar('object_id');
+		$table = JTable::getInstance('messages_read', 'Collector1Table');
+		if(SUser::checkMessageReadStatus($user_id_read,$message_id)) { // если есть в таблице прочтённых - удалить оттуда
+			$this->deleteMessage($message_id);
+		}else{ // добавить в таблицу прочтённых
+			$this->setMessRead($message_id,$user_id);
+		}
+	}	
+	/**
+	 * Удалить сообщение
+	 * @ user, customer, precustomer
+	 */
+	function deleteMessage($message_id){
+		$messages=SUser::getMessages( false,
+					  false,
+					  false,
+					  false,
+					  " message_id = ".$message_id,
+					  false,
+					  'id'
+					); //var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
+		$message=$messages[0]; 
+		$table->delete($message['id']);
 	}	
 	/**
 	 * Обновить контактные данные

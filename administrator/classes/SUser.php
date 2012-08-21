@@ -78,6 +78,82 @@ class SUser{
 		return (int)$db->loadResult(); // id / NULL
 	}
 	/**
+	 * Проверить статус прочтения сообщения для данного юзера
+	  * @ user, message, status
+	 */
+	function checkMessageReadStatus($user_id,$message_id,$db=false){
+		if (!$db) $db = JFactory::getDBO();
+		$query=$db->getQuery(true);
+		$query->select('COUNT(id)');
+		$query->from('#__webapps_messages_read');
+		$query->where('message_id = '.$message_id.' AND user_id = ' . $user_id);
+		$db->setQuery($query);
+		return $db->loadResult();
+	}
+	/**
+	 * получить сообщения
+	 * @ user, precustomer, customer, message
+	 */
+	function getMessages( $order_by=false,
+						  $user_id_from=false,
+						  $user_id_to=false,
+						  $user_id_read=false,
+						  $criteria=false,
+						  $limit=false,
+						  $fields=false
+						) { 
+		$query="SELECT ";
+		if ($fields){
+			$query.=$fields;
+		}else{
+			$query.="#__webapps_messages.id,";
+			//если нужно разобраться со статусом прочтения:
+       		if ($user_id_read) $query.="
+       ( SELECT DATE_FORMAT(#__webapps_messages_read.date_time, '%e.%c.%Y')
+         FROM #__webapps_messages_read 
+        WHERE user_id = ".$user_id_read."  AND message_id = dnior_webapps_messages.id
+       ) AS 'read_datetime',";
+       		$query.="
+       user_id_from, 
+       user_id_to, 
+       DATE_FORMAT(#__webapps_messages.date_time, '%e.%c.%Y') AS 'datetime', 
+       subject, 
+       message, 
+       obj_identifier ";
+		}
+	   $query.="
+  FROM #__webapps_messages ";
+		if ($user_id_from)
+			$subquery_user_from=$sbquery=" user_id_from = $user_id_from ";
+		if ($user_id_to)
+			$subquery_user_to=$sbquery=" user_id_to = $user_id_to ";
+		if ( $user_id_from
+			 || $user_id_to
+			 || $fields
+		   ){
+			$query.=" WHERE ";
+			if (!$fields) $query.=($user_id_from&&$user_id_to)? $subquery_user_from . "AND" . $subquery_user_to : $sbquery;
+		}
+		if ($criteria) {
+			if ($sbquery) $query.="
+   AND ";
+	   		$query.="(
+   		".$criteria."
+       )";
+		}
+		$query.="
+ORDER BY ";
+		if (!$order_by) $order_by="id DESC";
+		$query.=$order_by;
+		$query.=" LIMIT ";
+		if (!$limit) $limit="20";
+		$query.=$limit; //echo "<div>query: <hr><pre>".$query."</pre></div>";
+		$db = JFactory::getDBO();
+		$db->setQuery($query);  
+		$messages=$db->loadAssocList();  //var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
+		return $messages;
+	}
+	/**
 	 * Добавить или обновить данные в таблице предзаказчиков
 	 * ВНИМАНИЕ! Метод вызывается ТОЛЬКО ПРИ ДОБАВЛЕНИИ новой коллекции или заказа
 	 * (в табл.табл. *customer_site_options или *customer_orders соответственно)

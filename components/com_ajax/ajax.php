@@ -4,8 +4,7 @@ header('Content-type: text/plain; charset=utf-8');
 header('Cache-Control: no-store, no-cache');
 header('Expires: ' . date('r')); 
 // no direct access
-defined( '_JEXEC' ) or die;
-//jimport('joomla.factory.php');
+defined( '_JEXEC' ) or die; //jimport('joomla.factory.php');
 jimport('joomla.mail.mail');
 jimport('joomla.application.component.controller');
 jimport('joomla.application.component.model');
