@@ -49,28 +49,32 @@ class SUser{
 	/**
 	 * @ user, precustomer
 	 */
-	function getPrecustomerContactData($db=false,$user=false,$user_id=false){
+	function getPrecustomerContactData( $db=false,
+										$user=false,
+										$user_id=false,
+										$as_object=false
+									  ){
 		if (!$db) $db	= JFactory::getDBO();
 		if (!$user) $user = JFactory::getUser(); 
-		$query="SELECT";
+		$query="SELECT `name`, `phone`, `skype`";
 		$from_where=' FROM #__webapps_precustomers 
  WHERE ';
 		if (self::detectAdminStat($user)){
-			$query.=" `email` ".$from_where." id = ".(int)$user_id;
+			$query.=", `email` ".$from_where." id = ".(int)$user_id;
 		}else{
-			$query.=" `phone`, `skype` ".$from_where." `email` = '".$user->get('email')."' 
+			$query.=$from_where." `email` = '".$user->get('email')."' 
     OR `session_id` ='".session_id()."'";
 		}
 		$db->setQuery($query); // echo "<div>query: <hr><pre>".$query."</pre></div>";
-		return $db->loadAssoc();
+		return ($as_object)? $db->loadObject():$db->loadAssoc();
 	}
 	/**
 	 * Проверить, не является ли текущий юзер предзаказчиком?
 	  * @ user, precustomer, status
 	 */
-	function getPrecustomerStatus($email=false,$user=false) {
+	function getPrecustomerStatus($email=false/*,$user=false*/) {
 		if (!$email) $email = JRequest::getVar('email');
-		if (!$user) $user = JFactory::getUser();
+		//if (!$user) $user = JFactory::getUser();
 		$query="SELECT COUNT(*) FROM #__webapps_precustomers
  WHERE `email` = '$email' OR session_id = '".session_id()."'";
 		$db = JFactory::getDBO();
@@ -88,7 +92,8 @@ class SUser{
 		$query->from('#__webapps_messages_read');
 		$query->where('message_id = '.$message_id.' AND user_id = ' . $user_id);
 		$db->setQuery($query);
-		return $db->loadResult();
+		$result=$db->loadResult(); //echo "<div class=''>query ($result)= ".$query."</div>";
+		return $result;
 	}
 	/**
 	 * получить сообщения
@@ -104,25 +109,27 @@ class SUser{
 						) { 
 		$query="SELECT ";
 		if ($fields){
+			if ($fields=='id') $fields='#__webapps_messages.id';
 			$query.=$fields;
 		}else{
 			$query.="#__webapps_messages.id,";
 			//если нужно разобраться со статусом прочтения:
        		if ($user_id_read) $query.="
-       ( SELECT DATE_FORMAT(#__webapps_messages_read.date_time, '%e.%c.%Y')
+       ( SELECT DATE_FORMAT(#__webapps_messages_read.date_time, '%e.%m.%Y %H:%i')
          FROM #__webapps_messages_read 
         WHERE user_id = ".$user_id_read."  AND message_id = dnior_webapps_messages.id
        ) AS 'read_datetime',";
        		$query.="
        user_id_from, 
        user_id_to, 
-       DATE_FORMAT(#__webapps_messages.date_time, '%e.%c.%Y') AS 'datetime', 
+       DATE_FORMAT(#__webapps_messages.date_time, '%e.%m.%Y %H:%i') AS 'datetime', 
        subject, 
        message, 
        obj_identifier ";
 		}
 	   $query.="
-  FROM #__webapps_messages ";
+  FROM #__webapps_messages 
+  LEFT JOIN #__webapps_messages_read ON message_id = #__webapps_messages.id";
 		if ($user_id_from)
 			$subquery_user_from=$sbquery=" user_id_from = $user_id_from ";
 		if ($user_id_to)
@@ -131,14 +138,15 @@ class SUser{
 			 || $user_id_to
 			 || $fields
 		   ){
-			$query.=" WHERE ";
+			$query.=" 
+ WHERE ";
 			if (!$fields) $query.=($user_id_from&&$user_id_to)? $subquery_user_from . "AND" . $subquery_user_to : $sbquery;
 		}
 		if ($criteria) {
 			if ($sbquery) $query.="
    AND ";
 	   		$query.="(
-   		".$criteria."
+        ".$criteria."
        )";
 		}
 		$query.="
@@ -147,7 +155,7 @@ ORDER BY ";
 		$query.=$order_by;
 		$query.=" LIMIT ";
 		if (!$limit) $limit="20";
-		$query.=$limit; //echo "<div>query: <hr><pre>".$query."</pre></div>";
+		$query.=$limit;  // echo "<div>query: <hr><pre>".$query."</pre></div>";
 		$db = JFactory::getDBO();
 		$db->setQuery($query);  
 		$messages=$db->loadAssocList();  //var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");

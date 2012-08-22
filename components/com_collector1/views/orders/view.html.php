@@ -1,4 +1,4 @@
-﻿<?php
+﻿<?php 
 /**
  * @version     1.4.0
  * @package     com_collector1

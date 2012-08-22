@@ -127,15 +127,26 @@ SELECT option_id, `option` AS `component` FROM tbl_name1 ORDER BY `option`*/
 	 * получим заказы зарегистрированного юзера (все данные):
 	 * user, customer, precustomer, orders
 	 */
-	function getCustomerOrders($user = false, $db = false, $order_id = false){
+	function getCustomerOrders( $user = false, 
+								$db = false, 
+								$order_id = false
+							  ){
 		if (!$user) $user = JFactory::getUser(); //var_dump("<h1>user:</h1><pre>",$user,"</pre>"); //die();
 		if ($order_id) {
 			$where="#__webapps_customer_orders.id = ".$order_id;
 		}else{
-			if ($user->get('guest')!=1) {
-				$where="customer_id = ".$user->get('id');
-			}else{
-				$where="`email` = '".$user->get('email')."' OR session_id = '".session_id()."'"; 
+			
+			if ($user->type=='precustomer'){ // $user - полученный аргумент 
+				$user_id=$user->id;
+				$user_email=$user->email;
+			}elseif($user){
+				$user_id=$user->get('id');
+				$user_email=$user->get('email');
+			}
+			if ($user_id) { // customer
+				$where="customer_id = $user_id";
+			}else{ // precustomer
+				$where="`email` = '$user_email' OR session_id = '".session_id()."'"; 
 			}		
 			$where.="
 ORDER BY #__webapps_customer_orders.id DESC";	
@@ -147,7 +158,9 @@ ORDER BY #__webapps_customer_orders.id DESC";
        budget,
        finish_date
        FROM ".$this->default_table;
-		if ($user->get('guest')==1){
+		if ( !$user_id
+		     || $user->type=='precustomer'
+		   ){
 			$query.="
   JOIN #__webapps_precustomers
     ON orders_ids REGEXP CONCAT('(^|,)',".$this->default_table.".id,'(,|$)')";

@@ -3360,7 +3360,7 @@ table.tblMess tbody > tr:first-child td{
 	padding:4px;
 	border-bottom: solid 1px #999999;
 }
-table.tblMess tbody > tr:last-child td{
+table.tblMess tbody > tr:last-child td, tr.noBottomBorder td{
 	padding:4px;
 	border-bottom:none;
 }

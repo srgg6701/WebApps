@@ -1,4 +1,7 @@
 // JavaScript Document
+function wrongURL(){
+	alert("Неправильный URL отправки данных.");
+}
 //добавить/удалить поле загрузки файла
 function addFileField(action,pNode){
 	try{	

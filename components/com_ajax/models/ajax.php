@@ -98,6 +98,28 @@ class AjaxModelAjax extends JModel
 		}
 	}
 	/**
+	 * удалить из таблицы прочтённых
+	 * @ user, message
+	 */
+	function dropReadMessage($message_id){
+		$table=JTable::getInstance('messages_read', 'Collector1Table');
+		$messages=SUser::getMessages( false,
+					  false,
+					  false,
+					  false,
+					  " message_id = ".$message_id,
+					  false,
+					  'dnior_webapps_messages_read.id'
+					); // var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
+		$id=$messages[0]['id'];
+		//$test=true;
+		if ($test) {
+			if (JRequest::getVar('w'))
+				echo "<div class=''>dropReadMessage</div>"; 
+		}
+		elseif ($table->delete($id)) echo "Ошибка удаления записи из *messages_read";
+	}
+	/**
 	 * Получить контактные данные
 	 * @ user, customer, precustomer
 	 */
@@ -159,19 +181,26 @@ class AjaxModelAjax extends JModel
 						'obj_identifier'=>$objtype.$objid
 					  );
 		$jData=array( 'id'=>0,
-					  'status'=>'прочтено',
-					  'direction'=>'исходящее',
-					  'date_time'=>date('d.m.Y H:i')
+					  'date_time'=>date('d.m.Y H:i'),
+					  'status'=>date('d.m.Y H:i'),
+					  'direction'=>'outbox',
 					);
 		foreach ($arrData as $field => $value){
 			$table->set($field,$value);
 			if ($field=='subject') 
 				$jData[$field] = $value;
 		}
-		SErrors::afterTableUpdate($table);
 		// получить id добавленной записи
 		$db = JFactory::getDBO();
-		$jData['id']=$db->insertid(); //var_dump("<h1>jData:</h1><pre>",$jData,"</pre>"); die();
+		//$test=true;
+		if ($test){
+			$jData['id']='=ID=';
+			$jData['subject']='=SUBJECT=';
+			$jData['message']='=MESSAGE TEXT=';
+		}else{
+			SErrors::afterTableUpdate($table);
+			$jData['id']=$db->insertid(); //var_dump("<h1>jData:</h1><pre>",$jData,"</pre>"); die();
+		}
 		echo json_encode($jData);
 		exit;
 	}
@@ -186,43 +215,44 @@ class AjaxModelAjax extends JModel
 		$table->set('message_id', $message_id);
 		$table->set('user_id', $user_id);
 		$table->set('date_time', date("Y-m-d H:i:s"));
-		//если есть поле ordering
 		//$test=true;
 		if ($test){
 			$message['message_id']=$message_id;
 			$message['user_id']=$user_id;
 			$message['date_time']=date("Y-m-d H:i:s");
+			if (JRequest::getVar('w'))
+				var_dump("message set read:\n",$message,"\n");
 		}else SErrors::afterTable($table);
+		echo date("d.m.Y H:i");
 	}
 	/**
 	 * Переключить статус сообщения
 	 * @ user, customer, precustomer
 	 */
-	function switchMessageReadStatus(){
+	function switchMessageReadStatus(){ 
 		$user_id=(int)JRequest::getVar('user_id');
 		$message_id=(int)JRequest::getVar('object_id');
-		$table = JTable::getInstance('messages_read', 'Collector1Table');
-		if(SUser::checkMessageReadStatus($user_id_read,$message_id)) { // если есть в таблице прочтённых - удалить оттуда
-			$this->deleteMessage($message_id);
+		if(SUser::checkMessageReadStatus($user_id,$message_id)) { // если есть в таблице прочтённых - удалить оттуда
+			$this->dropReadMessage($message_id); //echo "<div class=''>Read!</div>";
 		}else{ // добавить в таблицу прочтённых
-			$this->setMessRead($message_id,$user_id);
+			$this->setMessRead($message_id,$user_id); //echo "<div class=''>UnRead!</div>";
 		}
+		exit;
 	}	
 	/**
 	 * Удалить сообщение
 	 * @ user, customer, precustomer
 	 */
-	function deleteMessage($message_id){
-		$messages=SUser::getMessages( false,
-					  false,
-					  false,
-					  false,
-					  " message_id = ".$message_id,
-					  false,
-					  'id'
-					); //var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
-		$message=$messages[0]; 
-		$table->delete($message['id']);
+	function deleteMessage($id){
+		$table=JTable::getInstance('messages', 'Collector1Table');
+		//$test=true;
+		if ($test) {
+			if (JRequest::getVar('w'))
+				echo "<div class=''>id to delete: ".$id."</div>";
+		}else{
+			if (!$table->delete($id)) echo "Ошибка удаления записи из *messages_read";
+		}
+		exit;
 	}	
 	/**
 	 * Обновить контактные данные

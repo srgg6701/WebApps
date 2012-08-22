@@ -46,7 +46,6 @@ class Collector1ViewPrecustomers extends JView
 	protected function addToolbar()
 	{
 		JRequest::setVar('hidemainmenu', true);
-
 		$user		= JFactory::getUser();
 		$isNew		= ($this->item->id == 0);
         if (isset($this->item->checked_out)) {
@@ -58,7 +57,7 @@ class Collector1ViewPrecustomers extends JView
 
 		JToolBarHelper::title(JText::_('COM_COLLECTOR1_TITLE_PRECUSTOMERS'), 'precustomers.png');
 		//http://localhost/webapps/administrator/index.php?option=com_collector1&view=precustomers&layout=edit&id=40
-		if ( JRequest::getVar('layout')=='edit'
+		if ( $this->_layout=='edit'
 			 && JRequest::getVar('id')
 			 // If not checked out, can save the item:
 			 && (!$checkedOut && ($canDo->get('core.edit')||($canDo->get('core.create')))) 
@@ -66,14 +65,14 @@ class Collector1ViewPrecustomers extends JView
 			JToolBarHelper::apply('precustomers.apply', 'JTOOLBAR_APPLY');
 			JToolBarHelper::save('precustomers.save', 'JTOOLBAR_SAVE');
 		}
-		if ( JRequest::getVar('order_id')
-			 	  && JRequest::getVar('user_id')
+		if ( ( JRequest::getVar('order_id')
+			   && JRequest::getVar('user_id')
+			 ) || $this->_layout=='collection' || $this->_layout=='order'
 		   ) JToolBarHelper::go_back();
 		else{
 			if (empty($this->item->id)) {
 				JToolBarHelper::cancel('precustomers.cancel', 'JTOOLBAR_CANCEL');
-			}
-			else {
+			}else {
 				JToolBarHelper::cancel('precustomers.cancel', 'JTOOLBAR_CLOSE');
 			}
 		}

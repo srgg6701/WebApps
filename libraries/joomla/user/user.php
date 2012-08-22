@@ -883,7 +883,7 @@ class JUser extends JObject
 
 		// Load the JUserModel object based on the user id or throw a warning.
 		if (!$table->load($id))
-		{
+		{	//echo "<h1>HERE</h1>";
 			JError::raiseWarning('SOME_ERROR_CODE', JText::sprintf('JLIB_USER_ERROR_UNABLE_TO_LOAD_USER', $id));
 			return false;
 		}
