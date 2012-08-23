@@ -2,6 +2,4 @@
 <info>
 	<infoitem key="MM_css_include" value="../../../templates/bluestork/css/template.css" />
 	<infoitem key="MM_css_exclude" value="" />
-	<infoitem key="notes" value="Для предзаказчика убрать:&#xD;$user = JFactory::getUser($user_id);&#xD;т.к. оно пытается извлечь данные несуществующего юзера." />
-	<infoitem key="showOnOpen" value="true" />
 </info>

@@ -3306,6 +3306,9 @@ span.update-badge {
 .block{
 	display:block;
 }
+.h3{
+	color:#DE9601;
+}
 .marginBottom4{
 	margin-bottom:4px;
 }
@@ -3349,6 +3352,17 @@ span.update-badge {
 .paddingLeft10{
 	padding-left:10px;
 }
+table#tblCollected{
+	border: solid 1px #CCCCCC;
+}
+table#tblCollected tbody > tr:first-child th{
+	background: #DDD;
+	border-bottom: solid 1px #CCC;
+	padding:5px 0;
+}
+table#tblCollected td{
+	border-bottom:solid 1px #CCC;
+}
 table.tblMess {
 	border:solid 1px #999999;
 }
@@ -3363,6 +3377,31 @@ table.tblMess tbody > tr:first-child td{
 table.tblMess tbody > tr:last-child td, tr.noBottomBorder td{
 	padding:4px;
 	border-bottom:none;
+}
+table.UnderCollected{
+	width:100%;
+	border:solid 1px #ccc;
+	margin-bottom:3px;
+}
+table.UnderCollected tbody > tr:first-child th{
+	padding:3px !important;
+	padding-right:5px !important;
+}
+table.UnderCollected tbody > tr:last-child td {
+	border-bottom:none !important;
+}
+td.checked{
+	font-size:1.6em;
+	padding:0;
+	color:#FF9900;
+}
+tr#site_desc_cell td{
+	padding:4px;
+}
+tr#site_desc_cell > td:last-child{
+	padding-left:6px;
+	background:#FFF;
+	border-left:solid 4px #F4F4F4;
 }
 tr.trMessHeaders td{
 	 background:#ddd;

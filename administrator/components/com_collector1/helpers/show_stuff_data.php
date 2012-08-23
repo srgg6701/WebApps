@@ -1,10 +1,16 @@
 ﻿<?	
+$UserAdmin=JFactory::getUser();
+$user_id_from=$UserAdmin->get('id');
+$user_id=JRequest::getVar('user_id');
+$document = &JFactory::getDocument();
+
 if ($order_id=JRequest::getVar('order_id')){
 	$objs='orders';
 	$object_id=$order_id;
 	$viewClass='Collector1ViewOrders';
 	$user_stuff_type='components';
 	$user_stuff_key='orders_of_user';
+	$userType='tUser';
 }
 elseif ($collection_id=JRequest::getVar('collection_id')) {
 	$objs='collected';
@@ -12,18 +18,16 @@ elseif ($collection_id=JRequest::getVar('collection_id')) {
 	$viewClass='Collector1ViewCollected';
 	$user_stuff_type='collections';
 	$user_stuff_key='collections_of_user';
+	$userType='UserAdmin';
 }
-$UserAdmin=JFactory::getUser();
-$user_id_from=$UserAdmin->get('id');
-$user_id=JRequest::getVar('user_id');
-$document = &JFactory::getDocument();
-$document->addStyleSheet('components/com_collector1/assets/css/collector1.css');
+//$document->addStyleSheet('components/com_collector1/assets/css/collector1.css');
 require_once JPATH_SITE.DS.'components'.DS.'com_collector1'.DS.'views'.DS.$objs.DS.'view.html.php';
 require_once JPATH_SITE.DS.'components'.DS.'com_collector1'.DS.'models'.DS.$objs.'.php';
 
 $view=JRequest::getVar('view');
-if ($view=='customers')
+if ($view=='customers') {
 	$tUser = JFactory::getUser($user_id);
+}
 else {	// get precustomer data
 	$tUser = SUser::getPrecustomerContactData( false,
 											   $UserAdmin,
@@ -35,7 +39,7 @@ else {	// get precustomer data
 	$tUser->type='precustomer';
 }
 $viewInstance=new $viewClass;
-$Data=$viewInstance->getData($object_id,$tUser);?>
+$Data=$viewInstance->getData($object_id,${$userType});?>
 <div class="floatTop">
 <h4>Состав <? 
 if (!$get_layout) $get_layout=JRequest::getVar('layout');
@@ -47,6 +51,8 @@ if ($objs=='orders') { //echo "<div class=''>ORDER</div>";
 									  	  $UserAdmin
 										);
 }else{
+	//var_dump("<h1>Data:</h1><pre>",$Data,"</pre>");
+	$viewInstance->buildComponentsBlocks();
 	// reserved...	
 }?>
 </div>

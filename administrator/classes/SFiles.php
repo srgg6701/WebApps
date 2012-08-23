@@ -7,7 +7,6 @@
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
-//JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_collector1/tables');
 jimport('joomla.mail.mail');
 //import joomlas filesystem functions, we will do all the filewriting with joomlas functions,
 //so if the ftp layer is on, joomla will write with that, not the apache user, which might
@@ -191,7 +190,7 @@ class SFiles extends JFile{
 						$view=false,
 						$baseurl=false
 					  ) {
-		require_once JPATH_BASE.DS.'components'.DS.'com_collector1'.DS.'helpers'.DS.'html'.DS.'delete_by_ajax_link.php';
+		require_once JPATH_SITE.DS.'components'.DS.'com_collector1'.DS.'helpers'.DS.'html'.DS.'delete_by_ajax_link.php';
 		if (!$view) $view=JRequest::getVar('view');
 		$type=($view=='orders')? 'o':'s';
 		if (is_array($filenames)){ //может быть false
@@ -226,11 +225,7 @@ class SFiles extends JFile{
                 	<span onMouseOver="this.title=this.innerHTML"><?=$filename?></span>
                 </nobr></a> 
         </div>
-	<?	/*
- 		<!--<div style="display:inline-block; padding-top:2px; padding-left:4px;">                  
-        	<a href="javascript:void();" onClick="return deleteFile(this,'<?=$file_in_dir_name?>');" class="txtRed"><img title="Удалить файл..." align="absmiddle" src="<?=$baseurl?>/templates/<?=$templatename?>/images/commands/delete.gif" width="13" height="13" style="margin-bottom:4px;"></a>
-		</div>-->*/ ?>
-        <?	makeLinkToDelete('deleteFile',$file_in_dir_name,$templatename,$baseurl,"Удалить файл...")?>
+        <?	if ($baseurl!="..") makeLinkToDelete('deleteFile',$file_in_dir_name,$templatename,$baseurl,"Удалить файл...")?>
     </div>
 		
 			<?	echo "\n";/**/

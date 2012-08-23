@@ -1,4 +1,5 @@
       SELECT dnior_webapps_precustomers.id AS precustomer_id, 
+             name,
              email, 
              dnior_webapps_customer_orders.id AS 'order id',
              dnior_webapps_customer_site_options.id AS 'collection id',
