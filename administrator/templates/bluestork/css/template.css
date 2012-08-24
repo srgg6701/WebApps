@@ -3411,3 +3411,6 @@ tr.trMessHeaders td{
 .width99{
 	width:99% !important;
 }
+.widthMax50{
+	max-width:50%;
+}

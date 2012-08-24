@@ -72,9 +72,8 @@ class SUser{
 	 * Проверить, не является ли текущий юзер предзаказчиком?
 	  * @ user, precustomer, status
 	 */
-	function getPrecustomerStatus($email=false/*,$user=false*/) {
+	function getPrecustomerStatus($email=false) {
 		if (!$email) $email = JRequest::getVar('email');
-		//if (!$user) $user = JFactory::getUser();
 		$query="SELECT COUNT(*) FROM #__webapps_precustomers
  WHERE `email` = '$email' OR session_id = '".session_id()."'";
 		$db = JFactory::getDBO();
@@ -92,34 +91,51 @@ class SUser{
 		$query->from('#__webapps_messages_read');
 		$query->where('message_id = '.$message_id.' AND user_id = ' . $user_id);
 		$db->setQuery($query);
-		$result=$db->loadResult(); //echo "<div class=''>query ($result)= ".$query."</div>";
+		$result=$db->loadResult(); if (JRequest::getVar('w')) echo "<div class=''>query ($result)= ".$query."</div>";
 		return $result;
 	}
+	/**
+	 * получить сообщение
+	 * @ user, precustomer, customer, message
+	 */
+	function getMessage($id){
+		$query="SELECT message FROM #__webapps_messages WHERE id = $id";
+		$db = JFactory::getDBO();
+		$db->setQuery($query);  //echo "<div class=''>query= ".$query."</div>";
+		return $db->loadResult();		
+	}	
 	/**
 	 * получить сообщения
 	 * @ user, precustomer, customer, message
 	 */
-	function getMessages( $order_by=false,
-						  $user_id_from=false,
-						  $user_id_to=false,
-						  $user_id_read=false,
-						  $criteria=false,
-						  $limit=false,
-						  $fields=false
+	function getMessages( $order_by=false, // сортировка
+						  $user_id_from=false, // фильтр по отправителю
+						  $user_id_to=false, // фильтр по получателю
+						  $user_id_read=false, // фильтр по тому, кто прочёл
+						  $criteria=false, // дополнительные критерии выбора записей
+						  $limit=false, // лимит записей
+						  $fields_subquery=false // дополнительные поля извлечения данных
 						) { 
 		$query="SELECT ";
-		if ($fields){
-			if ($fields=='id') $fields='#__webapps_messages.id';
-			$query.=$fields;
+		$webapps_messages_id='#__webapps_messages.id';
+		if ($fields_subquery){
+			
+			if ($fields_subquery=='id') $fields_subquery=$webapps_messages_id;
+			
+			$query.=$fields_subquery;
+		
 		}else{
-			$query.="#__webapps_messages.id,";
+			
+			$query.=$webapps_messages_id.", ";//"#__webapps_messages.id"
+			
 			//если нужно разобраться со статусом прочтения:
        		if ($user_id_read) $query.="
        ( SELECT DATE_FORMAT(#__webapps_messages_read.date_time, '%e.%m.%Y %H:%i')
          FROM #__webapps_messages_read 
         WHERE user_id = ".$user_id_read."  AND message_id = dnior_webapps_messages.id
        ) AS 'read_datetime',";
-       		$query.="
+       		
+			$query.="
        user_id_from, 
        user_id_to, 
        DATE_FORMAT(#__webapps_messages.date_time, '%e.%m.%Y %H:%i') AS 'datetime', 
@@ -129,36 +145,40 @@ class SUser{
 		}
 	   $query.="
   FROM #__webapps_messages 
-  LEFT JOIN #__webapps_messages_read ON message_id = #__webapps_messages.id";
-		if ($user_id_from)
-			$subquery_user_from=$sbquery=" user_id_from = $user_id_from ";
-		if ($user_id_to)
-			$subquery_user_to=$sbquery=" user_id_to = $user_id_to ";
-		if ( $user_id_from
-			 || $user_id_to
-			 || $fields
-		   ){
-			$query.=" 
- WHERE ";
-			if (!$fields) $query.=($user_id_from&&$user_id_to)? $subquery_user_from . "AND" . $subquery_user_to : $sbquery;
+  LEFT JOIN #__webapps_messages_read ON message_id = ".$webapps_messages_id."
+ WHERE (";
+ 		if ($user_id_from || $user_id_to) {
+			
+			$_user_id_from=" user_id_from = $user_id_from ";
+			$_user_id_to=" user_id_to = $user_id_to ";
+			
+			// конкретный юзер (например, заавторизованный заказчик/предзаказчик):
+			if ( $user_id_from && $user_id_to ) {
+				$operator=($user_id_from == $user_id_to)? " OR ":" AND ";
+				$subquery=$_user_id_from.$operator.$_user_id_to;
+			}else{
+				$subquery=($user_id_from)? $_user_id_from:$_user_id_to;
+			}
+			$query.=$subquery;
 		}
 		if ($criteria) {
 			if ($sbquery) $query.="
-   AND ";
+           AND ";
 	   		$query.="(
         ".$criteria."
-       )";
+           )";
 		}
 		$query.="
+       )
 ORDER BY ";
-		if (!$order_by) $order_by="id DESC";
+		if (!$order_by) $order_by=$webapps_messages_id." DESC";
 		$query.=$order_by;
 		$query.=" LIMIT ";
 		if (!$limit) $limit="20";
-		$query.=$limit;  // echo "<div>query: <hr><pre>".$query."</pre></div>";
+		$query.=$limit;   if (JRequest::getVar('q')) echo "<div>query: <hr><pre>".$query."</pre></div>";
 		$db = JFactory::getDBO();
 		$db->setQuery($query);  
-		$messages=$db->loadAssocList();  //var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
+		$messages=$db->loadAssocList(); // var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
 		return $messages;
 	}
 	/**

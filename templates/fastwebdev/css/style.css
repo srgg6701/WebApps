@@ -219,6 +219,11 @@ a.linkSpotYellow:hover{
 .marginTop20{
 	margin-top:20px;
 }
+div#message_content{
+	padding:10px;
+	border:solid 1px #CCCCCC;
+	border-radius:4px;
+}
 .mMenu{
 	position:relative;
 }
@@ -1132,7 +1137,7 @@ p#form-login-username{
 table.alignRight td{
 	text-align:right;
 }
-table.customerAccount{
+table.customerAccount, table.tblMess{
 	border:solid 1px #060;
 }
 table.customerAccount input [type="checkbox"]{
@@ -1142,20 +1147,26 @@ table.customerAccount input [type="checkbox"]{
 table.customerAccount div{
 	overflow:hidden;
 }
-table.customerAccount td,table.customerAccount th{
+table.customerAccount td,
+table.customerAccount th, 
+table.tblMess td,
+table.tblMess th {
 	padding:4px;
 }
-table.customerAccount th{
+table.customerAccount th,
+table.tblMess th,
+table.tblMess tbody > tr:first-child td{
 	background:#060;
 	white-space:nowrap;
 	cursor:default;
 }
-table.customerAccount th div{
+table.customerAccount th div,
+table.tblMess tbody > tr:first-child td{
 	color:#FFF;
 	text-align:center;
 }
-table.customerAccount td{
-	padding:4px;
+table.tblMess tbody > tr:first-child td{
+	font-weight:bold;
 }
 table.customerAccount td div{
 	color:#000;

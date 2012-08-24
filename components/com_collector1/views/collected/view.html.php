@@ -56,7 +56,7 @@ class Collector1ViewCollected extends JView
 		if (!$user) $user = JFactory::getUser();
 		if(!$collections_data_array)
 			$collections_data_array=$this->collections_data_array;
-		 SDebug::showDebugContent($collections_data_array,'collections_data_array');?>
+		// SDebug::showDebugContent($collections_data_array,'collections_data_array');?>
     	<table cellpadding="8" cellspacing="0" id="tblCollected">
           <tr id="tblHeaderRow">
             <th>Опция</th>
@@ -105,7 +105,8 @@ class Collector1ViewCollected extends JView
 		  <tr<? 		if ($option=='xtra') {?> id="site_desc_cell"<? }
 		  				if ($option_value=='options_array') :?> valign="top" class="rowMySiteOptions"<? endif;?>>
 			<td><?=$option_name?>:</td>
-			<td><?
+			<td><?	// echo "option value = ".$option_value."<hr>";
+			// SDebug::showDebugContent($collection_set,'collection_set');
 			
 			if ($option_value) {
 				//массив опций:

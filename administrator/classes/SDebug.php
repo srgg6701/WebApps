@@ -45,7 +45,7 @@ alert('alertDebugInfo:\n<?=$text?>');
 			<div style="display:none">
 	<?	//
 		if (SErrors::showDebugTrace($val)){ 
-			echo SErrors::$trace.'<br>';
+			echo "<div style='font-size:12px;'>".SErrors::$trace.'</div>';
 			SErrors::$trace='';
 		}else {?>ОШИБКА выполнения SErrors::showDebugTrace($val)!<? }?>
     		</div>

@@ -1,4 +1,7 @@
 ﻿<?	
+// No direct access
+defined('_JEXEC') or die;
+
 $UserAdmin=JFactory::getUser();
 $user_id_from=$UserAdmin->get('id');
 $user_id=JRequest::getVar('user_id');
@@ -122,82 +125,22 @@ echo ($got_view=="precustomers")? "предзаказчика":"заказчик
     </div>
 </div>
 <div style="clear:both;"></div>
-<div class="fltlft width-50">
-	<h4 class="marginBottom8">Список сообщений по <? 
-	if ($objs=='orders'){?>заказу<? }else{?>коллекции<? }?> &nbsp; | &nbsp; <a href="javascript:void();" onClick="composeMessageDisplay();" style="font-weight:200;">Добавить сообщение...</a></h4><?
-	$arrMessages=SUser::getMessages( false,
+<?	// извлечь данные сообщений:
+	$arrMessages=SUser::getMessages( 
 						  false,
-						  $user_id,
-						  $user_id_from, // текущий юзер, выяснить статус прочтения сообщения
+						  false,
+						  $user_id, // заказчик/предзаказчик
+						  $user_id_from, // поскольку есть доступ к сообщениям всех сотрудников
 						  false,
 						  20
-						); //for($i=0,$j=count($arrMessages);$i<$j;$i++) var_dump("<h1>arrMessages[$i]:</h1><pre>",$arrMessages[$i],"</pre>");
-	
-
-
-//var_dump("<h1>this:</h1><pre>",$this,"</pre>"); //die;
-
-	?>
-    <table width="100%" cellspacing="0" class="tblMess" id="tblMess">
-  <tr class="trMessHeaders">
-    <td>#</td>
-    <td>Прочтено</td>
-    <td>Создано</td>
-    <td>Напр.</td>
-    <td>Тема</td>
-    <td align="center">Опции</td>
-  </tr>
-<?	$white='#FFF';
-	$grey='#EDEDED'; 
-	$light_orange="#FFE3AA";
-	$unread='не прочтено';
-	$goSetStat='Пометить как ';
-	$goRead="прочтённое";
-	$goUnRead="непрочтённое";
-	for($i=0,$j=count($arrMessages);$i<$j;$i++):?>
-  <tr bgcolor="<? 
-  	if($read=$arrMessages[$i]['read_datetime']) {
-	  	echo $white;
-  	}else{ 
-		echo $grey;  
-		$read=false;
-  	}?>" id="message_<?=$arrMessages[$i]['id']?>">
-    <td><?=$arrMessages[$i]['id']?></td>
-    <td><a href="void();" onClick="<? $handleMess="return handleMess"; echo $handleMess;?>(<?=$arrMessages[$i]['id']?>,'<? $switch_read_status="switch_read_status"; echo $switch_read_status;?>');" title="<?
-		echo $goSetStat;
-    	echo ($read)? $goUnRead:$goRead;
-	?>"><?=($read)? $read:$unread?></a></td>
-    <td><?=$arrMessages[$i]['datetime']?></td>
-    <td><? 
-		if ($arrMessages[$i]['user_id_from']==$user_id_from) {?>outbox<? }else{?>inbox<? }
-	?></td>
-    <td><a href="javascript:void();" onClick="<? $loadMess="return loadMess"; echo $loadMess;?>(<?=$arrMessages[$i]['id']?>);"><?=$arrMessages[$i]['subject']?></a></td>
-    <td align="center"><a href="void();" onClick="return handleMess(<?=$arrMessages[$i]['id']?>,'delete');"<?
-    $del_title=' title="Удалить сообщение"'; echo $del_title;
-	?>><img src="<? 
-	$del_img=JUri::root().'administrator/templates/bluestork/images/menu/icon-16-trash.png" width="16" height="16';
-	echo $del_img; ?>"></a></td>
-  </tr>
-<?	endfor;?>    
-</table>
+						); //for($i=0,$j=count($arrMessages);$i<$j;$i++) var_dump("<h1>arrMessages:</h1><pre>",$arrMessages,"</pre>");
+//var_dump("<h1>this:</h1><pre>",$this,"</pre>"); //die;?>
+<div class="widthMax50" style="display:inline-block; vertical-align:top;">
+<? require_once JPATH_COMPONENT.DS.'helpers'.DS.'messages'.DS.'table.php';?>
 </div>
-<div class="fltrt width-50">
+<div class="width-50" style="display:inline-block;">
   <div style="margin-left:10px;">	
-    <h4 id="message_header" class="marginBottom8 paddingLeft10"><?
-	$h_mess_text='Текст сообщения'; //будет использоваться также в клиентском скрипте
-	echo $h_mess_text;?></h4>
-    <div id="message_content" class="messContent">
-    	<div id="sel_mess"><? $sel_message='Выберите сообщение';
-			echo $sel_message;?></div>
-        <div id="message_fields" style="display:<?='none'?>;">
-            <h4 id="staticHeader" class="marginBottom4 marginTop0">Тема сообщения</h4>
-            <input name="subject" id="subject" type="text" class="block width99 padding3">
-            <h4 class="marginBottom4 marginTop8">Текст сообщения</h4>
-            <textarea name="message" id="message" cols="" rows="10" class="width99 padding3"></textarea>
-            <button type="button" class="buttonMess" onClick="sendPostAjax('message');">Отправить</button>
-            <button type="reset" class="buttonMess" onClick="composeMessageDisplay('reverse');">Отменить</button>
-        </div>
-    </div>
+<? require_once JPATH_COMPONENT.DS.'helpers'.DS.'messages'.DS.'form.php';?>
   </div>  
 </div>
 <?	require_once JPATH_SITE.DS.'includes'.DS.'internal_mail_js.php';

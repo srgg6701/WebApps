@@ -108,8 +108,9 @@ $saveOrder	= $listOrder == 'a.ordering';
 					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 				</td>
 
-				<td>
-					<?php echo $item->customer_id; ?>
+				<td><a href="#"><?php 
+					//index.php?option=com_collector1&view=precustomers&layout=collection&collection_id=85&user_id=44
+					echo (int) $item->customer_id; ?></a>
 				</td>
 				<td>
 					<?php echo $item->engine_type_choice_id; ?>

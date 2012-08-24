@@ -30,7 +30,7 @@ class collector1ModelCollected extends JModel
 			for ($i=0,$j=count($arrCollectionsIds);$i<$j;$i++){
 				$collection_id=$arrCollectionsIds[$i]; 
 				$collections_data_array[$collection_id]=$modelCollector->getCollectionDataArray($collection_id); //все данные коллекции
-				//SDebug::showDebugContent($collections_data_array,'collections_data_array');
+				// SDebug::showDebugContent($collections_data_array,'collections_data_array');
 				if ($collections_data_array[$collection_id]===false) return false;
 				unset($collections_data_array[$collection_id]['engines_ids']);
 			}

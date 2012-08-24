@@ -112,12 +112,10 @@ class AjaxModelAjax extends JModel
 					  'dnior_webapps_messages_read.id'
 					); // var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
 		$id=$messages[0]['id'];
-		//$test=true;
-		if ($test) {
-			if (JRequest::getVar('w'))
-				echo "<div class=''>dropReadMessage</div>"; 
-		}
-		elseif ($table->delete($id)) echo "Ошибка удаления записи из *messages_read";
+		if (JRequest::getVar('w')) {
+			echo "<div class=''>id = $id</div>"; 
+			echo "<div class=''>dropReadMessage</div>"; 
+		}elseif ($table->delete($id)) echo "Ошибка удаления записи из *messages_read";
 	}
 	/**
 	 * Получить контактные данные
@@ -135,22 +133,15 @@ class AjaxModelAjax extends JModel
 	 * @ user, customer, precustomer, message, content
 	 */
 	function getMessage(){
+		$arrMessage=array();
 		$message_id=(int)JRequest::getVar('object_id');
+		$arrMessage['message']=SUser::getMessage($message_id); if (JRequest::getVar('w')) var_dump("\narrMessage:\n",$arrMessage);
 		$user_id_read=(int)JRequest::getVar('user_id_read');
-		$messages=SUser::getMessages( false,
-						  false,
-						  false,
-						  false,
-						  " id = ".$message_id,
-						  false,
-						  'message'
-						); //var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
-		$message=$messages[0]; 
 		// добавить к прочтённым:
 		if (!SUser::checkMessageReadStatus($user_id_read,$message_id)){
-			$this->setMessRead($message_id,$user_id_read);
+			$arrMessage['date']=$this->setMessRead($message_id,$user_id_read,true);
 		} //var_dump("<h1>message:</h1><pre>",$message,"</pre>");
-		echo json_encode($message);
+		echo json_encode($arrMessage);
 		exit;
 	}	
 	/**
@@ -187,7 +178,7 @@ class AjaxModelAjax extends JModel
 					);
 		foreach ($arrData as $field => $value){
 			$table->set($field,$value);
-			if ($field=='subject') 
+			if ($field=='subject'||$field=='message') 
 				$jData[$field] = $value;
 		}
 		// получить id добавленной записи
@@ -197,9 +188,11 @@ class AjaxModelAjax extends JModel
 			$jData['id']='=ID=';
 			$jData['subject']='=SUBJECT=';
 			$jData['message']='=MESSAGE TEXT=';
-		}else{
+		}
+		if (JRequest::getVar('w')) var_dump("<h1>jData:</h1><pre>",$jData,"</pre>");
+		else{
 			SErrors::afterTableUpdate($table);
-			$jData['id']=$db->insertid(); //var_dump("<h1>jData:</h1><pre>",$jData,"</pre>"); die();
+			$jData['id']=$db->insertid(); 
 		}
 		echo json_encode($jData);
 		exit;
@@ -208,22 +201,24 @@ class AjaxModelAjax extends JModel
 	 * Переключить статус сообщения
 	 * @ user, customer, precustomer
 	 */
-	function setMessRead($message_id,$user_id){
+	function setMessRead($message_id,$user_id,$date=false){
 		//создаём запись...:
 		$table = JTable::getInstance('messages_read', 'Collector1Table');
 		$table->reset();
 		$table->set('message_id', $message_id);
 		$table->set('user_id', $user_id);
 		$table->set('date_time', date("Y-m-d H:i:s"));
-		//$test=true;
-		if ($test){
+		if (JRequest::getVar('w')) { // протестировать
 			$message['message_id']=$message_id;
 			$message['user_id']=$user_id;
 			$message['date_time']=date("Y-m-d H:i:s");
-			if (JRequest::getVar('w'))
-				var_dump("message set read:\n",$message,"\n");
+			var_dump("message (setMessRead):\n",$message,"\n");
 		}else SErrors::afterTable($table);
-		echo date("d.m.Y H:i");
+		if ($date) return date("d.m.Y H:i");
+		else {
+			echo date("d.m.Y H:i");
+			exit;
+		}
 	}
 	/**
 	 * Переключить статус сообщения
@@ -243,15 +238,11 @@ class AjaxModelAjax extends JModel
 	 * Удалить сообщение
 	 * @ user, customer, precustomer
 	 */
-	function deleteMessage($id){
+	function deleteMessage($id) {
 		$table=JTable::getInstance('messages', 'Collector1Table');
 		//$test=true;
-		if ($test) {
-			if (JRequest::getVar('w'))
-				echo "<div class=''>id to delete: ".$id."</div>";
-		}else{
-			if (!$table->delete($id)) echo "Ошибка удаления записи из *messages_read";
-		}
+		if (JRequest::getVar('w')) echo "<div class=''>id to delete: ".$id."</div>";
+		elseif (!$table->delete($id)) echo "Ошибка удаления записи из *messages_read";
 		exit;
 	}	
 	/**
@@ -267,6 +258,7 @@ class AjaxModelAjax extends JModel
 			return false;
 		}else{
 			$table->set($arrData['field'], $arrData['value']); 
+			if (JRequest::getVar('w')) echo "<div>Обновить запись (afterTableUpdate)</div>";
 			//обновить запись:
 			SErrors::afterTableUpdate($table);
 		}

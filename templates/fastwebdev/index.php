@@ -123,8 +123,11 @@ function manageLoginDisplay(stat){
 <? 	}?>
             <div id="wrapper_component">
             <? 	if ($user->get('guest')!=1) :?>  			
-            	<div align="right" id="account_menu">
-                	<jdoc:include type="modules" name="account" style="xhtml" />
+            	<div align="right" id="account_menu"><!--
+                
+                Состав меню редактируется в разделе Меню -> Мой аккаунт
+                
+                	--><jdoc:include type="modules" name="account" style="xhtml" />
                 </div>
             <?	endif;?>
                 <!-- system messages -->

@@ -167,7 +167,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 			if (SUser::detectAdminStat($user)){
 				$isAdmin=true;
 				require_once JPATH_SITE.DS.'components'.DS.'com_collector1'.DS.'models'.DS.'CMS.php';
-				self::get_sites_types($current_order_set['site_type_id']);
+				$current_order_set['site_type_name']=self::get_sites_types($current_order_set['site_type_id']);
 			}else
 				$current_order_set['site_type_name']=$this->get_sites_types($current_order_set['site_type_id']);
 				
