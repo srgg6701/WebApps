@@ -23,8 +23,8 @@ class JAdminCssMenu extends JTree
 
 	function __construct()
 	{
-		$this->_root = new JMenuNode('ROOT');
-		$this->_current = & $this->_root;
+		$this->_root = new JMenuNode('ROOT'); 
+		$this->_current = & $this->_root; 
 	}
 
 	function addSeparator()
@@ -66,7 +66,7 @@ class JAdminCssMenu extends JTree
 	}
 
 	function renderLevel($depth)
-	{
+	{	
 		/*
 		 * Build the CSS class suffix
 		 */
@@ -104,7 +104,7 @@ class JAdminCssMenu extends JTree
 		if ($this->_current->link != null && $this->_current->target != null) {
 			echo "<a".$linkClass." href=\"".$this->_current->link."\" target=\"".$this->_current->target."\" >".$this->_current->title."</a>";
 		} elseif ($this->_current->link != null && $this->_current->target == null) {
-			echo "<a".$linkClass." href=\"".$this->_current->link."\">".$this->_current->title."</a>";
+			echo "<a".$linkClass." href=\"".$this->_current->link."\">".$this->_current->title."</a>"; // текст подменю
 		} elseif ($this->_current->title != null) {
 			echo "<a>".$this->_current->title."</a>\n";
 		} else {
@@ -219,7 +219,7 @@ class JMenuNode extends JNode
 
 	public function __construct($title, $link = null, $class = null, $active = false, $target = null, $titleicon = null)
 	{
-		$this->title	= $titleicon ? $title.$titleicon : $title;
+		$this->title	= $titleicon ? $title.$titleicon : $title; //echo " - title: $title,  titleicon: $titleicon";
 		$this->link		= JFilterOutput::ampReplace($link);
 		$this->class	= $class;
 		$this->active	= $active;

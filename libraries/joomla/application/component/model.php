@@ -317,7 +317,6 @@ abstract class JModel extends JObject
 	{
 		$this->_db->setQuery($query, $limitstart, $limit);
 		$result = $this->_db->loadObjectList();
-
 		return $result;
 	}
 

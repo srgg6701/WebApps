@@ -61,7 +61,9 @@ div#content-box div#toolbar-box div.m {
 	</div>
 	<div id="header-box">
 		<div id="module-menu">
+				<? if ($_GET['tp']){?><h4>menu</h4><? }?>
 			<jdoc:include type="modules" name="menu" />
+				<? if ($_GET['tp']){?><h4>/menu</h4><? }?>
 		</div>
 		<div id="module-status">
 			<jdoc:include type="modules" name="status" />
@@ -91,17 +93,24 @@ div#content-box div#toolbar-box div.m {
 	<div id="content-box">
 		<div id="toolbar-box">
 			<div class="m">
+				<? if ($_GET['tp']){?><h4>toolbar</h4><? }?>
 				<jdoc:include type="modules" name="toolbar" />
+				<? if ($_GET['tp']){?><h4>/toolbar<br />title</h4><? }?>
 				<jdoc:include type="modules" name="title" />
+        	<? if ($_GET['tp']){?><h4>/title</h4><? }?>
 			</div>
 		</div>
 		<?php if (!JRequest::getInt('hidemainmenu')): ?>
+        	<? if ($_GET['tp']){?><h4>submenu</h4><? }?>
 		<jdoc:include type="modules" name="submenu" style="rounded" id="submenu-box" />
+        	<? if ($_GET['tp']){?><h4>/submenu</h4><? }?>
 		<?php endif; ?>
 		<jdoc:include type="message" />
 		<div id="element-box">
 			<div class="m">
+        	<? if ($_GET['tp']){?><h4>component</h4><? }?>
 				<jdoc:include type="component" />
+        	<? if ($_GET['tp']){?><h4>/component</h4><? }?>
 				<div class="clr"></div>
 			</div>
 		</div>
@@ -109,8 +118,9 @@ div#content-box div#toolbar-box div.m {
 			<?php echo  JText::_('JGLOBAL_WARNJAVASCRIPT') ?>
 		</noscript>
 	</div>
-
+        	<? if ($_GET['tp']){?><h4>footer</h4><? }?>
 	<jdoc:include type="modules" name="footer" style="none"  />
+        	<? if ($_GET['tp']){?><h4>/footer</h4><? }?>
 	<div id="footer">
 		<p class="copyright">
 			<?php $joomla= '<a href="http://www.joomla.org">Joomla!&#174;</a>';

@@ -11,9 +11,9 @@ defined('_JEXEC') or die;
 
 if (JRequest::getVar('option')=='com_collector1'){
 	require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SHelpersAdmin.php';
-	$lists=SAdminMenuHelper::getSubMenuDropDown();
-	$list=$lists['parent_list'];
-	$list_options=$lists['drop_down_list'];
+	$lists=SAdminMenuHelper::getSubMenu();
+	$list=$lists['parent_list']; // строчное субменю
+	$list_options=$lists['drop_down_list']; // субменю в выпадающем списке
 	$width_style_ul=" style='float:left; width:75%; margin:0;'";
 }
 
@@ -47,4 +47,5 @@ foreach ($list as $item) :
 	endif;	
 endforeach; ?>
 </ul>
+<? if ($test){?><h4>Выпадающий список базовых таблиц</h4><? }?>
 <? if(!empty($list_options)): SAdminMenuHelper::buildTablesDropDownList($list_options); endif; ?>

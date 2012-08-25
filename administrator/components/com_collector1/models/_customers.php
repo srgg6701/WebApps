@@ -142,6 +142,6 @@ class Collector1Model_customers extends JModelList
         if ($orderCol && $orderDirn) {
 		    $query->order($db->getEscaped($orderCol.' '.$orderDirn));
         } // echo "<div>4 query: <hr><pre>".$query."</pre></div>";
-		return $query;
+		return $query; 
 	}
 }

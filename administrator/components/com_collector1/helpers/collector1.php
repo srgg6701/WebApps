@@ -118,6 +118,17 @@ class Collector1Helper
 		return $result;
 	}
 	/**
+	 * Получить набор id id заказов и коллекций ЗАКАЗЧИКА (нельзя получить одним запросом с данными dnior_users)
+	 * @ customer, collection, order
+	 */
+	function getCustomerObjects($user_id,$object_type,$db=false){
+		$query="SELECT id FROM #__webapps_customer_".$object_type." WHERE customer_id = ".$user_id;
+		if (!$db) $db = JFactory::getDBO();
+		$db->setQuery($query); //echo "<div>query: <hr><pre>".$query."</pre></div>";
+		$ids=$db->loadResultArray();
+		self::makeObjectsLinks($ids,$object_type,'customer',$user_id);
+	}
+	/**
 	 * Convert objects' set (collections id is, orders id id)
 	 * @ orders, collections
 	 * @return	JObject

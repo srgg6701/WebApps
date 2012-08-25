@@ -113,27 +113,26 @@ class JModelList extends JModel
 	 * @since   11.1
 	 */
 	public function getItems()
-	{
+	{	
 		// Get a storage key.
 		$store = $this->getStoreId();
 
 		// Try to load the data from internal storage.
 		if (isset($this->cache[$store]))
-		{
+		{	
 			return $this->cache[$store];
 		}
 
 		// Load the list items.
-		$query = $this->_getListQuery();
+		$query = $this->_getListQuery(); //echo "<div>query (JModelList::getItems()): <hr><pre>".$query."</pre></div>"; 
 		$items = $this->_getList($query, $this->getStart(), $this->getState('list.limit'));
-
 		// Check for a database error.
 		if ($this->_db->getErrorNum())
-		{
+		{	
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}
-
+		
 		// Add the items to the internal cache.
 		$this->cache[$store] = $items;
 

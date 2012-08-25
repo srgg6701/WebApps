@@ -3300,6 +3300,9 @@ span.update-badge {
 	background: transparent url(../images/admin/icon-16-allow.png) center left no-repeat;
 }
 /*	srgg	*/
+table.adminlist thead > tr:first-child th {
+	white-space:nowrap;
+} 
 .buttonMess{
 	padding:3px 6px;
 }
@@ -3413,4 +3416,8 @@ tr.trMessHeaders td{
 }
 .widthMax50{
 	max-width:50%;
+}
+.node ul{
+	box-shadow: 2px 4px 8px/*размытие тени*/ -1px/*растяжение тени*/ #D0D0D0;
+	/*http://htmlbook.ru/css/box-shadow*/
 }

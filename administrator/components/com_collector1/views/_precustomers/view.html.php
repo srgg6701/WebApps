@@ -37,7 +37,7 @@ class Collector1View_precustomers extends JView
 		}
 
 		$this->addToolbar();
-		parent::display($tpl);
+		parent::display($tpl); 
 	}
 
 	/**

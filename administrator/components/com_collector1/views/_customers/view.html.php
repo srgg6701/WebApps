@@ -35,7 +35,6 @@ class Collector1View_customers extends JView
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
-
 		$this->addToolbar();
 		parent::display($tpl);
 	}

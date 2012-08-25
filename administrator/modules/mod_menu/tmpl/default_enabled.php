@@ -273,7 +273,6 @@ if ($user->authorise('core.manage', 'com_content'))
 
 // Get the authorised components and sub-menus.
 $components = ModMenuHelper::getComponents( true );
-
 // Check if there are any components, otherwise, don't render the menu
 if ($components)
 {
@@ -282,11 +281,11 @@ if ($components)
 	foreach ($components as &$component)
 	{
 		if (!empty($component->submenu))
-		{
+		{	// основное меню:
 			// This component has a db driven submenu.
 			$menu->addChild(new JMenuNode($component->text, $component->link, $component->img), true);
 			foreach ($component->submenu as $sub)
-			{
+			{	// submenu:
 				$menu->addChild(new JMenuNode($sub->text, $sub->link, $sub->img));
 			}
 			$menu->getParent();
@@ -295,7 +294,7 @@ if ($components)
 		{
 			$menu->addChild(new JMenuNode($component->text, $component->link, $component->img));
 		}
-	}
+	} //die("\n\ndefault_enabled.php");
 	$menu->getParent();
 }
 

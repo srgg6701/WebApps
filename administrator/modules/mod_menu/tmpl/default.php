@@ -8,7 +8,6 @@
 
 // No direct access.
 defined('_JEXEC') or die;
-
+//default_enabled.php:
 require JModuleHelper::getLayoutPath('mod_menu', $enabled ? 'default_enabled' : 'default_disabled');
-
-$menu->renderMenu('menu', $enabled ? '' : 'disabled');
+$menu->renderMenu('menu', $enabled ? '' : 'disabled'); 

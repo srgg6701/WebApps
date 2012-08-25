@@ -6,4 +6,6 @@
 <file name="test.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129810600660000000" remote="129898081800000000" />
 <file name="default.xml" server="ftp.2-all.com" local="129813244867024000" remote="129814512600000000" />
 <file name="default.php" server="ftp.2-all.com" local="129814885525099997" remote="129814755600000000" />
+<file name="messages.xml" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129902710348331500" remote="129902746800000000" />
+<file name="messages.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129902825513237000" remote="129902746800000000" />
 </dwsync>

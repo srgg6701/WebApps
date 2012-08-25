@@ -44,7 +44,7 @@ class JTree extends JObject
 	public function __construct()
 	{
 		$this->_root = new JNode('ROOT');
-		$this->_current = & $this->_root;
+		$this->_current = & $this->_root; //var_dump("<h1>_current:</h1><pre>",$this->_current,"</pre>"); die();
 	}
 
 	/**
@@ -63,7 +63,7 @@ class JTree extends JObject
 		if ($setCurrent)
 		{
 			$this->_current = &$node;
-		}
+		} 
 	}
 
 	/**

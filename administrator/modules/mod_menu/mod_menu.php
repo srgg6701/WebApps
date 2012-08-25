@@ -21,7 +21,7 @@ if (!class_exists('JAdminCssMenu')) {
 // Initialise variables.
 $lang		= JFactory::getLanguage();
 $user		= JFactory::getUser();
-$menu		= new JAdminCSSMenu();
+$menu		= new JAdminCSSMenu(); 
 $enabled	= JRequest::getInt('hidemainmenu') ? false : true;
 
 // Render the module layout

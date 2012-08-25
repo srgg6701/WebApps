@@ -73,7 +73,7 @@ abstract class ModMenuHelper
 		$query->where('m.id > 1');
 
 		// Order by lft.
-		$query->order('m.lft');
+		$query->order('m.lft'); //echo "<div>query: <hr><pre>".$query."</pre></div>";
 
 		$db->setQuery($query);
 		// component list
@@ -118,7 +118,7 @@ abstract class ModMenuHelper
 					}
 				}
 			}
-		}
+		} 
 
 		$result = JArrayHelper::sortObjects($result, 'text', 1, true, $lang->getLocale());
 

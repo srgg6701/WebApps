@@ -15,7 +15,7 @@ class SAdminMenuHelper extends modSubmenuHelper{
 	/**
 	 * Получить список разделов, выносимых в субменю в выпадающем списке
 	 */
-	function getSubMenuDropDown(){
+	function getSubMenu(){
 		$query="SELECT `menu_text`, `link` FROM #__menu, #__webapps_backend_submenu_list
  WHERE menu_id = #__menu.id AND `hidden` = 0";
 		$db = JFactory::getDBO();

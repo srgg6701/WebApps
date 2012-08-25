@@ -10,7 +10,6 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
 JHtml::_('behavior.tooltip');
 JHTML::_('script','system/multiselect.js',false,true);
 // Import CSS
@@ -22,8 +21,7 @@ $userId	= $user->get('id');
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 $canOrder	= $user->authorise('core.edit.state', 'com_collector1');
-$saveOrder	= $listOrder == 'a.ordering';
-?>
+$saveOrder	= $listOrder == 'a.ordering'; SDebug::showDebugContent($this->items,'items');?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_collector1&view=_customers'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
@@ -47,48 +45,61 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<th width="1%">
 					<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
 				</th>
-				<th class='left'>
+				<th class='left'><? if ($test){?>USERNAME<? }?>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_USERNAME', 'a.username', $listDirn, $listOrder); ?>
                 </th>
-				<th class='left'>
+				<th class='left'><? if ($test){?>NAME<? }?>
                 <?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_NAME', 'a.name', $listDirn, $listOrder); ?>
                 </th>
-				<th class='left'>
+				<th class='left'><? if ($test){?>SURNAME<? }?>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_SURNAME', 'a.surname', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
+				<th class='left'><? if ($test){?>MIDDLE_NAME<? }?>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_MIDDLE_NAME', 'a.middle_name', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
+				<th class='left'><? if ($test){?>SEX<? }?>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_SEX', 'a.sex', $listDirn, $listOrder); ?>
 				</th>
+				<th class='left'> <?	if ($test){?>
+				  ID ID Сайтов
+				  <? }?>
+				  <?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__PRECUSTOMERS_COLLECTIONS_IDS', 'a.collections_ids', $listDirn, $listOrder); ?> </th>
+				<th class='left'> <?	if ($test){?>
+				  ID ID Заказов
+				  <? }?>
+				  <?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__PRECUSTOMERS_ORDERS_ID', 'a.orders_ids', $listDirn, $listOrder); ?> </th>
+				<?	/*
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_BIRTHDAY', 'a.birthday', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
+                
+                */	?>
+				<th class='left'><? if ($test){?>WORK_PHONE<? }?>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_WORK_PHONE', 'a.work_phone', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
+				<th class='left'><? if ($test){?>MOBILA<? }?>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_MOBILA', 'a.mobila', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
+				<th class='left'><? if ($test){?>SKYPE<? }?>
                 <?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_SKYPE', 'a.skype', $listDirn, $listOrder); ?>
                 </th>
-				<th class='left'>
+				<th class='left'><? if ($test){?>COMPANY_NAME<? }?>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_COMPANY_NAME', 'a.company_name', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
+				<th class='left'><? if ($test){?>CITY<? }?>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_CITY', 'a.city', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
+				<th class='left'><? if ($test){?>REGION<? }?>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_REGION', 'a.region', $listDirn, $listOrder); ?>
 				</th>
+                <?	/*
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_COLLECTOR1__CUSTOMERS_ZIP_CODE', 'a.zip_code', $listDirn, $listOrder); ?>
 				</th>
 
 
-                <?php if (isset($this->items[0]->state)) { ?>
+                <?php */
+					  if (isset($this->items[0]->state)) { ?>
 				<th width="5%">
 					<?php echo JHtml::_('grid.sort',  'JPUBLISHED', 'a.state', $listDirn, $listOrder); ?>
 				</th>
@@ -102,7 +113,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 				</th>
                 <?php } ?>
                 <?php if (isset($this->items[0]->id)) { ?>
-                <th width="1%" class="nowrap">
+                <th width="1%" class="nowrap"><? if ($test){?>ID<? }?>
                     <?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
                 </th>
                 <?php } ?>
@@ -110,7 +121,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 		</thead>
 		<tfoot>
 			<tr>
-				<td colspan="17">
+				<td colspan="19">
 					<?php echo $this->pagination->getListFooter(); ?>
 				</td>
 			</tr>
@@ -164,9 +175,13 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<td>
 					<?php echo $item->sex; ?>
 				</td>
-				<td>
+				<td><?php Collector1Helper::getCustomerObjects((int)$item->id,'site_options');?></td>
+				<td><?php Collector1Helper::getCustomerObjects((int)$item->id,'orders');?></td>
+				<? /*
+                <td>
 					<?php echo $item->birthday; ?>
 				</td>
+                	*/?>
 				<td>
 					<?php echo $item->work_phone; ?>
 				</td>
@@ -183,12 +198,12 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<td>
 					<?php echo $item->region; ?>
 				</td>
+                <? /*
 				<td>
 					<?php echo $item->zip_code; ?>
 				</td>
-
-
-                <?php if (isset($this->items[0]->state)) { ?>
+                <?php */
+					  if (isset($this->items[0]->state)) { ?>
 				    <td class="center">
 					    <?php echo JHtml::_('jgrid.published', $item->state, $i, '_customers.', $canChange, 'cb'); ?>
 				    </td>
