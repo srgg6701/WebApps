@@ -102,7 +102,5 @@ class Collector1View_engines_ru extends JView
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_collector1');
 		}
-
-
 	}
 }

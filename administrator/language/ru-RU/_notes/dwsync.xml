@@ -4,8 +4,8 @@
 <file name="install.xml" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807132844050000" remote="129898078200000000" />
 <file name="ru-RU.com_admin.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807132842110000" remote="129898078200000000" />
 <file name="ru-RU.com_admin.sys.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807132842120000" remote="129898078200000000" />
-<file name="ru-RU.com_banners.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807132842130000" remote="129898078200000000" />
-<file name="ru-RU.com_banners.sys.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807132842130000" remote="129898078200000000" />
+<file name="ru-RU.com_banners.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129903631932948500" remote="129903573600000000" />
+<file name="ru-RU.com_banners.sys.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129903641064047500" remote="129903573600000000" />
 <file name="ru-RU.com_cache.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807132842140000" remote="129898078200000000" />
 <file name="ru-RU.com_cache.sys.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807132842150000" remote="129898078200000000" />
 <file name="ru-RU.com_categories.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807132842160000" remote="129898078200000000" />
@@ -184,5 +184,6 @@
 <file name="ru-RU.tpl_hathor.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807132844010000" remote="129898078200000000" />
 <file name="ru-RU.tpl_hathor.sys.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807132844020000" remote="129898078800000000" />
 <file name="ru-RU.xml" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129807132844040000" remote="129898078800000000" />
-<file name="ru-RU.com_collector1.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129896862680844500" remote="129898078200000000" />
+<file name="ru-RU.com_collector1.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129903710186835000" remote="129903573600000000" />
+<file name="ru-RU.com_collector1.sys.ini" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129903648072427500" remote="129903573600000000" />
 </dwsync>

@@ -17,12 +17,12 @@ if (JRequest::getVar('option')=='com_collector1'){
 	$width_style_ul=" style='float:left; width:75%; margin:0;'";
 }
 
-$hide = JRequest::getInt('hidemainmenu');?>
-<ul id="submenu"<?=$width_style_ul?>>
-	<?php 
+$hide = JRequest::getInt('hidemainmenu');
+if ($test){?><h4>Субменю</h4><? }?>
+<ul id="submenu"<?=$width_style_ul?>><?php 
 foreach ($list as $item) :
 	if (!strstr($item[1],"&tabletype=base")):?>
-	<li>
+  <li>
 	<?php
 		if ($hide) :
 			if (isset ($item[2]) && $item[2] == 1) :
@@ -42,10 +42,12 @@ foreach ($list as $item) :
 			endif;
 		endif;
 		?>
-		</li>
+  </li>
 <?php 
 	endif;	
-endforeach; ?>
+endforeach; 
+if ($test){?><h4>Список сообщений</h4><? } 
+modSubmenuHelper::buildMailSubmodule(JRequest::getVar('view'));?>
 </ul>
 <? if ($test){?><h4>Выпадающий список базовых таблиц</h4><? }?>
 <? if(!empty($list_options)): SAdminMenuHelper::buildTablesDropDownList($list_options); endif; ?>

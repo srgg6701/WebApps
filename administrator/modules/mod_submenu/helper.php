@@ -29,4 +29,29 @@ abstract class modSubmenuHelper
 		}
 		return $list;
 	}
+	function buildMailSubmodule($view){
+			$direct=JRequest::getVar('direct');?>
+    	  <li><a style="cursor:default; text-decoration:none;"<? 
+		  if($view=='_messages'){?> class="active"<? }?>>Сообщения: <select name="mail_direct" onChange="return go_messages(this);">
+    	    <option value=""<? if(!$direct){?> selected<? }?>>-Выберите папку-</option>
+    	    <option value="all"<? if($direct=='all'){?> selected<? }?>>Все сообщения</option>
+    	    <option value="inbox"<? if($direct=='inbox'){?> selected<? }?>>Входящие</option>
+    	    <option value="outbox"<? if($direct=='outbox'){?> selected<? }?>>Отправленные</option>
+    	    <option value="drafts"<? if($direct=='drafts'){?> selected<? }?>>Черновики</option>
+    	    <option value="trash"<? if($direct=='trash'){?> selected<? }?>>Корзина</option>
+    	  </select></a></li>
+          <script type="text/javascript">
+function go_messages(sel){
+  try{
+	  var go_location=sel.options[sel.selectedIndex].value;
+	  if (go_location) location.href='<?=JUri::root()?>administrator/index.php?option=com_collector1&view=_messages&direct='+go_location;
+	  //alert();
+  }catch(e){
+	  alert(e.message);
+  }
+  return false;
+}
+</script>
+	
+<? }
 }

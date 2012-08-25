@@ -38,7 +38,6 @@ class Collector1Model_precustomers extends JModelList
                 'ordering', 'a.ordering',
                 'state', 'a.state',
                 'session_id', 'a.session_id',
-
             );
         }
 
