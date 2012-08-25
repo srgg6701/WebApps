@@ -168,6 +168,8 @@ class SUser{
         ".$criteria."
            )";
 		}
+		if (!$subquery&&!$criteria) 
+		$query.=1;
 		$query.="
        )
 ORDER BY ";

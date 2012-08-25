@@ -35,6 +35,17 @@ class SAdminMenuHelper extends modSubmenuHelper{
 		return array('parent_list'=>$arrParentItems,'drop_down_list'=>$arrForList);
 	}
 	/**
+	 * Сформировать список перехода к сообщениям по направлениям
+	 */
+	function makeMailFoldersList(){
+		return array( 'all'=>'Все сообщения',
+					  'inbox'=>'Входящие',
+					  'outbox'=>'Отправленные',
+					  'drafts'=>'Черновики',
+					  'trash'=>'Корзина'
+					);		
+	}
+	/**
 	 * Сформировать список перехода к редактированию базовых таблиц
 	 */
 	function buildTablesDropDownList($list_options){?>
