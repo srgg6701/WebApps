@@ -94,7 +94,7 @@ class SCollection extends JTable{
 	}
 	/**
 	 * Получим id id коллекций/объектов заказчика
-	 * customer, user, collections, orders
+	 * @ customer, user, collections, orders
 	 */
 	function getCustomerSet( $object_type, // collections_ids | orders_ids
 					     	 $user,
@@ -111,6 +111,33 @@ class SCollection extends JTable{
 			self::${$object_type.'_array'}=$ids_array;
 			return implode(",",$ids_array); //returns string
 		}else return false; //boolean - записей нет вообще
+	}
+	
+	/**
+	 * Получичить для редиректа:  view (customers/precustomers), user_id
+	 * @ customer, precustomer, user, collections, orders
+	 */
+	function getObjectDataForRedirect( $layout, // collection / order
+									   $object_id
+									 ){
+		$arrRedirectParams=array();
+		// получить статус юзера
+			// проверить, указан ли customer_id в соответствующей таблице
+		$table_name_tail=($layout=='collection')? 'site_options':'orders';
+		$query="SELECT customer_id FROM #__webapps_customer_".$table_name_tail."
+WHERE id = ".$object_id;
+		$db = JFactory::getDBO();
+		$db->setQuery($query);
+		if (!$arrRedirectParams['user_id']=$db->loadResult()){
+			$arrRedirectParams['view']='precustomers';
+			$query="SELECT id FROM #__webapps_".$arrRedirectParams['view']."
+WHERE " . $layout . "s_ids REGEXP '(^|,)".$object_id."($|,)'";
+			$db->setQuery($query); //die($query);
+			$arrRedirectParams['user_id']=$db->loadResult();
+		}else{
+			$arrRedirectParams['view']='customers';
+		} 
+		return $arrRedirectParams;
 	}
 	/**
 	 * Получить все коллекции/заказы незарегистрированного юзера

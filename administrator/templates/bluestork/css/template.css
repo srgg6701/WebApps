@@ -2415,6 +2415,7 @@ a.icon-16-menu span img {
 
 #submenu span.nolink {
 	color: #999;
+	cursor: default;
 }
 
 #submenu a:hover,
@@ -2951,7 +2952,7 @@ ul.acllegend li.acl-denied {
 	background: url(../images/admin/icon-16-deny.png) no-repeat left;
 }
 
-ul.acllegend li.acl-editgroups {
+ul.acllegend li.acl-editgroups, .padding-right10 {
 	padding-right: 10px;
 }
 
@@ -3078,8 +3079,8 @@ ul#rules li .pane-sliders .panel h3.title {
 	border: solid 0;
 }
 
-#permissions-sliders ul#rules li h3.pane-toggler-down {
-	color:#000;
+#permissions-sliders ul#rules li h3.pane-toggler-down, .txtBlack {
+	color:#000 !important;
 	/*background:#146295;*/
 }
 
@@ -3313,6 +3314,9 @@ table.adminlist thead > tr:first-child th {
 .h3{
 	color:#DE9601;
 }
+.iborder {
+	border:solid 1px #CCCCCC;
+}
 .marginBottom4{
 	margin-bottom:4px;
 }
@@ -3321,6 +3325,9 @@ table.adminlist thead > tr:first-child th {
 }
 .marginBottom8{
 	margin-bottom:8px;
+}
+.marginRight4{
+	margin-right:4px;
 }
 .marginTop0{
 	margin-top:0;
@@ -3342,6 +3349,9 @@ table.adminlist thead > tr:first-child th {
 	border:solid 1px #ccc; 
 	border-radius:4px; 
 	height:100%; 
+	padding:10px;
+}
+.padding10{
 	padding:10px;
 }
 .padding3{

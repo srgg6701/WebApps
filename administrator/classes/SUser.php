@@ -184,6 +184,19 @@ ORDER BY ";
 		return $messages;
 	}
 	/**
+	 * Установить данные юзера
+	 * @ user, data, message
+	 */
+	function getUserDataFromMail($message_id){
+		$query="SELECT #_users.id AS user_id, `name` AS user_name, `username` AS user_login
+FROM #_users, #_webapps_messages
+WHERE dnior_webapps_messages.user_id_from = dnior_users.id
+AND dnior_webapps_messages.id = ".$message_id;
+		$db = JFactory::getDBO();
+		$db->setQuery($query);
+		return $db->loadAssoc();
+	}	
+	/**
 	 * Добавить или обновить данные в таблице предзаказчиков
 	 * ВНИМАНИЕ! Метод вызывается ТОЛЬКО ПРИ ДОБАВЛЕНИИ новой коллекции или заказа
 	 * (в табл.табл. *customer_site_options или *customer_orders соответственно)

@@ -47,7 +47,33 @@ foreach ($list as $item) :
 	endif;	
 endforeach; 
 if ($test){?><h4>Список сообщений</h4><? } 
-modSubmenuHelper::buildMailSubmodule(JRequest::getVar('view'));?>
+modSubmenuHelper::buildMailSubmodule(JRequest::getVar('view'));
+if ($test){?><h4>Перейти к объекту</h4><? } ?>
+<span class="nolink txtBlack" style="margin-top:-8px;">Перейти к: 
+	<select id="sel_layout">
+      <option value="0">-Тип объекта-</option>
+      <option value="collection">сайту</option>
+      <option value="order">заказу</option>
+    </select>
+    id <input name="object_id" id="object_id" type="text" value="" size="2">
+    <button type="button" onClick="go_object_profile('object_id','sel_layout');">Перейти</button>
+</span>
 </ul>
+<script type="text/javascript">
+function go_object_profile(object_id,sel_layout){
+  try{
+	d=document;
+	var cell=d.getElementById(object_id); // obj id cell
+	var obj_type=d.getElementById(sel_layout); // select
+	var layout=obj_type.options[obj_type.selectedIndex].value;
+	location.href='<?=JUri::root()?>administrator/index.php?option=com_collector1&layout='+layout+'&'+layout+'_id='+cell.value;
+	// ! view ! user_id
+	//alert(); 
+  }catch(e){
+	alert(e.message);  
+  }
+}
+</script>
+
 <? if ($test){?><h4>Выпадающий список базовых таблиц</h4><? }?>
 <? if(!empty($list_options)): SAdminMenuHelper::buildTablesDropDownList($list_options); endif; ?>

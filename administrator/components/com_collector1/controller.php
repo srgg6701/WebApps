@@ -25,15 +25,36 @@ class Collector1Controller extends JController
 	public function display($cachable = false, $urlparams = false)
 	{
 		require_once JPATH_COMPONENT.'/helpers/collector1.php';
-
-		// Load the submenu.
-		Collector1Helper::addSubmenu(JRequest::getCmd('view', '_precustomers'));
-
-		$view		= JRequest::getCmd('view', '_precustomers');
-        JRequest::setVar('view', $view);
-
-		parent::display();
-
-		return $this;
+		$layout=JRequest::getVar('layout');
+		if ( !JRequest::getVar('view')
+		     && ($layout=='collection'||$layout=='order')
+		   ){
+			$object_id_string=$layout.'_id';
+			$object_id=JRequest::getVar($object_id_string);
+			// получить view (customers/orders), user_id
+			// administrator/index.php?option=com_collector1&view=customers&layout=collection&collection_id=82&user_id=64
+			// administrator/index.php?option=com_collector1&view=precustomer&layout=collection&collection_id=86user_id=
+			$arrRedirectParams=SCollection::getObjectDataForRedirect($layout,$object_id);
+			$url='index.php?option=com_collector1&view=' 
+										. $arrRedirectParams['view'] .
+										'&layout=' .
+										$layout .
+										'&' . $object_id_string . '=' .
+										$object_id .
+										'&user_id=' . 
+										$arrRedirectParams['user_id'];
+			//die('url: '.$url);
+			$this->setRedirect(JRoute::_($url, false)); //
+		}else{
+			// Load the submenu.
+			Collector1Helper::addSubmenu(JRequest::getCmd('view', '_precustomers'));
+	
+			$view		= JRequest::getCmd('view', '_precustomers');
+			JRequest::setVar('view', $view);
+	
+			parent::display();
+	
+			return $this;
+		}
 	}
 }

@@ -1,7 +1,10 @@
 ﻿<?	
 // No direct access
 defined('_JEXEC') or die;
-
+if (isset($_GET['user_id'])&&!JRequest::getVar('user_id')){
+	?><h4>Ошибка: не получен id субъекта.</h4>
+	<h5 style="margin:0;">Возможно, неправильно указан тип объекта (коллекция/заказ).</h5><?
+}else{
 $UserAdmin=JFactory::getUser();
 $user_id_from=$UserAdmin->get('id');
 $user_id=JRequest::getVar('user_id');
@@ -136,7 +139,11 @@ echo ($got_view=="precustomers")? "предзаказчика":"заказчик
 						); //for($i=0,$j=count($arrMessages);$i<$j;$i++) var_dump("<h1>arrMessages:</h1><pre>",$arrMessages,"</pre>");
 //var_dump("<h1>this:</h1><pre>",$this,"</pre>"); //die;?>
 <div class="widthMax50" style="display:inline-block; vertical-align:top;">
-<? require_once JPATH_COMPONENT.DS.'helpers'.DS.'messages'.DS.'table.php';?>
+<? 
+if ($got_view=="precustomers"){?>
+<br>
+<div style="background:#FFFF00; display:inline-block; border:solid 2px #ccc;" class="padding10"><h4>Здесь (ниже) будет список только автонапоминаний</h4></div><? }
+require_once JPATH_COMPONENT.DS.'helpers'.DS.'messages'.DS.'table.php';?>
 </div>
 <div class="width-50" style="display:inline-block;">
   <div style="margin-left:10px;">	
@@ -144,3 +151,4 @@ echo ($got_view=="precustomers")? "предзаказчика":"заказчик
   </div>  
 </div>
 <?	require_once JPATH_SITE.DS.'includes'.DS.'internal_mail_js.php';
+}

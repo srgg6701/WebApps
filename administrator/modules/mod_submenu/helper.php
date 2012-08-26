@@ -51,6 +51,5 @@ function go_messages(sel){
   return false;
 }
 </script>
-	
 <? }
 }

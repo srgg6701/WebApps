@@ -8,7 +8,7 @@
 <file name="_engines_ru.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129841589555428500" remote="129898072800000000" />
 <file name="_files_names.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129841589555438500" remote="129898072800000000" />
 <file name="_options_beyond_sides.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129841589555448500" remote="129898072800000000" />
-<file name="_precustomers.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129846007117298000" remote="129898072800000000" />
+<file name="_precustomers.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129903866549063500" remote="129903783600000000" />
 <file name="_site_options.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129841589555468500" remote="129898072800000000" />
 <file name="_site_options_partial.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129841589555478500" remote="129898072800000000" />
 <file name="_site_options_types.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129841589555488500" remote="129898072800000000" />
@@ -28,4 +28,5 @@
 <file name="site_options_types.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129841589555338500" remote="129898072800000000" />
 <file name="site_types.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129841589555358500" remote="129898072800000000" />
 <file name="virtual_orders.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129841589555368500" remote="129898072800000000" />
+<file name="_messages.php" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129903913042668500" remote="129903783600000000" />
 </dwsync>

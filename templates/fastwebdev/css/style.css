@@ -314,6 +314,10 @@ div#mode_login fieldset,
 .widthFull{
 	width:100%;
 }
+.width99{
+	width:99%;
+	display:block;
+}
 #button_call{
 	 border-radius:6px; 
 	 background:#FF9900; 
@@ -679,7 +683,8 @@ div.profile fieldset +a:hover,
 div.profile-edit button.validate span:hover,
 div.button-green:hover,
 div.button-green:hover a,
-button#make_site_prototype:hover {
+button#make_site_prototype:hover,
+button.buttonMess:hover {
 	color:#FFF;
 	text-decoration:none;
 	background:#FF9900;
@@ -721,6 +726,7 @@ div.profile fieldset[id*="users-profile-"] dl dd{
 }
 div.profile fieldset +a, 
 button.validate,
+button.buttonMess,
 a.button,
 button.button,
 div.profile-edit button.validate span,
