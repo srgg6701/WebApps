@@ -46,6 +46,19 @@ else {	// get precustomer data
 }
 $viewInstance=new $viewClass;
 $Data=$viewInstance->getData($object_id,${$userType});?>
+<style>
+tr.UnReadMe td{ /* непрочтённые мной (входящие, отправленные) */
+	background:#FFF;
+	font-weight:bold;
+}
+tr.UnReadOut td{ /* непрочтённые клиентом (исходящие) */
+	background:#FF9;
+}
+tr.UnReadOutMe td{ /* непрочтённые клиентом (исходящие) и мной */
+	background:#FF9;
+	font-weight:bold;
+}
+</style>
 <div class="floatTop">
 <h4>Состав <? 
 if (!$get_layout) $get_layout=JRequest::getVar('layout');
@@ -142,7 +155,8 @@ echo ($got_view=="precustomers")? "предзаказчика":"заказчик
 <? 
 if ($got_view=="precustomers"){?>
 <br>
-<div style="background:#FFFF00; display:inline-block; border:solid 2px #ccc;" class="padding10"><h4>Здесь (ниже) будет список только автонапоминаний</h4></div><? }
+<div style="background:#FFFF00; display:inline-block; border:solid 2px #ccc;" class="padding10"><h4>Здесь (ниже) будет список только автонапоминаний</h4></div><? 
+}
 require_once JPATH_COMPONENT.DS.'helpers'.DS.'messages'.DS.'table.php';?>
 </div>
 <div class="width-50" style="display:inline-block;">

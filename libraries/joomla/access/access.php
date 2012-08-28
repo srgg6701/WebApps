@@ -305,7 +305,7 @@ class JAccess
 				}
 
 				// Execute the query and load the rules from the result.
-				$db->setQuery($query);
+				$db->setQuery($query); 
 				$result = $db->loadColumn();
 
 				// Clean up any NULL or duplicate values, just in case
@@ -319,7 +319,7 @@ class JAccess
 				{
 					$result = array_unique($result);
 				}
-			}
+			} //echo "<div>query: <hr><pre>".$query."</pre></div>"; var_dump("<h1>result:</h1><pre>",$result,"</pre>"); die();
 
 			self::$groupsByUser[$storeId] = $result;
 		}

@@ -95,6 +95,18 @@ class SUser{
 		return $result;
 	}
 	/**
+	 * получить юзеров с правами не ниже....
+	 * @ user, admin, superadmin, manager
+	 */
+	function getInternalUsersIds($minimal_level,$db=false){
+		$query="SELECT DISTINCT u.id
+    FROM #__users as u, #__user_usergroup_map as g
+    WHERE u.id = g.user_id AND g.group_id >= ".$minimal_level." -- groups having access to clients: Super Users (8), Administrator (7), Manager (6)";
+		if (!$db) $db = JFactory::getDBO();
+		$db->setQuery($query);
+		return $db->loadResultArray();
+	}
+	/**
 	 * получить сообщение
 	 * @ user, precustomer, customer, message
 	 */
@@ -132,7 +144,7 @@ class SUser{
        		if ($user_id_read) $query.="
        ( SELECT DATE_FORMAT(#__webapps_messages_read.date_time, '%e.%m.%Y %H:%i')
          FROM #__webapps_messages_read 
-        WHERE user_id = ".$user_id_read."  AND message_id = dnior_webapps_messages.id
+        WHERE user_id = ".$user_id_read."  AND message_id = #__webapps_messages.id
        ) AS 'read_datetime',";
        		
 			$query.="
@@ -187,12 +199,12 @@ ORDER BY ";
 	 * Установить данные юзера
 	 * @ user, data, message
 	 */
-	function getUserDataFromMail($message_id){
-		$query="SELECT #_users.id AS user_id, `name` AS user_name, `username` AS user_login
-FROM #_users, #_webapps_messages
-WHERE dnior_webapps_messages.user_id_from = dnior_users.id
-AND dnior_webapps_messages.id = ".$message_id;
-		$db = JFactory::getDBO();
+	function getUserDataFromMail($message_id,$direct='from'){
+		$query="SELECT #__users.id AS user_id, `name` AS user_name, `username` AS user_login
+FROM #__users, #__webapps_messages
+WHERE #__webapps_messages.user_id_".$direct." = #__users.id
+AND #__webapps_messages.id = ".$message_id;
+		$db = JFactory::getDBO(); // echo "<div class=''>query= ".$query."</div>";
 		$db->setQuery($query);
 		return $db->loadAssoc();
 	}	
@@ -242,14 +254,14 @@ AND dnior_webapps_messages.id = ".$message_id;
 			$rws=count($result); //колич. записей
 			if($rws=='1') $table->delete();
    			else{
-				if ($rws>1) JMail::sendErrorMess("В таблице dnior_webapps_precustomers можеть быть только одна запись для каждого предзаказчика","Дублирование записей в табл. dnior_webapps_precustomers");
+				if ($rws>1) JMail::sendErrorMess("В таблице #__webapps_precustomers можеть быть только одна запись для каждого предзаказчика","Дублирование записей в табл. #__webapps_precustomers");
 				else{ //условие удаления строки не соблюдено - будем получать данные для обновления
 					if (!$table->load($actual_order_id)) //не загружена существующая запись
 						JMail::sendErrorMess($table->getError()," (\$table->load())");
 					else{
 						$arrObjs=explode(",",$result[0]);
 						if(!$key_del=array_search($actual_order_id,$arrObjs))
-							JMail::sendErrorMess("В таблице dnior_webapps_precustomers среди набора коллекций/заказов не обнаружен id удаляемого","Не обнаружен удаляемый $object_type");
+							JMail::sendErrorMess("В таблице #__webapps_precustomers среди набора коллекций/заказов не обнаружен id удаляемого","Не обнаружен удаляемый $object_type");
 						else{ //id удаляемой Коллекции/Заказа обнаружен
 							unset($arrObjs[$key_del]); //удалить из массива
 							$strObjsToUpdate=implode(",",$arrObjs); //подготовить актуальный набор Коллекций/Заказов для обновления, трансформировав в строку
@@ -327,7 +339,7 @@ AND dnior_webapps_messages.id = ".$message_id;
 		return true;
 	}
 	/**
-	 * Установить данные юзера
+	 * Выяснить, входит ли юзер в группу админов
 	 * @ user, status
 	 */
 	function detectAdminStat($user=false){ 
@@ -365,5 +377,98 @@ AND dnior_webapps_messages.id = ".$message_id;
 			if (!$user->$field) $user->set($field,$value);
 		}
 		return $user;
+	}
+	/**
+	 * Назначить строке сообщения класс, в зависимости от статуса прочтения субъектами сообщения
+	 * mail, data
+	 */
+	function setMailRowClass( $message_id,
+							  $internal_users_ids=false,
+							  $minimal_level=false,
+							  $user=false,
+							  $db=false
+							){
+		if (!$user) $user = JFactory::getUser();
+		$user_id=$user->get('id');
+		if (!$internal_users_ids) {
+			if (!$minimal_level) $minimal_level=6;
+			$internal_users_ids=self::getInternalUsersIds($minimal_level,$db);
+		}
+		// выяснить статус сообщения.
+		// полученное, если отправитель - заказчик
+		// отправленное, если отправитель - заказчик
+		$detect_resp_stat="IF ( m.user_id_from, 'inbox', 
+           IF ( m.user_id_from, 'outbox', 'unknown' )
+          ) AS direct";
+		
+		if (self::detectAdminStat($user)) {
+			//выяснить, является ли респондент заказчиком и каков его статус - отправитель или получатель
+			$query="SELECT DISTINCT 
+       $detect_resp_stat
+FROM #__users AS u 
+LEFT JOIN #__webapps_messages AS m 
+       ON ( m.user_id_from = u.id -- sender
+            OR 
+            m.user_id_to = u.id   -- receiver
+          )
+LEFT JOIN #__webapps_customer_site_options 
+    as cso ON cso.customer_id =  u.id
+LEFT JOIN #__webapps_customer_orders 
+    as co ON co.customer_id =  u.id
+WHERE m.id = ".$message_id." -- message id
+  AND ( cso.customer_id = m.user_id_from -- collection customer_id
+        OR 
+        co.customer_id = m.user_id_from  -- order customer_id
+      )";
+		}else{
+			$query="SELECT 
+			$detect_resp_stat
+FROM #__webapps_messages AS m
+WHERE m.id = ".$message_id." 
+  AND ( user_id_to = ".$user_id." 
+     OR user_id_from = ".$user_id." 
+     )";
+		}
+		if(!$db) $db = JFactory::getDBO();
+		$db->setQuery($query);
+		if ($direct=$db->loadResult()) {
+			if ($direct=="unknown")
+				JMail::sendErrorMess('Получен статус направления сообщения "unknown"','Неизвестный статус направления сообщения');
+		}
+		if (!self::checkMessageReadStatus($user->get('id'),$message_id)) $user_mess_unread=true;
+		// если админ
+		if (self::detectAdminStat($user)){
+			//
+			if($direct=='inbox'){ // от клиента
+				if (!$user_mess_unread) $class="Read";
+				else { // выяснить, прочёл ли кто-нибудь из сотрудников
+					$query="SELECT COUNT(*)
+FROM #__webapps_messages_read
+WHERE user_id IN ( " . $internal_users_ids ."
+) AND message_id = ".$message_id." AND user_id <> ".$user_id;
+					"UnReadMe";
+				}
+			}else{ // отправленные
+				   // выяснить, прочёл ли клиент
+				$receiver_data=getUserDataFromMail($message_id,'to');
+				if(!self::checkMessageReadStatus($receiver_data['user_id'],$message_id)) $customer_unread=true;
+				// не прочтено клиентом
+				if($customer_unread) {
+					$class=($user_mess_unread)? 
+						"UnReadOutMe" // не прочтено мной
+						:
+						"UnReadOut";  // прочтено мной
+				}else{ // прочтено клиентом
+					$class=($user_mess_unread)? 
+						"UnReadMe"  // не прочтено мной
+						:
+						"Read";  // прочтено мной
+				}
+			}
+		}else{ // если клиент
+			$class=($direct=='inbox'&&$user_mess_unread)? "UnReadAllIn":"Read";
+		}
+		echo $class;
+		return true;
 	}
 }
