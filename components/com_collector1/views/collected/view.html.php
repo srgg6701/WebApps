@@ -209,6 +209,7 @@ class Collector1ViewCollected extends JView
 				if(!$jrequest_collection_id=JRequest::getVar($site_action_type))
 					$jrequest_collection_id=JRequest::getVar('collection_id'); //потребуется далее, после выполнения цикла, для определения доступа к странице, с учётом статуса юзера и соответствия сессий создания коллекции и её просмотра
 				$this->jrequest_collection_id=$jrequest_collection_id;
+				
 				if (JRequest::getVar($site_action_type)) {
 					$this->done=$site_action_type_data_array; //действие, цвет фона блока сообщения, постфикс для флага
 					$this->_action=$site_action_type;
@@ -218,8 +219,10 @@ class Collector1ViewCollected extends JView
 						$siteName=JFactory::getConfig()->getValue('sitename');
 						if (!JFactory::getMailer()->sendMail($adminEmail, $siteName, $adminEmail, $siteName.': Новый сайт', 'На сайте WebApps.2-all.com создана новая коллекция.'))
 							JMail::sendErrorMess('','Ошибка отправки уведомления о новом сайте...');
-					}
-					$this->done[0].="
+					} 
+					//получить статус юзера 
+					if (SUser::getCustomerStatus($user)=="precustomer")
+						$this->done[0].="
 <div style=\"padding: 6px 0;\">Пожалуйста, <a href=".JRoute::_($this->go_signup).">добавьте к своим данным логин и пароль</a>.</div> 
 							<div>Это займёт несколько секунд и предоставит вам доступ ко всем опциям системы.</div>";
 					break;

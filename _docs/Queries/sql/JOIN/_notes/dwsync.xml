@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="#dnior_users + #messages.sql" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129904720087688000" remote="129904656600000000" />
+<file name="#dnior_users + #messages.sql" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129906068272460000" remote="129906049800000000" />
+<file name="#dnior_users + #dnior_user_usergroup_map.sql" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129906172490640000" remote="129906049800000000" />
+<file name="#dnior_users + #messages + #customer_site_options + #customer_orders.sql" server="ftp.2-all.com/www/2-all.com/2-all/webapps/" local="129906123430280000" remote="129906049800000000" />
 </dwsync>

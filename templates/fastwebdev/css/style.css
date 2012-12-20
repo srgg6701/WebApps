@@ -578,8 +578,12 @@ dd.message{
 	margin-right:60px;
 }
 div.block_done{
-	display:block; 
 	border-radius:6px;
+	box-shadow: 0 0 30px 1px #666;
+	display:inline-block;
+	position: absolute;
+	right: 30px; 
+	top: 150px;
 }
 div.block_done > div:first-child {
 	padding:30px 65px 30px 30px;
@@ -1203,7 +1207,7 @@ table#quick td {
 table#quick th {
 	padding-bottom:10px;
 }
-table#tblCollected, div.block_done {
+table#tblCollected {
 	width:700px;
 }
 table#tblCollector, table#tblCollected{

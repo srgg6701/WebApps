@@ -20,7 +20,8 @@ class SUser{
 	  *	-  not enabled, not activated				block = 1, activation [code]
 	  * -  disabled, activated	(can't log in)		block = 1, activation [empty]
 	  -----------------------------------------------------------------------
-	  * * Нет в таблице юзеров:
+	  * * 
+	  * Нет в таблице юзеров:
 	  * - предзаказчик - уже создавал коллекции/заказы, но ещё не зарегистрировался
 	  * - новый предзаказчик
 	  * @ user, customer, precustomer, status
@@ -128,7 +129,7 @@ class SUser{
 						  $limit=false, // лимит записей
 						  $fields_subquery=false // дополнительные поля извлечения данных
 						) { 
-		$query="SELECT ";
+		$query="SELECT DISTINCT ";
 		$webapps_messages_id='#__webapps_messages.id';
 		if ($fields_subquery){
 			
