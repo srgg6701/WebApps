@@ -1,4 +1,4 @@
-﻿<?	
+<?	
 // No direct access
 defined('_JEXEC') or die;
 if (isset($_GET['user_id'])&&!JRequest::getVar('user_id')){

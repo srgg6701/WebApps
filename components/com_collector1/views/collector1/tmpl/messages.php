@@ -1,7 +1,9 @@
-<?php echo "<?xml version=\"1.0\" encoding=\"utf-8\"?".">"; ?>
 <style>
 <?	$css=true;
 	if ($css){?>
+#message_header{
+	padding-left:6px;
+}
 table#tblMess tr[id] td {
 	font-size:0.9em;
 	overflow:hidden;
@@ -11,7 +13,6 @@ table#tblMess tr[id] > td:first-child {
 	text-align:right;
 }
 table#tblMess tr[id] > td:first-child +td +td {
-	background: #FCF;
 	max-width:70px;
 }
 table#tblMess tr[id] > td:first-child +td +td +td{
@@ -42,14 +43,13 @@ textarea#message{
 // No direct access to this file
 defined('_JEXEC') or die; 
 $mess_path=JPATH_ADMINISTRATOR.DS.'components'.DS.'com_collector1'.DS.'helpers'.DS.'messages'.DS;
-$arrMessages=$this->messages; //SDebug::showDebugContent($arrMessages,'arrMessages');?>
+$arrMessages=$this->messages; 
+SDebug::showDebugContent($arrMessages,'arrMessages');?>
 <div style="clear:both;margin-top:10px;"></div>
 <div><!-- style="display:inline-block; vertical-align:top; max-width:50%;"-->
 <? require_once $mess_path.'table.php';?>
 </div>
-<div style="display:inline-block;width:50%;">
-	<div class="paddingLeft10">
+<div style="display:inline-block;">
 <? require_once $mess_path.'form.php';?>
-	</div>
 </div>
 <?	require_once JPATH_SITE.DS.'includes'.DS.'internal_mail_js.php'; ?>

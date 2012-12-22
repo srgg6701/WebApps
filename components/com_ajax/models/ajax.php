@@ -1,4 +1,4 @@
-﻿<?
+<?
 defined('_JEXEC') or die;
 class AjaxModelAjax extends JModel
 {	
@@ -110,12 +110,13 @@ class AjaxModelAjax extends JModel
 					  " message_id = ".$message_id,
 					  false,
 					  'dnior_webapps_messages_read.id'
-					); // var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
+					); 
 		$id=$messages[0]['id'];
 		if (JRequest::getVar('w')) {
 			echo "<div class=''>id = $id</div>"; 
 			echo "<div class=''>dropReadMessage</div>"; 
-		}elseif ($table->delete($id)) echo "Ошибка удаления записи из *messages_read";
+		}elseif (!$table->delete($id)) 
+			echo "Ошибка удаления записи из *messages_read";
 	}
 	/**
 	 * Получить контактные данные
@@ -135,7 +136,8 @@ class AjaxModelAjax extends JModel
 	function getMessage(){
 		$arrMessage=array();
 		$message_id=(int)JRequest::getVar('object_id');
-		$arrMessage['message']=SUser::getMessage($message_id); if (JRequest::getVar('w')) var_dump("\narrMessage:\n",$arrMessage);
+		$arrMessage['message']=SUser::getMessage($message_id); 
+		if (JRequest::getVar('w')) var_dump("\narrMessage:\n",$arrMessage);
 		$user_id_read=(int)JRequest::getVar('user_id_read');
 		// добавить к прочтённым:
 		if (!SUser::checkMessageReadStatus($user_id_read,$message_id)){

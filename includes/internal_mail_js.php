@@ -1,16 +1,27 @@
-﻿<script type="text/javascript">
-d=document;
-// область сообщения:
-textContainer=d.getElementById('sel_mess'); // блок со статическим текстом
-messHeaderInput=d.getElementById('message_header'); // ячейка для темы сообщения
-textArea=d.getElementById('message_fields'); // поле ввода текста
-// таблица с сообщениями:
-tblMess=d.getElementById('tblMess');
-tBody=tblMess.getElementsByTagName('tbody').item(0);
-tRows=tBody.getElementsByTagName('tr');
-// страница отправки сообщнеия:
-requestPage = "<?=JUri::root()?>index.php?option=com_ajax"; // стр. отправки данных
-
+<script type="text/javascript">
+$( function(){
+		d=document;
+		requestPage = "<?=JUri::root()?>index.php?option=com_ajax"; // стр. отправки данных
+		// область сообщения:
+		textContainer=$('#sel_mess'); // блок со статическим текстом
+		messHeaderInput=$('#message_header'); // ячейка для темы сообщения
+		textArea=$('#message_fields'); // поле ввода текста
+		// таблица с сообщениями:
+		tblMess=$('table#tblMess');
+		//tBody=$('tbody',tblMess).eq(0);
+		//tRows=$('tr',tblMess);
+		// страница отправки сообщнеия:
+		
+		$('a[data-subject]').click( function(){
+				loadMess($(this).attr('data-subject'));
+			});
+		$('a[data-read-status]').click( function(){
+				handleMess($(this).attr('data-read-status'),'switch_read_status');
+			});
+		$('a[data-read-status]').live('click',function(){
+				handleMess($(this).attr('data-read-status'),'switch_read_status');
+			});
+	});
 /**
  * Управление отображением блока с сообщением
  */
@@ -104,59 +115,43 @@ function sendPostAjax(txtAreaID){
  * Обработать область сообщения после его отправки
  */
 function setReadMessageDate(message_id,tdContent){
-	return '<a title="<?=$goSetStat.$goUnRead?>" onclick="<? echo $handleMess;?>('+message_id+',\'<?=$switch_read_status?>\');" href="void();">'+tdContent+'</a>';
+	var linkContent='<a data-read-status="'+message_id+'" title="<?=$goSetStat.$goUnRead?>" href="javascript:void();">'+tdContent+'</a>';
+	// console.info();
+	return linkContent;
 }
 /**
  * Обработать область сообщения после его отправки
  */
 function handleMessAreaAfterPost(messageText,headerTextStatic){
-	textContainer.style.display='block'; // отобразить блок для контента сообщения
-	textContainer.innerHTML=messageText; // разместить там текст сообщения
-	textArea.style.display='none'; // спрятать форму
-	if (headerTextStatic) d.getElementById('message_header').innerHTML=headerTextStatic;
+	$('#sel_mess').fadeIn(150).html(messageText);
+	$('#message_fields').fadeOut(150);
+	if (headerTextStatic) $('#message_header').html(headerTextStatic);
 }
 /**
  * Загрузить сообщение
  */
 function loadMess(message_id){
-  try{ // alert('loadMess');
-	// content
-	var messageContent = "object=message&action=get&object_id="+message_id+"&user_id_read=<?=$user_id_from?>"; //alert(messageContent);
-	var req = getXmlHttpRequest();
-	req.onreadystatechange = function() {
-		if (req.readyState != 4) return;
-		else { 
-			if ( req.status == 200 ) {
-				//var gotMessage = ; //alert(jData['message_id']+', '+jData['user_id']+', '+jData['date_time']);
-				var jData = JSON.parse(req.responseText);
-				handleMessAreaAfterPost(jData['message']);
-				var rows=tblMess.getElementsByTagName('tr'); // получить все строки таблицы
-				for(i=0,j=rows.length;i<j;i++)
-					rows.item(i).style.backgroundColor='<?=$white?>'; // 
-				var tRow=d.getElementById('message_'+message_id); // получить активную строку
-				tRow.style.backgroundColor='<?=$light_orange?>'; // назначить стиль фона активной строки	
-				if (jData['date']) 
-					tRow.getElementsByTagName('td').item(1).innerHTML=setReadMessageDate(message_id,jData['date']); // ссылка с датой прочтения
-			} else {
-				//wrongURL();
-			}
+  try{ 
+	$.ajax({
+		type: "GET",//POST
+		url:'<?=JUri::root()?>index.php', 			
+		dataType: 'json',
+		data: "option=com_ajax&object=message&action=get&object_id="+message_id+"&user_id_read=<?=$user_id?>",
+		/*beforeSend: function() {},*/
+		success: function (data) {
+			handleMessAreaAfterPost(data['message']);
+			$('tr').each(function() {
+                $(this).css('background-color','<?=$white?>'); //
+            });
+			// для активной строки:
+			$('#message_'+message_id).css('background-color','<?=$light_orange?>');
+			if (data['date']) 
+				$('table#tblMess > tr td').eq(1).html(setReadMessageDate(message_id,data['date']));// ссылка с датой прочтения
+		},
+		error: function (data) {
+			alert("Не удалось отправить данные.\nОтвет: "+data.result);
 		}
-	}
-	newWin=true;
-	if (newWin){
-		var url=requestPage+'&'+messageContent; 
-		// alert(url);
-		req.open("GET", url, true);
-		req.send(null);
-		window.open(url,'ajax');
-	}
-	req.open("POST", requestPage, true);
-	// Установка заголовков
-	req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	req.setRequestHeader("Content-Length", messageContent.length);
-	// Отправка данных
-	req.send(messageContent);				
-	return false;
+	});
   }catch(e){
 	alert(e.message);
   }
@@ -168,42 +163,37 @@ function loadMess(message_id){
 function handleMess(message_id,action){
   try{ //alert('loadMess');
 	// content
-	var url = requestPage+"&object=message&action="+action+"&object_id="+message_id+"&user_id=<?=$user_id_from?>"; //alert(messageContent);
-	var req = getXmlHttpRequest();
-	req.onreadystatechange = function() {
-		if (req.readyState != 4) return;
-		else { 
-			if ( req.status == 200 ) {
-				var messRow=d.getElementById('message_'+message_id);
-				var messReadDateTD=messRow.getElementsByTagName('td').item(1);
-				var messReadDateLink=messReadDateTD.getElementsByTagName('a').item(0);
-				// Переключить статус прочтения сообщения
-				if (action=='switch_read_status'){	
-					if (messRow.bgColor=='<?=$white?>') { // уже прочтено
-						messRow.bgColor='<?=$grey?>'; // назначить серый фон строке
-						messReadDateLink.innerHTML='<?=$unread?>'; // текст ссылки
-						messReadDateLink.title='<?=$goSetStat.$goUnRead?>'; // текст title
-					}else{
-						messRow.bgColor='<?=$white?>';
-						messReadDateLink.innerHTML=req.responseText;
-						messReadDateLink.title='<?=$goSetStat.$goRead?>';
-					}
-				}else if(action=='delete'){ // Удалить сообщение
-					messRow.style.display='none'; // спрятать строку удаляемого сообщения
-					tRows.item(tRows.length-2).className='noBottomBorder'; // убрать строчную нижнюю границу с ячеек последней строки таблицы
+	$.ajax({
+		type: "GET",//
+		url: requestPage,
+		dataType: 'json',
+		data: "object=message&action="+action+"&object_id="+message_id+"&user_id=<?=$user_id_from?>",
+		/*beforeSend: function() {},*/
+		success: function (data) {
+			var messRow=$('#message_'+message_id);
+			var messReadDateLink=$('td a',messRow).eq(0);
+			//alert('OK!');
+			var Bckgr,Html,Title;
+			if (action=='switch_read_status'){	
+				if ($(messRow).attr('bgcolor')=='<?=$white?>'){ // уже прочтено
+					bckgr='<?=$grey?>';// назначить серый фон строке
+					Html='<?=$unread?>';// текст ссылки
+					Title='<?=$goSetStat.$goUnRead?>';// текст title
+				}else{
+					bckgr='<?=$white?>';
+					Html=data;
+					Title='<?=$goSetStat.$goRead?>';
 				}
-			}else{
-				wrongURL();
+				$(messRow).attr('bgcolor',bckgr);
+				$(messReadDateLink).html(Html).attr('title',Title);
+			}else if(action=='delete'){ // Удалить сообщение
+				$(messRow).css('display','none');
 			}
+		},
+		error: function (data) {
+			alert("Не удалось отправить данные.");
 		}
-	}
-	var newWin=true; // for test
-	//newWin=true;
-	// url - уже установлено
-	req.open("GET", url, true);
-	req.send(null);
-	if (newWin) window.open(url+'&w=1','ajax');  	
-	return false;
+	});
   }catch(e){
 	alert(e.message);
   }
