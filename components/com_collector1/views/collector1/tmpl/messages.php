@@ -46,7 +46,7 @@ $mess_path=JPATH_ADMINISTRATOR.DS.'components'.DS.'com_collector1'.DS.'helpers'.
 $arrMessages=$this->messages; 
 SDebug::showDebugContent($arrMessages,'arrMessages');?>
 <div style="clear:both;margin-top:10px;"></div>
-<div><!-- style="display:inline-block; vertical-align:top; max-width:50%;"-->
+<div>
 <? require_once $mess_path.'table.php';?>
 </div>
 <div style="display:inline-block;">

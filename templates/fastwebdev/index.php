@@ -9,15 +9,13 @@ if (!$app) $app = JFactory::getApplication();
 if (!$this->baseurl){
 	$this->baseurl="http://".$_SERVER['HTTP_HOST'];
 }?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
+<!DOCTYPE HTML>
+<html>
 <head>
 <jdoc:include type="head" />
-<?	$scripts=array('firefox/correct_submenu_position','jquery-1.7.1.min','json2','common');
-	for($sl=0,$al=count($scripts);$sl<$al;$sl++) {?>
-<script src="<?=$this->baseurl.'/templates/'.$this->template.'/js/'.$scripts[$sl];?>.js" type="text/javascript"></script>
-<?	}?>
-<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css">
+<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css"> 
+<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/fastwebdev/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/fastwebdev/js/common.js"></script>
 </head>
 <body>
 <?
@@ -29,9 +27,6 @@ if(strstr($_SERVER['HTTP_HOST'],"localhost")||$_GET['debug']){
         <div><a href="index.php?option=com_content&view=app&c=debug&task=_session_unset">session_unset</a></div>
     </div>
     </div>
-<script type="text/javascript">
-//document.getElementById().style.positionBottom='';
-</script>
 <? 
 }
 $path_to_images='templates/fastwebdev/images/'; 
@@ -65,35 +60,6 @@ $path_to_images='templates/fastwebdev/images/';
 		  echo $arrContact['phone'];//8(904)442-84-47 ?></div></td>
                     <td width="100%" align="right" nowrap id="topSearch">
                             	<jdoc:include type="modules" name="search" style="xhtml" />
-<script type="text/javascript">
-document.getElementById('swrd').innerHTML='Найти: ';
-function manageLoginDisplay(stat){
-	d=document;
-	try{
-		switch(stat){
-
-			case "exit":
-				d.getElementById('login-form').submit();
-				//option=com_users
-				//task=user.logout
-				break;		
-
-			case "menu":
-				d.getElementById('div_user_menu').style.display='block';
-				break;		
-
-			case "hide_menu":
-				d.getElementById('div_user_menu').style.display='none';
-				break;		
-
-			default: d.getElementById('login_block').style.display=stat;
-		}
-
-	}catch(e){
-		alert(e.message);
-	}
-}
-</script>
 					</td>
                     <td id="tdLogin">
 <? 	$user = JFactory::getUser();
@@ -161,6 +127,34 @@ function manageLoginDisplay(stat){
 	<jdoc:include type="modules" name="footer_menu" style="xhtml" />
     </center>
 </div>
+<script type="text/javascript">
+$( function(){
+		$('#swrd').html('Найти: ');
+	});
+function manageLoginDisplay(stat){
+	try{
+		switch(stat){
+
+			case "exit":
+				$('#login-form').submit();
+				break;		
+
+			case "menu":
+				$('#div_user_menu').show();
+				break;		
+
+			case "hide_menu":
+				$('#div_user_menu').hide();
+				break;		
+
+			default: $('#login_block').css('display',stat);
+		}
+
+	}catch(e){
+		alert(e.message);
+	}
+}
+</script>
 <jdoc:include type="modules" name="debug" />
 </body>
 </html>

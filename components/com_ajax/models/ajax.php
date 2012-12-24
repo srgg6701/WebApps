@@ -112,7 +112,7 @@ class AjaxModelAjax extends JModel
 					  'dnior_webapps_messages_read.id'
 					); 
 		$id=$messages[0]['id'];
-		if (JRequest::getVar('w')) {
+		if (JRequest::getVar('take_test')) {
 			echo "<div class=''>id = $id</div>"; 
 			echo "<div class=''>dropReadMessage</div>"; 
 		}elseif (!$table->delete($id)) 
@@ -210,11 +210,11 @@ class AjaxModelAjax extends JModel
 		$table->set('message_id', $message_id);
 		$table->set('user_id', $user_id);
 		$table->set('date_time', date("Y-m-d H:i:s"));
-		if (JRequest::getVar('w')) { // протестировать
+		if (JRequest::getVar('take_test')) { // протестировать
 			$message['message_id']=$message_id;
 			$message['user_id']=$user_id;
 			$message['date_time']=date("Y-m-d H:i:s");
-			var_dump("message (setMessRead):\n",$message,"\n");
+			var_dump("<pre>","message (setMessRead):\n",$message,"</pre>");
 		}else SErrors::afterTable($table);
 		if ($date) return date("d.m.Y H:i");
 		else {

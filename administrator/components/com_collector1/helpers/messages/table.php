@@ -37,7 +37,7 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 		echo $mailFolders[$direct];
 	}else{?>Список сообщений<? 
 		if ($objs=='orders'){?> по заказу<? }elseif($objs=='collections'){?> по коллекции<? }
-	}?> &nbsp; | &nbsp; <a href="javascript:void();" onClick="composeMessageDisplay();" style="font-weight:200;">Добавить сообщение...</a></h4>
+	}?> &nbsp; | &nbsp; <a href="javascript:void();" onClick="composeMessageDisplay();" data-action="add-message" style="font-weight:200;">Добавить сообщение...</a></h4>
 <table cellspacing="0" class="tblMess" id="tblMess">
   <tr class="trMessHeaders">
   	<? $y=0; ?>
@@ -121,9 +121,9 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 			}
 		}
 	?></td>
-    <td><a href="javascript:void();" data-read-status="<?=$arrMessages[$i]['id']?>" title="<?=$goSetStat?><?=($read)? $goRead:$goUnRead?>"><?=($read)? $read:$unread?></a></td>
-    <td><a href="javascript:void();" data-subject="<?=$arrMessages[$i]['id']?>"><?=$arrMessages[$i]['subject']?></a></td>
-    <td align="center"><a href="void();" onClick="return handleMess(<?=$arrMessages[$i]['id']?>,'delete');"<?
+    <td><a href="#" data-read-status="<?=$arrMessages[$i]['id']?>" title="<?=$goSetStat?><?=($read)? $goRead:$goUnRead?>"><?=($read)? $read:$unread?></a></td>
+    <td><a href="#" data-subject="<?=$arrMessages[$i]['id']?>"><?=$arrMessages[$i]['subject']?></a></td>
+    <td align="center"><a href="#" data-delete="<?=$arrMessages[$i]['id']?>" <?
     $del_title=' title="Удалить сообщение"'; echo $del_title;
 	?>><img src="<?=$del_img?>"></a></td>
   </tr>

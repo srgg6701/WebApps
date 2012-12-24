@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="MM_css_include" value="../../../../templates/fastwebdev/css/style.css" />
+	<infoitem key="MM_css_exclude" value="" />
+	<infoitem key="notes" value="Добавить чекбокс согласия с условиями обслуживания" />
+	<infoitem key="showOnOpen" value="true" />
+</info>
