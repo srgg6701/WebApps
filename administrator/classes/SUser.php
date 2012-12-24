@@ -92,7 +92,8 @@ class SUser{
 		$query->from('#__webapps_messages_read');
 		$query->where('message_id = '.$message_id.' AND user_id = ' . $user_id);
 		$db->setQuery($query);
-		$result=$db->loadResult(); if (JRequest::getVar('w')) echo "<div class=''>query ($result)= ".$query."</div>";
+		$result=$db->loadResult(); 
+		if ($take_test=JRequest::getVar('take_test')) echo "<div class=''>query ($result)= ".$query."</div>";
 		return $result;
 	}
 	/**

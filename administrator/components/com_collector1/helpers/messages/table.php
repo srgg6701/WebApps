@@ -37,7 +37,7 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 		echo $mailFolders[$direct];
 	}else{?>Список сообщений<? 
 		if ($objs=='orders'){?> по заказу<? }elseif($objs=='collections'){?> по коллекции<? }
-	}?> &nbsp; | &nbsp; <a href="javascript:void();" onClick="composeMessageDisplay();" data-action="add-message" style="font-weight:200;">Добавить сообщение...</a></h4>
+	}?> &nbsp; | &nbsp; <a href="#" data-action="add-message" style="font-weight:200;">Добавить сообщение...</a></h4>
 <table cellspacing="0" class="tblMess" id="tblMess">
   <tr class="trMessHeaders">
   	<? $y=0; ?>
@@ -88,7 +88,7 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 	$goRead="прочтённое";
 	$goUnRead="непрочтённое";
 	for($i=0,$j=count($arrMessages);$i<$j;$i++):?>
-  <tr class="<?=SUser::setMailRowClass($arrMessages[$i]['id']);
+  <tr class="<?=SUser::setMailRowClass($arrMessages[$i]['id'])?>" bgcolor="<?
   	if($read=$arrMessages[$i]['read_datetime']) {
 	  	echo $white;
   	}else{ 

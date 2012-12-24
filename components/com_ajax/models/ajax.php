@@ -112,11 +112,15 @@ class AjaxModelAjax extends JModel
 					  'dnior_webapps_messages_read.id'
 					); 
 		$id=$messages[0]['id'];
-		if (JRequest::getVar('take_test')) {
+		if ($take_test=JRequest::getVar('take_test')) {
 			echo "<div class=''>id = $id</div>"; 
 			echo "<div class=''>dropReadMessage</div>"; 
-		}elseif (!$table->delete($id)) 
-			echo "Ошибка удаления записи из *messages_read";
+		}
+		if (!$take_test||JRequest::getVar('do')){
+			echo(!$table->delete($id))? 
+				 "Ошибка удаления записи из *messages_read":
+				 "не прочтено";
+		}
 	}
 	/**
 	 * Получить контактные данные
@@ -210,16 +214,17 @@ class AjaxModelAjax extends JModel
 		$table->set('message_id', $message_id);
 		$table->set('user_id', $user_id);
 		$table->set('date_time', date("Y-m-d H:i:s"));
-		if (JRequest::getVar('take_test')) { // протестировать
+		if ($take_test=JRequest::getVar('take_test')) { // протестировать
 			$message['message_id']=$message_id;
 			$message['user_id']=$user_id;
 			$message['date_time']=date("Y-m-d H:i:s");
 			var_dump("<pre>","message (setMessRead):\n",$message,"</pre>");
-		}else SErrors::afterTable($table);
+		}
+		if (!$take_test||JRequest::getVar('do'))
+			SErrors::afterTable($table);
 		if ($date) return date("d.m.Y H:i");
 		else {
 			echo date("d.m.Y H:i");
-			exit;
 		}
 	}
 	/**
@@ -230,9 +235,9 @@ class AjaxModelAjax extends JModel
 		$user_id=(int)JRequest::getVar('user_id');
 		$message_id=(int)JRequest::getVar('object_id');
 		if(SUser::checkMessageReadStatus($user_id,$message_id)) { // если есть в таблице прочтённых - удалить оттуда
-			$this->dropReadMessage($message_id); //echo "<div class=''>Read!</div>";
+			$this->dropReadMessage($message_id);
 		}else{ // добавить в таблицу прочтённых
-			$this->setMessRead($message_id,$user_id); //echo "<div class=''>UnRead!</div>";
+			$this->setMessRead($message_id,$user_id);
 		}
 		exit;
 	}	
