@@ -1,4 +1,7 @@
 <script type="text/javascript">
+/*	страницы со сборкой:
+	/administrator/components/com_collector1/helpers/messages
+*/
 $(function(){
 		//
 		requestPage='<?=JUri::root()?>index.php';
@@ -32,14 +35,6 @@ $(function(){
 				return false;
 			});
 	});
-/**
- * Описание
- * @package
- * @subpackage
- */
-function takeTest(uData){
-	window.open(requestPage+'?'+uData+'&take_test=1','test');
-}
 
 /**
  * Управление отображением блока с сообщением
@@ -65,6 +60,99 @@ function composeMessageDisplay(rev){
 				.css('width','100%');
   }catch(e){
 	  alert(e.message);
+  }
+}
+/**
+ * Переключить статус прочтения сообщения
+ * Удалить сообщение
+ */
+function handleMess(message_id,action){
+  try{ 
+  	var uData="option=com_ajax&object=message&action="+action+"&object_id="+message_id+"&user_id=<?=$user_id?>";
+	var nw=false;
+	if (nw) 
+		takeTest(uData);
+	else{
+		// content
+		$.ajax({
+			type: "GET",//
+			url: requestPage,
+			data: uData,
+			success: function (data) {
+				var messRow=$('#message_'+message_id);
+				var messReadDateLink=$('td a',messRow).eq(0);
+				var Bckgr,Html,Title;
+				if (action=='switch_read_status'){	
+					Html=data;
+					if ($(messRow).attr('bgcolor')=='<?=$white?>'){ // уже прочтено
+						bckgr='<?=$grey?>';// назначить серый фон строке
+						Title='<?=$goSetStat.$goUnRead?>';// текст title
+					}else{
+						bckgr='<?=$white?>';
+						Title='<?=$goSetStat.$goRead?>';
+					}
+					$(messRow).attr('bgcolor',bckgr);
+					$(messReadDateLink).html(Html).attr('title',Title);
+				}else if(action=='delete'){ // Удалить сообщение
+					$(messRow).css('display','none');
+				}
+			},
+			error: function (data) {
+				alert("Не удалось отправить данные.\n"+data);
+			}
+		});
+	}
+  }catch(e){
+	alert(e.message);
+  }
+}
+/**
+ * Обработать область сообщения после его отправки
+ */
+function handleMessAreaAfterPost(messageText,headerTextStatic){
+	$('#sel_mess').fadeIn(150).html(messageText);
+	$('#message_fields').fadeOut(150);
+	if (headerTextStatic) $('#message_header').html(headerTextStatic);
+}
+/**
+ * Загрузить сообщение
+ */
+function loadMess(message_id){
+  try{ 
+  	var uData="option=com_ajax&object=message&action=get&object_id="+message_id+"&user_id_read=<?=$user_id?>";
+	var nw=false;
+	if (nw) 
+		takeTest(uData);
+  	else{
+		$.ajax({
+			type: "POST",//GET
+			url:requestPage, 			
+			dataType: 'json',
+			data: uData,
+			/*beforeSend: function() {},*/
+			success: function (data) {
+				handleMessAreaAfterPost(data['message']);
+				$('tr').each(function() {
+					$(this).removeAttr('style','background-color');
+				});
+				// для активной строки:
+				$('#message_'+message_id)
+					.attr('bgcolor','<?=$white?>') // установить фон прочтённого
+					.css('background-color','<?=$light_orange?>') // стиль активного
+						.children('td') // ячейки с датой прочтения
+							.children('a[data-read-status]') // ссылка с датой
+							.text(data['date']); // дата прочтения
+				console.info('data[date] = '+data['date']);
+				if (data['date']) 
+					$('table#tblMess > tr td').eq(1).html(setReadMessageDate(message_id,data['date']));// ссылка с датой прочтения
+			},
+			error: function (data) {
+				alert("Не удалось отправить данные.\nОтвет: "+data.result);
+			}
+		});
+    }
+  }catch(e){
+	alert(e.message);
   }
 }
 /**
@@ -110,99 +198,21 @@ function sendPostAjax(txtAreaID){
   }
 }
 /**
- * Обработать область сообщения после его отправки
+ * Прописать дату прочтения сообщения
  */
 function setReadMessageDate(message_id,readStatus){
 	var linkContent='<a data-read-status="'+message_id+'" title="<?=$goSetStat.$goUnRead?>" href="#">'+readStatus+'</a>';
 	// console.info();
 	return linkContent;
 }
+
+/*******************************************************
 /**
- * Обработать область сообщения после его отправки
+ * Загрузить страницу в тестовом режиме в новой вкладке
+ * @package
+ * @subpackage
  */
-function handleMessAreaAfterPost(messageText,headerTextStatic){
-	$('#sel_mess').fadeIn(150).html(messageText);
-	$('#message_fields').fadeOut(150);
-	if (headerTextStatic) $('#message_header').html(headerTextStatic);
-}
-/**
- * Загрузить сообщение
- */
-function loadMess(message_id){
-  try{ 
-  	var uData="option=com_ajax&object=message&action=get&object_id="+message_id+"&user_id_read=<?=$user_id?>";
-	var nw=true;
-	if (nw) 
-		takeTest(uData);
-  	else{
-		$.ajax({
-			type: "POST",//GET
-			url:requestPage, 			
-			dataType: 'json',
-			data: uData,
-			/*beforeSend: function() {},*/
-			success: function (data) {
-				handleMessAreaAfterPost(data['message']);
-				$('tr').each(function() {
-					$(this).css('background-color','<?=$white?>'); //
-				});
-				// для активной строки:
-				$('#message_'+message_id).css('background-color','<?=$light_orange?>');
-				if (data['date']) 
-					$('table#tblMess > tr td').eq(1).html(setReadMessageDate(message_id,data['date']));// ссылка с датой прочтения
-			},
-			error: function (data) {
-				alert("Не удалось отправить данные.\nОтвет: "+data.result);
-			}
-		});
-    }
-  }catch(e){
-	alert(e.message);
-  }
-}
-/**
- * Переключить статус прочтения сообщения
- * Удалить сообщение
- */
-function handleMess(message_id,action){
-  try{ 
-  	var uData="option=com_ajax&object=message&action="+action+"&object_id="+message_id+"&user_id=<?=$user_id?>";
-	var nw=false;
-	if (nw) 
-		takeTest(uData);
-	else{
-		// content
-		$.ajax({
-			type: "GET",//
-			url: requestPage,
-			data: uData,
-			success: function (data) {
-				var messRow=$('#message_'+message_id);
-				var messReadDateLink=$('td a',messRow).eq(0);
-				//alert('OK!');
-				var Bckgr,Html,Title;
-				if (action=='switch_read_status'){	
-					Html=data;
-					if ($(messRow).attr('bgcolor')=='<?=$white?>'){ // уже прочтено
-						bckgr='<?=$grey?>';// назначить серый фон строке
-						Title='<?=$goSetStat.$goUnRead?>';// текст title
-					}else{
-						bckgr='<?=$white?>';
-						Title='<?=$goSetStat.$goRead?>';
-					}
-					$(messRow).attr('bgcolor',bckgr);
-					$(messReadDateLink).html(Html).attr('title',Title);
-				}else if(action=='delete'){ // Удалить сообщение
-					$(messRow).css('display','none');
-				}
-			},
-			error: function (data) {
-				alert("Не удалось отправить данные.\n"+data);
-			}
-		});
-	}
-  }catch(e){
-	alert(e.message);
-  }
+function takeTest(uData){
+	window.open(requestPage+'?'+uData+'&take_test=1','test');
 }
 </script>

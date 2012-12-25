@@ -47,7 +47,7 @@ if (!$user)	$user = JFactory::getUser();?>
 		echo $SFiles->allowed_formats;
 	?>)</div>
   </div>
-<?	require_once JPATH_COMPONENT.DS.'helpers'.DS.'html'.DS.'upload.php';?>
+<?	SHTML::uploadFileField();?>
 <p>Предполагаемый бюджет, руб.: <input name="budget" type="text" size="4" value="<?=$current_order_data['budget']?>"></p>
   <div class="clearBoth marginTop10"></div>
   <hr size="1" class="marginTop10">

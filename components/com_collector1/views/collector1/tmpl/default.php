@@ -170,7 +170,7 @@ if ($current_order_set){
 		echo $SFiles->allowed_formats;
 	?>)</div>
   </div>
-<?	require_once JPATH_COMPONENT.DS.'helpers'.DS.'html'.DS.'upload.php';?>	
+<?	SHTML::uploadFileField();?>	
     <div class="clearBoth marginTop10"></div>
   <hr size="1" class="marginTop10">
 <div class="marginBottom4">Укажите желаемую дату выполнения задания в формате ГГГГ-ММ-ДД</div>

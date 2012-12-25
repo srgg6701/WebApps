@@ -41,41 +41,28 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 <table cellspacing="0" class="tblMess" id="tblMess">
   <tr class="trMessHeaders">
   	<? $y=0; ?>
-    <td>#<? 
-		
-		++$y;
+    <td id="tdId">#<?	++$y;
 		
 		?></td>
-    <td>Объект<? 
-		
-		++$y;
+    <td id="tdObject">Объект<? ++$y;
 		
 		?></td>
-    <td>Создано<? 
-		
-		++$y;
+    <td id="tdCreated">Создано<? ++$y;
 		
 		?></td>
-    <td align="center">Отправитель<? 
-		
-		++$y;
+    <td id="tdSender" align="center">Отправитель<? ++$y;
 		
 		?></td>
-    <td>Прочтено<? 
-		
-		++$y;
+    <td id="tdRead">Прочтено<? ++$y;
 		
 		?></td>
-    <td>Тема<? 
-		
-		++$y;
+    <td id="tdAttaches">Файлы<? ++$y;
 		
 		?></td>
-    <td align="center"><? 
-	
-		++$y;
+    <td id="tdSubject">Тема<? ++$y;
 		
-		?><img src="<? 
+		?></td>
+    <td id="tdRemove" align="center"><img src="<? ++$y;
 	
 	echo JUri::root().'templates/fastwebdev/images/commands/trash.png'; ?>"></td>
   </tr>
@@ -87,24 +74,24 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 	$goSetStat='Пометить как ';
 	$goRead="прочтённое";
 	$goUnRead="непрочтённое";
-	for($i=0,$j=count($arrMessages);$i<$j;$i++):?>
+	for($i=0,$j=count($arrMessages);$i<$j;$i++){?>
   <tr class="<?=SUser::setMailRowClass($arrMessages[$i]['id'])?>" bgcolor="<?
-  	if($read=$arrMessages[$i]['read_datetime']) {
-	  	echo $white;
-  	}else{ 
-		echo $grey;  
-		$read=false;
-  	}?>" id="message_<?=$arrMessages[$i]['id']?>">
+		if($read=$arrMessages[$i]['read_datetime']) {
+			echo $white;
+		}else{ 
+			echo $grey;  
+			$read=false;
+		}?>" id="message_<?=$arrMessages[$i]['id']?>">
     <td><?=$arrMessages[$i]['id']?></td>
     <td title="<?=$arrMessages[$i]['datetime']?>">&nbsp;</td>
     <td title="<?=$arrMessages[$i]['datetime']?>"><?=$arrMessages[$i]['datetime']?></td>
     <td align="center"><?
     
-	// ОТ КОГО? - ОТПРАВИТЕЛЬ СООБЩЕНИЯ	
+		// ОТ КОГО? - ОТПРАВИТЕЛЬ СООБЩЕНИЯ	
 	
-	if ((int)$arrMessages[$i]['user_id_from']==$user_id) {?>
-      Я
-<? 	}else{ // not me
+		if ((int)$arrMessages[$i]['user_id_from']==$user_id) {?>
+		  Я
+	<? 	}else{ // not me
 			//получить отправителя:
 			if($got_view=='precustomers') {?>Предзаказчик<? }
 			else{
@@ -122,12 +109,13 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 		}
 	?></td>
     <td><a href="#" data-read-status="<?=$arrMessages[$i]['id']?>" title="<?=$goSetStat?><?=($read)? $goRead:$goUnRead?>"><?=($read)? $read:$unread?></a></td>
+    <td>&nbsp;</td>
     <td><a href="#" data-subject="<?=$arrMessages[$i]['id']?>"><?=$arrMessages[$i]['subject']?></a></td>
     <td align="center"><a href="#" data-delete="<?=$arrMessages[$i]['id']?>" <?
     $del_title=' title="Удалить сообщение"'; echo $del_title;
 	?>><img src="<?=$del_img?>"></a></td>
   </tr>
-<?	endfor;
+<?	}
 	if(!$i):?>
     <td colspan="<?=$y?>" style="padding:10px;">Сообщений нет</td>
 <?	endif;?>        

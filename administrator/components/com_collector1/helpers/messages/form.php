@@ -12,6 +12,8 @@ defined('_JEXEC') or die;?>
             <input name="subject" id="subject" type="text" class="block width99 padding3">
           <h4 class="marginBottom4 marginTop8">Текст сообщения</h4>
             <textarea name="message" id="message" cols="" rows="10" class="width99 padding3"></textarea>
+		<?	SHTML::uploadFileField();?>
+        	<br>
             <button type="button" class="buttonMess" onClick="sendPostAjax('message');">Отправить</button>
             <button type="reset" class="buttonMess" onClick="composeMessageDisplay('reverse');">Отменить</button>
         </div>

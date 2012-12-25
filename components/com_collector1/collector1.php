@@ -19,6 +19,7 @@ jimport('joomla.application.component.controller');
 jimport('joomla.application.component.model');
 jimport('joomla.application.component.helper');
 jimport('joomla.application.component.view');
+require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SHTML.php';
 require_once JPATH_COMPONENT.DS.'helpers'.DS.'html'.DS.'delete_by_ajax_link.php';
 JTable::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_collector1'.DS.'tables');
 

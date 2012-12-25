@@ -141,12 +141,13 @@ class AjaxModelAjax extends JModel
 		$arrMessage=array();
 		$message_id=(int)JRequest::getVar('object_id');
 		$arrMessage['message']=SUser::getMessage($message_id); 
-		if (JRequest::getVar('w')) var_dump("\narrMessage:\n",$arrMessage);
+		if (JRequest::getVar('take_test')) 
+			var_dump("\narrMessage:\n",$arrMessage);
 		$user_id_read=(int)JRequest::getVar('user_id_read');
 		// добавить к прочтённым:
 		if (!SUser::checkMessageReadStatus($user_id_read,$message_id)){
 			$arrMessage['date']=$this->setMessRead($message_id,$user_id_read,true);
-		} //var_dump("<h1>message:</h1><pre>",$message,"</pre>");
+		} 
 		echo json_encode($arrMessage);
 		exit;
 	}	

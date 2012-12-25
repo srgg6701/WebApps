@@ -4,25 +4,45 @@
 #message_header{
 	padding-left:6px;
 }
-table#tblMess tr[id] td {
+table#tblMess 
+	tr[id] 
+		td:first-child {	/* Id */
+	text-align:right;
+}
+table#tblMess 
+	tr[id] 
+		td:first-child	
+			+td +td {	/* Created */
+	max-width:70px;
+}
+table#tblMess 
+	tr[id] 
+		td:first-child	
+			+td +td +td {	/* Sender */
+	max-width:100px;
+}
+table#tblMess 
+	tr[id] 
+		td:first-child	
+			+td +td +td +td { /* Read */
+	max-width:70px;
+}
+table#tblMess 
+	tr[id] 
+		td:first-child	
+			+td +td +td +td +td {	/* Attaches */
+	/*	*/
+}
+table#tblMess 
+	tr[id] 
+		td:first-child	
+			+td +td +td +td +td +td {	/* Subject */
+	max-width:578px;
+}
+tr[id] td{
 	font-size:0.9em;
 	overflow:hidden;
 	white-space:nowrap;
-}
-table#tblMess tr[id] > td:first-child {
-	text-align:right;
-}
-table#tblMess tr[id] > td:first-child +td +td {
-	max-width:70px;
-}
-table#tblMess tr[id] > td:first-child +td +td +td{
-	max-width:100px;
-}
-table#tblMess tr[id] > td:first-child +td +td +td +td{
-	max-width:70px;
-}
-table#tblMess tr[id] > td:first-child +td +td +td +td +td{
-	max-width:628px;
 }
 textarea#message{
 	width:97%;
