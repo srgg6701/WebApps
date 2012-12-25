@@ -6,6 +6,10 @@ $(function(){
 		//
 		requestPage='<?=JUri::root()?>index.php';
 		// 
+		$('input[type="radio"][id^="pickupObjectType_"]').click( function(){
+				$('div.hidden').fadeOut(250);
+				$('div.hidden#'+this.id+'_obj').fadeIn(250);
+			});
 		$('a[data-read-status]').click( function(){
 				handleMess($(this).attr('data-read-status'),'switch_read_status');
 				return false;
@@ -18,7 +22,7 @@ $(function(){
 				loadMess($(this).attr('data-subject'));
 				return false;
 			});
-		$('a[data-subject]').live( 'click',function(){
+		$('a[data-subject]').live('click',function(){
 				loadMess($(this).attr('data-subject'));
 				return false;
 			});
@@ -26,7 +30,7 @@ $(function(){
 				handleMess($(this).attr('data-delete'),'delete');
 				return false;
 			});
-		$('a[data-delete]').live( 'click',function(){
+		$('a[data-delete]').live('click',function(){
 				handleMess($(this).attr('data-delete'),'delete');
 				return false;
 			});
@@ -41,17 +45,20 @@ $(function(){
  */
 function composeMessageDisplay(rev){
   try{
-	var headerTextHolder,textAreaDisplay,messageTextHolderDisplay;
+	var headerTextHolder,textAreaDisplay,pickupObjDisplay,messageTextHolderDisplay;
 	if (rev){
 		headerTextHolder='<?=$h_mess_text?>'; // 'Текст сообщения'
+		pickupObjDisplay='none';
 		textAreaDisplay='none';
 		messageTextHolderDisplay='block';
 	}else{
 		headerTextHolder='Новое сообщение';
+		pickupObjDisplay='inline-block';
 		textAreaDisplay='block';
 		messageTextHolderDisplay='none';
 	}
 	$('#message_header').html(headerTextHolder); // ячейка для темы сообщения: поле с заголовком сообщения
+	$('#pickup_obj').css('display',pickupObjDisplay); // блок выбора объекта
 	$('#message_fields').css('display',textAreaDisplay); // поле ввода текста	// textarea
 	$('#sel_mess').css('display',messageTextHolderDisplay); // блок со статическим текстом - 'Выберите сообщение'
 	$('#message_content')

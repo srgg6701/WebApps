@@ -32,5 +32,14 @@ class SData{
 		$db->setQuery($query);
 		$last_id=$db->loadResult();
 		return (!$last_id)? false:$last_id;
-	}	
+	}
+/**
+ * Получить заказанные компоненты юзера
+ * @package
+ * @subpackage
+ */
+	public static function getUserOrders($user){
+		$model=JModel::getInstance('orders','Collector1Model');
+		return $model->getCustomerOrders($user);
+	}
 }?>

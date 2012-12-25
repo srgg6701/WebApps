@@ -18,7 +18,17 @@ class SHTML extends JHtml{
  * @package
  * @subpackage
  */
-	public static function uploadFileField(){
-		require_once JPATH_BASE.DS.'components'.DS.'com_collector1'.DS.'helpers'.DS.'html'.DS.'upload.php';
-	}
+	public static function uploadFileField(){?>
+<span style="display:inline-block;">
+  <div class="marginBottom10" id="files_container">
+    <div class="put_file_field">
+  		<input type="file" name="fileField_1" id="fileField_1" multiple>&nbsp; <a href="#" onClick="return addFileField('remove',parentNode);" class="txtRed">отменить загрузку...</a> &nbsp;
+    </div>
+  </div>
+  </span>
+  <div class="paddingLeft10">
+  	<a href="#" onClick="return addFileField('add');">ещё файл...</a>
+  </div>		
+<?	}
 }
+

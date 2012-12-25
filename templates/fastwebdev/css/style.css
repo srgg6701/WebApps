@@ -1293,7 +1293,7 @@ tr.hiddenShop > td:first-child{
 tr.hiddenShop > td[class="joined"]{
 	padding-left:10px;
 }
-tr.WebShop, tr.WebShop td{
+tr.WebShop, tr.WebShop td, .hidden{
 	display:none;
 }
 
