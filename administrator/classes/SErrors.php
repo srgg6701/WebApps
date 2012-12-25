@@ -41,9 +41,6 @@ class SErrors{
 		if ($err) JMail::sendErrorMess('Не получено: '.$err,$errSubj);
 		else{
 			if (is_array($arr_data)) { //может быть true, в этом случае данные уже должны быть подготовлены
-				/*if (!$table->load($id)) {
-					$err=true;
-				}else{*/	
 				foreach($arr_data as $field=>$value) 
 					$table->set($field,$value);//}
 			}

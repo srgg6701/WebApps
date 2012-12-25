@@ -23,7 +23,6 @@ tr.UnReadAllIn td{
 if(!isset($user))
 	$user=JFactory::getUser();
 $user_id=(int)$user->id;
-
 //SDebug::showDebugContent($user->id,'user->id');
 if (!$UserAdmin&&SUser::detectAdminStat($user)) {
 	$UserAdmin=$user;

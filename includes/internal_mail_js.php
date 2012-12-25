@@ -139,8 +139,9 @@ function loadMess(message_id){
 			/*beforeSend: function() {},*/
 			success: function (data) {
 				handleMessAreaAfterPost(data['message']);
-				$('tr').each(function() {
-					$(this).removeAttr('style','background-color');
+				$('table#tblMess > tr').each(function() {
+					//if (index>0)
+						$(this).removeAttr('style','background-color');
 				});
 				// для активной строки:
 				$('#message_'+message_id)
@@ -168,10 +169,10 @@ function loadMess(message_id){
 function sendPostAjax(txtAreaID){
   try{
 	// content
-	var messageContent = "object=message&action=send&<?=$get_layout?>_id=<?=$object_id?>&user_id_from=<?=$user_id_from?>&user_id_to=<?=$user_id?>";
+	var messageContent = "object=message&action=send&<?=$get_layout?>_id=<?=$object_id?>&user_id_from=<?=$user_id?>&user_id_to=<?=$user_id_to?>";
 	messageContent+="&subject=" + $('#subject').val() + "&message=" + $('#message').val(); 
 	var uData="option=com_ajax&"+messageContent;
-	var nw=true;
+	var nw=false;
 	if (nw) 
 		takeTest(uData);
   	else{
@@ -189,6 +190,7 @@ function sendPostAjax(txtAreaID){
 						*/'<td>'+setReadMessageDate(data['id'],data['date_time'])+'</td>'+/*
 						*/'<td>Я</td>'+/*
 						*/'<td>'+setReadMessageDate(data['id'],data['date_time'])+'</td>'+/*
+						*/'<td>files</td>'+/*
 						*/'<td><a href="#" data-subject="'+data['id']+'">'+data['subject']+'</a></td>'+/*
 						*/'<td align="center"><a href="#" data-delete="'+data['id']+'" <?=$del_title;?>><img src="<?=$del_img?>"></a></td>'+/*
 						

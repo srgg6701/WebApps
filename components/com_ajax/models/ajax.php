@@ -196,7 +196,8 @@ class AjaxModelAjax extends JModel
 			$jData['subject']='=SUBJECT=';
 			$jData['message']='=MESSAGE TEXT=';
 		}
-		if (JRequest::getVar('w')) var_dump("<h1>jData:</h1><pre>",$jData,"</pre>");
+		if (JRequest::getVar('take_test')) 
+			var_dump("<h1>jData:</h1><pre>",$jData,"</pre>");
 		else{
 			SErrors::afterTableUpdate($table);
 			$jData['id']=$db->insertid(); 

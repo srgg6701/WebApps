@@ -104,7 +104,7 @@ $arrMessages=$this->messages;
           </label>
           <div class="hidden" id="pickupObjectType_components_obj"><?		
 	$orders=SData::getUserOrders($user);
-	SDebug::showDebugContent($orders,'orders');
+		SDebug::showDebugContent($orders,'orders');
 	for($i=0,$j=count($orders);$i<$j;$i++){
 		$order=$orders[$i];
 		$cmp_name='<div>';	
