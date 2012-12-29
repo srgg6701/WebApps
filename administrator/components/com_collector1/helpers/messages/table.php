@@ -73,30 +73,32 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 	$goSetStat='Пометить как ';
 	$goRead="прочтённое";
 	$goUnRead="непрочтённое";
-	for($i=0,$j=count($arrMessages);$i<$j;$i++){?>
-  <tr class="<?=SUser::setMailRowClass($arrMessages[$i]['id'])?>" bgcolor="<?
-		if($read=$arrMessages[$i]['read_datetime']) {
-			echo $white;
-		}else{ 
-			echo $grey;  
-			$read=false;
-		}?>" id="message_<?=$arrMessages[$i]['id']?>">
-    <td><?=$arrMessages[$i]['id']?></td>
-    <td title="<?=$arrMessages[$i]['datetime']?>">&nbsp;</td>
-    <td title="<?=$arrMessages[$i]['datetime']?>"><?=$arrMessages[$i]['datetime']?></td>
+	for($i=0,$j=count($arrMessages);$i<$j;$i++){
+		$messageId=$arrMessages[$i]['id'];
+		$messageDateTime=$arrMessages[$i]['datetime'];
+		if ($messageReadDateTime=$arrMessages[$i]['read_datetime'])
+			$messageTime=substr($messageReadDateTime,11);
+		$messageSubject=$arrMessages[$i]['subject'];
+		$messageIdFrom=$arrMessages[$i]['user_id_from'];	
+    	$mine=((int)$messageIdFrom==$user_id)? true:false;
+		$read=($messageReadDateTime)? true:false;
+		?>
+  <tr class="<?=SUser::setMailRowClass($messageId)?>" bgcolor="<?
+		echo($read)? $white:$grey;
+		?>" id="message_<?=$messageId?>">
+    <td><?=$messageId?></td>
+    <td title="<?=$messageDateTime?>">&nbsp;</td>
+    <td title="<?=$messageDateTime?>"><?=$messageDateTime?></td>
     <td><?
-    
-		// ОТ КОГО? - ОТПРАВИТЕЛЬ СООБЩЕНИЯ	
-	
-		if ((int)$arrMessages[$i]['user_id_from']==$user_id) {?>
+		// ОТ КОГО? - ОТПРАВИТЕЛЬ СООБЩЕНИЯ		
+		if ($mine){?>
 		  Я
 	<? 	}else{ // not me
 			//получить отправителя:
 			if($got_view=='precustomers') {?>Предзаказчик<? }
 			else{
-				$arrUserDataFromMail=SUser::getUserDataFromMail($arrMessages[$i]['id']);?>
-				<a href="<? echo JUri::root() .
-					"administrator/index.php?option=com_users&view=user&layout=edit&id=" .
+				$arrUserDataFromMail=SUser::getUserDataFromMail($messageId);?>
+				<a href="<? echo JUri::root() .					"administrator/index.php?option=com_users&view=user&layout=edit&id=" .
 					$arrUserDataFromMail['user_id'];?>" title="<?
 						echo $arrUserDataFromMail['user_name'] . 
 						"; Редактировать данные";?>"><?
@@ -107,10 +109,19 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 			}
 		}
 	?></td>
-    <td><a href="#" data-read-status="<?=$arrMessages[$i]['id']?>" title="<?=$goSetStat?><?=($read)? $goRead:$goUnRead?>"><?=($read)? $read:$unread?></a></td>
+    <td><a href="#" data-read-status="<?=$messageId?>" title="<? 
+	
+	if ($messageTime) 		
+		echo $messageTime."\n"; 
+	
+	echo $goSetStat;
+	
+	echo ($read)? $goUnRead:$goRead;
+	
+	?>"><? echo ($read)? $messageReadDateTime:$unread;?></a></td>
     <td>&nbsp;</td>
-    <td><a href="#" data-subject="<?=$arrMessages[$i]['id']?>"><?=$arrMessages[$i]['subject']?></a></td>
-    <td align="center"><a href="#" data-delete="<?=$arrMessages[$i]['id']?>" <?
+    <td><a href="#" data-subject="<?=$messageId?>"><?=$messageSubject?></a></td>
+    <td align="center"><a href="#" data-delete="<?=$messageId?>" <?
     $del_title=' title="Удалить сообщение"'; echo $del_title;
 	?>><img src="<?=$del_img?>"></a></td>
   </tr>

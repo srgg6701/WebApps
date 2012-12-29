@@ -11,11 +11,11 @@ $(function(){
 				$('div.hidden#'+this.id+'_obj').fadeIn(250);
 			});
 		$('a[data-read-status]').click( function(){
-				handleMess($(this).attr('data-read-status'),'switch_read_status');
+				handleMess($(this).attr('data-read-status'),'switch_read_status',this);
 				return false;
 			});
 		$('a[data-read-status]').live('click',function(){
-				handleMess($(this).attr('data-read-status'),'switch_read_status');
+				handleMess($(this).attr('data-read-status'),'switch_read_status',this);
 				return false;
 			});
 		$('a[data-subject]').click( function(){
@@ -76,8 +76,8 @@ function composeMessageDisplay(rev){
  * Переключить статус прочтения сообщения
  * Удалить сообщение
  */
-function handleMess(message_id,action){
-  try{ 
+function handleMess(message_id,action,goLive){
+  try{  console.info('message_id,action = '+message_id+', '+action);
   	var uData="option=com_ajax&object=message&action="+action+"&object_id="+message_id+"&user_id=<?=$user_id?>";
 	var nw=false;
 	if (nw) 
@@ -90,10 +90,11 @@ function handleMess(message_id,action){
 			data: uData,
 			success: function (data) {
 				var messRow=$('#message_'+message_id);
-				var messReadDateLink=$('td a',messRow).eq(0);
 				var Bckgr,Html,Title;
+				
 				if (action=='switch_read_status'){	
 					Html=data;
+					console.info('color: '+$(messRow).attr('bgcolor')+' : <?=$white?>, Html = '+Html);
 					if ($(messRow).attr('bgcolor')=='<?=$white?>'){ // уже прочтено
 						bckgr='<?=$grey?>';// назначить серый фон строке
 						Title='<?=$goSetStat.$goUnRead?>';// текст title
@@ -102,7 +103,7 @@ function handleMess(message_id,action){
 						Title='<?=$goSetStat.$goRead?>';
 					}
 					$(messRow).attr('bgcolor',bckgr);
-					$(messReadDateLink).html(Html).attr('title',Title);
+					$(goLive).text(Html).attr('title',Title);
 				}else if(action=='delete'){ // Удалить сообщение
 					$(messRow).css('display','none');
 				}
@@ -186,10 +187,16 @@ function loadMess(message_id){
  */
 function sendPostAjax(txtAreaID){
   try{
+	// не отметили объект сообщения:
+	if (!$('#attachObjects input[type="radio"]:checked').size()){
+		alert('Отметьте объект сообщения');
+		$('#attachObjects').css('background-color','lightyellow');
+		return false;
+  	}
 	// content
 	var messageContent = "object=message&action=send&<?=$get_layout?>_id=<?=$object_id?>&user_id_from=<?=$user_id?>&user_id_to=<?=$user_id_to?>&subject=" + $('#subject').val() + "&message=" + $('#message').val(); 
 	if ($('#attachObjects input[type="radio"]:checked').size()>0){
-		console.info('checked!');
+		// console.info('checked!');
 		var pickupObjectType=$('input[type="radio"][id^="pickupObjectType_"]:checked').val();
 		var obdata,selVal,mAlert,rchecked=false;
 		if (pickupObjectType=='site'){
@@ -208,11 +215,11 @@ function sendPostAjax(txtAreaID){
 		}else
 			messageContent+='&pickupObjectType='+pickupObjectType+'&'+obdata;
 	}
-	console.info('messageContent: '+messageContent); return false;
+	console.info('messageContent: '+messageContent); // return false;
 	var uData="option=com_ajax&"+messageContent;
-	var nw=true;
+	var nw=false;
 	if (nw) 
-		takeTest(uData);
+		takeTest(uData); // take_test param is already included
   	else{
 		$.ajax({
 			type: "POST",// "GET"
@@ -222,7 +229,7 @@ function sendPostAjax(txtAreaID){
 			/*beforeSend: function() {},*/
 			success: function (data) {
 					$('table#tblMess tbody tr:first-child')
-						.after('<tr bgcolor="<?=$white?>" style="background-color:<?=$light_orange?>;">'+/*
+						.after('<tr id="message_'+data['id']+'" bgcolor="<?=$white?>" style="background-color:<?=$light_orange?>;">'+/*
 						*/'<td>'+data['id']+'</td>'+/*
 						*/'<td>&nbsp</td>'+/*
 						*/'<td>'+setReadMessageDate(data['id'],data['date_time'])+'</td>'+/*
@@ -249,7 +256,10 @@ function sendPostAjax(txtAreaID){
  * Прописать дату прочтения сообщения
  */
 function setReadMessageDate(message_id,readStatus){
-	var linkContent='<a data-read-status="'+message_id+'" title="<?=$goSetStat.$goUnRead?>" href="#">'+readStatus+'</a>';
+	//var readTime=new Date();
+	var sTime=readStatus.substr(11); 
+	console.info('sTime = '+sTime);
+	var linkContent='<a href="#" data-read-status="'+message_id+'" title="'+sTime+'\n<?=$goSetStat.$goUnRead?>">'+readStatus+'</a>';
 	// console.info();
 	return linkContent;
 }

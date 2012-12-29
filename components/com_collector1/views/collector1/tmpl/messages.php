@@ -128,7 +128,7 @@ $arrMessages=$this->messages;
 		$cmp_name.="</div>
 			<hr size='1' color='#CCC' style='clear:both'>";
 		
-		$option[]=JHTML::_( 'select.option', $order['id'], $order['id'].'</br>'.$cmp_name);
+		$option[]=JHTML::_( 'select.option', 'o'.$order['id'], $order['id'].'</br>'.$cmp_name);
 	}
 	$comps=JHTML::_('select.radiolist', 
 				   	$option, 
@@ -140,7 +140,7 @@ $arrMessages=$this->messages;
 				   	false 
 				   );
 	// correct elements' ids:
-	$comps=str_replace('id="component0','id="component',$comps);
+	$comps=str_replace('id="componento','id="component',$comps);
 	echo $comps;
 		  ?></div>
         <br />
