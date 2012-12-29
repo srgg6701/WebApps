@@ -429,13 +429,13 @@ FROM #__webapps_messages AS m
 WHERE m.id = ".$message_id." 
   AND ( user_id_to = ".$user_id." 
      OR user_id_from = ".$user_id." 
-     )";
+     )"; 
 		}
 		if(!$db) $db = JFactory::getDBO();
 		$db->setQuery($query);
 		if ($direct=$db->loadResult()) {
 			if ($direct=="unknown")
-				JMail::sendErrorMess('Получен статус направления сообщения "unknown"','Неизвестный статус направления сообщения');
+				JMail::sendErrorMess('Получен статус направления сообщения "unknown" (SUser::setMailRowClass())' ,'Неизвестный статус направления сообщения');
 		}
 		if (!self::checkMessageReadStatus($user->get('id'),$message_id)) $user_mess_unread=true;
 		// если админ

@@ -14,43 +14,49 @@ label > div{
 #message_header{
 	padding-left:6px;
 }
+#sel_mess{
+	max-width:925px;
+}
 table#tblMess 
-	tr[id] 
+	tr 
 		td:first-child {	/* Id */
 	text-align:right;
 }
 table#tblMess 
-	tr[id] 
+	tr 
 		td:first-child	
 			+td +td {	/* Created */
 	max-width:70px;
 }
 table#tblMess 
-	tr[id] 
+	tr 
 		td:first-child	
 			+td +td +td {	/* Sender */
 	max-width:100px;
+	text-align:center;
 }
 table#tblMess 
-	tr[id] 
+	tr 
 		td:first-child	
 			+td +td +td +td { /* Read */
 	max-width:70px;
 }
 table#tblMess 
-	tr[id] 
+	tr 
 		td:first-child	
 			+td +td +td +td +td {	/* Attaches */
 	/*	*/
 }
 table#tblMess 
-	tr[id] 
+	tr 
 		td:first-child	
 			+td +td +td +td +td +td {	/* Subject */
-	max-width:578px;
+	max-width:534px;
 }
-tr[id] td{
+tr td{
 	font-size:0.9em;
+}
+table#tblMess tr td{
 	overflow:hidden;
 	white-space:nowrap;
 }
@@ -89,22 +95,29 @@ $arrMessages=$this->messages;
 </div>
 <div class="paddingLeft10 paddingRight10" id="pickup_obj" style="display:<?="none"?>; vertical-align:top;">
 	<h4 class="marginBottom8">Выберите объект сообщения:</h4>
-    <div>
+    <div id="attachObjects">
         <label>
           <input type="radio" name="pickupObjectType" value="site" id="pickupObjectType_sites" />
           Сайты</label>
-          <div class="hidden" id="pickupObjectType_sites_obj"><?
+          <div class="<?="hidden"?>" id="pickupObjectType_sites_obj"><?
 	$collections_ids_array=$this->collections_ids_array; 
+	// add 's' to id:
+	function attachLetter($val){
+		return 's'.$val;
+	}
+	$arrCollectionsLetters=array_map('attachLetter',$collections_ids_array);
 	//SDebug::showDebugContent($collections_ids_array,'collections_ids_array');
-	echo JHTML::_('select.genericlist', array_combine($collections_ids_array,$collections_ids_array), 'collections_ids_array');
+	$selArray=array_combine($arrCollectionsLetters,$collections_ids_array);
+	array_unshift($selArray,'-?-');
+	echo JHTML::_('select.genericlist', $selArray, 'collections_ids_array');
 		?></div>
         <br />
         <label>
-          <input type="radio" name="pickupObjectType" value="components" id="pickupObjectType_components" /> Наботы компонентов
+          <input type="radio" name="pickupObjectType" value="components" id="pickupObjectType_components" /> Наборы компонентов
           </label>
-          <div class="hidden" id="pickupObjectType_components_obj"><?		
+          <div class="<?="hidden"?>" id="pickupObjectType_components_obj"><?		
 	$orders=SData::getUserOrders($user);
-		SDebug::showDebugContent($orders,'orders');
+		//SDebug::showDebugContent($orders,'orders');
 	for($i=0,$j=count($orders);$i<$j;$i++){
 		$order=$orders[$i];
 		$cmp_name='<div>';	
@@ -117,16 +130,18 @@ $arrMessages=$this->messages;
 		
 		$option[]=JHTML::_( 'select.option', $order['id'], $order['id'].'</br>'.$cmp_name);
 	}
-	echo JHTML::_( 'select.radiolist', 
-				   $option, 
-				   'component',	// name 
-				   ' class=""', 
-				   'value', // $rvalues key - is value 
-				   'text',  // $rvalues value - is text 
-				   false,  // selected value by default
-				   false 
-				 );
-
+	$comps=JHTML::_('select.radiolist', 
+				   	$option, 
+				   	'component',	// name 
+				   	' class=""', 
+				   	'value', // $rvalues key - is value 
+				   	'text',  // $rvalues value - is text 
+				   	false,  // selected value by default
+				   	false 
+				   );
+	// correct elements' ids:
+	$comps=str_replace('id="component0','id="component',$comps);
+	echo $comps;
 		  ?></div>
         <br />
         <label>

@@ -65,6 +65,9 @@ function composeMessageDisplay(rev){
 		.css('width','434px')
 			.children('input','textarea')
 				.css('width','100%');
+	$("html, body").animate({ // go to message area
+			scrollTop:$('#message_content').offset().top
+		},500);
   }catch(e){
 	  alert(e.message);
   }
@@ -103,9 +106,11 @@ function handleMess(message_id,action){
 				}else if(action=='delete'){ // Удалить сообщение
 					$(messRow).css('display','none');
 				}
+				console.info('handleMess(action:'+action+')->success');
 			},
 			error: function (data) {
 				alert("Не удалось отправить данные.\n"+data);
+				console.info('handleMess(action:'+action+')->error');
 			}
 		});
 	}
@@ -114,11 +119,37 @@ function handleMess(message_id,action){
   }
 }
 /**
+ * Описание
+ * @package
+ * @subpackage
+ */
+function handleReadStatus(data,message_id){
+	if (!message_id)
+		message_id=data['id'];
+	$('table#tblMess tr')
+			.each(function(index) {
+				if (index>0)
+					$(this).removeAttr('style','background-color');
+		});
+		// для активной строки:
+		$('#message_'+message_id)
+			.attr('bgcolor','<?=$white?>') // установить фон прочтённого
+			.css('background-color','<?=$light_orange?>') // стиль активного
+				.children('td') // ячейки с датой прочтения
+					.children('a[data-read-status]') // ссылка с датой
+					.text(data['date']); // дата прочтения
+		console.info('data[date] = '+data['date']);
+		if (data['date']) 
+			$('table#tblMess > tr td').eq(1).html(setReadMessageDate(message_id,data['date']));// ссылка с датой прочтения	
+}
+
+/**
  * Обработать область сообщения после его отправки
  */
 function handleMessAreaAfterPost(messageText,headerTextStatic){
 	$('#sel_mess').fadeIn(150).html(messageText);
 	$('#message_fields').fadeOut(150);
+	$('#pickup_obj').fadeOut(150);
 	if (headerTextStatic) $('#message_header').html(headerTextStatic);
 }
 /**
@@ -139,20 +170,7 @@ function loadMess(message_id){
 			/*beforeSend: function() {},*/
 			success: function (data) {
 				handleMessAreaAfterPost(data['message']);
-				$('table#tblMess > tr').each(function() {
-					//if (index>0)
-						$(this).removeAttr('style','background-color');
-				});
-				// для активной строки:
-				$('#message_'+message_id)
-					.attr('bgcolor','<?=$white?>') // установить фон прочтённого
-					.css('background-color','<?=$light_orange?>') // стиль активного
-						.children('td') // ячейки с датой прочтения
-							.children('a[data-read-status]') // ссылка с датой
-							.text(data['date']); // дата прочтения
-				console.info('data[date] = '+data['date']);
-				if (data['date']) 
-					$('table#tblMess > tr td').eq(1).html(setReadMessageDate(message_id,data['date']));// ссылка с датой прочтения
+				handleReadStatus(data,message_id);
 			},
 			error: function (data) {
 				alert("Не удалось отправить данные.\nОтвет: "+data.result);
@@ -169,10 +187,30 @@ function loadMess(message_id){
 function sendPostAjax(txtAreaID){
   try{
 	// content
-	var messageContent = "object=message&action=send&<?=$get_layout?>_id=<?=$object_id?>&user_id_from=<?=$user_id?>&user_id_to=<?=$user_id_to?>";
-	messageContent+="&subject=" + $('#subject').val() + "&message=" + $('#message').val(); 
+	var messageContent = "object=message&action=send&<?=$get_layout?>_id=<?=$object_id?>&user_id_from=<?=$user_id?>&user_id_to=<?=$user_id_to?>&subject=" + $('#subject').val() + "&message=" + $('#message').val(); 
+	if ($('#attachObjects input[type="radio"]:checked').size()>0){
+		console.info('checked!');
+		var pickupObjectType=$('input[type="radio"][id^="pickupObjectType_"]:checked').val();
+		var obdata,selVal,mAlert,rchecked=false;
+		if (pickupObjectType=='site'){
+			selVal=$('#collections_ids_array').val();
+			mAlert='id сайта';
+			obdata='collections_ids_array='+selVal;
+		}
+		else if (pickupObjectType=='components'){
+			selVal=$('input[type="radio"][id^="component"]:checked').val();
+			mAlert='# заказа';
+			obdata='component='+selVal;
+		}
+		if (selVal=='0'){
+			alert('Вы не указали '+mAlert+'объекта сообщения');
+			return false;
+		}else
+			messageContent+='&pickupObjectType='+pickupObjectType+'&'+obdata;
+	}
+	console.info('messageContent: '+messageContent); return false;
 	var uData="option=com_ajax&"+messageContent;
-	var nw=false;
+	var nw=true;
 	if (nw) 
 		takeTest(uData);
   	else{
@@ -196,6 +234,7 @@ function sendPostAjax(txtAreaID){
 						
 					*/'</tr>');
 					handleMessAreaAfterPost(data['message'],'Отправленное сообщение:');
+					handleReadStatus(data);
 				},
 			error: function (data) {
 				alert("Не удалось отправить данные.\nОтвет: "+data.result);

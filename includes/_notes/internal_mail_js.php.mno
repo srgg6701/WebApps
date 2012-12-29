@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="notes" value="Разобраться с sendPostAjax()-&gt; user_id_to - в админке должно быть указано значение." />
+	<infoitem key="showOnOpen" value="true" />
+</info>

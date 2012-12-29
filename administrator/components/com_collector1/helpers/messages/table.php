@@ -84,7 +84,7 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
     <td><?=$arrMessages[$i]['id']?></td>
     <td title="<?=$arrMessages[$i]['datetime']?>">&nbsp;</td>
     <td title="<?=$arrMessages[$i]['datetime']?>"><?=$arrMessages[$i]['datetime']?></td>
-    <td align="center"><?
+    <td><?
     
 		// ОТ КОГО? - ОТПРАВИТЕЛЬ СООБЩЕНИЯ	
 	

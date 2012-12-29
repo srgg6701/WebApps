@@ -147,7 +147,8 @@ class AjaxModelAjax extends JModel
 		// добавить к прочтённым:
 		if (!SUser::checkMessageReadStatus($user_id_read,$message_id)){
 			$arrMessage['date']=$this->setMessRead($message_id,$user_id_read,true);
-		} 
+		}else 
+			$arrMessage['date']=date("Y-m-d H:i:s");
 		echo json_encode($arrMessage);
 		exit;
 	}	
@@ -159,16 +160,17 @@ class AjaxModelAjax extends JModel
 		//subject
 		//message
 		//user_id
-		if (JRequest::getVar('order_id')){
-			
-			$objtype='o';
-			$objid=JRequest::getVar('order_id');
-			
-		}elseif(JRequest::getVar('collection_id')){
-			
-			$objtype='s';
-			$objid=JRequest::getVar('collection_id');
-			
+		if ($ObjectType=JRequest::getVar('pickupObjectType')){
+			$obj_identifier=($ObjectType=='site')? JRequest::getVar('collections_ids_array'):JRequest::getVar('component');
+		}else{
+			if (JRequest::getVar('order_id')){
+				$objtype='o';
+				$objid=JRequest::getVar('order_id');
+			}elseif(JRequest::getVar('collection_id')){
+				$objtype='s';
+				$objid=JRequest::getVar('collection_id');
+			}
+			$obj_identifier=$objtype.$objid;
 		}
 		$table = JTable::getInstance('messages', 'Collector1Table');
 		$arrData=array( 'user_id_from'=>JRequest::getVar('user_id_from'),
@@ -176,33 +178,33 @@ class AjaxModelAjax extends JModel
 						'date_time'=>date('Y-m-d H:i:s'),
 						'subject'=>JRequest::getVar('subject'),
 						'message'=>JRequest::getVar('message'),
-						'obj_identifier'=>$objtype.$objid
+						'obj_identifier'=>$obj_identifier
 					  );
-		$jData=array( 'id'=>0,
-					  'date_time'=>date('d.m.Y H:i'),
-					  'status'=>date('d.m.Y H:i'),
-					  'direction'=>'outbox',
+		$data=array( 'id'=>0,
+					 'date_time'=>date('d.m.Y H:i:s'),
+					 'status'=>date('d.m.Y H:i:s'),
+					 'direction'=>'outbox',
 					);
 		foreach ($arrData as $field => $value){
 			$table->set($field,$value);
 			if ($field=='subject'||$field=='message') 
-				$jData[$field] = $value;
+				$data[$field] = $value;
 		}
 		// получить id добавленной записи
 		$db = JFactory::getDBO();
 		//$test=true;
 		if ($test){
-			$jData['id']='=ID=';
-			$jData['subject']='=SUBJECT=';
-			$jData['message']='=MESSAGE TEXT=';
+			$data['id']='=ID=';
+			$data['subject']='=SUBJECT=';
+			$data['message']='=MESSAGE TEXT=';
 		}
 		if (JRequest::getVar('take_test')) 
-			var_dump("<h1>jData:</h1><pre>",$jData,"</pre>");
+			var_dump("<h1>jData:</h1><pre>",$data,"</pre>");
 		else{
 			SErrors::afterTableUpdate($table);
-			$jData['id']=$db->insertid(); 
+			$data['id']=$db->insertid(); 
 		}
-		echo json_encode($jData);
+		echo json_encode($data);
 		exit;
 	}
 	/**
@@ -224,9 +226,9 @@ class AjaxModelAjax extends JModel
 		}
 		if (!$take_test||JRequest::getVar('do'))
 			SErrors::afterTable($table);
-		if ($date) return date("d.m.Y H:i");
+		if ($date) return date("d.m.Y H:i:s");
 		else {
-			echo date("d.m.Y H:i");
+			echo date("d.m.Y H:i:s");
 		}
 	}
 	/**
