@@ -438,6 +438,9 @@ FROM #__webapps_site_types ORDER BY id DESC";
 	function updateCollectionData($collection_id) {
 		//Добавить данные в таблицу и проверить состояние:
 		SErrors::afterTableUpdate($this->prepareCollectionDataSet($collection_id));
+		SFiles::handleFilesUploading( 's'/* o or s */,
+								   $collection_id
+								 );
 		return true;
 	}
 }
