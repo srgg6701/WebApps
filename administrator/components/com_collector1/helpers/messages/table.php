@@ -125,9 +125,15 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
     $del_title=' title="Удалить сообщение"'; echo $del_title;
 	?>><img src="<?=$del_img?>"></a></td>
   </tr>
-<?	}
-	if(!$i):?>
+<?	}?>
+  <tr>
+    <td align="center" colspan="<?=$y?>"><?
+    echo $this->pagination; //var_dump("<h1>get:</h1><pre>",JRequest::get('get'),"</pre>");?></td>
+  </tr>
+<?	if(!$i):?>
+  <tr>
     <td colspan="<?=$y?>" style="padding:10px;">Сообщений нет</td>
+  </tr>
 <?	endif;?>        
 </table>
 

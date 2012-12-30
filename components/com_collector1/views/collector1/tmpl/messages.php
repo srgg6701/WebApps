@@ -1,77 +1,4 @@
-<style>
-<?	$css=true;
-	if ($css){?>
-label{
-	margin:0;
-	text-align:initial;
-}
-label > div{
-	float: left;
-	margin-top: -16px;
-	padding-bottom:6px;
-	padding-left: 60px;
-}
-#message_header{
-	padding-left:6px;
-}
-#sel_mess{
-	max-width:925px;
-}
-table#tblMess 
-	tr 
-		td:first-child {	/* Id */
-	text-align:right;
-}
-table#tblMess 
-	tr 
-		td:first-child	
-			+td +td {	/* Created */
-	max-width:70px;
-}
-table#tblMess 
-	tr 
-		td:first-child	
-			+td +td +td {	/* Sender */
-	max-width:100px;
-	text-align:center;
-}
-table#tblMess 
-	tr 
-		td:first-child	
-			+td +td +td +td { /* Read */
-	max-width:70px;
-}
-table#tblMess 
-	tr 
-		td:first-child	
-			+td +td +td +td +td {	/* Attaches */
-	/*	*/
-}
-table#tblMess 
-	tr 
-		td:first-child	
-			+td +td +td +td +td +td {	/* Subject */
-	max-width:534px;
-}
-tr td{
-	font-size:0.9em;
-}
-table#tblMess tr td{
-	overflow:hidden;
-	white-space:nowrap;
-}
-textarea#message{
-	width:97%;
-	margin-bottom:8px;
-}
-div.hidden{
-	padding:10px;
-}
-/*div#messContent{
-	display:inline-block;
-}*/
-<?	}?>
-</style>
+<link href="<?=JUri::root()?>templates/fastwebdev/css/messages.css" type="text/css" rel="stylesheet">
 <?php
 /**
  * @version		$Id: default.php 15 2009-11-02 18:37:15Z chdemko $
@@ -87,8 +14,8 @@ defined('_JEXEC') or die;
 if (JRequest::getVar('this'))
 	SDebug::showDebugContent($this,'this');
 $mess_path=JPATH_ADMINISTRATOR.DS.'components'.DS.'com_collector1'.DS.'helpers'.DS.'messages'.DS;
-$arrMessages=$this->messages; 
-// SDebug::showDebugContent($arrMessages,'arrMessages');?>
+$arrMessages=$this->messages; // выводит список, ограниченный установкой
+//SDebug::showDebugContent($arrMessages,'arrMessages');?>
 <div style="clear:both;margin-top:10px;"></div>
 <div>
 <? require_once $mess_path.'table.php';?>

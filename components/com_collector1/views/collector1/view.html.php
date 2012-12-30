@@ -44,7 +44,18 @@ class Collector1ViewCollector1 extends JView
 		$this->collections_ids_array=$collections_ids_array=SCollection::getCurrentSetArray('collections_ids');
 		if ($layout=='messages'){ 
 			$model=JModel::getInstance('messages','Collector1Model');
+			$messArray=array(); // make an array for an appropriate query data
+			if (!$limit=JRequest::getVar('limit'))
+				$limit='default';
+			if ($user->get('guest')!=1){
+				$user_id=$user->get('id');
+				$messArray['user_id_from']=$messArray['user_id_to']=$user_id;
+			}
+				// such a data required to be substituted into a query at SUser::getMessages() to get ALL messages belonging to the current user
+			$messArray['limit']=$limit;
+			$model->fillMessArray($messArray);
 			$this->messages=$model->getMessages(); 
+			SHTML::makePagination($limit,$user_id," class=\"pagination\"");
 		}else{
 			$model=$this->getModel();
 			//получим данные переданной коллекции заказчика:

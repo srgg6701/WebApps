@@ -300,6 +300,9 @@ div#mode_login fieldset,
 .txtRed{
 	color:#FF0000;
 }
+.txtOrange{
+	color:orange;
+}
 .tip-wrap{
 	background:#FFFF99;
 	color:#666666;

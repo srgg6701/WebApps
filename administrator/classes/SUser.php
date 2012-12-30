@@ -20,7 +20,28 @@ class SUser{
 	  *	-  not enabled, not activated				block = 1, activation [code]
 	  * -  disabled, activated	(can't log in)		block = 1, activation [empty]
 	  -----------------------------------------------------------------------
-	  * * 
+*/	  
+
+/**
+ * Получить колич. всех сообщений юзера
+ * @package
+ * @subpackage
+ */
+	public static function getAllUserMessagesCount($user_id=false){
+		if(!$user_id){
+			$user = JFactory::getUser();
+			$user_id=$user->get('id');
+		}
+		$query="SELECT COUNT(*)
+  FROM #__webapps_messages ";
+  		if ($user_id)
+			$query.="
+  WHERE user_id_from=$user_id OR user_id_to=$user_id";
+		$db=JFactory::getDBO();
+		$db->setQuery($query);
+		return $db->loadResult(); 
+	}
+/* * 
 	  * Нет в таблице юзеров:
 	  * - предзаказчик - уже создавал коллекции/заказы, но ещё не зарегистрировался
 	  * - новый предзаказчик
@@ -155,6 +176,7 @@ class SUser{
        DATE_FORMAT(#__webapps_messages.date_time, '%e.%m.%Y %H:%i') AS 'datetime', 
        subject, 
        message, 
+	   #__webapps_messages_read.date_time AS 'read_datetime',
        obj_identifier ";
 		}
 	   $query.="
@@ -189,12 +211,20 @@ class SUser{
 ORDER BY ";
 		if (!$order_by) $order_by=$webapps_messages_id." DESC";
 		$query.=$order_by;
-		$query.=" LIMIT ";
-		if (!$limit) $limit="20";
-		$query.=$limit;   if (JRequest::getVar('q')) echo "<div>query: <hr><pre>".$query."</pre></div>";
 		$db = JFactory::getDBO();
+		
+		if ($limit) {
+			$query.=" LIMIT ";
+			//if ($limit) $limit="20";
+			if ($limit=='default')
+				$limit="0,20";
+			$query.=$limit;   
+		}
 		$db->setQuery($query);  
 		$messages=$db->loadAssocList(); // var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
+		
+		if (JRequest::getVar('q')) echo "<div>query(".count($messages)."): <hr><pre>".$query."</pre></div>";
+		
 		return $messages;
 	}
 	/**

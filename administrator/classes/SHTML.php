@@ -13,6 +13,35 @@ JTable::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_collector1'.D
 require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
 
 class SHTML extends JHtml{
+	public $pagination;
+	public function makePagination( $limit=false,
+									$user_id=false,
+								  	$params=false
+								  ){
+		$mCount=(int)SUser::getAllUserMessagesCount($user_id);
+		$devided=$mCount/20;
+		$cnt=intval($devided);
+		$pages=($devided>$cnt)? $cnt+=1:$cnt;
+		$request=JRequest::get('get');
+		$current_limit=$request['limit'];
+		unset($request['limit']);
+		$link='?';
+		$i=0;
+		foreach($request as $key=>$value){
+			if ($i) $link.='&';
+			$link.=$key."=".$value;
+			$i++;
+		}
+		$p='';
+		for($i=0;$i<$pages;$i++){
+			$set_limit=($i*20).',20';
+			$p.='<a ';
+			if ($set_limit==$current_limit)
+				$p.='class="txtOrange" ';
+			$p.='href="'.$link.'&limit='.$set_limit.'">['.($i+1).']</a> ';
+		}
+		$this->pagination='<div'.$params.' align="center">Страницы: '.$p.'</div>';
+	}
 /**
  * Описание
  * @package

@@ -1,0 +1,83 @@
+@charset "utf-8";
+/* CSS Document */
+
+label{
+	margin:0;
+	text-align:initial;
+}
+label > div{
+	float: left;
+	margin-top: -16px;
+	padding-bottom:6px;
+	padding-left: 60px;
+}
+#message_header{
+	padding-left:6px;
+}
+#sel_mess{
+	max-width:925px;
+}
+div.pagination{
+	background:#060;
+	color:#FFF;
+	margin:-4px;
+	padding:10px;
+	text-align:center;
+}
+div.pagination
+	a:not([class*="txtOrange"]){
+	color:#FFF;
+}
+table#tblMess 
+	tr 
+		td:first-child {	/* Id */
+	text-align:right;
+}
+table#tblMess 
+	tr 
+		td:first-child	
+			+td +td {	/* Created */
+	max-width:70px;
+}
+table#tblMess 
+	tr 
+		td:first-child	
+			+td +td +td {	/* Sender */
+	max-width:100px;
+	text-align:center;
+}
+table#tblMess 
+	tr 
+		td:first-child	
+			+td +td +td +td { /* Read */
+	max-width:70px;
+}
+table#tblMess 
+	tr 
+		td:first-child	
+			+td +td +td +td +td {	/* Attaches */
+	/*	*/
+}
+table#tblMess 
+	tr 
+		td:first-child	
+			+td +td +td +td +td +td {	/* Subject */
+	max-width:450px;
+}
+tr td{
+	font-size:0.9em;
+}
+table#tblMess tr td{
+	overflow:hidden;
+	white-space:nowrap;
+}
+textarea#message{
+	width:97%;
+	margin-bottom:8px;
+}
+div.hidden{
+	padding:10px;
+}
+/*div#messContent{
+	display:inline-block;
+}*/
