@@ -62,7 +62,7 @@ table#tblMess
 	tr 
 		td:first-child	
 			+td +td +td +td +td +td {	/* Subject */
-	max-width:450px;
+	max-width:546px;
 }
 tr td{
 	font-size:0.9em;

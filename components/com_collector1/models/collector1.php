@@ -28,8 +28,9 @@ class Collector1ModelCollector1 extends JModel
 	 * Создать коллекцию 
 	 */
 	function addCollection(){
-		$table=$this->prepareCollectionDataSet(); //подготовить данные для добавления новой коллекции
-		if (!$table) die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareCollectionDataSet()");		
+		//подготовить данные для добавления новой коллекции
+		if (!$table=$this->prepareCollectionDataSet()) 
+			die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareCollectionDataSet()");		
 		SErrors::afterTable($table); //добавить данные в dnior_webapps_customer_site_options
 		$default_table=SCollection::getDefaultTable(); //echo "<div class=''>default_table= ".$default_table."</div>";
 		$added_record_id=SData::getLastId($default_table);
@@ -50,7 +51,8 @@ class Collector1ModelCollector1 extends JModel
 						JRequest::get('post')
 					  );
 		}
-		if (!SFiles::handleFilesUploading('s',$added_record_id)) JMail::sendErrorMess('Не выполнен метод загрузки файлов (не возвращено true).',"Загрузка файлов.");
+		if (!SFiles::handleFilesUploading('s',$added_record_id)) 
+			JMail::sendErrorMess('Не выполнен метод загрузки файлов (не возвращено true).',"Загрузка файлов.");
 		return $added_record_id; //id последней записи нужен для редиректа, устанавливаемом в контроллере
 	}
 	/**
@@ -282,9 +284,15 @@ FROM #__webapps_site_types ORDER BY id DESC";
 	 * @ collections
 	 */
 	function prepareCollectionDataSet($updated_id=false) {
-		$post_collection=JRequest::get('post');
 		$table = JTable::getInstance('customer_site_options', 'Collector1Table');
-		$table->reset();
+		if ($updated_id){
+			// если не удалось извлечь текущую запись из таблицы: 
+			if(!$table->load($updated_id)) 
+				JMail::sendErrorMess($table->getError()," (\$table->load())");
+		}else
+			$table->reset();
+		
+		$post_collection=JRequest::get('post');
 		$user = JFactory::getUser();
 		$selectSiteType=$post_collection["selectSiteType"]; //site type
 		$table->set('customer_id', $user->id); //id заказчика
@@ -311,7 +319,6 @@ FROM #__webapps_site_types ORDER BY id DESC";
 		$query="SELECT site_option_id, sites_types_ids_location FROM #__webapps_site_options_partial";
 		$db->setQuery($query);
 		$arrOptionsPartial=$db->loadAssocList();
-		//var_dump("<h1>arrOptionsPartial</h1><pre>",$arrOptionsPartial,"</pre>"); echo "$selectSiteType<hr>";
 		if (!empty($arrOptionsPartial)) {
 			$arrOptionToIgnore=array();
 			//получить игнорируемые опции, добавлять которые в набор не нужно:
@@ -321,7 +328,7 @@ FROM #__webapps_site_types ORDER BY id DESC";
 				if ($arrOptionsPartial[$i]['sites_types_ids_location']!=$selectSiteType)
 					$arrOptionToIgnore[]=$arrOptionsPartial[$i]['site_option_id'];
 			}
-		} //var_dump("<h1>arrOptionToIgnore</h1><pre>",$arrOptionToIgnore,"</pre>"); echo "<hr>";
+		}
 		foreach ($post_collection as $key=>$val){
 			if (strstr($key,'cms_name_')) $arrCMS[]=$val;
 			if (strstr($key,'option_')) {
@@ -333,11 +340,10 @@ FROM #__webapps_site_types ORDER BY id DESC";
 					//echo "<div>Start excluding : $gt[2]</div>";
 					if (!is_array($arrStoredOptions[$option_id])) {
 						$arrStoredOptions[$option_id]=array($gt[2]); // тип раздела сайта
-						//var_dump("<h1>arrStoredOptions[$option_id]</h1><pre>",$arrStoredOptions[$option_id],"</pre>"); echo "<hr>";
 					}else array_push($arrStoredOptions[$option_id],$gt[2]);
 				}//else echo "<div>exclude option_id: ".$gt[1]."</div>";
 			}
-		}//die('end of checking!');
+		}
 		if ($post_collection['choose_engine']=='build_own'){
 			
 			$table->set('engines_ids','Разработать собственный');
@@ -430,20 +436,8 @@ FROM #__webapps_site_types ORDER BY id DESC";
 	 * @ collections
 	 */
 	function updateCollectionData($collection_id) {
-		$table=$this->prepareCollectionDataSet($collection_id); 
 		//Добавить данные в таблицу и проверить состояние:
-		//добавить данные:
-		//SErrors::afterTable($table);
-		if (!$table->load($collection_id)) {
-			JMail::sendErrorMess($table->getError()," (\$table->load())");
-			//var_dump("<h1>updated_id:</h1><pre>",$updated_id,"</pre>"); die();
-			return false;
-		}else{
-			SErrors::afterTableUpdate( $table/*,
-									   true, // если передаём true, пропускаем проверку $table->load($id) внутри
-									   $collection_id*/
-									 );
-		}
+		SErrors::afterTableUpdate($this->prepareCollectionDataSet($collection_id));
 		return true;
 	}
 }

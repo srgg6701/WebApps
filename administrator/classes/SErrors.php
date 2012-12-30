@@ -35,16 +35,19 @@ class SErrors{
 							   $arr_data=false //если получили, будем извлекать данные запроса из массива, если нет - запрос уже установлен
 							   //$id // id обновляемой записи
 							 ) {
+		var_dump("<h1>options(afterTableUpdate):</h1><pre>",unserialize((string)$table->options_array),"</pre>");
 		$errSubj='Ошибка обновления таблицы';
 		if (!$table) $err='$table';//if (!$id) $err='id';
-		if (is_array($arr_data)&&empty($arr_data)) $err='arr_data (входящий массив $arr_data пуст)';
+		if (is_array($arr_data)&&empty($arr_data)) 
+			$err='arr_data (входящий массив $arr_data пуст)';
 		if ($err) JMail::sendErrorMess('Не получено: '.$err,$errSubj);
 		else{
 			if (is_array($arr_data)) { //может быть true, в этом случае данные уже должны быть подготовлены
 				foreach($arr_data as $field=>$value) 
 					$table->set($field,$value);//}
-			}
-			if ($table->check()) {
+			} 
+			if ($table->check()) { 
+				//var_dump("<h1>options(afterTableUpdate):</h1><pre>",unserialize((string)$table->options_array),"</pre>");die();
 				// При передаче тестового параметра (test) в URL выводит сообщение в методе store() вместо выполнения реального действия с таблицей:
 				if (!$table->store(true)) $err=true;
 			}else $err=true;

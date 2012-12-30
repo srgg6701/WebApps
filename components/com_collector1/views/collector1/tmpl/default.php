@@ -14,7 +14,8 @@ $collector_table=$this->collector_table;
 $current_order_set=$this->current_order_set;
 $collections_ids_array=$this->collections_ids_array;
 if (!$user) $user = JFactory::getUser();
-if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) $firefox=true;?>
+if (strstr($_SERVER['HTTP_USER_AGENT'],"Firefox")) 
+	$firefox=true;?>
 <form name="form1" method="post" enctype="multipart/form-data" action="<?=JRoute::_($this->go_submit)?>" onSubmit="return checkRequired();">
     <div>
 <?	
