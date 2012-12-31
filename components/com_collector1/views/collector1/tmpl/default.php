@@ -175,7 +175,8 @@ if ($current_order_set){
     <div class="clearBoth marginTop10"></div>
   <hr size="1" class="marginTop10">
 <div class="marginBottom4">Укажите желаемую дату выполнения задания в формате ГГГГ-ММ-ДД</div>
-или выберите её из календаря: <?php echo JHTML::_('calendar', $value = '', $name='finish_date', $id='finish_date', $format = '%Y-%m-%d', $attribs = 'size=9'); ?>    
+или выберите её из календаря: <?php 
+echo JHTML::_('calendar', $value = $current_order_set['finish_date'], $name='finish_date', $id='finish_date', $format = '%Y-%m-%d', $attribs = 'size=9'); ?>    
     </td>
   </tr>
 </table>

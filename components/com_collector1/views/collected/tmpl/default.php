@@ -30,6 +30,7 @@ tr.site_id td{
     		<img src="<?php echo $this->baseurl ?>/templates/<?php echo $this->templatename 
 	?>/images/signs/Flag_<?=$done[2]?>.png" width="24" height="24" hspace="6" align="baseline" style="margin-bottom:-2px;"><?=$done[0]?>
     	</div>
+        <img src="<?=JUri::root()?>templates/fastwebdev/images/commands/delete.gif" width="13" height="13" id="close_issue" class="closeIssue" style="position:absolute; right:0; top:0; margin:4px; cursor:pointer;" title="Закрыть" onClick="parentNode.style.display='none';" />
     </div>
 <?		}?>    
 <?	}elseif ($user->get('guest')==1){ 

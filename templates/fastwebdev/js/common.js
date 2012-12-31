@@ -45,8 +45,7 @@ function askToSignUp(go_signup){
 //
 function goNewSite(site_id){
 	try{
-		var aSite=document.getElementById('site_'+site_id);
-		var position = $(aSite).offset().top;
+		var position = $('#site_'+site_id).offset().top;
 		$("html, body").animate({scrollTop:position},1000)
 		return false;
 	}catch(e){

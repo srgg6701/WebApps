@@ -127,7 +127,8 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
        `engines_ids`,
        `options_array`,
        `xtra`, 
-       `files_names`
+       `files_names`,
+	   `finish_date`
   FROM #__webapps_customer_site_options 
   LEFT JOIN #__webapps_files_names 
     ON #__webapps_files_names.identifier = CONCAT('s',#__webapps_customer_site_options.id)

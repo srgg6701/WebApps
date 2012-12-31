@@ -201,7 +201,7 @@ class Collector1ViewCollected extends JView
 			$this->get_options_names=$modelCollector->get_options_names();
 			$arrSiteActions=array('site_new' => array("Сайт собран! <a href=\"#\" onClick=\"return goNewSite(".JRequest::getVar('site_new').");\" class=\"linkSpotYellow\">перейти к сайту...</a>","#CCF","blue"),
 								  'site_deleted' => array("Сайт удалён.","#FCC","red"),
-								  'site_updated' => array("Данные сайта изменены!","#E4F9DD","green")	
+								  'site_updated' => array("Данные <a href=\"#\" onClick=\"return goNewSite(".JRequest::getVar('site_updated').");\" class=\"linkSpotYellow\">сайта</a> изменены!","#E4F9DD","green")	
 						  		 );
 			$user = JFactory::getUser();
 			foreach ($arrSiteActions as $site_action_type=>$site_action_type_data_array){

@@ -584,7 +584,7 @@ div.block_done{
 	border-radius:6px;
 	box-shadow: 0 0 30px 1px #666;
 	display:inline-block;
-	position: absolute;
+	position: fixed;
 	right: 30px; 
 	top: 150px;
 }

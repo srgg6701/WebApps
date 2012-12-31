@@ -153,9 +153,8 @@ class SFiles extends JFile{
 						//назначить таблицу - коллекций (основная) или заказов (альтернативную):
 						if ($atype=='o') $alt_table=true;
 						$ttable=SCollection::getDefaultTable($alt_table);
-						if (!$prepared_file_id=SData::getLastId($ttable)) $prepared_file_id='1';
 						//получим имя файла вида: 29.2.doc // № заказа . № файла . расширение
-						$prepared_file_id.='.' . $f . '.' . $uploadedFileExtension;
+						$prepared_file_id=$record_id.'.' . $f . '.' . $uploadedFileExtension;
 						//закачать файлы; вид имён файлов: 9.doc
 						self::uploadFiles( $name, // filename field 
 										   // path to save file. Starts from an object type (s/o)
@@ -327,8 +326,7 @@ class SFiles extends JFile{
 				return;
 		}
 		else
-		{	return true;
-		   //exit(0);
-		}
+			return true;
+		
 	}
 }
