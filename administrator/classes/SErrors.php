@@ -35,7 +35,6 @@ class SErrors{
 							   $arr_data=false //если получили, будем извлекать данные запроса из массива, если нет - запрос уже установлен
 							   //$id // id обновляемой записи
 							 ) {
-		var_dump("<h1>options(afterTableUpdate):</h1><pre>",unserialize((string)$table->options_array),"</pre>");
 		$errSubj='Ошибка обновления таблицы';
 		if (!$table) $err='$table';//if (!$id) $err='id';
 		if (is_array($arr_data)&&empty($arr_data)) 

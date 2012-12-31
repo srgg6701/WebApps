@@ -30,13 +30,20 @@ class SFiles extends JFile{
 	/**
 	 * Обработать имена загружаемых файлов и добавить в таблицу (имена файлов разделяются ":"):
 	 */
-	function addFilesToTable($name,$identifier){
+	function addFilesToTable($name,$identifier,$updated_record_id=false){
 		$table = JTable::getInstance('files_names', 'Collector1Table');
+		$methodName='afterTable';
 		$table->reset();
+		if ($updated_record_id){
+			if (!$table->load($updated_record_id))
+				JMail::sendErrorMess('Не получен id записи при добавлении файла, addFilesToTable()'.$err,"Ошибка обновления таблицы файлов");
+			$methodName.='Update';
+		}
 		$table->set('files_names',$name); //имя файла
 		$table->set('identifier',$identifier); //идентификатор типа заказа (сайт/компонент) 
 		//сохраняем имя файла отдельно в таблице, а контент именуем как id последней записи
-		SErrors::afterTable($table);
+		SErrors::$methodName($table);
+		//echo "<div class=''>methodName= ".$methodName.", updated_record_id = $updated_record_id</div>"; die();
 	}
 	/**
 	 * Удалить файл
@@ -100,38 +107,63 @@ class SFiles extends JFile{
 		} //else echo "! dir: ".$dir; //die();
 		return true;
 	}*/
-	/**
-	 *
-	 */
-	function requestUserFilesByObjectId( 
-									$object_type,
-							   		$object_id,
-							   		$user=false,
-							   		$db=false
-							 	) {
-		if (!$user) $user = JFactory::getUser();
-		$method_name=($user->get('guest')==1)? 'getPrecustomerSet':'getCustomerSet';
-			$arrUserStuff=SCollection::$method_name($object_type,$user);
-		if ($arrUserStuff) {
-			$query="SELECT `identifier`, files_names FROM ".self::$_table." 
-	 WHERE SUBSTRING( identifier, 2) = ".$object_id; //echo "<div class=''>query= ".$query."</div>"; 
-			if (!$db) $db=JFactory::getDBO();
-			$db->setQuery($query); 
-			if($user_files=$db->loadAssoc()){
-				return explode(":",$user_files['files_names']);
-			}
-		}
-		return NULL;
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public static function explodeFilesNames($identifier,$params){
+		return ($rec_data=self::getFilesData($identifier,$params))? 
+			explode(":",$rec_data[$params]):NULL;	
+	}
+/**
+ * Получить данные файлов заказа/коллекции
+ * @package
+ * @subpackage
+ */
+	public static function getFilesData( $identifier=false,
+										 $params='id,files_names,identifier',
+										 $qparams=false
+									   ){
+		$query="SELECT ".$params." FROM ".self::$_table;
+		$method_name='loadAssoc';
+		($identifier)? 
+			$query.=" WHERE `identifier` = '".$identifier."'" : $method_name.='List';
+		if ($qparams)
+			$query.=" ".$qparams;
+		$db = JFactory::getDBO();
+		$db->setQuery($query); 
+		return $db->$method_name();
+	}	
+/**
+ * Описание
+ * @package
+ * @subpackage
+ */
+	public static function getIdByObjIdentifier($identifier){
+		$query="SELECT id FROM ".self::$_table." WHERE `identifier` = '".$identifier."'";
+		$db = JFactory::getDBO();
+		$db->setQuery($query); 
+		return $db->loadResult();
 	}
 	/**
 	 * Обработать закачиваемые файлы
 	 */
 	function handleFilesUploading( $atype/* o or s */,
-								   $record_id
+								   $obj_id
 								 ){
 		if ($_FILES){ //$deb=true; //if ($deb) echo JPATH_COMPONENT."<hr>";
-			//var_dump("<h1>_FILES:</h1><pre>",$_FILES,"</pre>");
+			//
 			$f=1;
+			$updated_record_id=false;
+			$identifier=$atype.$obj_id;
+			// проверить, были ли уже закачаны какие-либо файлы:
+			if($existFilesData=self::explodeFilesNames($identifier,'files_names')){
+				//var_dump("<h1>existFilesData:</h1><pre>",$existFilesData,"</pre>");
+				$f+=count($existFilesData);
+				$files_names=implode(":",$existFilesData);
+				$updated_record_id=self::getIdByObjIdentifier($identifier);
+			} 	
 			foreach ($_FILES as $name=>$data){
 				if ( key($data)=='name' &&
 				     $data['name'] //файл размещён в поле заказчки
@@ -154,14 +186,14 @@ class SFiles extends JFile{
 						if ($atype=='o') $alt_table=true;
 						$ttable=SCollection::getDefaultTable($alt_table);
 						//получим имя файла вида: 29.2.doc // № заказа . № файла . расширение
-						$prepared_file_id=$record_id.'.' . $f . '.' . $uploadedFileExtension;
+						$prepared_file_id=$obj_id.'.' . $f . '.' . $uploadedFileExtension;
+						
 						//закачать файлы; вид имён файлов: 9.doc
 						self::uploadFiles( $name, // filename field 
 										   // path to save file. Starts from an object type (s/o)
 										   JPATH_COMPONENT.DS.'files'.DS.$atype.$prepared_file_id
 										 );
 						$f++;
-						
 					}else{
 						JMail::sendErrorMess($_FILES,'Не получен контент загружаемого файла...');
 					}
@@ -170,9 +202,37 @@ class SFiles extends JFile{
 		}
 		//разместить имена/привязка к заказам в dnior_webapps_files_names:
 		if ($f>1) { //закачали хотя бы один файл
-			self::addFilesToTable($files_names,$atype.$record_id); //die();
+			//echo "<div class=''>f=$f, updated_record_id= ".$updated_record_id."</div>";
+			self::addFilesToTable( 
+							$files_names,
+							$atype.$obj_id,
+							$updated_record_id
+						); 	//die();
 			return true;
 		}else return NULL;
+	}
+	/**
+	 *
+	 */
+	function requestUserFilesByObjectId( 
+									$object_type,
+							   		$object_id,
+							   		$user=false,
+							   		$db=false
+							 	) {
+		if (!$user) $user = JFactory::getUser();
+		$method_name=($user->get('guest')==1)? 'getPrecustomerSet':'getCustomerSet';
+			$arrUserStuff=SCollection::$method_name($object_type,$user);
+		if ($arrUserStuff) {
+			$query="SELECT `identifier`, files_names FROM ".self::$_table." 
+	 WHERE SUBSTRING( identifier, 2) = ".$object_id; //echo "<div class=''>query= ".$query."</div>"; 
+			if (!$db) $db=JFactory::getDBO();
+			$db->setQuery($query); 
+			if($user_files=$db->loadAssoc()){
+				return explode(":",$user_files['files_names']);
+			}
+		}
+		return NULL;
 	}
 	/**
 	 * add a space 
