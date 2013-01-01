@@ -35,10 +35,9 @@ class Collector1ViewCollector1 extends JView
 		$params		= $app->getParams();
 		$this->templatename=SSite::getCurrentTemplateName($app);
 		$layout=JRequest::getVar('layout');
-		
 		// Get some data from the models
 		$state		= $this->get('State');
-		$item		= $this->get('Item'); //var_dump("<h1>get:</h1><pre>",JRequest::get('get'),"</pre>");
+		$item		= $this->get('Item');
 		$user = JFactory::getUser(); 
 		//нужно для формирования списка коллекций в таблице для выбора и быстрой загрузки:
 		$this->collections_ids_array=$collections_ids_array=SCollection::getCurrentSetArray('collections_ids');

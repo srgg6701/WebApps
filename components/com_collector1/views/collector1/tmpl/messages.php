@@ -20,6 +20,7 @@ $arrMessages=$this->messages; // выводит список, ограничен
 <div>
 <? require_once $mess_path.'table.php';?>
 </div>
+<form action="<?=JUri::root()?>index.php?option=com_ajax" id="send_message_form" method="post" enctype="multipart/form-data" style="margin:0;">
 <div class="paddingLeft10 paddingRight10" id="pickup_obj" style="display:<?="none"?>; vertical-align:top;">
 	<h4 class="marginBottom8">Выберите объект сообщения:</h4>
     <div id="attachObjects">
@@ -77,7 +78,15 @@ $arrMessages=$this->messages; // выводит список, ограничен
         <br />
     </div>
 </div>
-<div class="paddingLeft10" style="display:inline-block;">
+<div class="messLoadedArea">
 <? 	require_once $mess_path.'form.php';?>
 </div>
+<input name="object" type="hidden" value="message">
+<input name="action" type="hidden" value="send">
+<? 	if($get_layout):?>
+<input name="<?=$get_layout?>_id" type="hidden" value="<?=$object_id?>">
+<?	endif;?>
+<input name="user_id_from" type="hidden" value="<?=$user_id?>">
+<input name="user_id_to" type="hidden" value="<?=$user_id_to?>">
+</form>
 <?	require_once JPATH_SITE.DS.'includes'.DS.'internal_mail_js.php'; ?>

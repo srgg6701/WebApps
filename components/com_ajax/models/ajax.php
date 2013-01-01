@@ -167,7 +167,7 @@ class AjaxModelAjax extends JModel
 	 * @ user, customer, precustomer, message, contacts
 	 */
 	function sendMessage(){
-
+		//var_dump(JRequest::get('post'));die();
 		$arrFields=array('order_id','collection_id','subject','message','user_id_from','user_id_to');
 		foreach($arrFields as $i=>$value)
 			${$arrFields[$i]}=JRequest::getVar($value);
@@ -199,20 +199,48 @@ class AjaxModelAjax extends JModel
 			$table->set($field,$value);
 		}
 		// получить id добавленной записи
-		$db = JFactory::getDBO();
+		// 
 		if ($take_test=JRequest::getVar('take_test')){ 
 			var_dump("sendMessage, line: ".__LINE__."\n\narrData:</h1><pre>",$arrData,"</pre>");
 		}
 		if (!$take_test||JRequest::getVar('do')){
 			SErrors::afterTableUpdate($table);
 			$data=array( // вернуть клиентскому скрипту:
-					'id'=>$db->insertid(),
+					'id'=>SData::getLastId('#__webapps_messages'),
 					'date_time'=>$arrData['date_time'],
 					'subject'=>$arrData['subject'],
 					'message'=>$arrData['message'],
 				);
 			// добавить к прочтённым:
 			$this->setMessRead($data['id'],$user_id_from); 
+			// разместить файлы (если были):
+			if ($_FILES){
+				// получить № последнего приаттаченного файла:
+				$files_number_start=SFiles::getLastAttachNumber(true);
+				$file_names='';
+				$cnt=0;
+				foreach ($_FILES as $field_name=>$file_data){
+					if ( key($file_data)=='name' 
+						 && $file_data['name'] //файл размещён в поле заказчки
+						 && $file_data['size']>0
+				   ) {
+						$filename=$file_data['name'];
+						SFiles::uploadFiles( // filename field: 
+										$field_name, 
+									   	// saved file path:
+									   	JPATH_BASE.DS.'components'.DS.'com_collector1'.DS.'attaches'.DS.$files_number_start.substr($filename,strrpos($filename,"."))
+									 );
+					}
+					if ($cnt)
+						$file_names.=':';
+					$file_names.=$files_number_start.".".$filename;
+					$files_number_start++; 	// may be initializeb not by 0
+					$cnt++;					// initializeb not by 0
+				}
+				if (!SFiles::addAttachesToTable($data['id'],$file_names))
+					JMail::sendErrorMess('Файлы: $file_names, id сообщения: $message_id','Не добавлены файлы в таблицу аттачментов');
+				$data['file_names']=$file_names;
+			}
 		}
 		echo json_encode($data);
 		exit;

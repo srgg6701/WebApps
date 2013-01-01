@@ -23,7 +23,8 @@ class SHTML extends JHtml{
 		$cnt=intval($devided);
 		$pages=($devided>$cnt)? $cnt+=1:$cnt;
 		$request=JRequest::get('get');
-		$current_limit=$request['limit'];
+		if(!$current_limit=$request['limit'])
+			$current_limit=0; // чтоб выделить первое значение, если нет никакого
 		unset($request['limit']);
 		$link='?';
 		$i=0;

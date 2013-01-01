@@ -149,8 +149,7 @@ echo ($got_view=="precustomers")? "предзаказчика":"заказчик
 						  $user_id_from, // поскольку есть доступ к сообщениям всех сотрудников
 						  false,
 						  20
-						); //for($i=0,$j=count($arrMessages);$i<$j;$i++) var_dump("<h1>arrMessages:</h1><pre>",$arrMessages,"</pre>");
-//var_dump("<h1>this:</h1><pre>",$this,"</pre>"); //die;?>
+						); ?>
 <div class="widthMax50" style="display:inline-block; vertical-align:top;">
 <? 
 if ($got_view=="precustomers"){?>

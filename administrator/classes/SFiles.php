@@ -28,6 +28,19 @@ class SFiles extends JFile{
 		$this->allowed_formats='вы можете загрузить файлы форматов: '.$this->makeExtReadable($this->valid_extensions);
 	}
 	/**
+ * Добавить записи в таблицу аттачментов
+ * @package
+ * @subpackage
+ */
+	public static function addAttachesToTable($message_id,$file_names,$table=false){
+		if(!$table)
+			$table=JTable::getInstance('files_attaches', 'Collector1Table');
+		$table->reset();
+		$table->set('files_names',$file_names); //имена файлов
+		$table->set('message_id',$message_id); //идентификатор сообщения
+		return SErrors::afterTable($table);
+	}
+	/**
 	 * Обработать имена загружаемых файлов и добавить в таблицу (имена файлов разделяются ":"):
 	 */
 	function addFilesToTable($name,$identifier,$updated_record_id=false){
@@ -43,7 +56,6 @@ class SFiles extends JFile{
 		$table->set('identifier',$identifier); //идентификатор типа заказа (сайт/компонент) 
 		//сохраняем имя файла отдельно в таблице, а контент именуем как id последней записи
 		SErrors::$methodName($table);
-		//echo "<div class=''>methodName= ".$methodName.", updated_record_id = $updated_record_id</div>"; die();
 	}
 	/**
 	 * Удалить файл
@@ -146,6 +158,42 @@ class SFiles extends JFile{
 		$db->setQuery($query); 
 		return $db->loadResult();
 	}
+/**
+ * Получить № последнего аттачмента
+ * @package
+ * @subpackage
+ */
+	public static function getLastAttachNumber($add1){		
+		$table_name="#__webapps_files_attaches";
+		$table=JTable::getInstance('files_attaches', 'Collector1Table');
+		$query="SELECT files_names 
+FROM $table_name
+WHERE id=( SELECT MAX(id) FROM $table_name )";
+		$db = JFactory::getDBO();
+		$db->setQuery($query);
+		if(!$last_files=$db->loadResult())
+			$return=0; 
+		else{
+			$names=explode(":",$last_files);
+			$last_name=array_pop($names);
+			$return=(int)substr($last_name,0,strpos($last_name,"."));
+		}
+		if ($add1) $return+=1;
+		return $return;
+	}	
+/**
+ * Распарсить имена приаттаченных файлов и вернуть как массив: №=>name
+ * @package
+ * @subpackage
+ */
+	public static function handleAttachesNames($files_names){
+		$files=explode(":",$files_names);
+		$arrFiles=array();
+		foreach($files as $file){
+			$arrFiles[substr($file,0,strpos($file,"."))]=substr($file,strpos($file,".")+1);
+		} //var_dump("<h1>arrFiles:</h1><pre>",$arrFiles,"</pre>");
+		return $arrFiles;
+	}	
 	/**
 	 * Обработать закачиваемые файлы
 	 */
@@ -378,8 +426,10 @@ class SFiles extends JFile{
 				return;
 		}
 		//lose any special characters in the filename
-		$fileName = preg_replace("/[^A-Za-z0-9А-Яа-я]/i", "-", $fileName); 
+		// НЕ ИСПОЛЬЗУЕТСЯ ИЗ-ЗА ПРОБЛЕМ С ОТОБРАЖЕНИЕМ КИРИЛИЦЫ:
+		//$fileName = preg_replace("/[^A-Za-z0-9А-Яа-я]/i", "-", $fileName); 
 		//always use constants when making file paths, to avoid the possibilty of remote file inclusion
+		echo "\nuploadPath(LINE: ".__LINE__.")=".$uploadPath."\n";
 		if(!parent::upload($fileTemp, $uploadPath)) 
 		{
 			echo JText::_( 'ERROR MOVING FILE' );

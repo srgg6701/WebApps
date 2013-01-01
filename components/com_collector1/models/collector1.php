@@ -15,8 +15,6 @@ class Collector1ModelCollector1 extends JModel
 {
 	protected $_action;
 	protected $_item;
-	//public $collections_ids_array; //id id 
-	//public $_customer_status; //статус юзера как юзера и заказчика/предзаказчика
 	/**
 	 * Конструктор
 	 */

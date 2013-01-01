@@ -25,7 +25,7 @@ class SData{
 	/**
 	 * Получим id последней коллекции или заказа:
 	 */
-	function getLastId($table_name,$db=false){
+	public static function getLastId($table_name,$db=false){
 		//получить:
 		$query="SELECT max(id) FROM $table_name";
 		if (!$db) $db = JFactory::getDBO();

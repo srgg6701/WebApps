@@ -176,12 +176,14 @@ class SUser{
        DATE_FORMAT(#__webapps_messages.date_time, '%e.%m.%Y %H:%i') AS 'datetime', 
        subject, 
        message, 
+	   files_names,
 	   #__webapps_messages_read.date_time AS 'read_datetime',
        obj_identifier ";
 		}
 	   $query.="
   FROM #__webapps_messages 
   LEFT JOIN #__webapps_messages_read ON message_id = ".$webapps_messages_id."
+  LEFT JOIN #__webapps_files_attaches ON #__webapps_files_attaches.message_id = #__webapps_messages.id
  WHERE (";
  		if ($user_id_from || $user_id_to) {
 			
@@ -215,7 +217,6 @@ ORDER BY ";
 		
 		if ($limit) {
 			$query.=" LIMIT ";
-			//if ($limit) $limit="20";
 			if ($limit=='default')
 				$limit="0,20";
 			$query.=$limit;   

@@ -75,6 +75,17 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 	$goUnRead="непрочтённое";
 	for($i=0,$j=count($arrMessages);$i<$j;$i++){
 		$messageId=$arrMessages[$i]['id'];
+		$messageObjId=$arrMessages[$i]['obj_identifier'];
+		$ob_type=substr($messageObjId,0,1);
+		if ($ob_type=='s') $ob_type='сайт';
+		elseif ($ob_type=='o') $ob_type='набор компонентов';
+		//$messageObjId=substr($messageObjId,strpos($messageObjId,"."));
+		if ($messageFiles=$arrMessages[$i]['files_names']){
+			$messagesAttaches=SFiles::handleAttachesNames($messageFiles);
+			$allAttaches[$messageId]=$messagesAttaches;
+			$attchs=count($messagesAttaches);
+		}else
+			unset($attchs);
 		$messageDateTime=$arrMessages[$i]['datetime'];
 		if ($messageReadDateTime=$arrMessages[$i]['read_datetime'])
 			$messageTime=substr($messageReadDateTime,11);
@@ -87,7 +98,9 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 		echo($read)? $white:$grey;
 		?>" id="message_<?=$messageId?>">
     <td><?=$messageId?></td>
-    <td title="<?=$messageDateTime?>">&nbsp;</td>
+    <td align="center" title="<?
+		echo $ob_type;
+	?>"><?=$messageObjId?></td>
     <td title="<?=$messageDateTime?>"><?=$messageDateTime?></td>
     <td><?
 		// ОТ КОГО? - ОТПРАВИТЕЛЬ СООБЩЕНИЯ		
@@ -119,7 +132,11 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 	echo ($read)? $goUnRead:$goRead;
 	
 	?>"><? echo ($read)? $messageReadDateTime:$unread;?></a></td>
-    <td>&nbsp;</td>
+    <td align="center"><?
+    
+		echo $attchs;
+	
+	?></td>
     <td><a href="#" data-subject="<?=$messageId?>"><?=$messageSubject?></a></td>
     <td align="center"><a href="#" data-delete="<?=$messageId?>" <?
     $del_title=' title="Удалить сообщение"'; echo $del_title;
@@ -136,5 +153,16 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
   </tr>
 <?	endif;?>        
 </table>
-
+<?	if (count($allAttaches)){?>
+<script>
+var Attaches=new Array();
+<?		foreach($allAttaches as $attId=>$attData){?>
+Attaches['<?=$attId?>']=new Array();
+		<?	foreach($attData as $key=>$name):?>		
+Attaches['<?=$attId?>']['<?=$key?>']="<?=$name?>";
+		<?	endforeach;
+		}
+?>
+</script>
+<?	}?>
 

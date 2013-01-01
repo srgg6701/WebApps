@@ -147,11 +147,30 @@ function handleReadStatus(data,message_id){
 /**
  * Обработать область сообщения после его отправки
  */
-function handleMessAreaAfterPost(messageText,headerTextStatic){
-	$('#sel_mess').fadeIn(150).html(messageText);
+function handleMessAreaAfterPost(data,headerTextStatic){
+	$('#sel_mess').fadeIn(150).html(data['message']);
 	$('#message_fields').fadeOut(150);
 	$('#pickup_obj').fadeOut(150);
-	if (headerTextStatic) $('#message_header').html(headerTextStatic);
+	var mHeader=$('#message_header');
+	if (headerTextStatic) 
+		$(mHeader).html(headerTextStatic);
+	if ($.isArray(Attaches[data['id']])){
+		var attaches=$('<div id="dAttaches">'),attcontent='<h4 class="marginBottom8">Вложенные файлы:</h4>',linkToFile,ext;
+		$(attaches).attr({
+			class:'messLoadedArea'
+		});
+		for(var key in Attaches[data['id']]) {
+			if (Attaches[data['id']].hasOwnProperty(key)) {
+				linkToFile=Attaches[data['id']][key];
+				ext=linkToFile.substring(linkToFile.lastIndexOf("."));
+				attcontent+='<div style="padding:2px;"><a href="<?=JUri::root()?>components/com_collector1/attaches/'+key+ext+'">'+linkToFile+'</a></div>';
+		  	}
+		}
+		$(attaches).html(attcontent);
+		$(mHeader).parent().after($(attaches))
+	}else{
+		$('#dAttaches').remove();
+	}
 }
 /**
  * Загрузить сообщение
@@ -170,7 +189,11 @@ function loadMess(message_id){
 			data: uData,
 			/*beforeSend: function() {},*/
 			success: function (data) {
-				handleMessAreaAfterPost(data['message']);
+				//console.info('DATA ID = '+data['id']);
+				var mData=new Array();
+				mData['id']=message_id;
+				mData['message']=data['message'];
+				handleMessAreaAfterPost(mData);
 				handleReadStatus(data,message_id);
 			},
 			error: function (data) {
@@ -193,8 +216,6 @@ function sendPostAjax(txtAreaID){
 		$('#attachObjects').css('background-color','lightyellow');
 		return false;
   	}
-	// content
-	var messageContent = "object=message&action=send&<?=$get_layout?>_id=<?=$object_id?>&user_id_from=<?=$user_id?>&user_id_to=<?=$user_id_to?>&subject=" + $('#subject').val() + "&message=" + $('#message').val(); 
 	if ($('#attachObjects input[type="radio"]:checked').size()>0){
 		// console.info('checked!');
 		var pickupObjectType=$('input[type="radio"][id^="pickupObjectType_"]:checked').val();
@@ -215,39 +236,59 @@ function sendPostAjax(txtAreaID){
 		}else
 			messageContent+='&pickupObjectType='+pickupObjectType+'&'+obdata;
 	}
-	console.info('messageContent: '+messageContent); // return false;
-	var uData="option=com_ajax&"+messageContent;
-	var nw=false;
-	if (nw) 
-		takeTest(uData); // take_test param is already included
-  	else{
-		$.ajax({
-			type: "POST",// "GET"
-			url:requestPage, // 		
-			dataType: 'json',
-			data: uData,
-			/*beforeSend: function() {},*/
-			success: function (data) {
-					$('table#tblMess tbody tr:first-child')
-						.after('<tr id="message_'+data['id']+'" bgcolor="<?=$white?>" style="background-color:<?=$light_orange?>;">'+/*
-						*/'<td>'+data['id']+'</td>'+/*
-						*/'<td>&nbsp</td>'+/*
-						*/'<td>'+setReadMessageDate(data['id'],data['date_time'])+'</td>'+/*
-						*/'<td>Я</td>'+/*
-						*/'<td>'+setReadMessageDate(data['id'],data['date_time'])+'</td>'+/*
-						*/'<td>files</td>'+/*
-						*/'<td><a href="#" data-subject="'+data['id']+'">'+data['subject']+'</a></td>'+/*
-						*/'<td align="center"><a href="#" data-delete="'+data['id']+'" <?=$del_title;?>><img src="<?=$del_img?>"></a></td>'+/*
-						
-					*/'</tr>');
-					handleMessAreaAfterPost(data['message'],'Отправленное сообщение:');
-					handleReadStatus(data);
-				},
-			error: function (data) {
-				alert("Не удалось отправить данные.\nОтвет: "+data.result);
-			}
-		});
-	}	
+	
+	var att=0;
+	$('div#files_container input[id^="fileField_"]').each( function() {
+		if ($(this).val()) {
+			att++;
+			return false;
+		}
+    });
+    if (att>0) // разместили файлы для отсылки - будем использовать форму
+		$('#send_message_form').submit();
+	else{
+		// content
+		var messageContent = "object=message&action=send<? 	
+		if($get_layout):?>
+&<?=$get_layout?>_id=<? echo $object_id;
+		endif;?>&user_id_from=<?=$user_id?>&user_id_to=<?=$user_id_to?>&subject=" + $('#subject').val() + "&message=" + $('#message').val(); 
+		// console.info('messageContent: '+messageContent); // return false;
+		var uData="option=com_ajax&"+messageContent;
+		
+		
+		var nw=false;
+		if (nw) 
+			takeTest(uData); // take_test param is already included
+		else{
+			$.ajax({
+				type: "POST",// "GET"
+				url:requestPage, // 		
+				dataType: 'json',
+				data: uData,
+				/*beforeSend: function() {},*/
+				success: function (data) {
+						$('table#tblMess tbody tr:first-child')
+							.after('<tr id="message_'+data['id']+'" bgcolor="<?=$white?>" style="background-color:<?=$light_orange?>;">'+/*
+							*/'<td>'+data['id']+'</td>'+/*
+							*/'<td>&nbsp</td>'+/*
+							*/'<td>'+setReadMessageDate(data['id'],data['date_time'])+'</td>'+/*
+							*/'<td>Я</td>'+/*
+							*/'<td>'+setReadMessageDate(data['id'],data['date_time'])+'</td>'+/*
+							*/'<td>files</td>'+/*
+							*/'<td><a href="#" data-subject="'+data['id']+'">'+data['subject']+'</a></td>'+/*
+							*/'<td align="center"><a href="#" data-delete="'+data['id']+'" <?=$del_title;?>><img src="<?=$del_img?>"></a></td>'+/*
+							
+						*/'</tr>');
+						console.info('id = '+data['id']+', subject = '+data['subject']+', message = '+data['message']+', file_names = '+data['file_names']);
+						handleMessAreaAfterPost(data,'Отправленное сообщение:');
+						handleReadStatus(data);
+					},
+				error: function (data) {
+					alert("Не удалось отправить данные.\nОтвет: "+data.result);
+				}
+			});
+		}	
+	}
   }catch(e){
 	  alert(e.message);
   }
