@@ -152,7 +152,11 @@ class SUser{
 						  $fields_subquery=false // дополнительные поля извлечения данных
 						) { 
 		$query="SELECT DISTINCT ";
-		$webapps_messages_id='#__webapps_messages.id';
+		$tbl_attaches="#__webapps_files_attaches";
+		$tbl_mess="#__webapps_messages";
+		$tbl_read="#__webapps_messages_read";
+		$tbl_deleted="#__webapps_messages_deleted";
+		$webapps_messages_id=$tbl_mess.'.id';
 		if ($fields_subquery){
 			
 			if ($fields_subquery=='id') $fields_subquery=$webapps_messages_id;
@@ -165,25 +169,36 @@ class SUser{
 			
 			//если нужно разобраться со статусом прочтения:
        		if ($user_id_read) $query.="
-       ( SELECT DATE_FORMAT(#__webapps_messages_read.date_time, '%e.%m.%Y %H:%i')
-         FROM #__webapps_messages_read 
-        WHERE user_id = ".$user_id_read."  AND message_id = #__webapps_messages.id
+       ( SELECT DATE_FORMAT(".$tbl_read.".date_time, '%e.%m.%Y %H:%i')
+         FROM ".$tbl_read." 
+        WHERE user_id = ".$user_id_read."  AND message_id = ".$webapps_messages_id."
        ) AS 'read_datetime',";
        		
 			$query.="
        user_id_from, 
        user_id_to, 
-       DATE_FORMAT(#__webapps_messages.date_time, '%e.%m.%Y %H:%i') AS 'datetime', 
+       DATE_FORMAT(".$tbl_mess.".date_time, '%e.%m.%Y %H:%i') AS 'datetime', 
        subject, 
        message, 
 	   files_names,
-	   #__webapps_messages_read.date_time AS 'read_datetime',
+	   ".$tbl_read.".date_time AS 'read_datetime',
        obj_identifier ";
 		}
-	   $query.="
-  FROM #__webapps_messages 
-  LEFT JOIN #__webapps_messages_read ON message_id = ".$webapps_messages_id."
-  LEFT JOIN #__webapps_files_attaches ON #__webapps_files_attaches.message_id = #__webapps_messages.id
+	   	$query.="
+  FROM ".$tbl_mess." 
+  LEFT JOIN ".$tbl_read." ON message_id = ".$webapps_messages_id."
+  LEFT JOIN ".$tbl_attaches." ON ".$tbl_attaches.".message_id = ".$webapps_messages_id;
+  		$user = JFactory::getUser();
+		if (SUser::detectAdminStat($user))
+			$query.="
+       ".$tbl_deleted.".user_id AS del_by_user ";
+	   	else
+			$exclude_del="
+  AND ".$tbl_mess.".id NOT IN ( SELECT message_id 
+  							FROM ".$tbl_deleted." 
+						   WHERE user_id = ".$user_id_from."
+						)";
+  		$query.="
  WHERE (";
  		if ($user_id_from || $user_id_to) {
 			
@@ -206,10 +221,17 @@ class SUser{
         ".$criteria."
            )";
 		}
+		
 		if (!$subquery&&!$criteria) 
-		$query.=1;
+			$query.=1;
+		
 		$query.="
-       )
+       )";
+
+		if ($exclude_del)
+			$query.=$exclude_del;			
+	   
+		$query.="
 ORDER BY ";
 		if (!$order_by) $order_by=$webapps_messages_id." DESC";
 		$query.=$order_by;
@@ -233,10 +255,11 @@ ORDER BY ";
 	 * @ user, data, message
 	 */
 	function getUserDataFromMail($message_id,$direct='from'){
+		$tbl="#__webapps_messages";
 		$query="SELECT #__users.id AS user_id, `name` AS user_name, `username` AS user_login
-FROM #__users, #__webapps_messages
-WHERE #__webapps_messages.user_id_".$direct." = #__users.id
-AND #__webapps_messages.id = ".$message_id;
+FROM #__users, ".$tbl_mess."
+WHERE ".$tbl.".user_id_".$direct." = #__users.id
+AND ".$tbl.".id = ".$message_id;
 		$db = JFactory::getDBO(); // echo "<div class=''>query= ".$query."</div>";
 		$db->setQuery($query);
 		return $db->loadAssoc();

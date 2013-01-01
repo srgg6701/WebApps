@@ -101,11 +101,15 @@ class AjaxModelAjax extends JModel
 	 * Удалить сообщение
 	 * @ user, customer, precustomer
 	 */
-	function deleteMessage($id) {
-		$table=JTable::getInstance('messages', 'Collector1Table');
+	function deleteMessage() {
+		$table=JTable::getInstance('messages_deleted', 'Collector1Table');
+		$table->set('message_id',JRequest::getVar('object_id'));
+		$user = JFactory::getUser();
+		$table->set('user_id',$user->get('id'));
 		//$test=true;
 		if (JRequest::getVar('w')) echo "<div class=''>id to delete: ".$id."</div>";
-		elseif (!$table->delete($id)) echo "Ошибка удаления записи из *messages_read";
+		elseif (!SErrors::afterTable($table))
+			echo "Ошибка удаления записи из *messages_read";
 		exit;
 	}	
 	/**

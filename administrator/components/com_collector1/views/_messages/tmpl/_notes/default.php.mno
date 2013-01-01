@@ -2,4 +2,6 @@
 <info>
 	<infoitem key="MM_css_include" value="../../../../../templates/bluestork/css/template.css" />
 	<infoitem key="MM_css_exclude" value="" />
+	<infoitem key="notes" value="*Добавить метку для сообщений, удалённых заказчиками&#xD;*Дописать процедуру удаления сообщений админом. Удалять из:&#xD;    *Таблицы сообщений&#xD;    *Таблицы прочтённых сообщений&#xD;    *Таблицы удалённых сообщений&#xD;    *Таблицы аттачментов&#xD;    *Удалять аттачменты" />
+	<infoitem key="showOnOpen" value="true" />
 </info>
