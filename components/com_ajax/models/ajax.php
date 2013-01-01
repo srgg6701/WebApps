@@ -103,22 +103,34 @@ class AjaxModelAjax extends JModel
 	 */
 	function deleteMessage() {
 		$table=JTable::getInstance('messages_deleted', 'Collector1Table');
-		$table->set('message_id',JRequest::getVar('object_id'));
+		$message_id=JRequest::getVar('object_id');
+		$table->set('message_id',$message_id);
 		$user = JFactory::getUser();
-		$table->set('user_id',$user->get('id'));
+		$user_id=$user->get('id');
+		$table->set('user_id',$user_id);
 		//$test=true;
 		if (JRequest::getVar('w')) echo "<div class=''>id to delete: ".$id."</div>";
 		elseif (!SErrors::afterTable($table))
 			echo "Ошибка удаления записи из *messages_read";
+		// удалить из прочтённых:
+		$this->dropReadMessage($message_id,$user_id);
 		exit;
 	}	
 	/**
 	 * удалить из таблицы прочтённых
 	 * @ user, message
 	 */
-	function dropReadMessage($message_id){
+	function dropReadMessage($message_id,$user_id=false){
+		if (!$user_id){
+			$user = JFactory::getUser();
+			$user_id=$user->get('id');
+		}
+		$query="SELECT id FROM #__webapps_messages_read WHERE message_id = ".$message_id." AND user_id = ".$user_id;
+		$db=JFactory::getDBO();
+		$db->setQuery($query);
+		$id=$db->loadResult(); 
 		$table=JTable::getInstance('messages_read', 'Collector1Table');
-		$messages=SUser::getMessages( false,
+		/*$messages=SUser::getMessages( false,
 					  false,
 					  false,
 					  false,
@@ -126,7 +138,7 @@ class AjaxModelAjax extends JModel
 					  false,
 					  '#__webapps_messages_read.id'
 					); 
-		$id=$messages[0]['id'];
+		$id=$messages[0]['id'];*/
 		if ($take_test=JRequest::getVar('take_test')) {
 			var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
 			echo "<div class=''>id = $id</div>"; 
