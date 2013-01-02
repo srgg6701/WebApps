@@ -89,4 +89,3 @@ $arrMessages=$this->messages; // выводит список, ограничен
 <input name="user_id_from" type="hidden" value="<?=$user_id?>">
 <input name="user_id_to" type="hidden" value="<?=$user_id_to?>">
 </form>
-<?	require_once JPATH_SITE.DS.'includes'.DS.'internal_mail_js.php'; ?>

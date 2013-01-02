@@ -41,7 +41,11 @@ class SHTML extends JHtml{
 				$p.='class="txtOrange" ';
 			$p.='href="'.$link.'&limit='.$set_limit.'">['.($i+1).']</a> ';
 		}
-		$this->pagination='<div'.$params.' align="center">Страницы: '.$p.'</div>';
+		$pagination='<div'.$params.' align="center">Страницы: '.$p.'</div>';
+		if ($user_id)
+			$this->pagination=$pagination;
+		else 
+			return $pagination;
 	}
 /**
  * Описание

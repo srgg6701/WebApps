@@ -130,16 +130,8 @@ class AjaxModelAjax extends JModel
 		$db->setQuery($query);
 		$id=$db->loadResult(); 
 		$table=JTable::getInstance('messages_read', 'Collector1Table');
-		/*$messages=SUser::getMessages( false,
-					  false,
-					  false,
-					  false,
-					  " message_id = ".$message_id,
-					  false,
-					  '#__webapps_messages_read.id'
-					); 
-		$id=$messages[0]['id'];*/
 		if ($take_test=JRequest::getVar('take_test')) {
+			echo "query=".$query;
 			var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
 			echo "<div class=''>id = $id</div>"; 
 			echo "<div class=''>dropReadMessage</div>"; 
@@ -173,7 +165,7 @@ class AjaxModelAjax extends JModel
 			var_dump("\narrMessage:\n",$arrMessage);
 		$user_id_read=(int)JRequest::getVar('user_id_read');
 		// добавить к прочтённым:
-		if (!SUser::checkMessageReadStatus($user_id_read,$message_id))
+		if (!SUser::checkMessageReadStatus($message_id,$user_id_read))
 			$this->setMessRead($message_id,$user_id_read);
 		$arrMessage['date']=date("Y-m-d H:i:s");
 		echo json_encode($arrMessage);
@@ -289,9 +281,9 @@ class AjaxModelAjax extends JModel
 	 */
 	function switchMessageReadStatus(){ 
 		$user_id=(int)JRequest::getVar('user_id');
-		$message_id=(int)JRequest::getVar('object_id');
-		if(SUser::checkMessageReadStatus($user_id,$message_id)) { // если есть в таблице прочтённых - удалить оттуда
-			$this->dropReadMessage($message_id);
+		$message_id=(int)JRequest::getVar('object_id'); 
+		if(SUser::checkMessageReadStatus($message_id,$user_id)) { // если есть в таблице прочтённых - удалить оттуда
+			$this->dropReadMessage($message_id,$user_id);
 		}else{ // добавить в таблицу прочтённых
 			$this->setMessRead($message_id,$user_id,true);
 		}

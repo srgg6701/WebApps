@@ -21,14 +21,31 @@ class SUser{
 	  * -  disabled, activated	(can't log in)		block = 1, activation [empty]
 	  -----------------------------------------------------------------------
 */	  
-
+	/**
+	 * Проверить статус прочтения сообщения для данного юзера
+	  * @ user, message, status
+	 */
+	function checkMessageReadStatus($message_id,$user_id=false,$db=false){
+		if (!$db) $db = JFactory::getDBO();
+		$query=$db->getQuery(true);
+		$query->select('COUNT(id)');
+		$query->from('#__webapps_messages_read');
+		$messSb='message_id = '.$message_id;
+		if ($user_id)
+			$messSb.=' AND user_id = ' . $user_id;
+		$query->where($messSb);
+		$db->setQuery($query);
+		$result=$db->loadResult(); 
+		if ($take_test=JRequest::getVar('take_test')) echo "<div class=''>query ($result)= ".$query."</div>";
+		return $result;
+	}
 /**
  * Получить колич. всех сообщений юзера
  * @package
  * @subpackage
  */
 	public static function getAllUserMessagesCount($user_id=false){
-		if(!$user_id){
+		if(!$user_id&&$user_id!==NULL){
 			$user = JFactory::getUser();
 			$user_id=$user->get('id');
 		}
@@ -67,55 +84,6 @@ class SUser{
 		if (!$customer_status)
 			JMail::sendErrorMess('Не получен статус юзера.',"Определение статуса юзера.");
 		return $customer_status;
-	}
-	/**
-	 * @ user, precustomer
-	 */
-	function getPrecustomerContactData( $db=false,
-										$user=false,
-										$user_id=false,
-										$as_object=false
-									  ){
-		if (!$db) $db	= JFactory::getDBO();
-		if (!$user) $user = JFactory::getUser(); 
-		$query="SELECT `name`, `phone`, `skype`";
-		$from_where=' FROM #__webapps_precustomers 
- WHERE ';
-		if (self::detectAdminStat($user)){
-			$query.=", `email` ".$from_where." id = ".(int)$user_id;
-		}else{
-			$query.=$from_where." `email` = '".$user->get('email')."' 
-    OR `session_id` ='".session_id()."'";
-		}
-		$db->setQuery($query); // echo "<div>query: <hr><pre>".$query."</pre></div>";
-		return ($as_object)? $db->loadObject():$db->loadAssoc();
-	}
-	/**
-	 * Проверить, не является ли текущий юзер предзаказчиком?
-	  * @ user, precustomer, status
-	 */
-	function getPrecustomerStatus($email=false) {
-		if (!$email) $email = JRequest::getVar('email');
-		$query="SELECT COUNT(*) FROM #__webapps_precustomers
- WHERE `email` = '$email' OR session_id = '".session_id()."'";
-		$db = JFactory::getDBO();
-		$db->setQuery($query);
-		return (int)$db->loadResult(); // id / NULL
-	}
-	/**
-	 * Проверить статус прочтения сообщения для данного юзера
-	  * @ user, message, status
-	 */
-	function checkMessageReadStatus($user_id,$message_id,$db=false){
-		if (!$db) $db = JFactory::getDBO();
-		$query=$db->getQuery(true);
-		$query->select('COUNT(id)');
-		$query->from('#__webapps_messages_read');
-		$query->where('message_id = '.$message_id.' AND user_id = ' . $user_id);
-		$db->setQuery($query);
-		$result=$db->loadResult(); 
-		if ($take_test=JRequest::getVar('take_test')) echo "<div class=''>query ($result)= ".$query."</div>";
-		return $result;
 	}
 	/**
 	 * получить юзеров с правами не ниже....
@@ -177,27 +145,40 @@ class SUser{
 			$query.="
        user_id_from, 
        user_id_to, 
-       DATE_FORMAT(".$tbl_mess.".date_time, '%e.%m.%Y %H:%i') AS 'datetime', 
+DATE_FORMAT(".$tbl_mess.".date_time, '%e.%m.%Y %H:%i') 
+    AS 'datetime', 
        subject, 
        message, 
 	   files_names,
 	   ".$tbl_read.".date_time AS 'read_datetime',
-       obj_identifier ";
-		}
-	   	$query.="
-  FROM ".$tbl_mess." 
-  LEFT JOIN ".$tbl_read." ON message_id = ".$webapps_messages_id."
-  LEFT JOIN ".$tbl_attaches." ON ".$tbl_attaches.".message_id = ".$webapps_messages_id;
-  		$user = JFactory::getUser();
-		if (SUser::detectAdminStat($user))
-			$query.="
+       obj_identifier";
+  			$user = JFactory::getUser();
+			if ($isAdmin=SUser::detectAdminStat($user)) 
+				$query.=",
        ".$tbl_deleted.".user_id AS del_by_user ";
-	   	else
-			$exclude_del="
+	   		else 
+				$exclude_del="
   AND ".$tbl_mess.".id NOT IN ( SELECT message_id 
   							FROM ".$tbl_deleted." 
 						   WHERE user_id = ".$user_id_from."
 						)";
+		}
+	   	$query.="
+  FROM ".$tbl_mess." 
+  LEFT JOIN ".$tbl_read." ON ";
+  		
+		$eq_messages="message_id = ".$webapps_messages_id;
+  		
+		$query.= ($isAdmin) ? 
+			"( ".$eq_messages." AND ".$tbl_read.".user_id = ".$user->get('id')." )"
+			:
+			$eq_messages;
+		
+		$query.="
+  LEFT JOIN ".$tbl_attaches." ON ".$tbl_attaches.".message_id = ".$webapps_messages_id;
+  			if ($isAdmin)
+				$query.="
+  LEFT JOIN ".$tbl_deleted." ON ".$tbl_deleted.".message_id = ".$webapps_messages_id;
   		$query.="
  WHERE (";
  		if ($user_id_from || $user_id_to) {
@@ -246,20 +227,54 @@ ORDER BY ";
 		$db->setQuery($query);  
 		$messages=$db->loadAssocList(); // var_dump("<h1>messages:</h1><pre>",$messages,"</pre>");
 		
-		if (JRequest::getVar('q')) echo "<div>query(".count($messages)."): <hr><pre>".$query."</pre></div>";
+		if (JRequest::getVar('q')) echo "<div>SUser::getMessages(), query(".count($messages)."): <hr><pre>".$query."</pre></div>";
 		
 		return $messages;
+	}
+	/**
+	 * @ user, precustomer
+	 */
+	function getPrecustomerContactData( $db=false,
+										$user=false,
+										$user_id=false,
+										$as_object=false
+									  ){
+		if (!$db) $db	= JFactory::getDBO();
+		if (!$user) $user = JFactory::getUser(); 
+		$query="SELECT `name`, `phone`, `skype`";
+		$from_where=' FROM #__webapps_precustomers 
+ WHERE ';
+		if (self::detectAdminStat($user)){
+			$query.=", `email` ".$from_where." id = ".(int)$user_id;
+		}else{
+			$query.=$from_where." `email` = '".$user->get('email')."' 
+    OR `session_id` ='".session_id()."'";
+		}
+		$db->setQuery($query); // echo "<div>query: <hr><pre>".$query."</pre></div>";
+		return ($as_object)? $db->loadObject():$db->loadAssoc();
+	}
+	/**
+	 * Проверить, не является ли текущий юзер предзаказчиком?
+	  * @ user, precustomer, status
+	 */
+	function getPrecustomerStatus($email=false) {
+		if (!$email) $email = JRequest::getVar('email');
+		$query="SELECT COUNT(*) FROM #__webapps_precustomers
+ WHERE `email` = '$email' OR session_id = '".session_id()."'";
+		$db = JFactory::getDBO();
+		$db->setQuery($query);
+		return (int)$db->loadResult(); // id / NULL
 	}
 	/**
 	 * Установить данные юзера
 	 * @ user, data, message
 	 */
 	function getUserDataFromMail($message_id,$direct='from'){
-		$tbl="#__webapps_messages";
+		$tbl_mess="#__webapps_messages";
 		$query="SELECT #__users.id AS user_id, `name` AS user_name, `username` AS user_login
 FROM #__users, ".$tbl_mess."
-WHERE ".$tbl.".user_id_".$direct." = #__users.id
-AND ".$tbl.".id = ".$message_id;
+WHERE ".$tbl_mess.".user_id_".$direct." = #__users.id
+AND ".$tbl_mess.".id = ".$message_id;
 		$db = JFactory::getDBO(); // echo "<div class=''>query= ".$query."</div>";
 		$db->setQuery($query);
 		return $db->loadAssoc();
@@ -491,7 +506,7 @@ WHERE m.id = ".$message_id."
 			if ($direct=="unknown")
 				JMail::sendErrorMess('Получен статус направления сообщения "unknown" (SUser::setMailRowClass())' ,'Неизвестный статус направления сообщения');
 		}
-		if (!self::checkMessageReadStatus($user->get('id'),$message_id)) $user_mess_unread=true;
+		if (!self::checkMessageReadStatus($message_id,$user->get('id'))) $user_mess_unread=true;
 		// если админ
 		if (self::detectAdminStat($user)){
 			//
@@ -507,7 +522,7 @@ WHERE user_id IN ( " . $internal_users_ids ."
 			}else{ // отправленные
 				   // выяснить, прочёл ли клиент
 				$receiver_data=getUserDataFromMail($message_id,'to');
-				if(!self::checkMessageReadStatus($receiver_data['user_id'],$message_id)) $customer_unread=true;
+				if(!self::checkMessageReadStatus($message_id,$receiver_data['user_id'])) $customer_unread=true;
 				// не прочтено клиентом
 				if($customer_unread) {
 					$class=($user_mess_unread)? 

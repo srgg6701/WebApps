@@ -18,7 +18,7 @@ $(function(){
 				handleMess($(this).attr('data-read-status'),'switch_read_status',this);
 				return false;
 			});
-		$('a[data-subject]').click( function(){
+		$('a[data-subject]').click( function(){ console.info('go loadMess')
 				loadMess($(this).attr('data-subject'));
 				return false;
 			});
@@ -73,7 +73,7 @@ function composeMessageDisplay(rev){
   }
 }
 /**
- * Переключить статус прочтения сообщения
+ * Переключить статус прочтения сообщения или "удалить" его
  * Удалить сообщение
  */
 function handleMess(message_id,action,goLive){
@@ -120,11 +120,11 @@ function handleMess(message_id,action,goLive){
   }
 }
 /**
- * Описание
+ * Обработать визуально данные в строке с загруженным сообщением
  * @package
  * @subpackage
  */
-function handleReadStatus(data,message_id){
+function handleActiveRow(data,message_id){
 	if (!message_id)
 		message_id=data['id'];
 	$('table#tblMess tr')
@@ -178,7 +178,7 @@ function handleMessAreaAfterPost(data,headerTextStatic){
 function loadMess(message_id){
   try{ 
   	var uData="option=com_ajax&object=message&action=get&object_id="+message_id+"&user_id_read=<?=$user_id?>";
-	var nw=false;
+	var nw=true;
 	if (nw) 
 		takeTest(uData);
   	else{
@@ -194,7 +194,7 @@ function loadMess(message_id){
 				mData['id']=message_id;
 				mData['message']=data['message'];
 				handleMessAreaAfterPost(mData);
-				handleReadStatus(data,message_id);
+				handleActiveRow(data,message_id);
 			},
 			error: function (data) {
 				alert("Не удалось отправить данные.\nОтвет: "+data.result);
@@ -281,7 +281,7 @@ function sendPostAjax(txtAreaID){
 						*/'</tr>');
 						console.info('id = '+data['id']+', subject = '+data['subject']+', message = '+data['message']+', file_names = '+data['file_names']);
 						handleMessAreaAfterPost(data,'Отправленное сообщение:');
-						handleReadStatus(data);
+						handleActiveRow(data);
 					},
 				error: function (data) {
 					alert("Не удалось отправить данные.\nОтвет: "+data.result);

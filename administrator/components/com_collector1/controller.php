@@ -7,7 +7,6 @@
  * @author      srgg <srgg67@gmail.com> - http://www.facebook.com/srgg67
  */
 
-
 // No direct access
 defined('_JEXEC') or die;
 

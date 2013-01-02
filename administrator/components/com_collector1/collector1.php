@@ -11,7 +11,7 @@
 // no direct access
 defined('_JEXEC') or die;
 //массив подключаемых файлов:
-$arrPathReq=array('SData','SDebug','SErrors','SFiles','SCollection','SHelpersAdmin','SSite','SUser');
+$arrPathReq=array('SData','SDebug','SErrors','SFiles','SCollection','SHelpersAdmin','SHTML','SSite','SUser');
 for($i=0,$j=count($arrPathReq);$i<$j;$i++)
 	require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.$arrPathReq[$i].'.php';
 

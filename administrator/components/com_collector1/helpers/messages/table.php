@@ -20,11 +20,12 @@ tr.UnReadAllIn td{
 }
 </style>
 <?
+SDebug::showDebugContent($this,'this');
 if(!isset($user))
 	$user=JFactory::getUser();
 $user_id=(int)$user->id;
-//SDebug::showDebugContent($user->id,'user->id');
-if (!$UserAdmin&&SUser::detectAdminStat($user)) {
+$isAdmin=SUser::detectAdminStat($user);
+if (!$UserAdmin&&$isAdmin) {
 	$UserAdmin=$user;
 	$user_id_from=$user_id;
 }
@@ -145,7 +146,12 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
 <?	}?>
   <tr>
     <td align="center" colspan="<?=$y?>"><?
-    echo $this->pagination; //var_dump("<h1>get:</h1><pre>",JRequest::get('get'),"</pre>");?></td>
+    if ($isAdmin){
+		
+		echo SHTML::makePagination(20,NULL);
+		
+	}else	
+		echo $this->pagination;?></td>
   </tr>
 <?	if(!$i):?>
   <tr>
@@ -164,5 +170,5 @@ Attaches['<?=$attId?>']['<?=$key?>']="<?=$name?>";
 		}
 ?>
 </script>
-<?	}?>
-
+<?	}
+require_once JPATH_SITE.DS.'includes'.DS.'internal_mail_js.php'; ?>

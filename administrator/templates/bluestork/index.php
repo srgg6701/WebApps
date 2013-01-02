@@ -53,6 +53,7 @@ div#content-box div#toolbar-box div.m {
 }
 </style>
 <script type="text/javascript" src="<?=JUri::root()?>templates/fastwebdev/js/common.js"></script>
+<script type="text/javascript" src="<?=JUri::root()?>templates/fastwebdev/js/jquery-1.7.1.min.js"></script>
 </head>
 <body id="minwidth-body">
 	<div id="border-top" class="h_blue">
