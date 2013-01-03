@@ -16,7 +16,7 @@ JHTML::_('script','system/multiselect.js',false,true);
 // Import CSS
 $document = &JFactory::getDocument();
 $document->addStyleSheet('components/com_collector1/assets/css/collector1.css');
-//SDebug::showDebugContent($this,'this');
+SDebug::showDebugContent($this,'this');
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
 $listOrder	= $this->state->get('list.ordering');

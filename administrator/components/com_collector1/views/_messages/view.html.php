@@ -36,7 +36,10 @@ class Collector1View_messages extends JView
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
-		$this->_messages=$this->getModel()->getMessages();
+		if (!$limit=JRequest::getVar('limit'))
+				$limit='default';
+		$messArray['limit']=$limit;
+		$this->_messages=$this->getModel()->getMessages($messArray);
 		$this->addToolbar();
 		parent::display($tpl);
 	}

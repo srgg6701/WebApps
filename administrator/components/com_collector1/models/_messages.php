@@ -16,7 +16,9 @@ jimport('joomla.application.component.modellist');
  */
 class Collector1Model_messages extends JModelList
 {
-    /**
+    //private $messArray=array(); // to pass specified data for query
+	
+	/**
      * Constructor.
      *
      * @param    array    An optional associative array of configuration settings.
@@ -151,16 +153,7 @@ class Collector1Model_messages extends JModelList
 	/**
 	 *
 	 */
-	function getMessages($limit=false){
-		if (!$limit) $limit=20;
-		return SUser::getMessages( 
-						  false, // $order_by сортировка
-						  false, // $user_id_from фильтр по отправителю
-						  false, // $user_id_to заказчик/предзаказчик
-						  false, // $user_id_read фильтр по тому, кто прочёл
-						  false, // $criteria дополнительные критерии выбора записей
-						  $limit, // лимит записей
-						  false // $fields_subquery дополнительные поля извлечения данных
-						);
+	function getMessages($messArray){
+		return SUser::getMessages($messArray);
 	}
 }

@@ -178,7 +178,7 @@ function handleMessAreaAfterPost(data,headerTextStatic){
 function loadMess(message_id){
   try{ 
   	var uData="option=com_ajax&object=message&action=get&object_id="+message_id+"&user_id_read=<?=$user_id?>";
-	var nw=true;
+	var nw=false;
 	if (nw) 
 		takeTest(uData);
   	else{

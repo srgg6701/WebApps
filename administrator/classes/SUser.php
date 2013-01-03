@@ -111,14 +111,16 @@ class SUser{
 	 * получить сообщения
 	 * @ user, precustomer, customer, message
 	 */
-	function getMessages( $order_by=false, // сортировка
-						  $user_id_from=false, // фильтр по отправителю
-						  $user_id_to=false, // фильтр по получателю
-						  $user_id_read=false, // фильтр по тому, кто прочёл
-						  $criteria=false, // дополнительные критерии выбора записей
-						  $limit=false, // лимит записей
-						  $fields_subquery=false // дополнительные поля извлечения данных
-						) { 
+	function getMessages($arrMessages=false) { 
+		
+		$order_by=$arrMessages['sort']; // сортировка
+		$user_id_from=$arrMessages['user_id_from']; // фильтр по отправителю
+		$user_id_to=$arrMessages['user_id_to']; // фильтр по получателю
+		$user_id_read=$arrMessages['user_id_read']; // фильтр по тому, кто прочёл
+		$criteria=$arrMessages['criteria']; // дополнительные критерии выбора записей
+		$limit=$arrMessages['limit']; // лимит записей
+		$fields_subquery=$arrMessages['fields_subquery']; // дополнительные поля извлечения данных
+						
 		$query="SELECT DISTINCT ";
 		$tbl_attaches="#__webapps_files_attaches";
 		$tbl_mess="#__webapps_messages";
@@ -521,7 +523,7 @@ WHERE user_id IN ( " . $internal_users_ids ."
 				}
 			}else{ // отправленные
 				   // выяснить, прочёл ли клиент
-				$receiver_data=getUserDataFromMail($message_id,'to');
+				$receiver_data=SUser::getUserDataFromMail($message_id,'to');
 				if(!self::checkMessageReadStatus($message_id,$receiver_data['user_id'])) $customer_unread=true;
 				// не прочтено клиентом
 				if($customer_unread) {

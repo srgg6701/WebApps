@@ -14,8 +14,7 @@ require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SErrors.php';
 
 class SHTML extends JHtml{
 	public $pagination;
-	public function makePagination( $limit=false,
-									$user_id=false,
+	public function makePagination( $user_id=NULL,
 								  	$params=false
 								  ){
 		$mCount=(int)SUser::getAllUserMessagesCount($user_id);
@@ -46,6 +45,14 @@ class SHTML extends JHtml{
 			$this->pagination=$pagination;
 		else 
 			return $pagination;
+	}
+/**
+ * Пагинация для таблицы сообщений админа
+ * @package
+ * @subpackage
+ */
+	public static function makePaginationAdmin(){
+		return self::makePagination();
 	}
 /**
  * Описание

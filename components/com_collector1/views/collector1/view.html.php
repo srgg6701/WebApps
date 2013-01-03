@@ -30,7 +30,6 @@ class Collector1ViewCollector1 extends JView
 	 */
 	function display($tpl = NULL)
 	{
-		//require_once JPATH_ADMINISTRATOR.DS.'classes/SSite.php';
 		$app		= JFactory::getApplication();
 		$params		= $app->getParams();
 		$this->templatename=SSite::getCurrentTemplateName($app);
@@ -50,11 +49,10 @@ class Collector1ViewCollector1 extends JView
 				$user_id=$user->get('id');
 				$messArray['user_id_from']=$messArray['user_id_to']=$user_id;
 			}
-				// such a data required to be substituted into a query at SUser::getMessages() to get ALL messages belonging to the current user
+			// such a data required to be substituted into a query at SUser::getMessages() to get ALL messages belonging to the current user
 			$messArray['limit']=$limit;
-			$model->fillMessArray($messArray);
-			$this->messages=$model->getMessages(); 
-			SHTML::makePagination($limit,$user_id," class=\"pagination\"");
+			$this->messages=$model->getMessages($messArray); 
+			SHTML::makePagination($user_id," class=\"pagination\"");
 		}else{
 			$model=$this->getModel();
 			//получим данные переданной коллекции заказчика:

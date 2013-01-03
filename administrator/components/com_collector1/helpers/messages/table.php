@@ -145,13 +145,7 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
   </tr>
 <?	}?>
   <tr>
-    <td align="center" colspan="<?=$y?>"><?
-    if ($isAdmin){
-		
-		echo SHTML::makePagination(20,NULL);
-		
-	}else	
-		echo $this->pagination;?></td>
+    <td align="center" colspan="<?=$y?>"><?=($isAdmin)? SHTML::makePaginationAdmin():$this->pagination?></td>
   </tr>
 <?	if(!$i):?>
   <tr>
