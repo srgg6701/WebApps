@@ -70,9 +70,9 @@ table#tblMess
 	max-width:546px;
 	min-width:262px;
 }
-tr td{
+/*tr td{
 	font-size:0.9em;
-}
+}*/
 table#tblMess tr td{
 	overflow:hidden;
 	white-space:nowrap;

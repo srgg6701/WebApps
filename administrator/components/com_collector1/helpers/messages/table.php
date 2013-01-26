@@ -19,8 +19,7 @@ tr.UnReadAllIn td{
 	background:EDEDED;
 }
 </style>
-<?
-SDebug::showDebugContent($this,'this');
+<?	//SDebug::showDebugContent($this,'this');
 if(!isset($user))
 	$user=JFactory::getUser();
 $user_id=(int)$user->id;
@@ -31,7 +30,8 @@ if (!$UserAdmin&&$isAdmin) {
 }
 
 if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages');
-
+$del_img=JUri::root().'administrator/templates/bluestork/images/menu/icon-16-trash.png" width="16" height="16';
+	
 	ob_start();?>
 <table cellspacing="0" class="tblMess" id="tblMess">
   <tr class="trMessHeaders">
@@ -57,12 +57,10 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
     <td id="tdSubject">Тема<? ++$y;
 		
 		?></td>
-    <td id="tdRemove" align="center"><img src="<? ++$y;
-	
-	echo JUri::root().'templates/fastwebdev/images/commands/trash.png'; ?>"></td>
+    <td id="tdRemove" align="center"><img src="<?=$del_img?>"><? 
+		++$y;?></td>
   </tr>
-<?	$del_img=JUri::root().'administrator/templates/bluestork/images/menu/icon-16-trash.png" width="16" height="16';
-	$white='#FFF';
+<?	$white='#FFF';
 	$grey='#EDEDED'; 
 	$light_orange="#FFE3AA";
 	$unread='не прочтено';
