@@ -1,7 +1,7 @@
 <?php
 /**
  * @version     2.1.0
- * @package     com_collector1
+ * @package     com_application
  * @copyright   Copyright (C) webapps 2012. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  * @author      srgg <srgg67@gmail.com> - http://www.facebook.com/srgg67
@@ -15,7 +15,7 @@ jimport('joomla.application.component.view');
 /**
  * View to edit
  */
-class Collector1ViewXXX_UCFIRST_INTERNAL_NAME_XXX extends JView
+class ApplicationViewApplication extends JView
 {
 	protected $state;
 	protected $item;
@@ -54,29 +54,29 @@ class Collector1ViewXXX_UCFIRST_INTERNAL_NAME_XXX extends JView
         } else {
             $checkedOut = false;
         }
-		$canDo		= Collector1Helper::getActions();
+		$canDo		= ApplicationHelper::getActions();
 
-		JToolBarHelper::title(JText::_('COM_COLLECTOR1_TITLE_XXX_UPPER_INTERNAL_NAME_XXX'), 'XXX_INTERNAL_NAME_XXX.png');
+		JToolBarHelper::title(JText::_('COM_APPLICATION_TITLE_APPLICATION'), 'APPLICATION.png');
 
 		// If not checked out, can save the item.
 		if (!$checkedOut && ($canDo->get('core.edit')||($canDo->get('core.create'))))
 		{
 
-			JToolBarHelper::apply('XXX_INTERNAL_NAME_XXX.apply', 'JTOOLBAR_APPLY');
-			JToolBarHelper::save('XXX_INTERNAL_NAME_XXX.save', 'JTOOLBAR_SAVE');
+			JToolBarHelper::apply('APPLICATION.apply', 'JTOOLBAR_APPLY');
+			JToolBarHelper::save('APPLICATION.save', 'JTOOLBAR_SAVE');
 		}
 		if (!$checkedOut && ($canDo->get('core.create'))){
-			JToolBarHelper::custom('XXX_INTERNAL_NAME_XXX.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+			JToolBarHelper::custom('APPLICATION.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
 		}
 		// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
-			JToolBarHelper::custom('XXX_INTERNAL_NAME_XXX.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+			JToolBarHelper::custom('APPLICATION.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
 		}
 		if (empty($this->item->XXX_INTERNAL_PRIMARY_KEY_XXX)) {
-			JToolBarHelper::cancel('XXX_INTERNAL_NAME_XXX.cancel', 'JTOOLBAR_CANCEL');
+			JToolBarHelper::cancel('APPLICATION.cancel', 'JTOOLBAR_CANCEL');
 		}
 		else {
-			JToolBarHelper::cancel('XXX_INTERNAL_NAME_XXX.cancel', 'JTOOLBAR_CLOSE');
+			JToolBarHelper::cancel('APPLICATION.cancel', 'JTOOLBAR_CLOSE');
 		}
 
 	}

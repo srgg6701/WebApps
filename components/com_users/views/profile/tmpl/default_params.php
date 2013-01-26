@@ -15,7 +15,6 @@ JHtml::register('users.templatestyle', array('JHtmlUsers', 'templatestyle'));
 JHtml::register('users.admin_language', array('JHtmlUsers', 'admin_language'));
 JHtml::register('users.language', array('JHtmlUsers', 'language'));
 JHtml::register('users.editor', array('JHtmlUsers', 'editor'));
-
 ?>
 <?php $fields = $this->form->getFieldset('params'); ?>
 <?php if (count($fields)): ?>

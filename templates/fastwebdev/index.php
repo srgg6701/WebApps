@@ -13,7 +13,11 @@ if (!$this->baseurl){
 <html>
 <head>
 <jdoc:include type="head" />
-<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css"> 
+<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/style.css" type="text/css">
+
+<link rel="stylesheet/less" type="text/css" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/less/styles.less">
+<script src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/less/less.js" type="text/javascript"></script> 
+
 <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/fastwebdev/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/fastwebdev/js/common.js"></script>
 </head>

@@ -1,0 +1,22 @@
+@F3F3F3: #F3F3F3;
+@lightBlue: #FF6;
+@px10: 10px;
+
+.borderRadius6{
+	border-radius: 6px;
+}
+.solid1px(@borderColor){
+	border: solid 1px @borderColor;
+}
+
+fieldset {
+	background: @F3F3F3;
+	margin-bottom: @px10;
+	.borderRadius6;
+	legend{
+		background-color: @lightBlue;
+		.borderRadius6;
+		.solid1px(#FEBE38);
+		padding: @px10;
+	}
+}
