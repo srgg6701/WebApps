@@ -20,7 +20,7 @@ tr.UnReadAllIn td{
 }
 </style>
 <?
-SDebug::showDebugContent($this,'this');
+//SDebug::showDebugContent($this,'this');
 if(!isset($user))
 	$user=JFactory::getUser();
 $user_id=(int)$user->id;
@@ -30,14 +30,22 @@ if (!$UserAdmin&&$isAdmin) {
 	$user_id_from=$user_id;
 }
 
-if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages');?>
-	<h4 class="marginBottom8"><?
-    if($direct){
-		$mailFolders=SAdminMenuHelper::makeMailFoldersList();
-		echo $mailFolders[$direct];
-	}else{?>Список сообщений<? 
-		if ($objs=='orders'){?> по заказу<? }elseif($objs=='collections'){?> по коллекции<? }
-	}?> &nbsp; | &nbsp; <a href="#" data-action="add-message" style="font-weight:200;">Добавить сообщение...</a></h4>
+if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages');
+$mess_listing='Список сообщений';
+ob_start();
+	if ($objs=='orders')
+		echo 'по заказу';
+	elseif($objs=='collections')
+		echo 'по коллекции';
+	$mess_listing_accessory=ob_get_contents();	
+ob_clean();
+
+ob_start();
+	echo ' &nbsp; | &nbsp; <a href="#" data-action="add-message" style="font-weight:200;">Добавить сообщение...</a>';
+	$add_new_mess=ob_get_contents();	
+ob_clean();
+
+ob_start();?>
 <table cellspacing="0" class="tblMess" id="tblMess">
   <tr class="trMessHeaders">
   	<? $y=0; ?>
@@ -153,7 +161,31 @@ if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages
   </tr>
 <?	endif;?>        
 </table>
-<?	if (count($allAttaches)){?>
+<?		$mess_table=ob_get_contents();
+	ob_clean();
+	
+	if ($isAdmin):?>
+	<h4 class="marginBottom8"><?
+		if($direct){
+			
+			$mailFolders=SAdminMenuHelper::makeMailFoldersList();
+			echo $mailFolders[$direct];
+		
+		}else{
+			
+			echo $mess_listing.$mess_listing_accessory; //Список сообщений по коллекции/заказу
+		}
+		echo $add_new_mess;
+	?></h4><? 	
+		echo $mess_table;	
+	else:?>
+	<fieldset class="adminform">
+			<legend><?=$mess_listing?>,<?=$mess_listing_accessory?></legend>
+            <legend>LEGEND 2</legend>
+	<?=$mess_table?>
+    </fieldset>
+<?	endif;
+	if (count($allAttaches)){?>
 <script>
 var Attaches=new Array();
 <?		foreach($allAttaches as $attId=>$attData){?>
