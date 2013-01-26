@@ -20,7 +20,7 @@ tr.UnReadAllIn td{
 }
 </style>
 <?
-//SDebug::showDebugContent($this,'this');
+SDebug::showDebugContent($this,'this');
 if(!isset($user))
 	$user=JFactory::getUser();
 $user_id=(int)$user->id;
@@ -31,21 +31,8 @@ if (!$UserAdmin&&$isAdmin) {
 }
 
 if (JRequest::getVar('test')) SDebug::showDebugContent($arrMessages,'arrMessages');
-$mess_listing='Список сообщений';
-ob_start();
-	if ($objs=='orders')
-		echo 'по заказу';
-	elseif($objs=='collections')
-		echo 'по коллекции';
-	$mess_listing_accessory=ob_get_contents();	
-ob_clean();
 
-ob_start();
-	echo ' &nbsp; | &nbsp; <a href="#" data-action="add-message" style="font-weight:200;">Добавить сообщение...</a>';
-	$add_new_mess=ob_get_contents();	
-ob_clean();
-
-ob_start();?>
+	ob_start();?>
 <table cellspacing="0" class="tblMess" id="tblMess">
   <tr class="trMessHeaders">
   	<? $y=0; ?>
@@ -136,6 +123,7 @@ ob_start();?>
 	if ($messageTime) 		
 		echo $messageTime."\n"; 
 	
+
 	echo $goSetStat;
 	
 	echo ($read)? $goUnRead:$goRead;
@@ -164,25 +152,21 @@ ob_start();?>
 <?		$mess_table=ob_get_contents();
 	ob_clean();
 	
-	if ($isAdmin):?>
+	if ($isAdmin):?>	
 	<h4 class="marginBottom8"><?
 		if($direct){
-			
 			$mailFolders=SAdminMenuHelper::makeMailFoldersList();
 			echo $mailFolders[$direct];
-		
-		}else{
-			
-			echo $mess_listing.$mess_listing_accessory; //Список сообщений по коллекции/заказу
-		}
-		echo $add_new_mess;
-	?></h4><? 	
-		echo $mess_table;	
+		}else{?>Список сообщений<? 
+			if ($objs=='orders'){?> по заказу<? }elseif($objs=='collections'){?> по коллекции<? }
+		}?> &nbsp; | &nbsp; <a href="#" data-action="add-message" style="font-weight:200;">Добавить сообщение...</a></h4>
+<?		echo $mess_table;
 	else:?>
-	<fieldset class="adminform">
-			<legend><?=$mess_listing?>,<?=$mess_listing_accessory?></legend>
-            <legend>LEGEND 2</legend>
-	<?=$mess_table?>
+    <fieldset class="adminform">
+        <legend style='position:relative'>Список сообщений
+        <div class="legend"><a href="#" data-action="add-message">Добавить сообщение</a></div>
+        </legend>
+		<?=$mess_table?>
     </fieldset>
 <?	endif;
 	if (count($allAttaches)){?>

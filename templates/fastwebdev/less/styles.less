@@ -1,9 +1,18 @@
 @F3F3F3: #F3F3F3;
-@lightBlue: #FF6;
+@lightYellow: #FF6;
 @px10: 10px;
 
 .borderRadius6{
 	border-radius: 6px;
+}
+.legend(@bgColor){
+		background-color: @bgColor;
+		.borderRadius6;
+		.solid1px(#CFBA8E);
+		padding: @px10;	
+}
+.padding4px{
+	padding:4px;
 }
 .solid1px(@borderColor){
 	border: solid 1px @borderColor;
@@ -14,9 +23,107 @@ fieldset {
 	margin-bottom: @px10;
 	.borderRadius6;
 	legend{
-		background-color: @lightBlue;
-		.borderRadius6;
-		.solid1px(#CFBA8E);
-		padding: @px10;
+		.legend(@lightYellow);
+	}
+	div.legend{
+		.legend(#FFF);
+		left:106%;
+		position:absolute; 
+		top: -1px;
+		white-space:nowrap;
+	}
+}
+table.customerAccount, table.tblMess{
+	/*.solid1px(#060)*/
+}
+table.customerAccount {
+	input [type="checkbox"]{
+		margin:0;
+		padding:0;
+	}
+	div{
+		overflow:hidden;
+	}
+	td, th{
+		.padding4px;
+	}
+}
+table.tblMess {
+	td,th{
+		.padding4px;
+	}
+}
+table.customerAccount th,
+table.tblMess th,
+table.tblMess tbody > tr:first-child td{
+	/*background:#060;*/
+	white-space:nowrap;
+	cursor:default;
+}
+table.customerAccount th div,
+table.tblMess tbody > tr:first-child td{
+	/*color:#FFF;*/
+	text-align:center;
+}
+table.tblMess tbody > tr:first-child td{
+	font-weight:bold;
+}
+table.customerAccount {
+	table.quick img {
+		height:64px;
+		width:64px;
+	}	
+	td div{
+		color:#000;
+	}
+	tr{
+		/*background:#CCC;*/
+	}
+}
+table.UnderCollected {
+	width:100%;
+	tr > th:first-child, 
+	table.UnderCollected 
+		tr > td:first-child {
+			padding-left:8px;
+	}
+	td, th{
+		.padding4px
+	}
+}
+table#heads img{
+	margin-right:10px;
+}
+table#quick {
+	td {
+		padding:10px 10px 10px 40px;
+		text-align:center;
+	}
+	th{
+		padding-bottom:@px10;
+	}
+}
+table#tblCollected {
+	width:700px;
+}
+table#tblCollector, table#tblCollected{
+	border-radius:6px 6px 0 0;
+	border-bottom:solid 1px #ccc;
+	th{
+		background:#efefef;
+	}
+}
+table.customerAccount tr[id^="header-row"]{
+	background:#FFF;
+}
+table#tblCollector tr:hover, 
+table#tblCollected tr:hover, 
+#my_site_number, 
+table.customerAccount tr[id^="header-row"]:hover {
+	background:#E4F9DD;
+}
+.trMessHeaders {
+	>td {
+		border-bottom: solid 2px #CCC;
 	}
 }
