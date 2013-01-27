@@ -119,15 +119,18 @@ $saveOrder	= $listOrder == 'a.ordering';?>
 				</td>
 
 				<td>
-				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
-					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, '_precustomers.', $canCheckin); ?>
-				<?php endif; ?>
-				<?php if ($canEdit) : ?>
-					<a href="<?php echo JRoute::_('index.php?option=com_collector1&task=precustomers.edit&id='.(int) $item->id); ?>">
-					<?php echo $this->escape($item->name); ?></a>
-				<?php else : ?>
-					<?php echo $this->escape($item->name); ?>
-				<?php endif; ?>
+			<?php 	if (isset($item->checked_out) && $item->checked_out) :
+						echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, '_precustomers.', $canCheckin);
+					endif;
+				 	
+					if ($canEdit) : 
+					
+					?><a href="<?php echo JRoute::_('index.php?option=com_collector1&task=precustomers.edit&id='.(int) $item->id); 
+					?>"><?=$this->escape($item->name)?></a><?php 	
+					
+					else : 
+						echo $this->escape($item->name); 
+					endif; ?>
 				</td>
 				<td><?php Collector1Helper::makeObjectEditableField($item->id.'_email','precustomer',$item->email);?>
                 </td>

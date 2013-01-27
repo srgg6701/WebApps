@@ -74,7 +74,6 @@ function composeMessageDisplay(rev){
 }
 /**
  * Переключить статус прочтения сообщения или "удалить" его
- * Удалить сообщение
  */
 function handleMess(message_id,action,goLive){
   try{  console.info('message_id,action = '+message_id+', '+action);

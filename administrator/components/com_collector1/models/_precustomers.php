@@ -97,11 +97,11 @@ class Collector1Model_precustomers extends JModelList
 	 * @since	1.6
 	 */
 	protected function getListQuery()
-	{
+	{	
 		// Create a new query object.
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
-		/*// Select the required fields from the table.
+		/**/// Select the required fields from the table.
 		$query->select(
 			$this->getState(
 				'list.select',
@@ -110,7 +110,7 @@ class Collector1Model_precustomers extends JModelList
 		);
 		$query->from('`#__webapps_precustomers` AS a');
         // Join over the users for the checked out user.
-        $query->select('uc.name AS editor');
+        /*$query->select('uc.name AS editor');
         $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
         // Filter by published state
         $published = $this->getState('filter.state');
@@ -118,7 +118,7 @@ class Collector1Model_precustomers extends JModelList
             $query->where('a.state = '.(int) $published);
         } else if ($published === '') {
             $query->where('(a.state IN (0, 1))');
-        }
+        }*/
 		// Filter by search in title
 		$search = $this->getState('filter.search');
 		if (!empty($search)) {
@@ -134,11 +134,11 @@ class Collector1Model_precustomers extends JModelList
 		$orderDirn	= $this->state->get('list.direction');
         if ($orderCol && $orderDirn) {
 		    $query->order($db->getEscaped($orderCol.' '.$orderDirn));
-        }*/
-		$query->select(
+        }
+		/*$query->select(
 				'*'
 		);
-		$query->from('`#__webapps_precustomers`');
+		$query->from('`#__webapps_precustomers`');*/
 		return $query;
 	}
 }

@@ -166,17 +166,16 @@ $del_img=JUri::root().'administrator/templates/bluestork/images/menu/icon-16-tra
         </legend>
 		<?=$mess_table?>
     </fieldset>
-<?	endif;
-	if (count($allAttaches)){?>
+<?	endif;?>
 <script>
 var Attaches=new Array();
-<?		foreach($allAttaches as $attId=>$attData){?>
+<?	if (count($allAttaches)):
+		foreach($allAttaches as $attId=>$attData):?>
 Attaches['<?=$attId?>']=new Array();
 		<?	foreach($attData as $key=>$name):?>		
 Attaches['<?=$attId?>']['<?=$key?>']="<?=$name?>";
 		<?	endforeach;
-		}
-?>
+		endforeach;
+	endif;?>
 </script>
-<?	}
-require_once JPATH_SITE.DS.'includes'.DS.'internal_mail_js.php'; ?>
+<? 	require_once JPATH_SITE.DS.'includes'.DS.'internal_mail_js.php'; ?>
