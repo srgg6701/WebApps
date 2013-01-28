@@ -105,8 +105,9 @@ $del_img=JUri::root().'administrator/templates/bluestork/images/menu/icon-16-tra
 			if($got_view=='precustomers') {?>Предзаказчик<? }
 			else{
 				$arrUserDataFromMail=SUser::getUserDataFromMail($messageId);?>
-				<a href="<? echo JUri::root() .					"administrator/index.php?option=com_users&view=user&layout=edit&id=" .
-					$arrUserDataFromMail['user_id'];?>" title="<?
+				<a href="<? 
+				echo JRoute::_('index.php?option=com_users&task=user.edit&id='.$arrUserDataFromMail['user_id']);
+				//echo JUri::root() .					"administrator/index.php?option=com_users&view=user&layout=edit&id=" . $arrUserDataFromMail['user_id'];?>" title="<?
 						echo $arrUserDataFromMail['user_name'] . 
 						"; Редактировать данные";?>"><?
 				if ($view=="_messages"){ 

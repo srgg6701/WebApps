@@ -11,7 +11,7 @@ jimport('joomla.application.component.helper');
 JTable::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_collector1'.DS.'tables');
 
 //массив подключаемых файлов:
-$arrPathReq=array('SData','SDebug','SErrors','SFiles','SCollection','SSite','SUser');
+$arrPathReq=array('SData','SDebug','SErrors','SFiles','SStuff','SSite','SUser');
 for($i=0,$j=count($arrPathReq);$i<$j;$i++)
 	require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.$arrPathReq[$i].'.php';
 

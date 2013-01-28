@@ -349,16 +349,16 @@ AND ".$tbl_mess.".id = ".$message_id;
 			//Обновлять!
 			if ($customer_status=="precustomer") { //Предзаказчик (данные уже есть)
 				//получить id записи в таблице предзаказчика, чтобы передать далее для обновления таблицы и проверить её наличие
-				if (!$table->load(SCollection::getPrecustomerRowID($user)))
+				if (!$table->load(SStuff::getPrecustomerRowID($user)))
 					JMail::sendErrorMess($table->getError(),"Ошибка во время подготовки обновления таблицы предзаказчиков");
 				else{
 					$arrDataPatch=array();
 					$arrDataPatch[$object_type]=$post_data[$object_type];
 					//получить текущий набор (нужно, чтобы дополнить его создаваемой Коллекцией/Заказом)
-					if ($objects_ids_array=SCollection::getCurrentSetArray($object_type)) {//массив id id объектов сформирован (т.е., он - не NULL)1
+					if ($objects_ids_array=SStuff::getCurrentSetArray($object_type)) {//массив id id объектов сформирован (т.е., он - не NULL)1
 						$arrDataPatch[$object_type]=implode(",",$objects_ids_array).','.$actual_order_id;
 					}else{
-						$pre_set=SCollection::getPrecustomerSet($object_type,$user);
+						$pre_set=SStuff::getPrecustomerSet($object_type,$user);
 						if (gettype($pre_set)=='integer') {//запись в таблице есть, но ячейка пуста
 							$arrDataPatch[$object_type]=$actual_order_id;
 						}

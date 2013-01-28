@@ -107,7 +107,12 @@ require_once JPATH_COMPONENT.DS.'helpers'.DS.'messages'.DS.'table.php';?>
 </div>
 <div class="width-50" style="display:inline-block;">
   <div style="margin-left:10px;">	
-<? require_once JPATH_COMPONENT.DS.'helpers'.DS.'messages'.DS.'form.php';?>
+<?	// id id:
+	$collections_ids_array=SStuff::getCurrentSetArray('collections_ids'); 
+	// id, названия компонентов:
+	$orders=SStuff::getCurrentSetArray('orders_ids');
+	require_once JPATH_COMPONENT.DS.'helpers'.DS.'mess_object.php'; 
+	require_once JPATH_COMPONENT.DS.'helpers'.DS.'messages'.DS.'form.php';?>
   </div>  
 </div>
 <?	require_once JPATH_SITE.DS.'includes'.DS.'internal_mail_js.php';?>

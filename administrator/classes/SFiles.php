@@ -232,7 +232,7 @@ WHERE id=( SELECT MAX(id) FROM $table_name )";
 						$files_names.=$uploadedFileName;
 						//назначить таблицу - коллекций (основная) или заказов (альтернативную):
 						if ($atype=='o') $alt_table=true;
-						$ttable=SCollection::getDefaultTable($alt_table);
+						$ttable=SStuff::getDefaultTable($alt_table);
 						//получим имя файла вида: 29.2.doc // № заказа . № файла . расширение
 						$prepared_file_id=$obj_id.'.' . $f . '.' . $uploadedFileExtension;
 						
@@ -270,7 +270,7 @@ WHERE id=( SELECT MAX(id) FROM $table_name )";
 							 	) {
 		if (!$user) $user = JFactory::getUser();
 		$method_name=($user->get('guest')==1)? 'getPrecustomerSet':'getCustomerSet';
-			$arrUserStuff=SCollection::$method_name($object_type,$user);
+			$arrUserStuff=SStuff::$method_name($object_type,$user);
 		if ($arrUserStuff) {
 			$query="SELECT `identifier`, files_names FROM ".self::$_table." 
 	 WHERE SUBSTRING( identifier, 2) = ".$object_id; //echo "<div class=''>query= ".$query."</div>"; 

@@ -7,7 +7,7 @@
  
 // No direct access
 defined('_JEXEC') or die;
-//методы для работы с коллекциями также представлены в administrator/classes/SCollection.php
+//методы для работы с коллекциями также представлены в administrator/classes/SStuff.php
 class DebugController extends JController
 {
 	function __construct(){

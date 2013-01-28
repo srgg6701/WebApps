@@ -1093,7 +1093,8 @@ fieldset .optional{
 	background:none !important;
 	font-weight:100;
 }
-fieldset, fieldset +a,
+fieldset:not([class="userdata"]), 
+fieldset +a,
 div.button-green
  {
 	padding:10px;

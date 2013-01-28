@@ -402,7 +402,7 @@ class UsersModelUser extends JModelAdmin
 		
 		JPluginHelper::importPlugin('user');
 		// Обработать коллекции юзера - временные удалить, в таблице коллекций прописать его id
-		require_once JPATH_ADMINISTRATOR.DS.'classes/SCollection.php';
+		require_once JPATH_ADMINISTRATOR.DS.'classes/SStuff.php';
 
 		// Access checks.
 		foreach ($pks as $i => $pk)
@@ -450,7 +450,7 @@ class UsersModelUser extends JModelAdmin
 						}
 
 						// обработать данные предзаказчика:
-						SCollection::makeCustomerDataPermanent( $pk, // т.к. не объект, будет получать юзера по его id
+						SStuff::makeCustomerDataPermanent( $pk, // т.к. не объект, будет получать юзера по его id
 																false, // $db
 																$test // включить режим тестирования
 															  );

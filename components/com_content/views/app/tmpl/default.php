@@ -82,7 +82,7 @@ Foo::$variable();  // Это вызовет $foo->Variable(), прочитав $
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 //массив подключаемых файлов:
-$arrPathReq=array('SData','SErrors','SFiles','SCollection','SSite','SUser');
+$arrPathReq=array('SData','SErrors','SFiles','SStuff','SSite','SUser');
 for($i=0,$j=count($arrPathReq);$i<$j;$i++)
 	require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.$arrPathReq[$i].'.php';
 

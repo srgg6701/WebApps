@@ -22,7 +22,7 @@ class collector1ModelCollected extends JModel
 			require_once JPATH_SITE.DS.'components'.DS.'com_collector1'.DS.'models'.DS.'collector1.php';
 			if($collection_id=JRequest::getVar('collection_id')) $arrCollectionsIds=array($collection_id);
 		}
-		if (!$arrCollectionsIds) $arrCollectionsIds=SCollection::getCurrentSetArray('collections_ids');
+		if (!$arrCollectionsIds) $arrCollectionsIds=SStuff::getCurrentSetArray('collections_ids');
 		if (!empty($arrCollectionsIds)) {
 			$modelCollector=JModel::getInstance('collector1','Collector1Model'); // SDebug::showDebugContent($modelCollector,'modelCollector'); 
 			//будем создавать массив ВСЕХ данных для каждой коллекции:

@@ -30,7 +30,7 @@ class Collector1ModelCollector1 extends JModel
 		if (!$table=$this->prepareCollectionDataSet()) 
 			die("ОШИБКА! Не выполнено: Collector1ModelCollector1::prepareCollectionDataSet()");		
 		SErrors::afterTable($table); //добавить данные в dnior_webapps_customer_site_options
-		$default_table=SCollection::getDefaultTable(); //echo "<div class=''>default_table= ".$default_table."</div>";
+		$default_table=SStuff::getDefaultTable(); //echo "<div class=''>default_table= ".$default_table."</div>";
 		$added_record_id=SData::getLastId($default_table);
 		if(!$added_record_id)
 			JMail::sendErrorMess('Не добавлена временная коллекция опций сайта для незарегистрированного заказачика.',"Добавление временной коллекции.");
@@ -180,7 +180,7 @@ WHERE site_options_beyond_side REGEXP concat('(^|,)',$option_id,'(,|$)')";
 						$current_order_set['engines']=$modelCMS->get_cms_names($current_order_set['engines_ids']);
 					break;
 				case "2": //разработать собственный
-					$arrSMSs=SCollection::setCMStypes();
+					$arrSMSs=SStuff::setCMStypes();
 					$current_order_set['engines']=$arrSMSs[2][1];
 					break;
 				case "3":

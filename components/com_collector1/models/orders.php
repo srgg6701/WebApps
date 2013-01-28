@@ -16,7 +16,7 @@ class collector1ModelOrders extends JModel
 		//удаляем все записи из таблиц:
 		if ($user->get('guest')==1) { // обновить запись в #__webapps_precustomers
 			// При передаче тестового параметра (test) в URL выводит сообщение в методе store() вместо выполнения реального действия с таблицей:
-			SCollection::deletePrecustomerObject('orders_ids',$order_id);
+			SStuff::deletePrecustomerObject('orders_ids',$order_id);
 		}
 		// удалить запись из #__webapps_customer_orders
 		/* 	ВНИМАНИЕ! 
@@ -186,7 +186,7 @@ ORDER BY #__webapps_customer_orders.id DESC";
 			if ($file_name=$rows[$i]['files_names']) {
 				$filenames=explode(":",$file_name); //convert to array
 				$rows[$i]['files_names']=$filenames;
-			} // SDebug::showDebugContent($rows,'rows');
+			} //SDebug::showDebugContent($rows,'rows');
 		}
 		return (empty($rows))? false:$rows;
 	}
@@ -198,12 +198,12 @@ ORDER BY #__webapps_customer_orders.id DESC";
 		if (!$user) $user = JFactory::getUser();
 		if (!$this->orders_ids_array) {
 			if ($user->get('guest')==1){ //returns string
-				return SCollection::getPrecustomerSet( 'orders_ids', 
+				return SStuff::getPrecustomerSet( 'orders_ids', 
 														$user,
 														true
 													  );
 			}else{ //returns string
-				return SCollection::getUserSet('orders_ids',$user->get('id'));
+				return SStuff::getUserSet('orders_ids',$user->get('id'));
 			}
 		}
 		return $model->orders_ids_string;
@@ -245,7 +245,7 @@ ORDER BY #__webapps_customer_orders.id DESC";
 		}else{ //добавить запись в таблицу заказов
 			SErrors::afterTable($table);
 		}//die('136');
-		$new_order_record_id=SData::getLastId(SCollection::getDefaultTable(true)); //получить id последней записи из таблицы заказов	
+		$new_order_record_id=SData::getLastId(SStuff::getDefaultTable(true)); //получить id последней записи из таблицы заказов	
 		$customer_status=SUser::handleUserData(JFactory::getUser());//назначить данные/получить статус юзера
 		/**
 		 * обработка данных таблицы предзаказчиков
@@ -258,7 +258,7 @@ ORDER BY #__webapps_customer_orders.id DESC";
 			//получить id записи в таблице предзаказчика, чтобы передать далее для обновления таблицы:   
 			
 			//if ($customer_status=="precustomer"){ //предзаказчик
-				//$precustomer_table_id=SCollection::getPrecustomerRowID($user);
+				//$precustomer_table_id=SStuff::getPrecustomerRowID($user);
 			//}
 			SUser::handlePrecustomersTable( //добавить запись в таблицу предзаказчиков 
 						$customer_status,//precustomer/unknown

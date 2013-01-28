@@ -39,7 +39,7 @@ class Collector1ViewCollector1 extends JView
 		$item		= $this->get('Item');
 		$user = JFactory::getUser(); 
 		//нужно для формирования списка коллекций в таблице для выбора и быстрой загрузки:
-		$this->collections_ids_array=$collections_ids_array=SCollection::getCurrentSetArray('collections_ids');
+		$this->collections_ids_array=$collections_ids_array=SStuff::getCurrentSetArray('collections_ids');
 		if ($layout=='messages'){ 
 			$model=JModel::getInstance('messages','Collector1Model');
 			$messArray=array(); // make an array for an appropriate query data

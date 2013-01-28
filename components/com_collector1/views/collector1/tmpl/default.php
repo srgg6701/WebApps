@@ -194,7 +194,7 @@ td.labelInlineBlock label input[type="radio"]{
 <table cellpadding="8" cellspacing="0">
   <tr>
   	<td class="labelInlineBlock">
-<?	$arrSMSs=SCollection::setCMStypes();?>    
+<?	$arrSMSs=SStuff::setCMStypes();?>    
 <h4 style="margin-bottom:6px;">Выберите движок:</h4>
     <!--<div>(вы можете выбрать несколько возможных вариантов)</div>-->
       <label>

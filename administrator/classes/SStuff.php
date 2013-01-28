@@ -13,7 +13,7 @@ jimport('joomla.mail.mail');
 /**
  * static
  */
-class SCollection extends JTable{
+class SStuff extends JTable{
 	static private $alt_table='#__webapps_customer_orders';
 	static private $default_table='#__webapps_customer_site_options';
 	static private $precustomers_table='#__webapps_precustomers';
@@ -49,17 +49,44 @@ class SCollection extends JTable{
 			$table->set($object_type, $new_objects_ids); 
 			//обновить запись:
 			SErrors::afterTableUpdate($table);
-			/*if ($table->check()) {
-				if (!$table->store(true)){ // обновить данные
-					// handle failed update
-					JMail::sendErrorMess($table->getError()," (\$table->store())");
-				}
-			}else{
-				// handle invalid input
-				JMail::sendErrorMess($table->getError()," (\$table->check())");
-			}*/
 		}
 		return true; 		
+	}
+	/**
+	 * Получить текущий набор id id коллекций/объектов независимо ни от того, был ли он уже создан и каков статус юзера
+	 * @ set, orders, collections
+	 */
+	function getCurrentSetArray($object_type){ 
+		$objs_array=$object_type.'_array'; //value!
+		if (!self::$$objs_array) { // collections_ids_array or orders_ids_array; equal to ${$objs_array}
+			if(SUser::detectAdminStat($user)){
+				$data="id";
+				if($object_type=='collections_ids'){
+					$table=self::$default_table;
+					$method='loadResultArray';
+				}elseif($object_type=='orders_ids'){
+					$data.=",components_names";
+					$table=self::$alt_table;
+					$method='loadAssocList';
+				}
+				$query="SELECT ".$data." FROM ".$table." ORDER BY id DESC";
+				$db = JFactory::getDBO();
+				$db->setQuery($query); // а иначе вытащит старый запрос!
+				$result=$db->$method();
+				if ($object_type=='orders_ids'){
+					$cmps=array();
+					foreach($result as $i=>$array){
+						$cmps[$i]['id']=$array['id'];
+						$cmps[$i]['components_names']=explode('|',$array['components_names']);
+					}
+					unset($result);
+					$result=$cmps;
+				}
+				return $result;  
+			}else
+				self::getUserSet(false,$objs_array);
+			return self::$$objs_array; //equal to ${$objs_array}
+		}
 	}
 	/**
 	 * Получить default_table
@@ -80,17 +107,6 @@ class SCollection extends JTable{
 		$db = JFactory::getDBO();
 		$db->setQuery($query);
 		return $db->loadResult();
-	}
-	/**
-	 * Получить текущий набор id id коллекций/объектов независимо ни от того, был ли он уже создан и каков статус юзера
-	 * @ set, orders, collections
-	 */
-	function getCurrentSetArray($object_type){ 
-		$objs_array=$object_type.'_array'; //value!
-		if (!self::$$objs_array) { // collections_ids_array or orders_ids_array; equal to ${$objs_array}
-			self::getUserSet(false,$objs_array);
-			return self::$$objs_array; //equal to ${$objs_array}
-		}
 	}
 	/**
 	 * Получим id id коллекций/объектов заказчика
@@ -178,7 +194,7 @@ WHERE " . $layout . "s_ids REGEXP '(^|,)".$object_id."($|,)'";
 	function getUserSet( $user=false,
 						 $object_type=false // collections_ids | orders_ids
 					   ) {
-		$user_id=JRequest::getVar('user_id'); // для backend'а
+		$user_id=JRequest::getVar('user_id'); // для frontend'а
 		if (!$user) $user = JFactory::getUser($user_id);
 		if ($user->get('email')) { 
 			if ($user_id){ // для backend'а

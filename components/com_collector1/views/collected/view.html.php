@@ -64,7 +64,7 @@ class Collector1ViewCollected extends JView
           </tr>
 <?	$arrRightOptions=array('site_type_id','engine_type_choice_id','engines','options_array','xtra'); 
 	if (!empty($collections_data_array)) :
-		//$arrSMSs=SCollection::setCMStypes(); SDebug::showDebugContent($arrSMSs,'arrSMSs');
+		//$arrSMSs=SStuff::setCMStypes(); SDebug::showDebugContent($arrSMSs,'arrSMSs');
 		$j=count($collections_data_array);
 		$fl=0;
 		foreach ($collections_data_array as $collection_set) :

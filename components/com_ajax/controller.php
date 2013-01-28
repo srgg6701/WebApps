@@ -5,7 +5,7 @@
  * @subpackage Ajax
  */
 // No direct access 
-//методы для работы с коллекциями также представлены в administrator/classes/SCollection.php
+//методы для работы с коллекциями также представлены в administrator/classes/SStuff.php
 class AjaxController extends JController
 {
 	function __construct(){

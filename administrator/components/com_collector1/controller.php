@@ -33,7 +33,7 @@ class Collector1Controller extends JController
 			// получить view (customers/orders), user_id
 			// administrator/index.php?option=com_collector1&view=customers&layout=collection&collection_id=82&user_id=64
 			// administrator/index.php?option=com_collector1&view=precustomer&layout=collection&collection_id=86user_id=
-			$arrRedirectParams=SCollection::getObjectDataForRedirect($layout,$object_id);
+			$arrRedirectParams=SStuff::getObjectDataForRedirect($layout,$object_id);
 			$url='index.php?option=com_collector1&view=' 
 										. $arrRedirectParams['view'] .
 										'&layout=' .

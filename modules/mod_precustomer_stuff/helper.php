@@ -8,7 +8,7 @@
 
 // no direct access
 defined('_JEXEC') or die;
-require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SCollection.php';
-SCollection::getUserSet();
-$arr_collections_ids=SCollection::$collections_ids_array;
-$arr_orders_ids=SCollection::$orders_ids_array;
+require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.'SStuff.php';
+SStuff::getUserSet();
+$arr_collections_ids=SStuff::$collections_ids_array;
+$arr_orders_ids=SStuff::$orders_ids_array;

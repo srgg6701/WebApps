@@ -8,7 +8,7 @@
 // No direct access
 defined('_JEXEC') or die;
 //echo "<h3>controller.php</h3>";
-//методы для работы с коллекциями также представлены в administrator/classes/SCollection.php
+//методы для работы с коллекциями также представлены в administrator/classes/SStuff.php
 class Collector1Controller extends JController
 {
 	private $go_page='index.php?option=com_collector1&view=collected'; //ссылка на собранные коллекции
@@ -36,7 +36,7 @@ class Collector1Controller extends JController
 		$user = JFactory::getUser();
 		if( // удалить данные из таблиц:
 			$deleting=($user->get('guest')==1)? 
-				SCollection::deletePrecustomerObject('collections_ids',$collection_id) : 
+				SStuff::deletePrecustomerObject('collections_ids',$collection_id) : 
 				$this->getModel()->deleteCollection($collection_id)
 		  ) { 
 			SFiles::deleteFilesRecords('s'.$collection_id); //удалить записи из таблицы файлов 

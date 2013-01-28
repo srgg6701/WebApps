@@ -14,7 +14,7 @@ require_once JPATH_COMPONENT.'/helpers/route.php';
 require_once JPATH_COMPONENT.'/helpers/query.php';
 if($c = JRequest::getVar('c')) { //call an additional controller and assign it as main one
 	//массив подключаемых файлов:
-	$arrPathReq=array('SData','SDebug','SErrors','SFiles','SCollection','SSite','SUser');
+	$arrPathReq=array('SData','SDebug','SErrors','SFiles','SStuff','SSite','SUser');
 	for($i=0,$j=count($arrPathReq);$i<$j;$i++)
 		require_once JPATH_ADMINISTRATOR.DS.'classes'.DS.$arrPathReq[$i].'.php';
 	//SDebug::dOutput("content.php",'h3','display:inline');
