@@ -106,7 +106,7 @@ $direct=JRequest::getVar('direct');
 require_once JPATH_COMPONENT.DS.'helpers'.DS.'messages'.DS.'table.php';?>
 </div>
 <div class="width-50" style="display:inline-block;">
-  <div style="margin-left:10px;">	
+  <div class="marginLeft10">	
 <?	// id id:
 	$collections_ids_array=SStuff::getCurrentSetArray('collections_ids'); 
 	// id, названия компонентов:

@@ -6,10 +6,25 @@ $(function(){
 		//
 		requestPage='<?=JUri::root()?>index.php';
 		// 
-		$('input[type="radio"][id^="pickupObjectType_"]').click( function(){
+		$('input[type="radio"][id^="pickupObjectType_"]')
+			.click( function(){
 				$('div.hidden').fadeOut(250);
 				$('div.hidden#'+this.id+'_obj').fadeIn(250);
 			});
+		// 
+		$('input[type="radio"][id^="component"]')
+			.click( function(){
+				var tWrapper=$(this).parent();
+				$('div.orders_wrapper').fadeTo(150,0.5,function(){
+					$(tWrapper).css('opacity',1);	
+				});
+		});
+		$('input[type="radio"][id^="collections_ids_array"]')
+			.click( function(){
+				$('div#cids_wrapper label').removeAttr('style');
+				$(this).parent('label').css('background-color','orange');	
+			});
+		//
 		$('a[data-read-status]').click( function(){
 				handleMess($(this).attr('data-read-status'),'switch_read_status',this);
 				return false;

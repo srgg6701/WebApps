@@ -52,6 +52,9 @@ div#content-box div#toolbar-box div.m {
 	border-radius:6px 6px 0 0 !important;
 }
 </style>
+<link rel="stylesheet/less" type="text/css" href="templates/<?php echo $this->template ?>/less/styles.less">
+<script src="templates/<?php echo $this->template ?>/less/less.js" type="text/javascript"></script> 
+
 <script type="text/javascript" src="<?=JUri::root()?>templates/fastwebdev/js/common.js"></script>
 <script type="text/javascript" src="<?=JUri::root()?>templates/fastwebdev/js/jquery-1.7.1.min.js"></script>
 </head>

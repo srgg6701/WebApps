@@ -1,0 +1,32 @@
+@import url(mixines.less);
+@px10: 10px;
+
+div#pickupObjectType_sites_obj{
+	div#cids_wrapper{
+		float: right;
+		width: 450px;
+		margin-top: -20px;
+		padding-left: 70px;
+	}
+	label{
+		.bgColor(lightyellow);
+		.borderRadius(5px);
+		display:inline-block;
+		.margin(0 4px 4px 0);
+		.padding(3px 10px 3px 0);
+	}
+}
+div#pickupObjectType_components_obj{
+	.marginTop(6px);
+	div.orders_wrapper{
+		.bgColor(rgb(172, 235, 77));
+		.borderRadius(5px);
+		display:inline-block;
+		.margin(0 4px 4px 0);
+		.padding(3px 6px 3px 1px);
+		vertical-align:top;
+		label > div{
+			.padding(2px 4px 6px 6px);
+		}
+	}
+}
